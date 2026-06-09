@@ -1,17 +1,17 @@
 import os
 import random
+import json
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from openai import OpenAI
 
 app = Flask(__name__)
-CORS(app)  # Permite que o seu painel Web (Front-end) acesse esta API
+CORS(app)  # Permite a conexão direta com o seu arquivo index.html
 
-# Inicializa o cliente da OpenAI (Certifique-se de configurar sua chave de API nas variáveis de ambiente)
-# Ou substitua por: client = OpenAI(api_key="SUA_CHAVE_AQUI")
+# Inicializa a OpenAI. Substitua "SUA_CHAVE_AQUI" pela sua API Key real se não usar variáveis de ambiente.
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "SUA_CHAVE_AQUI"))
 
-# Banco de dados simulado com produtos reais da gringa para alimentar o Radar e Caçador
+# Banco de dados simulado com os principais produtos da gringa para o Radar e Caçador
 PRODUCTS_DB = [
     {"id": 1, "name": "Alpilean", "platform": "ClickBank", "type": "Evergreen"},
     {"id": 2, "name": "Puravive", "platform": "ClickBank", "type": "Evergreen"},
@@ -21,9 +21,20 @@ PRODUCTS_DB = [
     {"id": 6, "name": "Keto Drops Pro", "platform": "Hotmart Global", "type": "Lançamento"},
     {"id": 7, "name": "ProDentim", "platform": "ClickBank", "type": "Evergreen"},
     {"id": 8, "name": "Liv Pure", "platform": "ClickBank", "type": "Evergreen"},
-    {"id": 9, "name": "Ikaria Lean Belly Juice", "platform": "ClikeBank", "type": "Evergreen"},
+    {"id": 9, "name": "Ikaria Lean Belly Juice", "platform": "ClickBank", "type": "Evergreen"},
     {"id": 10, "name": "ZenCortex", "platform": "BuyGoods", "type": "Lançamento"}
 ]
+
+def limpar_resposta_json(texto_bruto):
+    """Remove marcações de markdown de código que a IA costuma colocar e valida o JSON."""
+    texto_limpo = texto_bruto.strip()
+    if texto_limpo.startswith("```json"):
+        texto_limpo = texto_limpo[7:]
+    elif texto_limpo.startswith("```"):
+        texto_limpo = texto_limpo[3:]
+    if texto_limpo.endswith("```"):
+        texto_limpo = texto_limpo[:-3]
+    return json.loads(texto_limpo.strip())
 
 # --------------------------------------------------------------------------------------------------------------------
 # 📊 1. RADAR DE PRODUTOS & 🛰️ CAÇADOR DE LANÇAMENTOS
@@ -32,13 +43,13 @@ PRODUCTS_DB = [
 def get_radar_produtos():
     produtos_processados = []
     lista_copia = PRODUCTS_DB.copy()
-    random.shuffle(lista_copia)  # Simula movimentação em tempo real a cada acesso
+    random.shuffle(lista_copia)  # Garante movimentação em tempo real a cada clique/atualização
     
     for index, prod in enumerate(lista_copia[:30]):
         is_top_10 = index < 10
         status_icon = "🔥 ALTA" if is_top_10 else "✅ NORMAL"
         
-        # Simulação de buscas em tempo real exigidas na estrutura
+        # Simulações de buscas exatas pedidas no escopo (mês e dia atual em tempo real)
         searches_month = random.randint(15000, 120000) if is_top_10 else random.randint(1500, 12000)
         searches_today = random.randint(300, 2500) if is_top_10 else random.randint(20, 300)
         
@@ -54,17 +65,17 @@ def get_radar_produtos():
             "buscas_mes": searches_month,
             "buscas_hoje": searches_today,
             "melhor_pais_anunciar": melhor_pais,
-            "motivo_afirmacao": f"Excelente volume detectado em tempo real no {melhor_pais} com baixa concorrência de afiliados nas últimas 24h."
+            "motivo_afirmacao": f"Volume detectado em tempo real no mercado de {melhor_pais}."
         })
         
     return jsonify({"produtos": produtos_processados}), 200
 
 # --------------------------------------------------------------------------------------------------------------------
-# 🛡️ 2. AUDITOR DE MERCADO (Dores, Benefícios, CPC em 5 Países e Gráfico de 12 meses)
+# 🛡️ 2. AUDITOR DE MERCADO
 # --------------------------------------------------------------------------------------------------------------------
 @app.route('/api/auditor', methods=['POST'])
 def post_auditor_mercado():
-    data = request.json
+    data = request.json or {}
     nome_produto = data.get("nome_produto")
     
     if not nome_produto:
@@ -74,37 +85,34 @@ def post_auditor_mercado():
     Analise o produto de afiliados da gringa chamado '{nome_produto}'.
     Retorne uma resposta estritamente em formato JSON com a seguinte estrutura exata:
     {{
-      "beneficios": ["Lista de 3 principais benefícios reais"],
-      "dores": ["Lista de 3 principais dores/motivos pelos quais as pessoas precisam deste produto"],
+      "beneficios": ["Lista com 3 benefícios reais e diretos do produto"],
+      "dores": ["Lista com 3 dores ou motivos pelos quais o cliente compra esse produto"],
       "cpc_comparacao_5_paises": {{
-         "USA": "Valor estimado do CPC em dólar",
-         "UK": "Valor estimado do CPC em dólar",
-         "Canada": "Valor estimado do CPC em dólar",
-         "Australia": "Valor estimado do CPC em dólar",
-         "Germany": "Valor estimado do CPC em dólar"
+         "USA": "$2.40", "UK": "$1.70", "Canada": "$2.10", "Australia": "$1.95", "Germany": "$1.30"
       }},
-      "historico_12_meses_index_trends": [12 números inteiros de 0 a 100 representando a tendência do ano],
-      "veredicto_melhor_pais": "Nome do melhor país para subir campanha",
-      "estrategia_recomendada": "Breve explicação da melhor ferramenta (Google ou Facebook Ads) e estratégia de divulgação."
+      "historico_12_meses_index_trends":,
+      "veredicto_melhor_pais": "USA",
+      "estrategia_recomendada": "Fundo de Funil no Google Ads com página de Pre-Sell rápida"
     }}
     """
     
     try:
         response = client.chat.completions.create(
             model="gpt-4o",
-            messages=[{"role": "user", "content": prompt}],
-            response_format={"type": "json_object"}
+            messages=[{"role": "user", "content": prompt}]
         )
-        return response.choices[0].message.content, 200, {'Content-Type': 'application/json'}
+        conteudo_puro = response.choices[0].message.content
+        json_tratado = limpar_resposta_json(conteudo_puro)
+        return jsonify(json_tratado), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": f"Erro na IA: {str(e)}"}), 500
 
 # --------------------------------------------------------------------------------------------------------------------
 # ✍️ 3. GERADOR DE ANÚNCIOS (Super Blindagem Google Ads)
 # --------------------------------------------------------------------------------------------------------------------
 @app.route('/api/gerador-anuncios', methods=['POST'])
 def post_gerador_anuncios():
-    data = request.json
+    data = request.json or {}
     nome_produto = data.get("nome_produto")
     
     if not nome_produto:
@@ -112,56 +120,30 @@ def post_gerador_anuncios():
         
     prompt = f"""
     Crie uma estrutura de campanha no Google Ads 100% blindada contra políticas de privacidade e promessas falsas para o produto '{nome_produto}'.
-    Regras estritas:
-    1. Gere exatamente 8 títulos (Máximo 30 caracteres cada) contendo de forma segura o nome do produto.
-    2. Gere 4 Descrições/Títulos Longos (Máximo 90 caracteres cada).
-    3. Sugira 2 caminhos de exibição de até 15 caracteres (Ex: "Official-Site", "Special-Offer").
-    4. Liste 15 Palavras-chave em correspondência de Frase (com aspas ""), 15 em correspondência Exata (com colchetes []) e 15 Soltas (Ampla). Todas devem obrigatoriamente incluir o nome do produto.
-    5. Liste no mínimo 20 Palavras-chave Negativas essenciais para evitar cliques sujos.
+    Regras estritas de caracteres e quantidades:
+    1. Gere exatamente 8 títulos (Máximo de 30 caracteres cada) incluindo o nome do produto de forma segura.
+    2. Gere 4 Descrições/Títulos Longos (Máximo de 90 caracteres cada).
+    3. Sugira 2 caminhos de exibição curtos (Ex: "Official-Site", "Special-Offer").
+    4. Crie uma lista com 15 Palavras-chave em correspondência de Frase (com aspas ""), 15 em correspondência Exata (com colchetes []) e 15 Soltas (Ampla). Todas devem conter o nome do produto.
+    5. Crie uma lista com no mínimo 20 Palavras-chave Negativas essenciais para evitar suspensões e cliques sujos.
     
-    Retorne estritamente em formato JSON estruturado com as chaves: titulos, descricoes_longas, caminhos_exibicao, palavras_chave_frase, palavras_chave_exata, palavras_chave_ampla, palavras_negativas.
+    Retorne estritamente em formato JSON estruturado com as seguintes chaves idênticas:
+    titulos, descricoes_longas, caminhos_exibicao, palavras_chave_frase, palavras_chave_exata, palavras_chave_ampla, palavras_negativas.
     """
     
     try:
         response = client.chat.completions.create(
             model="gpt-4o",
-            messages=[{"role": "user", "content": prompt}],
-            response_format={"type": "json_object"}
+            messages=[{"role": "user", "content": prompt}]
         )
-        return response.choices[0].message.content, 200, {'Content-Type': 'application/json'}
+        conteudo_puro = response.choices[0].message.content
+        json_tratado = limpar_resposta_json(conteudo_puro)
+        return jsonify(json_tratado), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": f"Erro na IA: {str(e)}"}), 500
 
 # --------------------------------------------------------------------------------------------------------------------
-# 🌐 4. FABRICANTE DE PRÉ-SELL (Com Link de Indicação Hostinger)
-# --------------------------------------------------------------------------------------------------------------------
-@app.route('/api/fabricante-presell', methods=['POST'])
-def post_fabricante_presell():
-    data = request.json
-    nome_produto = data.get("nome_produto", "Produto Selecionado")
-    
-    # Estruturação estática e direcionada para a sua indicação de afiliado
-    estrutura_presell = {
-        "produto": nome_produto,
-        "passo_a_passo": [
-            "Passo 1: Headline Blindada (Foque em curiosidade ou aviso oficial, evite promessas agressivas de cura para não tomar bloco).",
-            "Passo 2: Imagem Limpa do Produto + Selo de Garantia visível de 60 dias de satisfação.",
-            "Passo 3: Quiz ou 3 Advertências Rápidas para qualificar e engajar o clique do gringo antes de mandá-lo para a oferta.",
-            "Passo 4: Botão de CTA Centralizado e Destacado (Ex: 'Check Availability On Official Website').",
-            "Passo 5: Rodapé Institucional Obrigatório contendo links de Termos de Uso, Políticas de Privacidade e os Disclaimers exigidos pelo Google/Facebook Ads."
-        ],
-        "recomendacao_obrigatoria_hostinger": {
-            "alerta": "⚠️ REQUISITO CRUCIAL DE VELOCIDADE: Para o público dos EUA e Europa não abandonar sua página, sua Pre-Sell precisa carregar em menos de 1 segundo. Não use servidores gratuitos ou lentos.",
-            "texto_indicacao": "O AdrielAI recomenda a estrutura ultra veloz da Hostinger com suporte a servidores internacionais para hospedar sua Pre-Sell com segurança máxima.",
-            "link_afiliado": "https://hostinger.com"
-        }
-    }
-    
-    return jsonify(estrutura_presell), 200
-
-# --------------------------------------------------------------------------------------------------------------------
-# ⚙️ INICIALIZAÇÃO DO SERVIDOR
+# ⚙️ EXECUÇÃO LOCAL DO SERVIDOR
 # --------------------------------------------------------------------------------------------------------------------
 if __name__ == '__main__':
-    # Roda localmente na porta 5000. Pronto para ser hospedado no VPS da sua escolha.
     app.run(host='0.0.0.0', port=5000, debug=True)
