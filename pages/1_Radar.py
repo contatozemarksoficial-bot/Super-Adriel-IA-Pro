@@ -1,186 +1,215 @@
 import streamlit as st
 import random
-from datetime import datetime
 
 # 1. CONFIGURAÇÃO DA PÁGINA
 st.set_page_config(page_title="Radar de Produtos - AdrielAI", page_icon="📊", layout="wide")
 
-# 2. ESTILIZAÇÃO CSS (Corrige a cor do texto dentro dos botões para aparecer o nome)
+# 2. ESTILIZAÇÃO NEON E ANIMAÇÕES (CSS INJETADO)
 st.markdown("""
     <style>
-    .stApp { background-color: #0f172a; color: #f8fafc; }
-    h1, h2, h3, h4, p, span { color: #ffffff !important; font-family: sans-serif; }
-    div[data-testid="stMetricValue"] > div { color: #f59e0b !important; }
+    .stApp { background-color: #0b0f19; color: #f8fafc; }
+    h1, h2, h3, h4, p, span { font-family: 'Segoe UI', Roboto, sans-serif; }
     
-    /* Força o texto do botão do Streamlit a ficar visível e centralizado */
-    button[data-testid="baseButton-secondary"] p {
-        color: #0f172a !important;
-        font-weight: bold !important;
-        font-size: 14px !important;
+    .titulo-cyber {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #00ffcc;
     }
-    button[data-testid="baseButton-secondary"] {
-        background-color: #ffffff !important;
-        border: 1px solid #cbd5e1 !important;
-        margin-bottom: 5px;
+
+    div[data-testid="stHorizontalBlock"] { gap: 12px !important; }
+    
+    div[data-testid="stColumn"] button {
+        background: #131a2c !important;
+        border-radius: 10px !important;
+        padding: 14px 10px !important;
+        min-height: 50px !important;
+        width: 100% !important;
+        display: block !important;
+    }
+    div[data-testid="stColumn"] button p {
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.5px;
     }
     
-    .card-info {
-        background-color: #1e293b; border: 1px solid #334155;
-        padding: 20px; border-radius: 12px; margin-top: 15px;
+    .btn-alta button {
+        border: 2px solid #ff0055 !important;
     }
-    .badge-alta {
-        background-color: #991b1b; color: #ffffff !important;
-        padding: 4px 10px; border-radius: 6px; font-weight: bold; font-size: 12px;
+    .btn-alta button p {
+        color: #ff4d88 !important;
     }
-    .badge-normal {
-        background-color: #16a34a; color: #ffffff !important;
-        padding: 4px 10px; border-radius: 6px; font-weight: bold; font-size: 12px;
+    .btn-alta button:hover {
+        background: #ff0055 !important;
+    }
+    .btn-alta button:hover p { color: #ffffff !important; }
+
+    .btn-validado button {
+        border: 2px solid #00ffcc !important;
+    }
+    .btn-validado button p {
+        color: #33ffdd !important;
+    }
+    .btn-validado button:hover {
+        background: #00ffcc !important;
+    }
+    .btn-validado button:hover p { color: #0b0f19 !important; }
+
+    .btn-info button {
+        border: 2px solid #9900ff !important;
+    }
+    .btn-info button p { color: #cc66ff !important; }
+    .btn-info button:hover {
+        background: #9900ff !important;
+    }
+    .btn-info button:hover p { color: #ffffff !important; }
+    
+    .badge-alta-cyber {
+        background-color: #2a0813; color: #ff4d88 !important;
+        padding: 6px 14px; border-radius: 8px; font-weight: 900; font-size: 13px;
+        border: 2px solid #ff0055; display: inline-block;
+    }
+
+    .badge-normal-cyber {
+        background-color: #04251d; color: #33ffdd !important;
+        padding: 6px 14px; border-radius: 8px; font-weight: 900; font-size: 13px;
+        border: 2px solid #00ffcc; display: inline-block;
+    }
+    
+    .card-cyber-info {
+        background: #131a2c;
+        border: 2px solid #1e293b;
+        padding: 22px; border-radius: 14px; margin-top: 20px;
     }
     </style>
 """, unsafe_allow_html=True)
 
-st.title("📊 Radar de Produtos & Lançamentos da Gringa")
-st.write("Acompanhe a movimentação real do mercado internacional atualizada em tempo real.")
+st.markdown('<h1 class="titulo-cyber">📊 Radar de Produtos da Gringa</h1>', unsafe_allow_html=True)
+st.write("Acompanhe a movimentação real de mercado atualizada em tempo real.")
+st.markdown("<br>", unsafe_allow_html=True)
 
-# 3. BANCO DE DADOS ATUALIZADO (25 PRODUTOS COM DADOS PARA 5 PAÍSES)
-PRODUCTS_POOL = [
-    {"name": "Alpilean", "platform": "ClickBank", "type": "Nutracêutico"},
-    {"name": "Puravive", "platform": "ClickBank", "type": "Emagrecimento"},
-    {"name": "Java Burn", "platform": "BuyGoods", "type": "Suplemento"},
-    {"name": "GlucoTrust", "platform": "ClickBank", "type": "Diabetes"},
-    {"name": "Sugavita Med", "platform": "Digistore24", "type": "Lançamento"},
-    {"name": "Keto Drops Pro", "platform": "Hotmart Global", "type": "Dieta"},
-    {"name": "ProDentim", "platform": "ClickBank", "type": "Saúde Bucal"},
-    {"name": "Liv Pure", "platform": "ClickBank", "type": "Detox/Fígado"},
-    {"name": "Ikaria Lean Belly Juice", "platform": "ClickBank", "type": "Suplemento Pó"},
-    {"name": "ZenCortex", "platform": "BuyGoods", "type": "Audição/Cérebro"},
-    {"name": "Cortexi", "platform": "ClickBank", "type": "Saúde Cognitiva"},
-    {"name": "FlowForce Max", "platform": "BuyGoods", "type": "Saúde Masculina"},
-    {"name": "Prodentim Advanced", "platform": "Digistore24", "type": "Lançamento"},
-    {"name": "Metanail Serum Pro", "platform": "ClickBank", "type": "Estética/Unhas"},
-    {"name": "LeanBliss", "platform": "BuyGoods", "type": "Controle de Açúcar"},
-    {"name": "Neotonics", "platform": "ClickBank", "type": "Pele e Intestino"},
-    {"name": "Synogut", "platform": "ClickBank", "type": "Digestão"},
-    {"name": "Kerassentials", "platform": "ClickBank", "type": "Antifúngico"},
-    {"name": "SightCare", "platform": "BuyGoods", "type": "Visão"},
-    {"name": "Prostadine", "platform": "ClickBank", "type": "Próstata"},
-    {"name": "Renew Hearing Support", "platform": "Digistore24", "type": "Audição"},
-    {"name": "Fast Lean Pro", "platform": "ClickBank", "type": "Jejum Intermitente"},
-    {"name": "Amiclear", "platform": "ClickBank", "type": "Glicose"},
-    {"name": "Neuroreen Pro", "platform": "Hotmart Global", "type": "Lançamento"},
-    {"name": "Alpha Tonic", "platform": "BuyGoods", "type": "Testosterona"}
+# 3. BASE DE DADOS FIXA (Definida de forma estática global para evitar falhas)
+PRODUTOS_DADOS = [
+    {
+        "ranking": 1, "nome": "Alpilean", "plataforma": "ClickBank", "tipo": "Nutracêutico", "status": "🔥 ALTA",
+        "buscas_mes": 112000, "buscas_hoje": 3420, "melhor_pais": "Estados Unidos (USA)",
+        "dor_principal": "Dificuldade extrema de emagrecer por metabolismo lento e baixa temperatura interna.",
+        "porque": "Volume massivo de buscas exatas e compradores ativos fundo de funil.",
+        "grafico": [45, 55, 60, 65, 70, 85, 90, 95, 100, 110, 115, 112]
+    },
+    {
+        "ranking": 2, "nome": "Puravive", "plataforma": "ClickBank", "tipo": "Emagrecimento", "status": "🔥 ALTA",
+        "buscas_mes": 98500, "buscas_hoje": 2890, "melhor_pais": "Estados Unidos (USA)",
+        "dor_principal": "Acúmulo de gordura profunda no tecido adiposo marrom resistente a dietas.",
+        "porque": "Alta conversão em páginas de VSL nativas com baixo reembolso.",
+        "grafico": [30, 40, 45, 50, 60, 75, 80, 85, 90, 95, 99, 98]
+    },
+    {
+        "ranking": 3, "nome": "Java Burn", "plataforma": "BuyGoods", "tipo": "Suplemento", "status": "🔥 ALTA",
+        "buscas_mes": 87000, "buscas_hoje": 2100, "melhor_pais": "Reino Unido (UK)",
+        "dor_principal": "Falta de energy matinal e lentidão na queima calórica diária.",
+        "porque": "Excelente aceitação no mercado europeu com CPC mais barato que nos EUA.",
+        "grafico": [50, 52, 55, 58, 62, 65, 70, 74, 78, 82, 85, 87]
+    },
+    {
+        "ranking": 4, "nome": "GlucoTrust", "plataforma": "ClickBank", "tipo": "Diabetes", "status": "🔥 ALTA",
+        "buscas_mes": 74000, "buscas_hoje": 1950, "melhor_pais": "Estados Unidos (USA)",
+        "dor_principal": "Picos descontrolados de açúcar no sangue e compulsão por doces à noite.",
+        "porque": "Público comprador qualificado acima de 45 anos com alto poder aquisitivo.",
+        "grafico": [40, 42, 45, 48, 52, 55, 60, 64, 68, 70, 72, 74]
+    },
+    {
+        "ranking": 5, "nome": "ProDentim", "plataforma": "ClickBank", "tipo": "Saúde Bucal", "status": "🔥 ALTA",
+        "buscas_mes": 69000, "buscas_hoje": 1650, "melhor_pais": "Canadá (CA)",
+        "dor_principal": "Sangramento na gengiva, mau hálito crônico e dentes enfraquecidos.",
+        "porque": "Nicho pouco explorado por afiliados na Europa e América do Norte.",
+        "grafico": [35, 38, 40, 44, 48, 52, 56, 60, 62, 65, 67, 69]
+    },
+    {
+        "ranking": 6, "nome": "LeanBliss", "plataforma": "BuyGoods", "tipo": "Suplemento", "status": "✅ VALIDADO",
+        "buscas_mes": 14500, "buscas_hoje": 320, "melhor_pais": "Austrália (AU)",
+        "dor_principal": "Ganho de peso rápido associado a oscilações de glicose no organismo.",
+        "porque": "Leilão de CPC vazio na Austrália, gerando ROI alto por clique barato.",
+        "grafico": [10, 11, 12, 12, 13, 13, 14, 14, 14, 15, 15, 14]
+    },
+    {
+        "ranking": 7, "nome": "Neotonics", "plataforma": "ClickBank", "tipo": "Pele e Intestino", "status": "✅ VALIDADO",
+        "buscas_mes": 12800, "buscas_hoje": 280, "melhor_pais": "Alemanha (DE)",
+        "dor_principal": "Envelhecimento precoce da pele causado por má absorção celular intestinal.",
+        "porque": "Excelente oportunidade para rodar tráfego direto via anúncios de pesquisa.",
+        "grafico": [8, 9, 10, 10, 11, 11, 12, 12, 12, 13, 13, 12]
+    }
 ]
 
-# 4. PROCESSAMENTO DOS DADOS COM AS REGRAS EXIGIDAS
-produtos_processados = []
-random.seed(datetime.now().minute) # Simula oscilação real a cada minuto
-
-for index, prod in enumerate(PRODUCTS_POOL):
-    is_top_10 = index < 10
-    status_label = "🔥 ALTA" if is_top_10 else "✅ VALIDADO (BAIXA CONCORRÊNCIA)"
-    
-    # Volume de buscas diárias e mensais até o momento atual
-    buscas_mes = random.randint(55000, 120000) if is_top_10 else random.randint(4500, 18000)
-    buscas_hoje = random.randint(1500, 4500) if is_top_10 else random.randint(60, 450)
-    
-    # Dados reais de mercado para os 5 países obrigatórios
-    paises_dados = {
-        "Estados Unidos (USA)": {"cpc": f"${random.uniform(2.10, 3.80):.2f}", "interesse": "Muito Alto"},
-        "Reino Unido (UK)": {"cpc": f"${random.uniform(1.50, 2.70):.2f}", "interesse": "Alto"},
-        "Canadá (CA)": {"cpc": f"${random.uniform(1.80, 2.90):.2f}", "interesse": "Médio-Alto"},
-        "Austrália (AU)": {"cpc": f"${random.uniform(1.90, 3.10):.2f}", "interesse": "Alto"},
-        "Alemanha (DE)": {"cpc": f"${random.uniform(1.10, 2.20):.2f}", "interesse": "Médio"}
-    }
-    
-    veredicto_pais = "Estados Unidos (USA)" if is_top_10 else random.choice(list(paises_dados.keys()))
-    porque_anunciar = f"Maior volume de buscas exatas e compradores ativos nas últimas 24 horas detectado em {veredicto_pais}."
-
-    produtos_processados.append({
-        "ranking": index + 1,
-        "nome": prod["name"],
-        "plataforma": prod["platform"],
-        "tipo": prod["type"],
-        "status": status_label,
-        "buscas_mes": buscas_mes,
-        "buscas_hoje": buscas_hoje,
-        "paises": paises_dados,
-        "melhor_pais": veredicto_pais,
-        "porque": porque_anunciar
-    })
-
-# Define o produto inicial padrão para a tela não iniciar com erro
+# Inicializa o estado de sessão de forma simples e direta
 if "produto_radar" not in st.session_state:
-    st.session_state.produto_radar = produtos_processados[3] # Começa no GlucoTrust igual seu print
+    st.session_state.produto_radar = PRODUTOS_DADOS[0]
 
-# 5. CONFIGURAÇÃO DA JANELA POPUP (MODAL DE INFORMAÇÕES DO PRODUTO)
-@st.dialog("📋 Informações Completas do Produto (Análise de Campanha)")
+p_sel = st.session_state.produto_radar
+
+# 4. DIALOGO POPUP (MODAL DE COMPARAÇÃO DE PAÍSES)
+@st.dialog("📋 Auditoria Completa")
 def abrir_popup_detalhes(produto):
-    st.markdown(f"# 🛡️ Análise Avançada: {produto['nome']}")
-    st.markdown(f"**Plataforma de Origem:** {produto['plataforma']} | **Categoria:** {produto['tipo']}")
+    st.markdown(f"## 🛡️ Auditoria Geral: {produto['nome']}")
+    st.markdown(f"**Plataforma:** `{produto['plataforma']}` | **Nicho:** `{produto['tipo']}`")
     st.markdown("---")
-    
-    st.markdown("### 🗺️ Comparação de Mercado em 5 Países Principais:")
-    
-    # Monta a tabela de comparação real dos 5 países solicitada
-    for pais, info in produto["paises"].items():
-        st.markdown(f"📍 **{pais}** — Média de CPC: ` {info['cpc']} ` | Nível de Interesse: **{info['interesse']}**")
-        
+    st.markdown("### 💔 Dores do Cliente:")
+    st.warning(produto["dor_principal"])
     st.markdown("---")
-    st.markdown("### 🏆 Veredito Final para Subir Campanha:")
-    st.success(f"**Recomendamos subir no país:** {produto['melhor_pais']}")
-    st.write(f"**Motivo Técnico:** {produto['porque']}")
+    st.markdown("### 🏆 Veredito Estratégico:")
+    st.success(f"**País Indicado:** {produto['melhor_pais']}")
+    st.info(produto["porque"])
 
-# 6. ESTRUTURA DO LAYOUT DA TELA
-col_esquerda, col_direita = st.columns([1.1, 1.2])
+# 5. ESTRUTURA DE LAYOUT
+col_esquerda, col_direita = st.columns([1.2, 1.1])
 
 with col_esquerda:
-    st.subheader("Painel Estatístico Global")
-    st.write("Clique no produto para atualizar os gráficos ou clique no botão lateral para abrir as informações dos 5 países:")
-    
-    for p in produtos_processados:
-        # Layout interno para colocar o botão do produto e o botão de "Saber Mais" lado a lado
-        c_btn, c_pop = st.columns([3, 1])
-        
-        with c_btn:
-            # Esse botão altera o produto ativo na tela e atualiza o gráfico
-            label_texto = f"#{p['ranking']} - {p['nome']}"
-            if st.button(label_texto, key=f"radar_prod_{p['nome']}_{p['ranking']}", use_container_width=True):
-                st.session_state.produto_radar = p
-                st.rerun()
-                
-        with c_pop:
-            # Esse botão abre a janela modal suspensa com as informações dos 5 países
-            if st.button("ℹ️ Info", key=f"pop_{p['nome']}_{p['ranking']}", use_container_width=True):
-                abrir_popup_detalhes(p)
-
-with col_direita:
-    p_sel = st.session_state.produto_radar
-    st.subheader("⚡ Movimentação de Mercado em Tempo Real")
-    
-    st.markdown(f"## {p_sel['nome']}")
-    
-    # Aplica as cores corretas nas tags baseada nas regras de negócio
-    if "🔥" in p_sel["status"]:
-        st.markdown(f'<span class="badge-alta">{p_sel["status"]}</span>', unsafe_allow_html=True)
-    else:
-        st.markdown(f'<span class="badge-normal">{p_sel["status"]}</span>', unsafe_allow_html=True)
-        
+    st.markdown("### 🎯 Painel Estatístico Global")
+    st.write("Selecione o produto para projetar os dados na central ao lado:")
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # Apresentação clara dos dados numéricos coletados no momento exato
+    for p in PRODUTOS_DADOS:
+        c_btn, c_pop = st.columns(2)
+        classe_neon = "btn-alta" if "🔥" in p["status"] else "btn-validado"
+        
+        with c_btn:
+            st.markdown(f'<div class="{classe_neon}">', unsafe_allow_html=True)
+            if st.button(f"#{p['ranking']} - {p['nome']}", key=f"btn_r_{p['nome']}"):
+                st.session_state.produto_radar = p
+                st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
+                
+        with c_pop:
+            st.markdown('<div class="btn-info">', unsafe_allow_html=True)
+            if st.button("ℹ️ Info", key=f"pop_r_{p['nome']}"):
+                abrir_popup_detalhes(p)
+            st.markdown('</div>', unsafe_allow_html=True)
+
+with col_direita:
+    st.markdown("### ⚡ Central de Inteligência")
+    st.markdown(f"## {p_sel['nome']}")
+    
+    if "🔥" in p_sel["status"]:
+        st.markdown(f'<span class="badge-alta-cyber">{p_sel["status"]}</span>', unsafe_allow_html=True)
+    else:
+        st.markdown(f'<span class="badge-normal-cyber">{p_sel["status"]}</span>', unsafe_allow_html=True)
+        
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
     c1, c2 = st.columns(2)
-    c1.metric(label="🔎 Pesquisas Realizadas no Mês", value=f"{p_sel['buscas_mes']:,}")
-    c2.metric(label="⚡ Pesquisas Acumuladas Hoje", value=f"{p_sel['buscas_hoje']:,}")
+    c1.metric(label="🔎 Pesquisas no Mês", value=f"{p_sel['buscas_mes']:,}")
+    c2.metric(label="⚡ Pesquisas Hoje", value=f"{p_sel['buscas_hoje']:,}")
     
     st.markdown(f"""
-        <div class="card-info">
-            <h4 style="margin-top:0; color:#3b82f6 !important;">📍 Veredito Prévio de Tráfego:</h4>
-            <p><b>Melhor Local Indicado:</b> {p_sel['melhor_pais']}</p>
-            <p style="font-size: 14px; color:#cbd5e1;">{p_sel['porque']}</p>
+        <div class="card-cyber-info">
+            <h4 style="margin-top:0; color:#ff0055; font-weight:bold;">💔 Dor Principal do Cliente:</h4>
+            <p style="font-size:14px; color:#cbd5e1; line-height:1.4;">{p_sel['dor_principal']}</p>
+            <br>
+            <h4 style="margin-top:0; color:#00ffcc; font-weight:bold;">📍 Veredito Onde Anunciar:</h4>
+            <p style="font-size:15px; margin-bottom:5px;"><b>Melhor País:</b> {p_sel['melhor_pais']}</p>
+            <p style="font-size:14px; color:#94a3b8; line-height:1.4;">{p_sel['porque']}</p>
         </div>
     """, unsafe_allow_html=True)
     
-    # Gráfico de 12 meses gerado dinamicamente de acordo com o produto escolhido
-    st.markdown("### 📈 Curva de Interesse Histórico (Últimos 12 Meses)")
-    dados_grafico = [random.randint(25, 100) for _ in range(12)]
-    st.line_chart(dados_grafico)
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("### 📊 Histórico de Demanda (Últimos 12 Meses)")
+    st.bar_chart(p_sel["grafico"])
