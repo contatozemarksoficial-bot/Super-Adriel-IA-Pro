@@ -47,11 +47,11 @@ def main():
     ativar_busca = st.button("🚀 PESQUISAR LANÇAMENTOS AGORA")
     st.markdown("---")
 
-    # CONTROLE DE ESTADO DA BUSCA INTERATIVA
+    # CONTROLE DE ESTADO DA BUSCA INTERATIVA ANTI-CACHE
     if "cacador_semente_viva" not in st.session_state:
         st.session_state.cacador_semente_viva = 12
 
-    if ativar_busca:
+    if activar_busca:
         st.session_state.cacador_semente_viva = random.randint(10, 99)
 
     semente_ativa = st.session_state.cacador_semente_viva
@@ -80,8 +80,9 @@ def main():
     t_status2 = pool_status[(semente_ativa + 2) % 5]
     t_status3 = pool_status[(semente_ativa + 3) % 5]
 
+    # 🪐 CORREÇÃO SUPREMA V5: Purificação completa dos cálculos sem operador composto inline
     cpc_calculado1 = str(round(1.10 + (semente_ativa * 0.02), 2))
-    cpc_calculado2 = str(round(1.25 + (semente_viva := semente_ativa * 0.015), 2))
+    cpc_calculado2 = str(round(1.25 + (semente_ativa * 0.015), 2))
     cpc_calculado3 = str(round(1.05 + (semente_ativa * 0.025), 2))
 
     lista_semanas = ["S1", "S2", "S3", "S4"]
@@ -95,7 +96,6 @@ def main():
 
     # --- DOSSIÊ PRODUTO 1 REAL ---
     with c_prod1:
-        # 🪐 CORREÇÃO SUPREMA: Título injetado de forma dinâmica usando a variável sorteada do banco de dados gringo
         st.markdown("<h3 style='color:#00ffcc; text-shadow: 0 0 10px rgba(0,255,204,0.4); margin-bottom:5px;'>🔥 1. " + nome_topo_p1 + "</h3>", unsafe_allow_html=True)
         st.write("**Plataforma:** ClickBank Real Offer")
         st.write("**Termometro:** " + t_status1)
@@ -107,7 +107,6 @@ def main():
 
     # --- DOSSIÊ PRODUTO 2 REAL ---
     with c_prod2:
-        # 🪐 CORREÇÃO SUPREMA: Título injetado de forma dinâmica usando a variável sorteada do banco de dados gringo
         st.markdown("<h3 style='color:#ff0055; text-shadow: 0 0 10px rgba(255,0,85,0.4); margin-bottom:5px;'>🔥 2. " + nome_topo_p2 + "</h3>", unsafe_allow_html=True)
         st.write("**Plataforma:** BuyGoods Network")
         st.write("**Termometro:** " + t_status2)
@@ -119,7 +118,6 @@ def main():
 
     # --- DOSSIÊ PRODUTO 3 REAL ---
     with c_prod3:
-        # 🪐 CORREÇÃO SUPREMA: Título injetado de forma dinâmica usando a variável sorteada do banco de dados gringo
         st.markdown("<h3 style='color:#0066ff; text-shadow: 0 0 10px rgba(0,102,255,0.4); margin-bottom:5px;'>🔥 3. " + nome_topo_p3 + "</h3>", unsafe_allow_html=True)
         st.write("**Plataforma:** Digistore24 Int.")
         st.write("**Termometro:** " + t_status3)
@@ -135,3 +133,7 @@ def main():
     st.markdown("<h4 style='color:#00ffcc;'>📲 Compartilhar Relatorio dos 3 Lancamentos via WhatsApp</h4>", unsafe_allow_html=True)
     st.write("Dispare o dossie completo das 3 oportunidades reais para o seu telefone cadastrado:")
     
+    msg_whats = "ALERTA%20DE%20LANCAMENTOS%20ADRIEL-AI%0A%0A1.%20" + nome_topo_p1 + "%20-" + t_status1.replace(" ", "%20") + "%0A2.%20" + nome_topo_p2 + "%20-" + t_status2.replace(" ", "%20") + "%0A3.%20" + nome_topo_p3 + "%20-" + t_status3.replace(" ", "%20") + "%0A%0A_Varredura%20viva%20executada%20as%20" + horario_atual + "_"
+    
+    num_destino = st.session_state.user_whatsapp_saved
+    link_final_whats = "https://whatsapp.com" + num_destino + "&text=" + msg_whats
