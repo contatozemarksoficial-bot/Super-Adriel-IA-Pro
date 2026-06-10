@@ -35,7 +35,7 @@ def main():
     st.info("🛰️ Sistema operando em Modo de Guerra. Varredura viva às " + horario_viva)
     st.markdown("---")
 
-    # 3. CONTROLE DE SESSÃO PARA MONITORAR CLIQUES VERTICAIS SEM SELECTBOX
+    # CONTROLE DE SESSÃO PARA MONITORAR CLIQUES VERTICAIS SEM SELECTBOX
     if "produto_radar_ativo" not in st.session_state:
         st.session_state.produto_radar_ativo = "Alpilean"
 
@@ -47,7 +47,7 @@ def main():
         st.write("Selecione a oportunidade abaixo para ativar no painel:")
         st.write("")
 
-        # Configuração estrita de chaves e dados do banco de dados de ofertas do print
+        # Configuração das chaves e nomes originais limpos sem erros
         lista_completa_produtos = [
             {"id": "Alpilean", "label": "📍 Alpilean | 🟢 ALTA - MONITORANDO"},
             {"id": "Puravive", "label": "⚡ Puravive | 🔥 ALTA - SUBINDO"},
@@ -69,7 +69,7 @@ def main():
             {"id": "LeanBliss", "label": "🛡️ LeanBliss | 🔵 NORMAL - ESTÁVEL"}
         ]
 
-        # BOTÕES VERTICAIS NATIVOS EM LOOPS COM FORMATO DE ALTO LUXO SEM CONFLITOS VISUAIS
+        # BOTÕES VERTICAIS EM PARALELO DE ACORDO COM O DESIGN DO SEU CONTRATO VISUAL
         for item in lista_completa_produtos:
             if st.session_state.produto_radar_ativo == item["id"]:
                 st.markdown("<div style='background-color:#0f172a; border:2px solid #00ffcc; padding:11px; border-radius:6px; margin-bottom:8px; color:#00ffcc; font-weight:bold; font-size:1rem;'>" + item['label'] + "</div>", unsafe_allow_html=True)
@@ -86,7 +86,7 @@ def main():
         st.write("Classificação: **ALTA** | Monitoramento Ativo do Robô V8")
         st.write("---")
 
-        # MÉTRICAS COM DESIGN DO PRINT CORRIGIDAS ORTOGRAFICAMENTE
+        # MÉTRICAS COM DESIGN PREMIUM CORRIGIDAS ORTOGRAFICAMENTE
         c_met1, c_met2 = st.columns(2)
         with c_met1:
             st.metric(label="🔎 Buscas pesquisadas nas últimas 24 horas", value="53.325", delta="+12.4%")
@@ -119,8 +119,8 @@ def main():
         st.markdown("<h4 style='color:#00ffcc;'>📈 Movimentação Histórica de Leilão (Status do Sinal Mensal):</h4>", unsafe_allow_html=True)
         
         lista_meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
-        # 🪐 CORREÇÃO SUPREMA DA LINHA 91: Preenchido os dados numéricos de forma sólida e estável
-        dados_leilao = [4200, 4500, 4900, 5300, 5100, 5800, 6200, 6000, 6400, 6900, 7200, 7500]
+        # 🪐 VALORES PREENCHIDOS E CORRIGIDOS PARA ELIMINAR O APAGÃO VISUAL DA TELA BRANCA
+        dados_leilao = [45, 55, 62, 70, 85, 90, 78, 82, 88, 95, 110, 125]
         
         df_radar = pd.DataFrame({"Meses": lista_meses, "Sinal": dados_leilao})
         st.bar_chart(df_radar, x="Meses", y="Sinal", color="#00ffcc")
