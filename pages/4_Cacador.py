@@ -44,6 +44,8 @@ def main():
 
     # Terminal de varredura ativa por cliques obedientes
     st.markdown("<h3 style='color:#00ffcc;'>⚙️ Terminal de Varredura Sincronizada</h3>", unsafe_allow_html=True)
+    
+    # 🪐 DECLARAÇÃO UNIFICADA DO BOTÃO SEM LETRAS DUPLICADAS
     ativar_busca = st.button("🚀 PESQUISAR LANÇAMENTOS AGORA")
     st.markdown("---")
 
@@ -51,7 +53,8 @@ def main():
     if "cacador_semente_viva" not in st.session_state:
         st.session_state.cacador_semente_viva = 12
 
-    if activar_busca:
+    # 🪐 CORREÇÃO DA LINHA 54: Corrigida a grafia exata para ler o botão ativo
+    if ativar_busca:
         st.session_state.cacador_semente_viva = random.randint(10, 99)
 
     semente_ativa = st.session_state.cacador_semente_viva
@@ -60,7 +63,7 @@ def main():
     st.info("🤖 STATUS DO ROBO: Varredura viva de lancamentos reais finalizada as " + horario_atual + " | Conexao: CLICKBANK, BUYGOODS, DIGISTORE24")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 🪐 BANCO DE DADOS DE PRODUTOS REAIS PARA EMBARALHAMENTO DO TOPO PAI
+    # BANCO DE DADOS DE PRODUTOS REAIS PARA EMBARALHAMENTO DO TOPO PAI
     pool_produtos_col1 = ["FitSpresso", "Puravive Launch", "Alpilean Custom", "Liv Pure Core"]
     pool_produtos_col2 = ["Nagano Tonic", "Java Burn Pro", "Ikaria Juice V2", "LeanBliss Gringo"]
     pool_produtos_col3 = ["DentiCore", "ProDentim Elite", "Steel Bite Pro", "Sugar Defender V2"]
@@ -81,7 +84,6 @@ def main():
     t_status2 = pool_status[(semente_ativa + 2) % 5]
     t_status3 = pool_status[(semente_ativa + 3) % 5]
 
-    # Purificação completa da matemática sem nenhuma atribuição inline indesejada
     v_cpc1 = 1.10 + (semente_ativa * 0.02)
     v_cpc2 = 1.25 + (semente_ativa * 0.015)
     v_cpc3 = 1.05 + (semente_ativa * 0.025)
@@ -96,7 +98,7 @@ def main():
     df_p2 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v2, int(v2 * 1.08), int(v2 * 1.22), int(v2 * 1.38)]})
     df_p3 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v3, int(v3 * 1.14), int(v3 * 1.26), int(v3 * 1.52)]})
 
-    # 3. CONSTRUÇÃO DO LAYOUT EM COLUNAS NATIVAS SEM STRINGS HTML COMPLEXAS INTERNAS
+    # 3. CONSTRUÇÃO DO LAYOUT EM COLUNAS NATIVAS PREMIUM
     c_prod1, c_prod2, c_prod3 = st.columns(3)
 
     # --- DOSSIÊ PRODUTO 1 REAL ---
@@ -106,8 +108,6 @@ def main():
         st.write("**Termometro:** " + t_status1)
         st.write("**Analise:** Oferta recente focada em trafego massivo de alta intencao de compra. Excelente ROI em termos fundo de funil.")
         st.write("**Melhores Paises:** USA, UK, Canada, Australia, Alemanha")
-        
-        # Injeção estável com caixas nativas para eliminar conflito visual e caixas brancas
         st.info("💵 CPC USA Estimado: $" + cpc_calculado1 + " | Outros: $0.95")
         st.bar_chart(df_p1, x="Semanas", y="Buscas")
 
@@ -118,8 +118,6 @@ def main():
         st.write("**Termometro:** " + t_status2)
         st.write("**Analise:** Suplemento encapsulado de alto rendimento leiloado na gringa. Baixissima concorrencia no leilao oficial.")
         st.write("**Melhores Paises:** USA, Canada, Reino Unido, Australia, Nova Zelandia")
-        
-        # Injeção estável com caixas nativas para eliminar conflito visual e caixas brancas
         st.info("💵 CPC USA Estimado: $" + cpc_calculado2 + " | Outros: $1.10")
         st.bar_chart(df_p2, x="Semanas", y="Buscas")
 
@@ -130,8 +128,6 @@ def main():
         st.write("**Termometro:** " + t_status3)
         st.write("**Analise:** Oferta recente focada em conversao acelerada com VSL de alta retencao. Alta taxa de comissionamento.")
         st.write("**Melhores Paises:** USA, UK, Irlanda, Australia, Canada")
-        
-        # Injeção estável com caixas nativas para eliminar conflito visual e caixas brancas
         st.info("💵 CPC USA Estimado: $" + cpc_calculado3 + " | Outros: $0.85")
         st.bar_chart(df_p3, x="Semanas", y="Buscas")
 
@@ -142,7 +138,6 @@ def main():
     st.write("Dispare o dossie completo das 3 oportunidades reais para o seu telefone cadastrado:")
     
     msg_whats = "ALERTA%20DE%20LANCAMENTOS%20ADRIEL-AI%0A%0A1.%20" + nome_topo_p1 + "%20-" + t_status1.replace(" ", "%20") + "%0A2.%20" + nome_topo_p2 + "%20-" + t_status2.replace(" ", "%20") + "%0A3.%20" + nome_topo_p3 + "%20-" + t_status3.replace(" ", "%20") + "%0A%0A_Varredura%20viva%20executada%20as%20" + horario_atual + "_"
-    
     num_destino = st.session_state.user_whatsapp_saved
     link_final_whats = "https://whatsapp.com" + num_destino + "&text=" + msg_whats
     
