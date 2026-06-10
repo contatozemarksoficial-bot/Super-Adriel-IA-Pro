@@ -21,6 +21,11 @@ def main():
     estilo_luxo += "[data-testid='stMetricContainer'] {background: linear-gradient(135deg, #0f172a, #030712) !important; border: 1px solid #1e293b !important; border-left: 4px solid #00ffcc !important; padding: 15px !important; border-radius: 10px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;}"
     estilo_luxo += "h1, h2, h3, h4, span, p, label, .stMarkdown p {color: #f3f4f6 !important;}"
     estilo_luxo += "[data-testid='stNotification'] {background-color: #0f172a !important; border: 1px solid #1e293b !important; border-radius: 10px !important;}"
+    
+    # CUSTOMIZAÇÃO E ANULAÇÃO DE FUNDO BRANCO NOS GRÁFICOS (FIXAÇÃO DARK LUXO)
+    estilo_luxo += "div[data-testid='stVegaLiteChart'], .stVegaLiteChart {background-color: rgba(0,0,0,0) !important; background: transparent !important; border: 1px solid #1e293b !important; padding: 10px !important; border-radius: 8px !important;}"
+    estilo_luxo += "svg, canvas, g, path, rect {background-color: transparent !important; background: transparent !important;}"
+    estilo_luxo += "text, span {fill: #f3f4f6 !important; color: #f3f4f6 !important; font-family: monospace !important;}"
     estilo_luxo += "</style>"
     st.markdown(estilo_luxo, unsafe_allow_html=True)
 
@@ -92,10 +97,10 @@ def main():
         st.markdown("<h3 style='color:#00ffcc; margin:0; text-align:center;'>📐 Desenho Arquitetonico do Funil</h3>", unsafe_allow_html=True)
         st.write("")
         
-        # 🪐 CORREÇÃO SUPREMA V8: Desenho estrutural geométrico do funil feito 100% em blocos de info nativos imunes a bugs de parser!
+        # 🪐 BLINDAGEM COMPILADA V8: Desenho estrutural geométrico feito em blocos nativos livres de tags HTML divisórias complexas
         st.error("▼ [TOPO DO FUNIL] — Estagio Informativo Amplo / Atração de Trafego")
         st.info("▼ [MEIO DO FUNIL] — Pagina Pre-Sell / Quebra de Objecoes e Filtro")
-        st.success("▼ [FUNDO DO FUNIL] — Intencao de Compra Direta / Foco em Conversao")
+        st.success("▼ [FUNDO DO FUNIL] — Intencao de Compra Direta / Foco em ROI")
 
     st.markdown("---")
     st.markdown("<h3 style='color:#cc66ff;'>📊 Simulacao Operacional de Tráfego Gringo</h3>", unsafe_allow_html=True)
@@ -128,7 +133,3 @@ def main():
     st.markdown("<h4 style='color:#00ffcc;'>📲 Compartilhar Diagnostico do Funil no WhatsApp</h4>", unsafe_allow_html=True)
     st.write("Dispare o relatorio estrategico e o veredicto deste funil direto para o seu telefone cadastrado:")
     
-    msg_funil = "DIAGNOSTICO%20DE%20FUNIL%20ADRIEL-AI%0A%0A-%20Termo:%20" + produto_analisado.replace(" ", "%20") + "%0A-%20Nivel:%20" + nivel_funil.replace(" ", "%20") + "%0A-%20Cliques:%20" + str(cliques_estimados) + "%0A-%20Lucro%20Liquido:%20$" + str(lucro_liquido) + "%20USD%0A-%20ROI:%20" + str(roi_porcentagem) + "%25%0A%0A_Estrategia%20mapeada%20as%20" + horario_atual + "_"
-    
-    link_final_funil = "https://whatsapp.com" + num_whats + "&text=" + msg_funil
-    st.markdown("<a href='" + link_final_funil + "' target='_blank' style='display:block; text-align:center; background-color:#25d366; color:#ffffff; padding:15px; border-radius:8px; font-weight:bold; text-decoration:none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); font-size:1.1rem;'>💬 DISPARAR RELATÓRIO DO FUNIL NO WHATSAPP</a>", unsafe_allow_html=True)
