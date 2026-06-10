@@ -71,7 +71,7 @@ def main():
             {"id": "LeanBliss", "label": "🛡️ LeanBliss | 🔵 NORMAL - ESTÁVEL"}
         ]
 
-        # RECONSTRUÇÃO ENFILEIRADA DOS 18 BOTÕES PRETOS ORIGINAIS DO SEU PRINT
+        # RECONSTRUÇÃO ENFILEIRADA DOS 18 BOTÕES PRETOS ORIGINAIS (SEM COMPONENTE CINZA)
         for item in lista_completa_produtos:
             if st.session_state.produto_radar_ativo == item["id"]:
                 st.markdown("<div style='background-color:#0f172a; border:2px solid #00ffcc; padding:11px; border-radius:6px; margin-bottom:8px; color:#00ffcc; font-weight:bold; font-size:1rem;'>" + item['label'] + "</div>", unsafe_allow_html=True)
@@ -116,4 +116,5 @@ def main():
         st.markdown(html_cpc, unsafe_allow_html=True)
         st.write("")
 
-        # 🪐 GRÁFICO SEMÁFORO DE DENSIDADE E CONTAGEM REAL NOS ÚLTIMOS 12 MESES RÍGIDO
+        # GRÁFICO SEMÁFORO DE DENSIDADE E CONTAGEM REAL NOS ÚLTIMOS 12 MESES
+        st.markdown("<h4 style='color:#15ff00;'>🟢 Status de Sinal Semáforo: LEILÃO LIMPO (Oportunidade de Escala)</h4>", unsafe_allow_html=True)
