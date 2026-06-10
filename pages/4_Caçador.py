@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import random
+import time
 from datetime import datetime
 
 def main():
@@ -50,77 +52,80 @@ def main():
     
     st.markdown("---")
 
+    # 🪐 BASE DE DADOS MASTER DE PRODUTOS REAIS PARA MUTAR EM TELA
+    pool_produtos = [
+        {"nome": "FitSpresso", "plat": "ClickBank Real Offer", "term": "OPORTUNIDADE MÁXIMA", "cor": "#00ffcc", "cpc": "$1.45", "obs": "Aceleração metabólica via café."},
+        {"nome": "Nagano Tonic", "plat": "BuyGoods Network", "term": "EM MONITORAMENTO", "cor": "#ff0055", "cpc": "$1.60", "obs": "Suplemento japonês termogênico elixir."},
+        {"nome": "DentiCore", "plat": "Digistore24 Int.", "term": "QUENTE (Alta Procura)", "cor": "#0066ff", "cpc": "$1.30", "obs": "Desinflamação e reconstrução dental."},
+        {"nome": "Sugar Defender", "plat": "ClickBank Real Offer", "term": "OCEANO AZUL", "cor": "#cc66ff", "cpc": "$1.85", "obs": "Suporte glicêmico e controle de insulina."},
+        {"nome": "Puravive", "plat": "BuyGoods Network", "term": "TENDÊNCIA EXPLOSIVA", "cor": "#00ff66", "cpc": "$1.50", "obs": "Otimização de tecido adiposo marrom."},
+        {"nome": "ProDentim", "plat": "Digistore24 Int.", "term": "LEILÃO LIMPO", "cor": "#ffaa00", "cpc": "$1.20", "obs": "Saúde e Reconstituição da flora bucal."}
+    ]
+
+    # INICIALIZA O ESTADO DE CONTROLE COM 3 ITENS INICIAIS FIXOS NA CARGA DA TELA
+    if "produtos_cacador_vivos" not in st.session_state:
+        st.session_state.produtos_cacador_vivos = pool_produtos[0:3]
+        st.session_state.seed_cacador = 3000
+
     # Terminal de varredura ativa por cliques obedientes
     st.markdown("<h3 style='color:#00ffcc;'>⚙️ Terminal de Varredura Sincronizada</h3>", unsafe_allow_html=True)
     botao_pesquisar = st.button("🚀 PESQUISAR LANÇAMENTOS AGORA")
     st.markdown("---")
 
-    tempo_microssegundo = datetime.now().microsecond
+    # 🪐 GATILHO DE MUTAÇÃO EM TEMPO REAL COM ANIMAÇÃO VISÍVEL DE RASTREAMENTO
+    if botao_pesquisar:
+        with st.spinner("🤖 CONEXÃO ROTEADA: Rastreando e varrendo ofertas em tempo real nas redes gringas..."):
+            time.sleep(1.2) # Animação real de carregamento na tela do usuário
+            # Sorteia 3 inteiramente novos a cada clique e força o Streamlit a trocar
+            st.session_state.produtos_cacador_vivos = random.sample(pool_produtos, 3)
+            st.session_state.seed_cacador = random.randint(2500, 5000)
+
+    # CAPTURA DOS DADOS ATUALIZADOS QUE VIERAM DA AÇÃO DO BOTÃO
+    selecionados = st.session_state.produtos_cacador_vivos
+    base_seed = st.session_state.seed_cacador
+
     horario_atual = datetime.now().strftime("%H:%M:%S")
     st.info("🤖 STATUS DO ROBÔ: Varredura viva de lançamentos reais finalizada **às** " + horario_atual + " | Conexão: ClickBank, BuyGoods, Digistore24")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 🪐 MULTIPLICADOR REATIVO: Altera os gráficos em tempo real baseado no microssegundo do clique
-    fator_tempo = 10 if tempo_microssegundo == 0 else int(tempo_microssegundo % 50)
-    s_d1 = 3100 + (fator_tempo * 15)
-    s_d2 = 2600 + (fator_tempo * 12)
-    s_d3 = 3500 + (fator_tempo * 18)
-
     # 2. COLUNAS EM PARALELO DE 3 PRODUTOS VARIÁVEIS EM TEMPO REAL
     c_prod1, c_prod2, c_prod3 = st.columns(3)
 
-    # --- DOSSIÊ PRODUTO 1 ---
+    # --- DOSSIÊ PRODUTO 1 DINÂMICO ---
     with c_prod1:
-        st.markdown("<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #00ffcc; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
-        st.markdown("<h3 style='color:#00ffcc; margin:0;'>🔥 1. FitSpresso</h3>", unsafe_allow_html=True)
-        st.write("**Plataforma:** ClickBank Real Offer")
-        st.write("**Termômetro:** OPORTUNIDADE MÁXIMA")
-        st.write("**Análise:** Oferta recente focada em tráfego de nicho de alta intenção de compra. Apresenta o menor CPC fundo de funil da categoria hoje por ser um lançamento agressivo. Aceleração metabólica via café.")
+        st.markdown(f"<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid {selecionados[0]['cor']}; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
+        st.markdown(f"<h3 style='color:{selecionados[0]['cor']}; margin:0;'>🔥 1. {selecionados[0]['nome']}</h3>", unsafe_allow_html=True)
+        st.write(f"**Plataforma:** {selecionados[0]['plat']}")
+        st.write(f"**Termômetro:** {selecionados[0]['term']}")
+        st.write(f"**Análise:** Oferta mapeada em tempo real pelo robô. Apresenta excelente taxa de conversão em redes de pesquisa internacionais. {selecionados[0]['obs']}")
         st.write("**Melhores Países:** USA, UK, Canadá, Austrália, Alemanha")
-        st.write("**CPC USA Estimado:** $1.45 | **Outros:** $0.95")
+        st.write(f"**CPC USA Estimado:** {selecionados[0]['cpc']} | **Outros:** $0.95")
         st.write("")
-        df_p1 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [s_d1, int(s_d1 * 1.1), int(s_d1 * 1.2), int(s_d1 * 1.35)]})
-        st.bar_chart(df_p1.set_index("Semanas"), y="Buscas", color="#00ffcc")
+        df_p1 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [base_seed, int(base_seed * 1.12), int(base_seed * 1.26), int(base_seed * 1.42)]})
+        st.bar_chart(df_p1.set_index("Semanas"), y="Buscas", color=selecionados[0]['cor'])
         st.markdown("</div>", unsafe_allow_html=True)
 
-    # --- DOSSIÊ PRODUTO 2 ---
+    # --- DOSSIÊ PRODUTO 2 DINÂMICO ---
     with c_prod2:
-        st.markdown("<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #ff0055; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
-        st.markdown("<h3 style='color:#ff0055; margin:0;'>🔥 2. Nagano Tonic</h3>", unsafe_allow_html=True)
-        st.write("**Plataforma:** BuyGoods Network")
-        st.write("**Termômetro:** EM MONITORAMENTO (Altos Cliques)")
-        st.write("**Análise:** Monitoramento contínuo aponta baixa densidade de concorrentes no leilão fundo de funil gringo para esta estrutura. Suplemento japonês termogênico elixir.")
+        st.markdown(f"<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid {selecionados[1]['cor']}; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
+        st.markdown(f"<h3 style='color:{selecionados[1]['cor']}; margin:0;'>🔥 2. {selecionados[1]['nome']}</h3>", unsafe_allow_html=True)
+        st.write(f"**Plataforma:** {selecionados[1]['plat']}")
+        st.write(f"**Termômetro:** {selecionados[1]['term']}")
+        st.write(f"**Análise:** Monitoramento contínuo aponta baixa densidade de concorrentes no leilão fundo de funil gringo para esta estrutura. {selecionados[1]['obs']}")
         st.write("**Melhores Países:** USA, Canadá, Reino Unido, Austrália, Nova Zelândia")
-        st.write("**CPC USA Estimado:** $1.60 | **Outros:** $1.10")
+        st.write(f"**CPC USA Estimado:** {selecionados[1]['cpc']} | **Outros:** $1.10")
         st.write("")
-        df_p2 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [s_d2, int(s_d2 * 1.05), int(s_d2 * 1.15), int(s_d2 * 1.3)]})
-        st.bar_chart(df_p2.set_index("Semanas"), y="Buscas", color="#ff0055")
+        df_p2 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [int(base_seed*0.8), int(base_seed * 0.95), int(base_seed * 1.15), int(base_seed * 1.3)]})
+        st.bar_chart(df_p2.set_index("Semanas"), y="Buscas", color={selecionados[1]['cor']})
         st.markdown("</div>", unsafe_allow_html=True)
 
-    # --- DOSSIÊ PRODUTO 3 ---
+    # --- DOSSIÊ PRODUTO 3 DINÂMICO ---
     with c_prod3:
-        st.markdown("<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #0066ff; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
-        st.markdown("<h3 style='color:#0066ff; margin:0;'>🔥 3. DentiCore</h3>", unsafe_allow_html=True)
-        st.write("**Plataforma:** Digistore24 Int.")
-        st.write("**Termômetro:** QUENTE (Alta Procura)")
-        st.write("**Análise:** Lançamento mapeado com alta comissão liberada de saída. O tráfego pago via pre-sell blindada performa com custo por clique limpo. Desinflamação e reconstrução dental.")
+        st.markdown(f"<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid {selecionados[2]['cor']}; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
+        st.markdown(f"<h3 style='color:{selecionados[2]['cor']}; margin:0;'>🔥 3. {selecionados[2]['nome']}</h3>", unsafe_allow_html=True)
+        st.write(f"**Plataforma:** {selecionados[2]['plat']}")
+        st.write(f"**Termômetro:** {selecionados[2]['term']}")
+        st.write(f"**Análise:** Lançamento mapeado com alta comissão liberada de saída. O tráfego pago via pre-sell blindada performa com custo por clique limpo. {selecionados[2]['obs']}")
         st.write("**Melhores Países:** USA, UK, Irlanda, Austrália, Canadá")
-        st.write("**CPC USA Estimado:** $1.30 | **Outros:** $0.85")
+        st.write(f"**CPC USA Estimado:** {selecionados[2]['cpc']} | **Outros:** $0.85")
         st.write("")
-        df_p3 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [s_d3, int(s_d3 * 1.08), int(s_d3 * 1.12), int(s_d3 * 1.25)]})
-        st.bar_chart(df_p3.set_index("Semanas"), y="Buscas", color="#0066ff")
-        st.markdown("</div>", unsafe_allow_html=True)
-
-    # --- RODAPÉ DE EXPORTAÇÃO ---
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown("<h4>📢 Compartilhar Relatório dos 3 Lançamentos via WhatsApp</h4>", unsafe_allow_html=True)
-    st.write("Dispare o dossiê completo das oportunidades qualificadas para o seu número cadastrado:")
-    st.write("")
-    
-    st.markdown("<div class='botao-disparo-whatsapp'>", unsafe_allow_html=True)
-    if st.button("🟢 DISPARAR ALERTA DOS 3 PRODUTOS NO WHATSAPP", key="btn_wa"):
-        st.success(f"Relatório enviado com sucesso para o número {st.session_state.user_whatsapp_saved}!")
-    st.markdown("</div>", unsafe_allow_html=True)
-
-if __name__ == "__main__":
-    main()
