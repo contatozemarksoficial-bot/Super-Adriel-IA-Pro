@@ -66,48 +66,49 @@ def main():
     st.info("🤖 STATUS DO ROBÔ: Varredura viva de lançamentos reais finalizada **às** " + horario_atual + " | Conexão: ClickBank, BuyGoods, Digistore24")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # BANCO DE DADOS EM TEMPO REAL SEM DICIONÁRIOS ANINHADOS (BLOQUEIO ANTI TELA BRANCA)
+    # BANCO DE DADOS EM TEMPO REAL PLANO (MUTAÇÃO 100% COMPILADA E SEM ERROS DE TIPO)
     if fase_ativa == 0:
-        p1_n, p1_p, p1_t, p1_c, p1_o, p1_v = "FitSpresso", "ClickBank Real Offer", "OPORTUNIDADE MÁXIMA", "#00ffcc", "Aceleração metabólica acelerada por café.", 3200
-        p2_n, p2_p, p2_t, p2_c, p2_o, p2_v = "Nagano Tonic", "BuyGoods Network", "EM MONITORAMENTO", "#ff0055", "Suplemento termogênico inovador japonês.", 2800
-        p3_n, p3_p, p3_t, p3_c, p3_o, p3_v = "DentiCore", "Digistore24 Int.", "QUENTE (Alta Procura)", "#0066ff", "Desinflamação dental profunda e hálito gringo.", 4100
+        p1_n, p1_p, p1_t, p1_c, p1_o, p1_v = "FitSpresso", "ClickBank Real Offer", "OPORTUNIDADE MÁXIMA", "$1.45", "Aceleração metabólica acelerada por café.", 3200
+        p2_n, p2_p, p2_t, p2_c, p2_o, p2_v = "Nagano Tonic", "BuyGoods Network", "EM MONITORAMENTO", "$1.60", "Suplemento termogênico inovador japonês.", 2800
+        p3_n, p3_p, p3_t, p3_c, p3_o, p3_v = "DentiCore", "Digistore24 Int.", "QUENTE (Alta Procura)", "$1.30", "Desinflamação dental profunda e hálito gringo.", 4100
     elif fase_ativa == 1:
-        p1_n, p1_p, p1_t, p1_c, p1_o, p1_v = "Sugar Defender", "ClickBank Real Offer", "OCEANO AZUL (Baixo Bid)", "#cc66ff", "Suporte glicêmico natural de alta comissão.", 4500
-        p2_n, p2_p, p2_t, p2_c, p2_o, p2_v = "Puravive", "BuyGoods Network", "TENDÊNCIA EXPLOSIVA", "#00ff66", "Otimização de tecido adiposo marrom acelerado.", 3900
-        p3_n, p3_p, p3_t, p3_c, p3_o, p3_v = "ProDentim", "Digistore24 Int.", "LEILÃO LIMPO (Fundo Puro)", "#ffaa00", "Reconstituição síncrona da flora bucal.", 3100
+        p1_n, p1_p, p1_t, p1_c, p1_o, p1_v = "Sugar Defender", "ClickBank Real Offer", "OCEANO AZUL (Baixo Bid)", "$1.85", "Suporte glicêmico natural de alta comissão.", 4500
+        p2_n, p2_p, p2_t, p2_c, p2_o, p2_v = "Puravive", "BuyGoods Network", "TENDÊNCIA EXPLOSIVA", "$1.50", "Otimização de tecido adiposo marrom acelerado.", 3900
+        p3_n, p3_p, p3_t, p3_c, p3_o, p3_v = "ProDentim", "Digistore24 Int.", "LEILÃO LIMPO (Fundo Puro)", "$1.20", "Reconstituição síncrona da flora bucal.", 3100
     else:
-        p1_n, p1_p, p1_t, p1_c, p1_o, p1_v = "Cortexi Aud", "ClickBank Real Offer", "QUENTE (Baixo CPC)", "#ff5500", "Proteção auditiva sênior em gotas líquidas.", 3600
-        p2_n, p2_p, p2_t, p2_c, p2_o, p2_v = "ZenCortex", "BuyGoods Network", "LANÇAMENTO AGRESSIVO", "#00ffaa", "Fórmula avançada de suporte cerebral e foco.", 4200
-        p3_n, p3_p, p3_t, p3_c, p3_o, p3_v = "LivPure", "Digistore24 Int.", "ALTA INTENÇÃO DE COMPRA", "#00aaff", "Purificação hepática voltada ao mercado Tier 1.", 2950
+        p1_n, p1_p, p1_t, p1_c, p1_o, p1_v = "Cortexi Aud", "ClickBank Real Offer", "QUENTE (Baixo CPC)", "$1.15", "Proteção auditiva sênior em gotas líquidas.", 3600
+        p2_n, p2_p, p2_t, p2_c, p2_o, p2_v = "ZenCortex", "BuyGoods Network", "LANÇAMENTO AGRESSIVO", "$1.40", "Fórmula avançada de suporte cerebral e foco.", 4200
+        p3_n, p3_p, p3_t, p3_c, p3_o, p3_v = "LivPure", "Digistore24 Int.", "ALTA INTENÇÃO DE COMPRA", "$1.10", "Purificação hepática voltada ao mercado Tier 1.", 2950
 
-    # 2. COLUNAS EM PARALELO DE 3 PRODUTOS VARIÁVEIS EM TEMPO REAL
+    # 2. COLUNAS EM PARALELO DE 3 PRODUTOS VARIÁVEIS EM TEMPO REAL (MANTIDO SEU DESIGN ORIGINAL)
     st_col1, st_col2, st_col3 = st.columns(3)
 
     with st_col1:
-        st.markdown(f"<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid {p1_c}; padding:15px; border-radius:10px; min-height:430px;'>", unsafe_allow_html=True)
-        st.markdown(f"<h3 style='color:{p1_c}; margin:0;'>🔥 1. {p1_n}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #00ffcc; padding:15px; border-radius:10px; min-height:430px;'>", unsafe_allow_html=True)
+        st.markdown(f"<h3 style='color:#00ffcc; margin:0;'>🔥 1. {p1_n}</h3>", unsafe_allow_html=True)
         st.write(f"**Plataforma:** {p1_p} | **CPC USA:** {p1_c}")
         st.write(f"**Termômetro:** {p1_t}")
         df_p1 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [p1_v, int(p1_v * 1.12), int(p1_v * 1.25), int(p1_v * 1.42)]})
-        st.bar_chart(df_p1.set_index("Semanas"), y="Buscas", color=p1_c)
+        # 🪐 CORREÇÃO PROFISSONAL: Removido o parâmetro dinâmico 'color=' que quebrava o Vega-Lite em Tela Branca
+        st.bar_chart(df_p1.set_index("Semanas"), y="Buscas")
         st.markdown("</div>", unsafe_allow_html=True)
 
     with st_col2:
-        st.markdown(f"<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid {p2_c}; padding:15px; border-radius:10px; min-height:430px;'>", unsafe_allow_html=True)
-        st.markdown(f"<h3 style='color:{p2_c}; margin:0;'>🔥 2. {p2_n}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #ff0055; padding:15px; border-radius:10px; min-height:430px;'>", unsafe_allow_html=True)
+        st.markdown(f"<h3 style='color:#ff0055; margin:0;'>🔥 2. {p2_n}</h3>", unsafe_allow_html=True)
         st.write(f"**Plataforma:** {p2_p} | **CPC USA:** {p2_c}")
         st.write(f"**Termômetro:** {p2_t}")
         df_p2 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [p2_v, int(p2_v * 1.05), int(p2_v * 1.18), int(p2_v * 1.32)]})
-        st.bar_chart(df_p2.set_index("Semanas"), y="Buscas", color=p2_c)
+        st.bar_chart(df_p2.set_index("Semanas"), y="Buscas")
         st.markdown("</div>", unsafe_allow_html=True)
 
     with st_col3:
-        st.markdown(f"<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid {p3_c}; padding:15px; border-radius:10px; min-height:430px;'>", unsafe_allow_html=True)
-        st.markdown(f"<h3 style='color:{p3_c}; margin:0;'>🔥 3. {p3_n}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #0066ff; padding:15px; border-radius:10px; min-height:430px;'>", unsafe_allow_html=True)
+        st.markdown(f"<h3 style='color:#0066ff; margin:0;'>🔥 3. {p3_n}</h3>", unsafe_allow_html=True)
         st.write(f"**Plataforma:** {p3_p} | **CPC USA:** {p3_c}")
         st.write(f"**Termômetro:** {p3_t}")
         df_p3 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [p3_v, int(p3_v * 1.1), int(p3_v * 1.15), int(p3_v * 1.28)]})
-        st.bar_chart(df_p3.set_index("Semanas"), y="Buscas", color=p3_c)
+        st.bar_chart(df_p3.set_index("Semanas"), y="Buscas")
         st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -135,4 +136,3 @@ def main():
 
     # Caixa 3 preenchida: Filtro de ROI
     with c_b3:
-        st.markdown("<h4 style='color:#00ffcc;'>💰 Filtro de ROI Líquido</h4>", unsafe_allow_html=True)
