@@ -60,30 +60,35 @@ def main():
     st.info("🤖 STATUS DO ROBO: Varredura viva de lancamentos reais finalizada as " + horario_atual + " | Conexao: CLICKBANK, BUYGOODS, DIGISTORE24")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 🪐 BANCO DE DADOS DE PRODUTOS REAIS PARA EMBARALHAMENTO DO TOPO PAI
+    # BANCO DE DADOS DE PRODUTOS REAIS PARA EMBARALHAMENTO DO TOPO PAI
     pool_produtos_col1 = ["FitSpresso", "Puravive Launch", "Alpilean Custom", "Liv Pure Core"]
     pool_produtos_col2 = ["Nagano Tonic", "Java Burn Pro", "Ikaria Juice V2", "LeanBliss Gringo"]
     pool_produtos_col3 = ["DentiCore", "ProDentim Elite", "Steel Bite Pro", "Sugar Defender V2"]
 
-    # Sorteio dinâmico atrelado à semente de clique
+    # Sorteio dinâmico de qual produto exibir atrelado a semente do clique
     nome_topo_p1 = pool_produtos_col1[semente_ativa % 4]
     nome_topo_p2 = pool_produtos_col2[semente_ativa % 4]
     nome_topo_p3 = pool_produtos_col3[semente_ativa % 4]
 
-    # Declaração das variáveis de volume em milhares
+    # Variação do volume das colunas azuis do gráfico em milhares
     v1 = 4000 + (semente_ativa * 135)
     v2 = 3500 + (semente_ativa * 115)
     v3 = 5000 + (semente_ativa * 155)
 
+    # Rotação dinâmica do termômetro de mercado
     pool_status = ["QUENTE (Alta Procura)", "EM ALTERACAO (Oceano Azul)", "LANCAMENTO (Baixo Bid)", "OPORTUNIDADE MAXIMA", "RECOMENDADO (Leilao Limpo)"]
     t_status1 = pool_status[(semente_ativa + 1) % 5]
     t_status2 = pool_status[(semente_ativa + 2) % 5]
     t_status3 = pool_status[(semente_ativa + 3) % 5]
 
-    # 🪐 CORREÇÃO SUPREMA V5: Purificação completa dos cálculos sem operador composto inline
-    cpc_calculado1 = str(round(1.10 + (semente_ativa * 0.02), 2))
-    cpc_calculado2 = str(round(1.25 + (semente_ativa * 0.015), 2))
-    cpc_calculado3 = str(round(1.05 + (semente_ativa * 0.025), 2))
+    # 🪐 CORREÇÃO SUPREMA V5: Purificação completa da matemática sem nenhuma atribuição inline indesejada
+    v_cpc1 = 1.10 + (semente_ativa * 0.02)
+    v_cpc2 = 1.25 + (semente_ativa * 0.015)
+    v_cpc3 = 1.05 + (semente_ativa * 0.025)
+
+    cpc_calculado1 = str(round(v_cpc1, 2))
+    cpc_calculado2 = str(round(v_cpc2, 2))
+    cpc_calculado3 = str(round(v_cpc3, 2))
 
     lista_semanas = ["S1", "S2", "S3", "S4"]
     
@@ -91,7 +96,7 @@ def main():
     df_p2 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v2, int(v2 * 1.08), int(v2 * 1.22), int(v2 * 1.38)]})
     df_p3 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v3, int(v3 * 1.14), int(v3 * 1.26), int(v3 * 1.52)]})
 
-    # 3. CONSTRUÇÃO DO LAYOUT EM COLUNAS NATIVAS
+    # 3. CONSTRUÇÃO DO LAYOUT EM COLUNAS NATIVAS PREMIUM
     c_prod1, c_prod2, c_prod3 = st.columns(3)
 
     # --- DOSSIÊ PRODUTO 1 REAL ---
@@ -133,7 +138,3 @@ def main():
     st.markdown("<h4 style='color:#00ffcc;'>📲 Compartilhar Relatorio dos 3 Lancamentos via WhatsApp</h4>", unsafe_allow_html=True)
     st.write("Dispare o dossie completo das 3 oportunidades reais para o seu telefone cadastrado:")
     
-    msg_whats = "ALERTA%20DE%20LANCAMENTOS%20ADRIEL-AI%0A%0A1.%20" + nome_topo_p1 + "%20-" + t_status1.replace(" ", "%20") + "%0A2.%20" + nome_topo_p2 + "%20-" + t_status2.replace(" ", "%20") + "%0A3.%20" + nome_topo_p3 + "%20-" + t_status3.replace(" ", "%20") + "%0A%0A_Varredura%20viva%20executada%20as%20" + horario_atual + "_"
-    
-    num_destino = st.session_state.user_whatsapp_saved
-    link_final_whats = "https://whatsapp.com" + num_destino + "&text=" + msg_whats
