@@ -1,10 +1,9 @@
 import streamlit as st
-import random
 import pandas as pd
 from datetime import datetime
 
 def main():
-    # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE SAAS 2026
+    # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE SAAS
     st.set_page_config(page_title="Radar Premium - AdrielAI", layout="wide")
 
     # FORÇADOR ULTRA LUXO CYBER-NEON COMPILADO (IMUNE AO BUG DE PARSER)
@@ -87,7 +86,7 @@ def main():
         
         ativo = st.session_state.produto_radar_ativo
         st.markdown("<h2 style='color:#ffffff; margin:0; font-size:2.2rem;'>" + ativo + "</h2>", unsafe_allow_html=True)
-        st.write("Análise Operacional: **Nível Advanced** | Monitoramento Proprietário Adriel-AI")
+        st.write("Análise Operacional: **Nível Avançado** | Monitoramento Proprietário Adriel-AI")
         st.write("---")
 
         # MÉTRICAS PREMIUM COM COPIES ACESSAS E PRECISAS
@@ -100,7 +99,7 @@ def main():
         st.write("")
         
         # SEÇÃO 1: SUPERINTELIGÊNCIA DE COPY APLICADA À DOR EMOCIONAL DO COMPRADOR
-        st.markdown("<h4 style='color:#00ffcc;'>❤️ Âncora Psicológica e Dor Cirúrgica do Comprador Gringo:</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='color:#00ffcc;'>❤️ Âncora Psicológica e Dor端 Cirúrgica do Comprador Gringo:</h4>", unsafe_allow_html=True)
         st.info("O sofrimento emocional profundo do comprador internacional é alimentado pelo acúmulo de gordura corporal resistente, o qual destrói a autoconfiança de forma devastadora. Essa dor gera um estado de urgência psicológica e física imediata. Essa vulnerabilidade ativa o gatilho perfeito para injetarmos uma estrutura de vendas de alta performance, capaz de converter essa necessidade latente em compras de alto rendimento com comissões robustas em dólares.")
 
         # SEÇÃO 2: SUPERINTELIGÊNCIA DE COPY APLICADA AO VEREDITO ESTRATÉGICO
