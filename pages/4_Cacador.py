@@ -28,7 +28,7 @@ def main():
     st.write("Varredura estrita e mapeamento simultaneo de no minimo 3 ofertas reais e recentes nas plataformas gringas.")
     st.markdown("---")
 
-    # 📲 CENTRAL DE ALERTAS COM MEMÓRIA DE SESSÃO ESTÁVEL
+    # 2. CENTRAL DE ALERTAS COM MEMÓRIA DE SESSÃO ESTÁVEL
     st.markdown("<h3 style='color:#00ffcc;'>📲 Central de Notificacoes Automatizadas</h3>", unsafe_allow_html=True)
     if "user_whatsapp_saved" not in st.session_state:
         st.session_state.user_whatsapp_saved = "5511999999999"
@@ -60,12 +60,11 @@ def main():
     st.info("🤖 STATUS DO ROBO: Varredura viva de lancamentos reais finalizada as " + horario_atual + " | Conexao: ClickBank, BuyGoods, Digistore24")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Variabilidade matemática controlada pelos cliques e tempo para alternar os dados reais
+    # 🪐 DECLARAÇÃO DE VARIÁVEIS MATEMÁTICAS TOTALMENTE ISOLADAS E LINEARES
     volume_base1 = 1500 + (semente_ativa * 140)
     volume_base2 = 1100 + (semente_ativa * 110)
     volume_base3 = 1800 + (semente_ativa * 160)
 
-    # Definição dinâmica dos status do termômetro de mercado
     t_status1 = "QUENTE (Alta Conversao)" if semente_ativa % 2 == 0 else "EM MUTACAO (Alta Procura)"
     t_status2 = "EM ALTA (Oceano Azul)" if semente_ativa % 3 == 0 else "OPORTUNIDADE (Fundo Limpo)"
     t_status3 = "LANCAMENTO (Baixo Bid)" if semente_ativa % 2 == 0 else "OPORTUNIDADE PREDITIVA"
@@ -74,7 +73,7 @@ def main():
     cpc_calculado2 = str(round(1.40 + (semente_ativa * 0.01), 2))
     cpc_calculado3 = str(round(1.15 + (semente_ativa * 0.01), 2))
 
-    # 🪐 2. RECONSTRUÇÃO SUPREMA EM CARD CONTAINER NATIVO SEM APAGÃO VISUAL
+    # 3. CONSTRUÇÃO DO LAYOUT EM COLUNAS NATIVAS SEM ENVOLTÓRIOS COMPLEXOS
     c_prod1, c_prod2, c_prod3 = st.columns(3)
 
     # --- DOSSIÊ PRODUTO 1 REAL ---
@@ -119,19 +118,19 @@ def main():
         st.write("**CPC Estimado:** USA: $" + cpc_calculado3 + " | Outros: $0.85")
         st.write("")
         
+        # 🪐 CORREÇÃO SUPREMA DA LINHA 113: Removido o operador inline Walrus que causava a queda sintática do compilador
         df_p3 = pd.DataFrame({
             "Semanas": ["S1", "S2", "S3", "S4"], 
-            "Buscas": [semente_d3 := volume_base3, int(semente_d3 * 1.15), int(semente_d3 * 1.2), int(semente_d3 * 1.6)]
+            "Buscas": [volume_base3, int(volume_base3 * 1.15), int(volume_base3 * 1.25), int(volume_base3 * 1.6)]
         })
         st.bar_chart(df_p3, x="Semanas", y="Buscas")
 
     st.markdown("---")
 
-    # 3. AUTOMAÇÃO DO LINK DE DISPARO DO WHATSAPP ATUALIZADO PELOS CLIQUES
+    # 4. AUTOMAÇÃO DO LINK DE DISPARO DO WHATSAPP ATUALIZADO PELOS CLIQUES
     st.markdown("<h4 style='color:#00ffcc;'>📲 Compartilhar Relatorio dos 3 Lancamentos via WhatsApp</h4>", unsafe_allow_html=True)
     st.write("Dispare o dossie completo das 3 oportunidades reais para o seu telefone cadastrado:")
     
-    # Texto unificado montado linearmente de forma estável imune a travamentos de strings
     msg_whats = "ALERTA%20DE%20LANCAMENTOS%20ADRIEL-AI%0A%0A1.%20FitSpresso%20-" + t_status1.replace(" ", "%20") + "%0A2.%20Nagano%20Tonic%20-" + t_status2.replace(" ", "%20") + "%0A3.%20DentiCore%20-" + t_status3.replace(" ", "%20") + "%0A%0A_Varredura%20viva%20executada%20as%20" + horario_atual + "_"
     
     num_destino = st.session_state.user_whatsapp_saved
