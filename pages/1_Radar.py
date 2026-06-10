@@ -37,7 +37,7 @@ def main():
     st.write("Varredura automatizada e mapeamento analítico de ofertas de alta conversão nas plataformas internacionais.")
     
     horario_viva = datetime.now().strftime("%H:%M:%S")
-    st.info("🛰️ Sistema operando com Inteligência Preditiva Computacional. Auditoria active às " + horario_viva)
+    st.info("🛰️ Sistema operando com Inteligência Preditiva Computacional. Auditoria ativa às " + horario_viva)
     st.markdown("---")
 
     # CONTROLE DE SESSÃO ESTÁVEL PARA PRESERVAR O CLIQUE VERTICAL DO PRODUTO ATIVO
@@ -118,5 +118,3 @@ def main():
         html_cpc += "<span>🇳🇿 <b>NZ:</b> <span style='color:#00ffcc;'>$1.25</span></span>"
         html_cpc += "</div>"
         st.markdown(html_cpc, unsafe_allow_html=True)
-        st.write("")
-
