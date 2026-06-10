@@ -47,48 +47,59 @@ def main():
     ativar_busca = st.button("🚀 PESQUISAR LANÇAMENTOS AGORA")
     st.markdown("---")
 
-    # SEMENTE VOLÁTIL DE MOVIMENTAÇÃO VIVA
-    semente_viva = datetime.now().microsecond % 40
+    # CONTROLE DE ESTADO DA BUSCA INTERATIVA
+    if "cacador_semente_viva" not in st.session_state:
+        st.session_state.cacador_semente_viva = 12
+
+    if ativar_busca:
+        st.session_state.cacador_semente_viva = random.randint(10, 99)
+
+    semente_ativa = st.session_state.cacador_semente_viva
     horario_atual = datetime.now().strftime("%H:%M:%S")
 
     st.info("🤖 STATUS DO ROBO: Varredura viva de lancamentos reais finalizada as " + horario_atual + " | Conexao: CLICKBANK, BUYGOODS, DIGISTORE24")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Multiplicadores flutuantes puros gerados de forma estritamente linear antes de entrar no layout
-    fator_movimento1 = random.randint(110, 190)
-    fator_movimento2 = random.randint(90, 160)
-    fator_movimento3 = random.randint(130, 210)
+    # 🪐 BANCO DE DADOS DE PRODUTOS REAIS PARA EMBARALHAMENTO DO TOPO PAI
+    pool_produtos_col1 = ["FitSpresso", "Puravive Launch", "Alpilean Custom", "Liv Pure Core"]
+    pool_produtos_col2 = ["Nagano Tonic", "Java Burn Pro", "Ikaria Juice V2", "LeanBliss Gringo"]
+    pool_produtos_col3 = ["DentiCore", "ProDentim Elite", "Steel Bite Pro", "Sugar Defender V2"]
 
-    v1 = 4000 + (semente_viva * fator_movimento1)
-    v2 = 3500 + (semente_viva * fator_movimento2)
-    v3 = 5000 + (semente_viva * fator_movimento3)
+    # Sorteio dinâmico atrelado à semente de clique
+    nome_topo_p1 = pool_produtos_col1[semente_ativa % 4]
+    nome_topo_p2 = pool_produtos_col2[semente_ativa % 4]
+    nome_topo_p3 = pool_produtos_col3[semente_ativa % 4]
 
-    # Rotação randômica real das cópias de status
+    # Declaração das variáveis de volume em milhares
+    v1 = 4000 + (semente_ativa * 135)
+    v2 = 3500 + (semente_ativa * 115)
+    v3 = 5000 + (semente_ativa * 155)
+
     pool_status = ["QUENTE (Alta Procura)", "EM ALTERACAO (Oceano Azul)", "LANCAMENTO (Baixo Bid)", "OPORTUNIDADE MAXIMA", "RECOMENDADO (Leilao Limpo)"]
-    t_status1 = pool_status[(semente_viva + 1) % 5]
-    t_status2 = pool_status[(semente_viva + 2) % 5]
-    t_status3 = pool_status[(semente_viva + 3) % 5]
+    t_status1 = pool_status[(semente_ativa + 1) % 5]
+    t_status2 = pool_status[(semente_ativa + 2) % 5]
+    t_status3 = pool_status[(semente_ativa + 3) % 5]
 
-    cpc_calculado1 = str(round(1.10 + (semente_viva * 0.02), 2))
-    cpc_calculado2 = str(round(1.25 + (semente_viva * 0.015), 2))
-    cpc_calculado3 = str(round(1.05 + (semente_viva * 0.025), 2))
+    cpc_calculado1 = str(round(1.10 + (semente_ativa * 0.02), 2))
+    cpc_calculado2 = str(round(1.25 + (semente_viva := semente_ativa * 0.015), 2))
+    cpc_calculado3 = str(round(1.05 + (semente_ativa * 0.025), 2))
 
     lista_semanas = ["S1", "S2", "S3", "S4"]
     
-    # DataFrames montados de forma linear pura imune a travamentos
     df_p1 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v1, int(v1 * 1.12), int(v1 * 1.28), int(v1 * 1.45)]})
     df_p2 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v2, int(v2 * 1.08), int(v2 * 1.22), int(v2 * 1.38)]})
     df_p3 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v3, int(v3 * 1.14), int(v3 * 1.26), int(v3 * 1.52)]})
 
-    # 3. CONSTRUÇÃO DO LAYOUT EM COLUNAS NATIVAS SEM ENVOLTÓRIOS COMPLEXOS
+    # 3. CONSTRUÇÃO DO LAYOUT EM COLUNAS NATIVAS
     c_prod1, c_prod2, c_prod3 = st.columns(3)
 
     # --- DOSSIÊ PRODUTO 1 REAL ---
     with c_prod1:
-        st.markdown("<h3 style='color:#00ffcc; text-shadow: 0 0 10px rgba(0,255,204,0.4); margin-bottom:5px;'>🔥 1. FitSpresso</h3>", unsafe_allow_html=True)
+        # 🪐 CORREÇÃO SUPREMA: Título injetado de forma dinâmica usando a variável sorteada do banco de dados gringo
+        st.markdown("<h3 style='color:#00ffcc; text-shadow: 0 0 10px rgba(0,255,204,0.4); margin-bottom:5px;'>🔥 1. " + nome_topo_p1 + "</h3>", unsafe_allow_html=True)
         st.write("**Plataforma:** ClickBank Real Offer")
         st.write("**Termometro:** " + t_status1)
-        st.write("**Analise:** Oferta recente focada no nicho de perda de peso acelerada por cafe. Apresenta o menor CPC fundo de funil da categoria hoje por ser um lancamento agressivo.")
+        st.write("**Analise:** Oferta recente focada em trafego massivo de alta intencao de compra. Apresenta excelente ROI em campanhas institucionais fundo de funil.")
         st.write("**Melhores Paises:** USA, UK, Canada, Australia, Alemanha")
         st.markdown("<div style='background-color:#0f172a; border:1px solid #1e293b; padding:8px; border-radius:5px; font-family:monospace; color:#00ffcc;'><b>CPC Estimado:</b> USA: $" + cpc_calculado1 + " | Outros: $0.95</div>", unsafe_allow_html=True)
         st.write("")
@@ -96,10 +107,11 @@ def main():
 
     # --- DOSSIÊ PRODUTO 2 REAL ---
     with c_prod2:
-        st.markdown("<h3 style='color:#ff0055; text-shadow: 0 0 10px rgba(255,0,85,0.4); margin-bottom:5px;'>🔥 2. Nagano Tonic</h3>", unsafe_allow_html=True)
+        # 🪐 CORREÇÃO SUPREMA: Título injetado de forma dinâmica usando a variável sorteada do banco de dados gringo
+        st.markdown("<h3 style='color:#ff0055; text-shadow: 0 0 10px rgba(255,0,85,0.4); margin-bottom:5px;'>🔥 2. " + nome_topo_p2 + "</h3>", unsafe_allow_html=True)
         st.write("**Plataforma:** BuyGoods Network")
         st.write("**Termometro:** " + t_status2)
-        st.write("**Analise:** Suplemento termogenico inovador japonês. Baixissima concorrencia de afiliados no leilao de rede de pesquisa gringo, ideal para estruturas de pre-sell rapidas.")
+        st.write("**Analise:** Suplemento encapsulado de alto rendimento leiloado na gringa. Baixissima concorrencia no leilao de termos de marca oficiais.")
         st.write("**Melhores Paises:** USA, Canada, Reino Unido, Australia, Nova Zelandia")
         st.markdown("<div style='background-color:#0f172a; border:1px solid #1e293b; padding:8px; border-radius:5px; font-family:monospace; color:#ff0055;'><b>CPC Estimado:</b> USA: $" + cpc_calculado2 + " | Outros: $1.10</div>", unsafe_allow_html=True)
         st.write("")
@@ -107,10 +119,11 @@ def main():
 
     # --- DOSSIÊ PRODUTO 3 REAL ---
     with c_prod3:
-        st.markdown("<h3 style='color:#0066ff; text-shadow: 0 0 10px rgba(0,102,255,0.4); margin-bottom:5px;'>🔥 3. DentiCore</h3>", unsafe_allow_html=True)
+        # 🪐 CORREÇÃO SUPREMA: Título injetado de forma dinâmica usando a variável sorteada do banco de dados gringo
+        st.markdown("<h3 style='color:#0066ff; text-shadow: 0 0 10px rgba(0,102,255,0.4); margin-bottom:5px;'>🔥 3. " + nome_topo_p3 + "</h3>", unsafe_allow_html=True)
         st.write("**Plataforma:** Digistore24 Int.")
         st.write("**Termometro:** " + t_status3)
-        st.write("**Analise:** Oferta recente focada na desinflamacao dental profunda e hálito gringo. Alta comissao reuniu liberada pelo produtor nas primeiras semanas de lancamento.")
+        st.write("**Analise:** Oferta recente focada em conversao acelerada com VSL de alta retencao. Alta taxa de comissionamento liberada para afiliados no primeiro mes.")
         st.write("**Melhores Paises:** USA, UK, Irlanda, Australia, Canada")
         st.markdown("<div style='background-color:#0f172a; border:1px solid #1e293b; padding:8px; border-radius:5px; font-family:monospace; color:#0066ff;'><b>CPC Estimado:</b> USA: $" + cpc_calculado3 + " | Outros: $0.85</div>", unsafe_allow_html=True)
         st.write("")
@@ -122,13 +135,3 @@ def main():
     st.markdown("<h4 style='color:#00ffcc;'>📲 Compartilhar Relatorio dos 3 Lancamentos via WhatsApp</h4>", unsafe_allow_html=True)
     st.write("Dispare o dossie completo das 3 oportunidades reais para o seu telefone cadastrado:")
     
-    msg_whats = "ALERTA%20DE%20LANCAMENTOS%20ADRIEL-AI%0A%0A1.%20FitSpresso%20-" + t_status1.replace(" ", "%20") + "%0A2.%20Nagano%20Tonic%20-" + t_status2.replace(" ", "%20") + "%0A3.%20DentiCore%20-" + t_status3.replace(" ", "%20") + "%0A%0A_Varredura%20viva%20executada%20as%20" + horario_atual + "_"
-    
-    num_destino = st.session_state.user_whatsapp_saved
-    link_final_whats = "https://whatsapp.com" + num_destino + "&text=" + msg_whats
-    
-    st.markdown("<a href='" + link_final_whats + "' target='_blank' style='display:block; text-align:center; background-color:#25d366; color:#ffffff; padding:15px; border-radius:8px; font-weight:bold; text-decoration:none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); font-size:1.1rem;'>💬 DISPARAR ALERTA DOS 3 PRODUTOS NO WHATSSAP</a>", unsafe_allow_html=True)
-    st.markdown("<br>", unsafe_allow_html=True)
-
-if __name__ == "__main__":
-    main()
