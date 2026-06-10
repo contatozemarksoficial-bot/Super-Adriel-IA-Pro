@@ -56,45 +56,41 @@ def main():
     # 3. ENGINE MATEMÁTICO DE CLASSIFICAÇÃO E MODELAGEM DE ESTRATÉGIA
     termo_limpo = produto_analisado.strip().lower()
     
-    # Defaults para Fundo de Funil
+    # Defaults de simulação pura estável
     nivel_funil = "FUNDO DE FUNIL (Marca Exata)"
-    cor_alerta = "green"
     txt_estrategia = "ESTRATÉGIA DO ROBÓ AFILIADO ELITE: O leilao para este termo e cirurgico! Como o lead esta buscando pelo nome exato do produto, a intencao de compra e maxima (fundo de funil). Use correspondencia de frase ou exata no Google Ads, crie uma estrutura de Pre-Sell direta de alta velocidade e foque em cliques qualificados."
     cor_grafico = "#00ffcc" 
     
-    # Variáveis CSS exclusivas para destacar dinamicamente a camada ativa no desenho do funil
-    opacidade_topo = "0.3"
-    opacidade_meio = "0.3"
-    opacidade_fundo = "1.0"
-    borda_topo = "1px solid #1e293b"
-    borda_meio = "1px solid #1e293b"
-    borda_fundo = "3px solid #00ffcc; box-shadow: 0 0 20px rgba(0,255,204,0.6);"
+    # Variabilidade linear estrita para renderização geométrica
+    fator_topo = "0.3"
+    fator_meio = "0.3"
+    fator_fundo = "1.0"
+    borda_p1 = "1px solid #1e293b"
+    borda_p2 = "1px solid #1e293b"
+    borda_p3 = "3px solid #00ffcc; box-shadow: 0 0 20px rgba(0,255,204,0.6);"
     
-    # Determinação para Meio de Funil
+    # Classificação dinâmica livre de erros de interpolação cruzada
     if "supplement" in termo_limpo or "tonic" in termo_limpo or "remedy" in termo_limpo or "juice" in termo_limpo or "pills" in termo_limpo or "diet" in termo_limpo:
         nivel_funil = "MEIO DE FUNIL (Solucao / Categoria)"
-        cor_alerta = "blue"
         txt_estrategia = "ESTRATÉGIA DO ROBÓ AFILIADO ELITE: O lead sabe o que precisa (um suplemento, tonico ou capsula) mas ainda nao escolheu a marca. Voce deve usar uma Pre-Sell robusta do tipo 'Advertorial' ou comparativa (Top 3) para educar o lead antes de envia-lo para a oferta."
         cor_grafico = "#0066ff"
-        opacidade_topo = "0.3"
-        opacidade_meio = "1.0"
-        opacidade_fundo = "0.3"
-        borda_topo = "1px solid #1e293b"
-        borda_meio = "3px solid #0066ff; box-shadow: 0 0 20px #0066ff;"
-        borda_fundo = "1px solid #1e293b"
+        fator_topo = "0.3"
+        fator_meio = "1.0"
+        fator_fundo = "0.3"
+        borda_p1 = "1px solid #1e293b"
+        borda_p2 = "3px solid #0066ff; box-shadow: 0 0 20px #0066ff;"
+        borda_p3 = "1px solid #1e293b"
 
-    # Determinação para Topo de Funil
     if "how to" in termo_limpo or "lose" in termo_limpo or "cure" in termo_limpo or "fast" in termo_limpo or "ways to" in termo_limpo or "treatment" in termo_limpo:
         nivel_funil = "TOPO DE FUNIL (Sintoma / Nicho Amplo)"
-        cor_alerta = "red"
         txt_estrategia = "ESTRATÉGIA DO ROBÓ AFILIADO ELITE: Intencao de descoberta! O lead possui uma dor (quer emagrecer ou tratar um sintoma) mas nao conhece nenhuma solucao comercial. Nao mande para a Pre-Sell de afiliado! Use paginas de captura ou YouTube Ads."
         cor_grafico = "#ff0055"
-        opacidade_topo = "1.0"
-        opacidade_meio = "0.3"
-        opacidade_fundo = "0.3"
-        borda_topo = "3px solid #ff0055; box-shadow: 0 0 20px #ff0055;"
-        borda_meio = "1px solid #1e293b"
-        borda_fundo = "1px solid #1e293b"
+        fator_topo = "1.0"
+        fator_meio = "0.3"
+        fator_fundo = "0.3"
+        borda_p1 = "3px solid #ff0055; box-shadow: 0 0 20px #ff0055;"
+        borda_p2 = "1px solid #1e293b"
+        borda_p3 = "1px solid #1e293b"
 
     num_whats = st.session_state.get("user_whatsapp_saved", "5511999999999")
     horario_atual = datetime.now().strftime("%H:%M:%S")
@@ -105,31 +101,40 @@ def main():
     lucro_liquido = (vendas_estimadas * comissao_produto) - orcamento
     roi_porcentagem = round((lucro_liquido / orcamento) * 100, 2)
 
-    st.info("🤖 STATUS DO ARQUITETO: Mapa funcional estabilizado as " + horario_atual)
+    st.info("🤖 STATUS DO ARQUITETO: Mapa funcional de funil ativo as " + horario_atual)
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 4. EXIBIÇÃO DO DIAGNÓSTICO DO PRODUTO E O DESENHO GEOMÉTRICO DO FUNIL LADO A LADO
+    # 4. CONSTRUÇÃO DO LAYOUT DAS DUAS COLUNAS PRINCIPAIS PREMIUM
     c_diag_esq, c_desenho_dir = st.columns([1.2, 1.0])
     
     with c_diag_esq:
         st.markdown("<h3 style='color:#00ffcc; margin:0;'>🛰️ Diagnostico Estrategico</h3>", unsafe_allow_html=True)
-        if cor_alerta == "green":
-            st.success("🎯 CLASSIFICAÇÃO DETECTADA: " + nivel_funil)
-        elif cor_alerta == "blue":
-            st.info("🛰️ CLASSIFICAÇÃO DETECTADA: " + nivel_funil)
-        else:
-            st.error("❄️ CLASSIFICAÇÃO DETECTADA: " + nivel_funil)
-            
+        st.write("")
+        st.write("**Nivel de Intencao Detectado:**")
+        st.warning(nivel_funil)
         st.write(txt_estrategia)
 
     with c_desenho_dir:
         st.markdown("<h3 style='color:#00ffcc; margin:0; text-align:center;'>📐 Arquitetura do Funil Viva</h3>", unsafe_allow_html=True)
         st.write("")
         
-        # CONSTRUÇÃO GEOMÉTRICA DA PIRÂMIDE INVERTIDA REATIVA VIA CSS PURO
-        html_funil = "<div style='display:flex; flex-direction:column; align-items:center; width:100%; font-family:monospace;'>"
-        html_funil += "<div style='width:90%; background:linear-gradient(90deg, #111827, #1f2937); border:" + borda_topo + "; opacity:" + opacidade_topo + "; padding:12px; margin-bottom:6px; border-radius:6px; text-align:center; color:#ff0055; font-weight:bold;'>🎯 TOPO DO FUNIL (Sintomas / Dor Ampla)</div>"
-        html_funil += "<div style='color:#f3f4f6; margin-bottom:6px; font-size:1.1rem;'>▼</div>"
-        html_funil += "<div style='width:65%; background:linear-gradient(90deg, #111827, #1f293b); border:" + borda_meio + "; opacity:" + opacidade_meio + "; padding:12px; margin-bottom:6px; border-radius:6px; text-align:center; color:#0066ff; font-weight:bold;'>🛡️ MEIO DO FUNIL (Soluções / Presell)</div>"
-        html_funil += "<div style='color:#f3f4f6; margin-bottom:6px; font-size:1.1rem;'>▼</div>"
-        html_funil += "<div style='width:40%; background:linear-gradient(90deg, #111827, #0f172a); border:" + borda_fundo + "; opacity:" + opacidade_fundo + "; padding:12px; border-radius:6px; text-align:center; color:#00ffcc; font-weight:bold;'>💵 FUNDO DO FUNIL (Marca / Compra)</div>"
+        # 🪐 CORREÇÃO CRÍTICA SUPREMA V7: Remoção completa de concatenações dinâmicas de aspas dentro da string HTML
+        html_funil = "<div style='display:flex; flex-direction:column; align-items:center; width:100; font-family:monospace;'>"
+        html_funil += "<div style='width:90%; background-color:#111827; border:2px solid #ff0055; padding:10px; margin-bottom:5px; border-radius:6px; text-align:center; color:#ff0055; font-weight:bold;'>🎯 TOPO DO FUNIL (Sintomas / Dor Ampla)</div>"
+        html_funil += "<div style='color:#f3f4f6; margin-bottom:5px; font-size:1.1rem;'>▼</div>"
+        html_funil += "<div style='width:65%; background-color:#111827; border:2px solid #0066ff; padding:10px; margin-bottom:5px; border-radius:6px; text-align:center; color:#0066ff; font-weight:bold;'>🛡️ MEIO DO FUNIL (Solucoes / Presell)</div>"
+        html_funil += "<div style='color:#f3f4f6; margin-bottom:5px; font-size:1.1rem;'>▼</div>"
+        html_funil += "<div style='width:40%; background-color:#111827; border:2px solid #00ffcc; padding:10px; border-radius:6px; text-align:center; color:#00ffcc; font-weight:bold;'>💵 FUNDO DO FUNIL (Compra)</div>"
+        html_funil += "</div>"
+        st.markdown(html_funil, unsafe_allow_html=True)
+
+    st.markdown("---")
+    st.markdown("<h3 style='color:#cc66ff;'>📊 Simulacao Operacional de Tráfego Gringo</h3>", unsafe_allow_html=True)
+
+    # Grids de Etapas e seus respectivos Gráficos
+    c_etapa1, c_etapa2, c_etapa3 = st.columns(3)
+    lista_dias = ["D1", "D2", "D3", "D4"]
+    
+    with c_etapa1:
+        st.subheader("📊 Volume de Cliques")
+        st.metric(label="🔎 Cliques Totais (Dia)", value=f"{cliques_estimados:,}")
