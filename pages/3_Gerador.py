@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit st
 from datetime import datetime
 
 def main():
@@ -54,7 +54,7 @@ def main():
             st.markdown("<h3 style='color:#00ffcc;'>📌 Títulos do Anúncio (Máx 30 Caracteres)</h3>", unsafe_allow_html=True)
             st.write("Selecione e copie para as Headlines do Google Ads:")
             
-            # Geração rigorosa de 8 Títulos respeitando o tamanho máximo de 30 caracteres
+            # Geração de 8 Títulos respeitando o tamanho máximo de 30 caracteres
             t1 = f"Buy {p_nome} Official"[:30]
             t2 = f"{p_nome} Official Store"[:30]
             t3 = f"{p_nome} Discount Today"[:30]
@@ -82,7 +82,7 @@ def main():
             st.markdown("<h3 style='color:#cc66ff;'>📝 Descrições do Anúncio (Máx 90 Caracteres)</h3>", unsafe_allow_html=True)
             st.write("Copie para as Descriptions do Google Ads:")
             
-            # Geração rigorosa de 4 Descrições longas respeitando o tamanho máximo de 90 caracteres
+            # Geração de 4 Descrições longas respeitando o tamanho máximo de 90 caracteres
             d1 = f"Get {p_nome} directly from the official website. Enjoy safe delivery and special discount today."[:90]
             d2 = f"Order your {p_nome} bottles today with free standard shipping and exclusive money back guarantee."[:90]
             d3 = f"Shop {p_nome} original supplement online. Secure your package now before the stock runs out!"[:90]
@@ -95,30 +95,29 @@ def main():
 
         st.markdown("---")
 
-        # 6. CENTRAL DE PALAVRAS-CHAVE DO LEILÃO (MÍNIMO 15 DE CADA TIPO = 45 TOTAL)
-        st.markdown("<h3 style='color:#00ffcc;'>🔑 Central de Palavras-Chave do Leilão (45 Termos Fundo de Funil)</h3>", unsafe_allow_html=True)
-        st.write("Mapeamento cirúrgico de termos exatos de intenção de compra divididos por tipo de correspondência:")
+        # 6. CENTRAL DE PALAVRAS-CHAVE EXCLUSIVAS (45 TERMOS REAIS SEM REPETIÇÃO)
+        st.markdown("<h3 style='color:#00ffcc;'>🔑 Central de Palavras-Chave do Leilão (45 Termos Fundo de Funil Exclusivos)</h3>", unsafe_allow_html=True)
+        st.write("Mapeamento cirúrgico de termos de intenção de compra divididos por tipo. Zero repetição entre as colunas:")
         st.write("")
 
         c_solta, c_aspas, c_colchete = st.columns(3)
 
-        # Sufixos dinâmicos de alta conversão para estruturar as 15 variações estáveis
-        sufixos = ["official", "website", "buy", "order", "price", "discount", "supplement", "store", "online", "sale", "original", "reviews", "ingredients", "cost", "shop"]
+        # 🪐 45 Sufixos únicos e independentes distribuídos para banir duplicações nas 3 colunas
+        suf_broad = ["buy online", "official store", "best price", "where to buy", "purchase original", "order discount", "secure package", "promo code", "retailer store", "sale online", "safest site", "lowest cost", "supply near me", "get bottles", "shop discount"]
+        suf_phrase = ["official website", "supplement reviews", "ingredients list", "customer warning", "independent review", "real side effects", "fda approved status", "capsules directions", "weight loss drops", "complaints check", "scam alert report", "shipping tracking", "refund policy guarantee", "clinical studies results", "formula benefits"]
+        suf_exact = ["brand bidding", "manufacturer direct", "authorized seller", "coupon code 2026", "moneyback guarantee", "exclusive offer matinal", "certified pure check", "stock availability", "wholesale price package", "official link gate", "verified checkout page", "vip client portal", "one time payment", "secured order processing", "original product checkout"]
 
         with c_solta:
             st.markdown("<h4>🟢 15 Palavras Soltas (Broad Match)</h4>", unsafe_allow_html=True)
-            soltas_txt = "\n".join([f"{p_nome} {suf}" for suf in sufixos])
-            st.text_area("Copiar Soltas:", value=soltas_txt, height=350, key="kw_soltas")
+            st.text_area("Copiar Soltas:", value="\n".join([f"{p_nome} {s}" for s in suf_broad]), height=350, key="kw_soltas")
 
         with c_aspas:
             st.markdown("<h4>🔵 15 Palavras com Aspas (Phrase Match)</h4>", unsafe_allow_html=True)
-            aspas_txt = "\n".join([f'"{p_nome} {suf}"' for suf in sufixos])
-            st.text_area("Copiar Frases:", value=aspas_txt, height=350, key="kw_aspas")
+            st.text_area("Copiar Frases:", value="\n".join([f'"{p_nome} {s}"' for s in suf_phrase]), height=350, key="kw_aspas")
 
         with c_colchete:
             st.markdown("<h4>🔴 15 Palavras com Colchetes (Exact Match)</h4>", unsafe_allow_html=True)
-            colchetes_txt = "\n".join([f"[{p_nome} {suf}]" for suf in sufixos])
-            st.text_area("Copiar Exatas:", value=colchetes_txt, height=350, key="kw_colchetes")
+            st.text_area("Copiar Exatas:", value="\n".join([f"[{p_nome} {s}]" for s in suf_exact]), height=350, key="kw_colchetes")
 
 if __name__ == "__main__":
     main()
