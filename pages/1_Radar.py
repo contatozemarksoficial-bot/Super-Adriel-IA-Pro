@@ -70,6 +70,12 @@ def main():
                 border: 1px solid #1e293b !important;
                 border-radius: 10px !important;
             }
+            code {
+                background-color: #0f172a !important;
+                color: #00ffcc !important;
+                border: 1px solid #1e293b !important;
+                font-weight: bold !important;
+            }
         </style>
     """, unsafe_allow_html=True)
 
@@ -101,8 +107,7 @@ def main():
     p_status = "ALTA" if posicao_lista <= 10 else "NORMAL"
     
     p_mes = 50000 + (posicao_lista * 3200) + (tempo_segundo * 5)
-    p_hoje = 1200 + (posicao_lista * 110) + (tempo_segundo * 2)
-    p_semente = 10 + posicao_lista * 4
+    p_hoje = 1200 + (posicao_lista * 105) + (tempo_segundo * 2)
     
     p_paises = ["Estados Unidos (USA)", "Reino Unido (UK)", "Canada (CA)", "Australia (AU)", "Alemanha (DE)"]
     p_pais = p_paises[posicao_lista % 5]
@@ -154,24 +159,24 @@ def main():
         
         st.markdown("---")
         
-        # 🌟 GRÁFICO CYBER-NEON COM COLUNAS DE CORES SÓLIDAS E INDEPENDENTES
+        # 📊 GRÁFICO TOTALMENTE MOLDADO E INTEGRADO EM MILHARES REAIS
         st.markdown("<h4 style='color:#00ffcc;'>📊 Movimentacao Historica de Leilao (Status do Sinal Mensal)</h4>", unsafe_allow_html=True)
         
-        # Estrutura de dados reformulada de forma estrita: cada mês ganha um valor em apenas uma categoria de cor sólida
+        base_mes_real = p_mes // 4
         df_comportamento = pd.DataFrame({
             "Meses": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-            "Verde Neon (Subindo)":    [p_semente * 3, 0, 0, p_semente * 4, 0, 0, p_semente * 5, 0, 0, p_semente * 6, 0, 0],
-            "Laser Vermelho (Decendo)": [0, p_semente * 2, 0, 0, p_semente * 3, 0, 0, p_semente * 4, 0, 0, p_semente * 5, 0],
-            "Azul Eletrico (Indecisao)": [0, 0, p_semente * 2, 0, 0, p_semente * 3, 0, 0, p_semente * 4, 0, 0, p_semente * 4]
+            "Verde Neon (Subindo)":    [base_mes_real, 0, 0, int(base_mes_real * 1.1), 0, 0, int(base_mes_real * 1.2), 0, 0, int(base_mes_real * 1.3), 0, 0],
+            "Laser Vermelho (Decendo)": [0, int(base_mes_real * 0.9), 0, 0, int(base_mes_real * 0.95), 0, 0, int(base_mes_real * 1.05), 0, 0, int(base_mes_real * 1.15), 0],
+            "Azul Eletrico (Indecisao)": [0, 0, int(base_mes_real * 0.85), 0, 0, int(base_mes_real * 1.0), 0, 0, int(base_mes_real * 1.1), 0, 0, int(base_mes_real * 1.2)]
         })
         
-        cores_comportamento = ["#00ffcc", "#ff0055", "#0066ff"]
+        cores_auditor = ["#00ffcc", "#ff0055", "#0066ff"]
         
         st.bar_chart(
             df_comportamento, 
             x="Meses", 
             y=["Verde Neon (Subindo)", "Laser Vermelho (Decendo)", "Azul Eletrico (Indecisao)"],
-            color=cores_comportamento
+            color=cores_auditor
         )
 
 if __name__ == "__main__":
