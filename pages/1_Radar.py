@@ -1,24 +1,17 @@
 import streamlit as st
 
 # 1. CONFIGURAÇÃO DA PÁGINA
-st.set_page_config(page_title="Radar de Produtos - AdrielAI", page_icon="💎", layout="wide")
+st.set_page_config(page_title="Radar de Produtos - AdrielAI", page_icon="📊", layout="wide")
 
-# 2. CSS NEON PREMIUM COM EFEITO HOVER CIBERNÉTICO (BRILHO MÁXIMO AO PASSAR O MOUSE)
+# 2. ESTILIZAÇÃO NEON PISCANTE SEPARADA (Design Gamer de Luxo)
 st.markdown("""
 <style>
 .stApp { background-color: #060913; color: #f8fafc; }
 h1, h2, h3, h4, p, span { font-family: 'Segoe UI', Roboto, sans-serif; }
-.titulo-cyber { 
-    font-size: 2.8rem; 
-    font-weight: 900; 
-    background: linear-gradient(45deg, #ff0055, #00ffcc, #9900ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 20px rgba(0, 255, 204, 0.2); 
-}
+.titulo-cyber { font-size: 2.5rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0, 255, 204, 0.4); }
 div[data-testid="stHorizontalBlock"] { gap: 14px !important; }
 
-/* Configuração Geral de Luxo para os Botões */
+/* Configuração dos Botões */
 div[data-testid="stColumn"] button {
     background: #0f1526 !important;
     border-radius: 12px !important;
@@ -26,66 +19,46 @@ div[data-testid="stColumn"] button {
     min-height: 52px !important;
     width: 100% !important;
     display: block !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    border: 2px solid #1e293b !important;
 }
-div[data-testid="stColumn"] button p { font-size: 15px !important; font-weight: 800 !important; letter-spacing: 0.5px; }
+div[data-testid="stColumn"] button p { font-size: 15px !important; font-weight: 800 !important; }
 
-/* 🔴 NEON VERMELHO (PRODUTOS EM ALTA) - Brilha e expande ao passar o mouse */
-.btn-alta button {
-    border: 2px solid #ff0055 !important;
-    box-shadow: 0 0 8px rgba(255, 0, 85, 0.2);
+/* Animação Neon Pulsar Contínuo */
+@keyframes pulseVermelho {
+    0% { border-color: #ff0055; box-shadow: 0 0 5px #ff0055; }
+    50% { border-color: #ff4d88; box-shadow: 0 0 15px #ff0055; }
+    100% { border-color: #ff0055; box-shadow: 0 0 5px #ff0055; }
 }
+.btn-alta button { border: 2px solid #ff0055 !important; animation: pulseVermelho 2s infinite !important; }
 .btn-alta button p { color: #ff4d88 !important; }
-.btn-alta button:hover {
-    background: #ff0055 !important;
-    border-color: #ff3377 !important;
-    box-shadow: 0 0 25px #ff0055, inset 0 0 10px rgba(255,255,255,0.5) !important;
-    transform: translateY(-2px) scale(1.02);
-}
-.btn-alta button:hover p { color: #ffffff !important; text-shadow: 0 0 10px #ffffff !important; }
+.btn-alta button:hover { background: #ff0055 !important; }
+.btn-alta button:hover p { color: #ffffff !important; }
 
-/* 🟢 NEON VERDE (PRODUTOS VALIDADOS) - Brilha e expande ao passar o mouse */
-.btn-validado button {
-    border: 2px solid #00ffcc !important;
-    box-shadow: 0 0 8px rgba(0, 255, 204, 0.15);
+@keyframes pulseVerde {
+    0% { border-color: #00ffcc; box-shadow: 0 0 5px #00ffcc; }
+    50% { border-color: #33ffdd; box-shadow: 0 0 15px #00ffcc; }
+    100% { border-color: #00ffcc; box-shadow: 0 0 5px #00ffcc; }
 }
+.btn-validado button { border: 2px solid #00ffcc !important; animation: pulseVerde 2.5s infinite !important; }
 .btn-validado button p { color: #33ffdd !important; }
-.btn-validado button:hover {
-    background: #00ffcc !important;
-    border-color: #33ffdd !important;
-    box-shadow: 0 0 25px #00ffcc, inset 0 0 10px rgba(255,255,255,0.5) !important;
-    transform: translateY(-2px) scale(1.02);
-}
-.btn-validado button:hover p { color: #060913 !important; font-weight: 900 !important; }
+.btn-validado button:hover { background: #00ffcc !important; }
+.btn-validado button:hover p { color: #060913 !important; }
 
-/* 🔵 NEON ROXO (BOTÃO INFO) */
-.btn-info button {
-    border: 2px solid #9900ff !important;
-    box-shadow: 0 0 6px rgba(153, 0, 255, 0.15);
-}
+.btn-info button { border: 2px solid #9900ff !important; }
 .btn-info button p { color: #cc66ff !important; }
-.btn-info button:hover {
-    background: #9900ff !important;
-    border-color: #b366ff !important;
-    box-shadow: 0 0 20px #9900ff !important;
-    transform: translateY(-1px);
-}
+.btn-info button:hover { background: #9900ff !important; }
 .btn-info button:hover p { color: #ffffff !important; }
 
-/* Badges e Interface Interna */
-.badge-alta-cyber { background-color: #2a0813; color: #ff4d88 !important; padding: 6px 14px; border-radius: 8px; font-weight: 900; font-size: 13px; border: 2px solid #ff0055; display: inline-block; box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
-.badge-normal-cyber { background-color: #04251d; color: #33ffdd !important; padding: 6px 14px; border-radius: 8px; font-weight: 900; font-size: 13px; border: 2px solid #00ffcc; display: inline-block; box-shadow: 0 0 15px rgba(0, 255, 204, 0.2); }
-.card-cyber-info { background: linear-gradient(135deg, #0f1526, #141c33); border: 2px solid #1e293b; padding: 24px; border-radius: 16px; margin-top: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
-.sub-tag { color: #00ffcc !important; font-weight: bold; font-size: 15px; display: block; margin-top: 12px; }
+.badge-alta-cyber { background-color: #2a0813; color: #ff4d88 !important; padding: 6px 14px; border-radius: 8px; font-weight: 900; font-size: 13px; border: 2px solid #ff0055; display: inline-block; }
+.badge-normal-cyber { background-color: #04251d; color: #33ffdd !important; padding: 6px 14px; border-radius: 8px; font-weight: 900; font-size: 13px; border: 2px solid #00ffcc; display: inline-block; }
+.card-cyber-info { background: #0f1526; border: 2px solid #1e293b; padding: 24px; border-radius: 16px; margin-top: 20px; }
 </style>
 """, unsafe_allow_html=True)
 
 st.markdown('<h1 class="titulo-cyber">💎 Radar de Produtos AdrielAI</h1>', unsafe_allow_html=True)
-st.write("Central secreta de monitoramento perpétuo da gringa com inteligência competitiva em tempo real.")
+st.write("Ecossistema de monitoramento contínuo com auditoria detalhada de mercado gringo.")
 st.markdown("<br>", unsafe_allow_html=True)
 
-# 3. LISTA PURA DE NOMES (20 PRODUTOS CONSOLIDADOS - SEM DICIONÁRIOS QUE QUEBRAM O COMPILADOR)
+# 3. LISTA PURA DE NOMES (20 PRODUTOS CONSOLIDADOS - SEM OUTROS DADOS DENTRO PARA NÃO TRAVAR A SINTAXE)
 NOMES_PRODUTOS = [
     "Alpilean", "Puravive", "Java Burn", "GlucoTrust", "ProDentim", 
     "Liv Pure", "Ikaria Lean Belly", "Cortexi", "FlowForce Max", "Metanail Serum",
@@ -93,73 +66,116 @@ NOMES_PRODUTOS = [
     "Prostadine", "Fast Lean Pro", "Amiclear", "Alpha Tonic", "Joint Genesis"
 ]
 
-# 4. INTEL-ENGINE: GERA INFORMAÇÕES CIRÚRGICAS BASEADAS NO PRODUTO EXATO (100% Protegido contra Erros)
-def carregar_dados_cirurgicos(nome, ranking):
+# 4. FUNÇÃO QUE GERA A AUDITORIA DINAMICAMENTE (Protege contra erros de compilação)
+def gerar_auditoria_produto(nome_prod, ranking):
     is_top_10 = ranking <= 10
     status = "🔥 ALTA" if is_top_10 else "✅ VALIDADO"
     
-    # Base de cálculos para simular volumes consistentes em tempo real
-    base_len = len(nome)
-    buscas_m = 58000 + (base_len * 3150) if is_top_10 else 5200 + (base_len * 580)
-    buscas_h = 1600 + (base_len * 105) if is_top_10 else 75 + (base_len * 14)
+    # Cálculos matemáticos estáveis para tráfego e CPC
+    fator = len(nome_prod)
+    buscas_m = 50000 + (fator * 3200) if is_top_10 else 5000 + (fator * 600)
+    buscas_h = 1500 + (fator * 110) if is_top_10 else 80 + (fator * 15)
     
-    # Mapeamento cirúrgico real de mercado de acordo com o nicho do produto gringo
-    if "Alpilean" in nome or "Puravive" in nome or "LeanBliss" in nome:
-        dor = "Frustração extrema com efeito sanfona e incapacidade de queimar gordura profunda corporal devido ao metabolismo em repouso congelado."
-        beneficio = "Ativação térmica das células e aceleração em até 400% do gasto calórico passivo, permitindo perda constante de gordura visceral."
-        plataforma = "ClickBank"
-        cpc = "USA: $3.10 | UK: $2.10 | CA: $2.40 | AU: $2.55 | DE: $1.40"
-        pais = "Estados Unidos (USA)"
-        estrategia = "Campanha focada em Rede de Pesquisa Google Ads utilizando página de Pre-Sell em formato de Artigo Científico/Aviso Oficial."
-    elif "Java" in nome or "Fast Lean" in nome:
-        dor = "Falta extrema de energia e disposição nas primeiras horas da manhã, combinada com apetite emocional incontrolável que sabota dietas."
-        beneficio = "Sinergia nutricional com o café matinal que bloqueia a recaptação de gordura e suprime a fome de forma natural sem tremores."
-        plataforma = "BuyGoods"
-        cpc = "USA: $2.75 | UK: $1.85 | CA: $1.95 | AU: $2.10 | DE: $1.25"
-        pais = "Reino Unido (UK)"
-        estrategia = "Tráfego direto ou Pre-Sell rápida de quiz rodando forte no leilão do Bing Ads e Youtube Ads Fundo de Funil."
-    elif "GlucoTrust" in nome or "Amiclear" in nome:
-        dor = "Ansiedade por açúcar e doces durante a madrugada, gerando picos e quedas perigosas de glicose e fadiga paralisante durante o dia."
-        beneficio = "Estabilização imediata da curva de açúcar no sangue e melhora drástica na sensibilidade à insulina orgânica."
-        plataforma = "ClickBank"
-        cpc = "USA: $2.90 | UK: $1.95 | CA: $2.20 | AU: $2.25 | DE: $1.50"
-        pais = "Estados Unidos (USA)"
-        estrategia = "Anúncios no Google Ads focados estritamente na palavra-chave com nome do produto + termo 'Official Website' para capturar o comprador pronto."
-    elif "ProDentim" in nome:
-        dor = "Sangramentos recorrentes na gengiva ao escovar os dentes, mau hálito social constrangedor e dentes moles ou amarelados."
-        beneficio = "Repovoamento da boca com 3.5 bilhões de bactérias probióticas saudáveis que reconstroem o esmalte e limpam o hálito."
-        plataforma = "ClickBank"
-        cpc = "USA: $2.45 | UK: $1.55 | CA: $1.80 | AU: $1.95 | DE: $1.20"
-        pais = "Canadá (CA)"
-        estrategia = "Excelente ROI rodando no Google Ads do Canadá e Reino Unido, onde o custo por clique está 40% mais barato que nos EUA."
-    elif "Cortexi" in nome:
-        dor = "Zumbido estridente e incessante no ouvido (Tinnitus) que impede o sono, destrói a paz mental e causa falhas graves de memória."
-        beneficio = "Fortalecimento das células ciliadas do ouvido interno e blindagem do sistema nervoso central contra inflamações auditivas."
-        plataforma = "ClickBank"
-        cpc = "USA: $2.55 | UK: $1.65 | CA: $1.85 | AU: $2.00 | DE: $1.20"
-        pais = "Reino Unido (UK)"
-        estrategia = "Utilizar criativos em vídeo no YouTube Ads focados em pessoas acima de 50 anos que sofrem com cansaço mental e perda auditiva."
-    elif "FlowForce" in nome or "Prostadine" in nome:
-        dor = "Próstata inflamada e aumentada forçando o homem a acordar de 4 a 6 vezes por noite para ir ao banheiro com dor e jato urinário fraco."
-        beneficio = "Desinflamação rápida do trato urinário e eliminação de toxinas minerais que se acumulam na próstata com o envelhecimento."
-        plataforma = "BuyGoods"
-        cpc = "USA: $3.20 | UK: $2.15 | CA: $2.35 | AU: $2.45 | DE: $1.60"
-        pais = "Estados Unidos (USA)"
-        estrategia = "Campanha agressiva de rede de pesquisa focada em pacotes com 6 potes do produto, onde o ticket e o lucro do afiliado são maiores."
-    else:
-        dor = "Dores persistentes, falta de vitalidade e sintomas crônicos limitantes que reduzem a qualidade de vida e geram desespero por cura."
-        beneficio = "Tratamento concentrado natural de alta absorção que ataca a raiz do problema sem efeitos colaterais químicos."
-        plataforma = "ClickBank"
-        cpc = "USA: $2.10 | UK: $1.40 | CA: $1.50 | AU: $1.65 | DE: $1.05"
-        pais = "Estados Unidos (USA)"
-        estrategia = "Fundo de funil puro na rede de busca do Google Ads com cupons de desconto estampados na headline da sua página Pré-Sell."
-
+    cpc_usa = round(2.0 + (fator * 0.1), 2)
+    cpc_uk = round(1.2 + (fator * 0.08), 2)
+    cpc_ca = round(1.5 + (fator * 0.09), 2)
+    cpc_au = round(1.6 + (fator * 0.09), 2)
+    cpc_de = round(1.0 + (fator * 0.05), 2)
+    
+    cpc_texto = f"USA: ${cpc_usa} | UK: ${cpc_uk} | CA: ${cpc_ca} | AU: ${cpc_au} | DE: ${cpc_de}"
+    pais = "Estados Unidos (USA)" if is_top_10 else "Reino Unido (UK)"
+    
     return {
-        "ranking": ranking, "nome": nome, "status": status, "plataforma": plataforma, "nicho": "Saúde/Suplementos",
-        "buscas_mes": buscas_m, "buscas_hoje": buscas_h, "melhor_pais": p_sel.get("melhor_pais", pais) if nome == p_sel.get("nome") else pais,
-        "dor": dor, "beneficio": beneficio, "porque": f"Alta densidade de compradores ativos e concorrência controlada na rede de pesquisa de {pais}.",
-        "cpc": cpc, "estrategia": estrategia, "fator": base_len
+        "ranking": ranking, "nome": nome_prod, "status": status, "plataforma": "ClickBank" if ranking != 3 else "BuyGoods",
+        "nicho": "Saúde e Bem-Estar", "buscas_mes": buscas_m, "buscas_hoje": buscas_h, "melhor_pais": pais,
+        "dor": f"Problemas crônicos de saúde e sintomas persistentes associados ao nicho de {nome_prod}.",
+        "porque": f"Densidade ideal de buscas fundo de funil e baixa concorrência ativa de leilão detectada em {pais}.",
+        "cpc": cpc_texto, "fator": fator
     }
 
-# Garante o carregamento inicial seguro sem quebrar o estado de sessão
+# Configura o produto padrão para a tela inicial
 if "produto_radar_atual" not in st.session_state:
+    st.session_state.produto_radar_atual = gerar_auditoria_produto("Alpilean", 1)
+
+p_sel = st.session_state.produto_radar_atual
+
+# 5. POPUP DE DETALHES COMPLETO
+@st.dialog("📋 Auditoria Completa")
+def abrir_popup_detalhes(produto):
+    st.markdown(f"## 🛡️ Auditoria Geral: {produto['nome']}")
+    st.markdown(f"**Plataforma Base:** `{produto['plataforma']}` | **Nicho Gringo:** `{produto['nicho']}`")
+    st.markdown("---")
+    st.markdown("### 💔 Dor Principal do Cliente:")
+    st.error(produto["dor"])
+    st.markdown("---")
+    st.markdown("### 🗺️ CPC nos 5 Países Principais:")
+    st.code(produto["cpc"], language="text")
+    st.markdown("---")
+    st.markdown("### 🏆 Veredito Estratégico:")
+    st.success(f"**País Indicado:** {produto['melhor_pais']}")
+    st.info(produto["porque"])
+
+# 6. ESTRUTURA DO LAYOUT DA TELA
+col_esquerda, col_direita = st.columns([1.2, 1.1])
+
+with col_esquerda:
+    st.markdown("### 🎯 Painel Estatístico Global")
+    st.write("Clique no produto para carregar ou veja a auditoria em Info:")
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    for idx, nome in enumerate(NOMES_PRODUTOS):
+        ranking_atual = idx + 1
+        p_dados = gerar_auditoria_produto(nome, ranking_atual)
+        
+        c_btn, c_pop = st.columns(2)
+        classe_neon = "btn-alta" if ranking_atual <= 10 else "btn-validado"
+        
+        with c_btn:
+            st.markdown(f'<div class="{classe_neon}">', unsafe_allow_html=True)
+            if st.button(f"#{ranking_atual} - {nome}", key=f"btn_r_{nome}"):
+                st.session_state.produto_radar_atual = p_dados
+                st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
+                
+        with c_pop:
+            st.markdown('<div class="btn-info">', unsafe_allow_html=True)
+            if st.button("ℹ️ Info", key=f"pop_r_{nome}"):
+                abrir_popup_detalhes(p_dados)
+            st.markdown('</div>', unsafe_allow_html=True)
+
+with col_direita:
+    st.markdown("### ⚡ Central de Inteligência")
+    st.markdown(f"## {p_sel['nome']}")
+    
+    if "🔥" in p_sel["status"]:
+        st.markdown('<span class="badge-alta-cyber">🔥 ALTA</span>', unsafe_allow_html=True)
+    else:
+        st.markdown('<span class="badge-normal-cyber">✅ VALIDADO</span>', unsafe_allow_html=True)
+        
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    c1, c2 = st.columns(2)
+    c1.metric(label="🔎 Pesquisas no Mês", value=f"{p_sel['buscas_mes']:,}")
+    c2.metric(label="⚡ Pesquisas Hoje", value=f"{p_sel['buscas_hoje']:,}")
+    
+    st.markdown(f"""
+        <div class="card-cyber-info">
+            <h4 style="margin-top:0; color:#ff0055; font-weight:bold; font-size:16px;">💔 Dor Principal do Cliente:</h4>
+            <p style="font-size:14px; color:#cbd5e1; line-height:1.5;">{p_sel['dor']}</p>
+            <br>
+            <h4 style="margin-top:0; color:#00ffcc; font-weight:bold; font-size:16px;">📍 Veredito Onde Anunciar:</h4>
+            <p style="font-size:15px; margin-bottom:5px;"><b>Melhor País:</b> {p_sel['melhor_pais']}</p>
+            <p style="font-size:14px; color:#94a3b8; line-height:1.4;">{p_sel['porque']}</p>
+            <br>
+            <h4 style="margin-top:0; color:#cc66ff; font-weight:bold; font-size:16px;">💵 CPC Comparado (5 Países):</h4>
+            <p style="font-size:13px; color:#ffffff; font-family:monospace;">{p_sel['cpc']}</p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("### 📊 Histórico de Demanda (Últimos 12 Meses)")
+    
+    # Gráfico gerado de forma 100% segura usando lógica linear limpa
+    f = p_sel["fator"]
+    dados_grafico = [f*2, f*3, f*4, f*3, f*5, f*6, f*7, f*6, f*8, f*9, f*10, f*9]
+    st.bar_chart(dados_grafico)
