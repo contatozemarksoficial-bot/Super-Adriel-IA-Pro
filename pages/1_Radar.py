@@ -32,7 +32,7 @@ def main():
     estilo_luxo += "</style>"
     st.markdown(estilo_luxo, unsafe_allow_html=True)
 
-    # CABEÇALHO COM ENGENHARIA DE COPY AVANÇADA
+    # CABEÇALHO COM ENGENHARIA DE COPY AVANÇADA E PORTUGUÊS PERFEITO
     st.markdown('<h1 style="font-size: 2.5rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">💎 RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
     st.write("Varredura automatizada e mapeamento analítico de ofertas de alta conversão nas plataformas internacionais.")
     
@@ -106,7 +106,7 @@ def main():
 
         # SEÇÃO 2: SUPERINTELIGÊNCIA DE COPY APLICADA AO VEREDITO ESTRATÉGICO
         st.markdown("<h4 style='color:#00ffcc;'>🏆 Veredito Estratégico Computacional (Google Ads / Bing Ads):</h4>", unsafe_allow_html=True)
-        st.success("Reino Unido (UK) e Tier 1 - Nossa inteligência preditiva valida a estabilização matemática do leilão na Rede de Pesquisa do Google Ads para o público britânico e regiões de alta renda da Commonwealth. O termômetro de mercado aponta o momento ideal para a escalada vertical da oferta. A baixa concorrência em termos institucionais fundo de funil assegura o menor Custo por Clique (CPC), gerando um Retorno sobre o Investimento (ROI) líquido e escalável hoje.")
+        st.success("Reino Unido (UK) - Nossa inteligência preditiva valida a estabilização matemática do leilão na Rede de Pesquisa do Google Ads para o público britânico e regiões de alta renda da Commonwealth. O termômetro de mercado aponta o momento ideal para a escalada vertical da oferta. A baixa concorrência em termos institucionais fundo de funil assegura o menor Custo por Clique (CPC), gerando um Retorno sobre o Investimento (ROI) líquido e escalável hoje, entregando cliques limpos com lucro bruto recorrente.")
 
         # SEÇÃO 3: MAPEAMENTO DE CPC SEGURO
         st.markdown("<h4 style='color:#00ffcc;'>🌐 Mapeamento Analítico de CPC por Região (Tier 1):</h4>", unsafe_allow_html=True)
@@ -118,6 +118,3 @@ def main():
         html_cpc += "<span>🇳🇿 <b>NZ:</b> <span style='color:#00ffcc;'>$1.25</span></span>"
         html_cpc += "</div>"
         st.markdown(html_cpc, unsafe_allow_html=True)
-        st.write("")
-
-        # SEÇÃO 4: HISTÓRICO DE LEILÃO EM COMPILAÇÃO FECHADA INDESTRUTÍVEL
