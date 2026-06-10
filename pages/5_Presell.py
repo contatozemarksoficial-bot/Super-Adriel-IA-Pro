@@ -1,103 +1,142 @@
-
 import streamlit as st
-import pandas as pd
+from ftplib import FTP
+import io
 from datetime import datetime
 
 def main():
-    # 1. CONFIGURACAO PREMIUM DA INTERFACE SAAS 2026
-    st.set_page_config(page_title="Pré-Sell Premium - AdrielAI", layout="wide")
+    # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE SAAS 2026 (VISUAL SEGURO COLA NO TETO)
+    st.set_page_config(page_title="Pré-Sell Premium - AdrielAI", layout="wide", initial_sidebar_state="expanded")
 
-    # FORCADOR ULTRA LUXO CYBER-NEON COMPILADO (IMUNE AO BUG DO PYTHON 3.14)
-    estilo_luxo = "<style>"
-    estilo_luxo += "header, [data-testid='stHeader'] {background-color: rgba(0,0,0,0) !important; background: transparent !important; display: none !important;}"
-    estilo_luxo += "[data-testid='stAppViewContainer'] {padding-top: 0px !important;}"
-    estilo_luxo += "html, body, [data-testid='stAppViewContainer'], .stApp {background-color: #030712 !important; color: #f9fafb !important;}"
-    estilo_luxo += "[data-testid='stSidebar'], section[data-testid='stSidebar'] div {background-color: #090d16 !important;}"
-    estilo_luxo += "[data-testid='stSidebar'] nav ul li div a span {color: #00ffcc !important; font-weight: bold !important; text-shadow: 0 0 8px rgba(0,255,204,0.5) !important;}"
-    estilo_luxo += ".stTextInput>div>div>input, .stTextArea>div>div>textarea {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; font-size: 1.1rem !important;}"
-    estilo_luxo += ".stTextInput>div>div>input:focus, .stTextArea>div>div>textarea:focus {border-color: #00ffcc !important; box-shadow: 0 0 15px rgba(0, 255, 204, 0.3) !important;}"
-    estilo_luxo += ".stButton>button {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #00ffcc !important; border-radius: 8px !important; font-weight: bold !important; box-shadow: 0 0 10px rgba(0, 255, 204, 0.15) !important; transition: all 0.3s ease-in-out !important; width: 100% !important; height: 45px !important;}"
-    estilo_luxo += ".stButton>button:hover {background-color: #00ffcc !important; color: #030712 !important; box-shadow: 0 0 25px #00ffcc, 0 0 45px rgba(0,255,204,0.4) !important; transform: scale(1.01);}"
-    estilo_luxo += "[data-testid='stMetricContainer'] {background: linear-gradient(135deg, #0f172a, #030712) !important; border: 1px solid #1e293b !important; border-left: 4px solid #00ffcc !important; padding: 15px !important; border-radius: 10px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;}"
-    estilo_luxo += "h1, h2, h3, h4, span, p, label {color: #f3f4f6 !important;}"
-    estilo_luxo += "</style>"
-    st.markdown(estilo_luxo, unsafe_allow_html=True)
-
-    st.markdown('<h1 style="font-size: 2.6rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">🌐 FABRICANTE DE PÁGINAS PRÉ-SELL</h1>', unsafe_allow_html=True)
-    st.write("Aprenda o passo a passo estrategico para construir paginas pontes indestrutivas e clonar ofertas gringas com maxima conversao.")
-    st.markdown("---")
-
-    # 2. INFRAESTRUTURA INDISPENSÁVEL: DIRECIONAMENTO DE HOSPEDAGEM (MARKETING DE AFILIADOS)
-    st.markdown("<h3 style='color:#00ffcc;'>🚀 PASSO 1: Registro de Dominio e Hospedagem de Elite</h3>", unsafe_allow_html=True)
-    st.write("Antes de montar a sua estrutura, e fundamental possuir um dominio proprio profissional para evitar bloqueios severos de links clonados diretamente da plataforma gringa.")
+    # INJEÇÃO CIRÚRGICA ESTILO LUXO CYBER-NEON COMPILADO (IMUNE A TELA BRANCA NO PYTHON 3.14)
+    st.markdown("""
+    <style>
+    /* Forçador escuro premium do chassi principal e fontes sem mexer no body global */
+    .stApp, [data-testid="stAppViewContainer"] { background-color: #030712 !important; color: #f9fafb !important; }
+    h1, h2, h3, h4, p, span, label, .stMarkdown p { color: #f3f4f6 !important; font-family: 'Segoe UI', sans-serif !important; }
     
-    url_afiliado = "https://hostinger.com"
+    /* Remove o cabeçalho branco nativo para colar o conteúdo no teto do monitor */
+    [data-testid="stHeader"] { display: none !important; height: 0px !important; background: transparent !important; }
+    .block-container { padding-top: 0px !important; padding-bottom: 2rem !important; }
     
-    st.markdown("<div style='background-color:#0f172a; border:2px solid #00ffcc; border-radius:10px; padding:20px; box-shadow:0 4px 15px rgba(0,255,204,0.15); margin-bottom:20px;'>💬 <b style='color:#00ffcc; font-size:1.2rem;'>RECOMENDAÇÃO CRÍTICA DO ROBO ADRIEL-AI:</b><br><br>A <b>Hostinger</b> e considerada a melhor provedora de hospedagem do mercado internacional para afiliados! Ela oferece servidores Cloud de altissima velocidade, criador de sites intuitivo com IA, suporte premium 24 horas por dia em portugues e certificados SSL gratuitos inclusos para manter sua pagina pontes 100% segura contra falhas publicitarias.<br><br><a href='" + url_afiliado + "' target='_blank' style='display:inline-block; background-color:#00ffcc; color:#030712; padding:12px 25px; border-radius:6px; font-weight:bold; text-decoration:none; box-shadow:0 0 10px #00ffcc;'>👉 CLIQUE AQUI PARA ADQUIRIR SUA HOSPEDAGEM NA HOSTINGER COM DESCONTO</a></div>", unsafe_allow_html=True)
+    /* Elementos de entrada de dados personalizados */
+    .stTextInput>div>div>input { background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; font-size: 1.1rem !important; }
+    .stTextInput>div>div>input:focus { border-color: #00ffcc !important; box-shadow: 0 0 15px rgba(0, 255, 204, 0.3) !important; }
+    
+    /* Botões originais com borda cyber verde e hover ativo do seu design */
+    .stButton>button { background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #00ffcc !important; border-radius: 8px !important; font-weight: bold !important; width: 100% !important; height: 45px !important; box-shadow: 0 0 10px rgba(0, 255, 204, 0.15) !important; transition: all 0.3s ease-in-out !important; }
+    .stButton>button:hover { background-color: #00ffcc !important; color: #030712 !important; box-shadow: 0 0 25px #00ffcc, 0 0 45px rgba(0,255,204,0.4) !important; transform: scale(1.01); }
+    
+    /* Customização dos contêineres nativos para integrar ao modo escuro */
+    [data-testid="stVerticalBlockBorderWrapper"] { background-color: #0f172a !important; border: 1px solid #1e293b !important; border-radius: 10px !important; }
+    [data-testid="stNotification"] { background-color: #0f172a !important; border: 1px solid #1e293b !important; border-radius: 10px !important; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<h1 style="font-size: 2.6rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">🏭 FÁBRICA DE PÁGINAS PRÉ-SELL</h1>', unsafe_allow_html=True)
+    st.write("Geração e publicação automatizada de páginas de alta conversão diretamente no servidor Hostinger.")
     st.markdown("---")
 
-    # 3. INPUT DINÂMICO PARA FACILITAR A CUSTOMIZAÇÃO EM TEMPO REAL
-    st.markdown("<h3 style='color:#00ffcc;'>⚙️ Customizar Textos da sua Pré-Sell</h3>", unsafe_allow_html=True)
-    produto_nome = st.text_input("Insira o nome do produto gringo para moldar a estrutura:", value="Sugar Defender")
-    botao_processar = st.button("⚡ GERAR CONTEÚDO DA PÁGINA PONTE")
+    # 💾 MEMÓRIA DE SESSÃO PERMANENTE INTERNA (PREVINE RESETS DE FORMULÁRIO)
+    if "ftp_host" not in st.session_state: st.session_state.ftp_host = "://seu-dominio.com"
+    if "ftp_user" not in st.session_state: st.session_state.ftp_user = "usuario_ftp"
+    if "ftp_pass" not in st.session_state: st.session_state.ftp_pass = "sua_senha_ftp"
+
+    # 2. SEÇÃO DE LAYOUT EM DUAS COLUNAS PRINCIPAIS
+    col_esquerda, col_direita = st.columns([1.0, 1.0])
+
+    with col_esquerda:
+        st.markdown("<h3 style='color:#00ffcc;'>🖥️ Configuração do Servidor Hostinger</h3>", unsafe_allow_html=True)
+        h_input = st.text_input("Host FTP da Hostinger:", value=st.session_state.ftp_host)
+        u_input = st.text_input("Usuário FTP Criado no hPanel:", value=st.session_state.ftp_user)
+        p_input = st.text_input("Senha do Usuário FTP:", value=st.session_state.ftp_pass, type="password")
+        
+        if st.button("🔒 SALVAR CREDENCIAIS COMPLIANCE"):
+            st.session_state.ftp_host = h_input.strip()
+            st.session_state.ftp_user = u_input.strip()
+            st.session_state.ftp_pass = p_input.strip()
+            st.success("Credenciais de hospedagem salvas em cache de segurança com sucesso!")
+
+    with col_direita:
+        st.markdown("<h3 style='color:#cc66ff;'>📐 Estrutura do Clone Pré-Sell</h3>", unsafe_allow_html=True)
+        p_nome = st.text_input("Nome Comercial do Ativo Gringo (Ex: Sugar Defender):", value="Sugar Defender")
+        p_slug = st.text_input("Diretório / Pasta da URL (Ex: sugardefender-site):", value="sugardefender-site")
+        p_link = st.text_input("Seu Link de Afiliado Internacional (ClickBank/BuyGoods):", value="https://clickbank.net")
+
     st.markdown("---")
 
-    if produto_nome:
-        p_nome = produto_nome.strip()
-        
-        # 4. PASSO A PASSO DA ARQUITETURA DE LUXO DA PRÉ-SELL
-        st.markdown("<h3 style='color:#00ffcc;'>📋 PASSO 2: A Anatomia Perfeita de uma Pré-Sell Conversiva</h3>", unsafe_allow_html=True)
-        st.write("Uma Pré-Sell de alta conversão para o Google Ads e Bing Ads deve possuir 4 blocos limpos para filtrar o lead qualificado e aquecer a intenção de compra sem violar as politicas de privacidade de dados.")
-        st.write("")
+    # 3. TERMINAL DE DISPARO SÍNCRONO DA COMPILAÇÃO FTP
+    st.markdown("<h3 style='color:#00ffcc;'>🚀 Painel de Transmissão e Deploy na Web</h3>", unsafe_allow_html=True)
+    botao_publicar = st.button("⚡ PUBLICAR PÁGINA DIRETORIO NA HOSTINGER")
+    st.markdown("---")
 
-        b1_titulo = "🎯 Bloco 1: Headline de Segurança Governamental"
-        b1_desc = "Fica no topo absoluto. Deve informar de forma clara e profissional que o usuario está acessando uma pagina de redirecionamento oficial ou um portal de review institucional para checagem de estoque do produto " + p_nome + "."
-        
-        b2_titulo = "💔 Bloco 2: Pergunta Filtro (Gatilho de Qualificação)"
-        b2_desc = "Uma pergunta estrategica sim/nao para reter a atencao do comprador consciente. Exemplo: Quer saber se o lote original de " + p_nome + " ainda possui frete gratuito para a sua regiao?"
-        
-        b3_titulo = "🚀 Bloco 3: Chamada para Ação Central (CTA Brilhante)"
-        b3_desc = "Um botao centralizado de alta visibilidade que direciona o lead para a VSL ou checkout oficial do produtor gringo. O texto deve reforcar a seguranca da transacao."
-        
-        b4_titulo = "🛡️ Bloco 4: Rodapé de Conformidade Legal (Anti-Bloqueio)"
-        b4_desc = "O bloco mais importante para blindar sua conta! Deve conter os links obrigatorios de Termos de Uso, Politica de Privacidade, e o aviso de isencao de responsabilidade do Facebook/Google."
+    horario_atual = datetime.now().strftime("%H:%M:%S")
+    st.info("🤖 STATUS DA FÁBRICA: Motor de deploy pronto para empacotar HTML **às** " + horario_atual)
 
-        # 🪐 CORREÇÃO CRÍTICA COMPILADA V5: Remoção do operador inline e chamada estrita de colunas
-        col_passo1, col_passo2 = st.columns([1.0, 1.0])
+    # 🪐 MAQUINÁRIO DE CLONAGEM E DISPARO REALTIME VIA PROTOCOLO FTP
+    if botao_publicar:
+        if not p_nome or not p_slug or not p_link:
+            st.error("Erro Técnico: Todos os campos do clone pré-sell precisam estar preenchidos!")
+        else:
+            with st.spinner("Fabricando código-fonte estrutural e injetando link de afiliado..."):
+                
+                # 📝 CONSTRUTOR HTML PLANO PURE - Anatomia Blindada Antivírus e Antibloqueio Google Ads
+                html_code = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{p_nome} - Official Website</title>
+    <style>
+        body {{ background-color: #030712; color: #f3f4f6; font-family: sans-serif; text-align: center; padding: 50px 20px; }}
+        .card {{ max-width: 600px; margin: 0 auto; background: #0f172a; padding: 30px; border-radius: 12px; border: 1px solid #1e293b; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }}
+        h1 {{ color: #00ffcc; font-size: 2.2rem; }}
+        p {{ font-size: 1.1rem; line-height: 1.6; color: #94a3b8; }}
+        .btn {{ display: inline-block; background: linear-gradient(135deg, #00ff66 0%, #009933 100%); color: #030712; padding: 15px 40px; font-weight: bold; text-decoration: none; border-radius: 8px; font-size: 1.2rem; margin-top: 25px; box-shadow: 0 0 15px rgba(0,255,102,0.4); }}
+        .btn:hover {{ transform: scale(1.02); box-shadow: 0 0 25px #00ff66; }}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>⚠️ REDIRECTION PROTOCOL ACTIVE</h1>
+        <p>You are being safely routed to the official manufacturer portal of <strong>{p_nome}</strong> to claim your exclusive discount package with secure checkout mapping.</p>
+        <p><em>Click the button below if you are not redirected within 3 seconds.</em></p>
+        <a href="{p_link}" class="btn">PROCEED TO OFFICIAL SITE</a>
+    </div>
+</body>
+</html>"""
 
-        with col_passo1:
-            st.markdown("<h4 style='color:#00ffcc;'>" + b1_titulo + "</h4>", unsafe_allow_html=True)
-            st.write(b1_desc)
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown("<h4 style='color:#ff0055;'>" + b2_titulo + "</h4>", unsafe_allow_html=True)
-            st.write(b2_desc)
-            
-        with col_passo2:
-            st.markdown("<h4 style='color:#cc66ff;'>" + b3_titulo + "</h4>", unsafe_allow_html=True)
-            st.write(b3_desc)
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown("<h4 style='color:#00ffcc;'>" + b4_titulo + "</h4>", unsafe_allow_html=True)
-            st.write(b4_desc)
-
-        st.markdown("---")
-
-        # 5. GERADOR DE CONTEÚDO PRONTO PARA COPIAR E COLAR
-        st.markdown("<h3 style='color:#00ffcc;'>✍️ PASSO 3: Textos Prontos para Copiar e Colar no Criador de Sites</h3>", unsafe_allow_html=True)
-        st.write("Utilize os blocos abaixo diretamente no construtor de arrastar e soltar da sua hospedagem Hostinger para montar a pagina em minutos:")
-        st.write("")
-
-        copy_headline = "WELCOME TO THE OFFICIAL BRAND VERIFICATION PORTAL"
-        copy_subheadline = "You are being directed to the official manufacturer supply page for " + p_nome + "."
-        copy_botao = "👉 CLICK HERE TO VISIT THE OFFICIAL WEBSITE NOW"
-        copy_termos = "Copyright 2026 - All Rights Reserved. This site is not part of the Google website or Google Inc. Additionally, this site is NOT endorsed by Google in any way."
-
-        st.text_input("Texto da Headline Principal:", value=copy_headline, key="copy_h1")
-        st.text_input("Texto do Subtítulo Informativo:", value=copy_subheadline, key="copy_sub")
-        st.text_input("Texto do Botão Central de Clique (CTA):", value=copy_botao, key="copy_btn")
-        st.text_area("Texto do Rodapé de Isenção de Responsabilidade (Privacy Disclosure):", value=copy_termos, height=100, key="copy_foot")
-
-        st.markdown("---")
-        st.success("🎯 Módulo de Criação de Pré-Sell finalizado com sucesso! Acesse seu painel da Hostinger através do link indicado no Passo 1, configure os blocos gerados e suba sua campanha de alta comissão com total segurança!")
+                # Converte a string HTML plana em bytes legíveis para transmissão de rede
+                html_bytes = io.BytesIO(html_code.encode('utf-8'))
+                
+                try:
+                    # 🚀 EXECUÇÃO DE CONEXÃO E PUBLICAÇÃO MILITAR VIA PORTA 21
+                    ftp = FTP()
+                    ftp.connect(st.session_state.ftp_host, 21, timeout=15)
+                    ftp.login(st.session_state.ftp_user, st.session_state.ftp_pass)
+                    
+                    # Tenta acessar ou criar a pasta slug do produto na raiz pública da Hostinger
+                    try:
+                        ftp.cwd(f"public_html/{p_slug}")
+                    except:
+                        try:
+                            ftp.mkd(f"public_html/{p_slug}")
+                            ftp.cwd(f"public_html/{p_slug}")
+                        except:
+                            ftp.mkd(p_slug)
+                            ftp.cwd(p_slug)
+                    
+                    # Efetua o upload real do index.html para dentro da pasta criada
+                    ftp.storbinary("STOR index.html", html_bytes)
+                    ftp.quit()
+                    
+                    # EXIBIÇÃO DE SUCESSO COMPLIANCE COM PORTUGUÊS IMPECÁVEL
+                    st.balloons()
+                    st.success(f"🔥 SUCESSO TOTAL! Página clonada com Veredito operacional estável!")
+                    st.info(f"🌐 Link Ativo na Web: http://{st.session_state.ftp_host.replace('ftp.', '')}/{p_slug}/index.html")
+                    
+                except Exception as erro_ftp:
+                    st.error(f"Falha na Transmissão FTP: {str(erro_ftp)}")
+                    st.warning("Dica de Leilão: Verifique se o Host, Usuário e Senha FTP estão corretos e se a pasta public_html existe no seu domínio.")
 
 if __name__ == "__main__":
     main()
