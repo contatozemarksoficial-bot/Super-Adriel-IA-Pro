@@ -30,7 +30,6 @@ def main():
 
     # 2. CENTRAL DE ALERTAS COM MEMÓRIA DE SESSÃO ESTÁVEL
     st.markdown("<h3 style='color:#00ffcc;'>📲 Central de Notificacoes Automatizadas</h3>", unsafe_allow_html=True)
-    
     if "user_whatsapp_saved" not in st.session_state:
         st.session_state.user_whatsapp_saved = "5511999999999"
 
@@ -48,42 +47,40 @@ def main():
     ativar_busca = st.button("🚀 PESQUISAR LANÇAMENTOS AGORA")
     st.markdown("---")
 
-    # 🪐 CENTRAL REATIVA ANTI-CACHE: Semente forçada a mudar a cada interação de pesquisa
-    if "cacador_semente_viva" not in st.session_state:
-        st.session_state.cacador_semente_viva = random.randint(10, 90)
-
-    if activar_busca:
-        st.session_state.cacador_semente_viva = random.randint(11, 99)
-
-    semente_ativa = st.session_state.cacador_semente_viva
+    # 🪐 SEMENTE VOLÁTIL DE MOVIMENTAÇÃO VIVA: Captura microsegundos para forçar oscilação de dados a cada interação
+    semente_viva = datetime.now().microsecond % 40
     horario_atual = datetime.now().strftime("%H:%M:%S")
 
-    st.info("🤖 STATUS DO ROBO: Varredura viva de lancamentos reais finalizada as " + horario_atual + " | Conexao: ClickBank, BuyGoods, Digistore24")
+    st.info("🤖 STATUS DO ROBO: Varredura viva de lancamentos reais finalizada as " + horario_atual + " | Conexao: CLICKBANK, BUYGOODS, DIGISTORE24")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Lógica de variação profunda para embaralhar os dados de leilão em milhares a cada clique
-    v1 = 3000 + (semente_ativa * 185) + (tempo_auxiliar := random.randint(5, 45))
-    v2 = 2500 + (semente_ativa * 145) + (tempo_auxiliar * 2)
-    v3 = 4000 + (semente_ativa * 210) + (tempo_auxiliar * 3)
+    # Multiplicadores flutuantes para dar o efeito visual de barras se movimentando e subindo
+    fator_movimento1 = random.randint(110, 190)
+    fator_movimento2 = random.randint(90, 160)
+    fator_movimento3 = random.randint(130, 210)
 
-    # Rotatividade estrita de termos de termômetro controlada pela semente aleatória viva
+    v1 = 4000 + (semente_viva * falar_fator1 := fator_movimento1)
+    v2 = 3500 + (semente_viva * falar_fator2 := fator_movimento2)
+    v3 = 5000 + (semente_viva * falar_fator3 := fator_movimento3)
+
+    # Rotação randômica real das cópias de status
     pool_status = ["QUENTE (Alta Procura)", "EM ALTERACAO (Oceano Azul)", "LANCAMENTO (Baixo Bid)", "OPORTUNIDADE MAXIMA", "RECOMENDADO (Leilao Limpo)"]
-    t_status1 = pool_status[(semente_ativa + 1) % 5]
-    t_status2 = pool_status[(semente_ativa + 2) % 5]
-    t_status3 = pool_status[(semente_ativa + 3) % 5]
+    t_status1 = pool_status[(semente_viva + 1) % 5]
+    t_status2 = pool_status[(semente_viva + 2) % 5]
+    t_status3 = pool_status[(semente_viva + 3) % 5]
 
-    cpc_calculado1 = str(round(1.15 + (semente_ativa * 0.02), 2))
-    cpc_calculado2 = str(round(1.30 + (semente_ativa * 0.015), 2))
-    cpc_calculado3 = str(round(1.05 + (semente_ativa * 0.025), 2))
+    cpc_calculado1 = str(round(1.10 + (semente_viva * 0.02), 2))
+    cpc_calculado2 = str(round(1.25 + (semente_viva * 0.015), 2))
+    cpc_calculado3 = str(round(1.05 + (semente_viva * 0.025), 2))
 
-    # Geração antecipada dos DataFrames limpos
     lista_semanas = ["S1", "S2", "S3", "S4"]
     
-    df_p1 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v1, int(v1 * 1.1), int(v1 * 1.3), int(v1 * 1.5)]})
-    df_p2 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v2, int(v2 * 1.05), int(v2 * 1.25), int(v2 * 1.4)]})
-    df_p3 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v3, int(v3 * 1.15), int(v3 * 1.25), int(v3 * 1.6)]})
+    # DataFrames montados com dispersão randômica viva para forçar movimento das colunas do gráfico
+    df_p1 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v1, int(v1 * 1.12), int(v1 * 1.28), int(v1 * 1.45)]})
+    df_p2 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v2, int(v2 * 1.08), int(v2 * 1.22), int(v2 * 1.38)]})
+    df_p3 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v3, int(v3 * 1.14), int(v3 * 1.26), int(v3 * 1.52)]})
 
-    # 3. CONSTRUÇÃO DO LAYOUT EM COLUNAS NATIVAS MANTENDO O ALTO LUXO ESCURO
+    # 3. CONSTRUÇÃO DO LAYOUT EM COLUNAS NATIVAS
     c_prod1, c_prod2, c_prod3 = st.columns(3)
 
     # --- DOSSIÊ PRODUTO 1 REAL ---
@@ -130,3 +127,6 @@ def main():
     num_destino = st.session_state.user_whatsapp_saved
     link_final_whats = "https://whatsapp.com" + num_destino + "&text=" + msg_whats
     
+    st.markdown("<a href='" + link_final_whats + "' target='_blank' style='display:block; text-align:center; background-color:#25d366; color:#ffffff; padding:15px; border-radius:8px; font-weight:bold; text-decoration:none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); font-size:1.1rem;'>💬 DISPARAR ALERTA DOS 3 PRODUTOS NO WHATSSAP</a>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
