@@ -38,7 +38,7 @@ def main():
     
     sugestoes_pool = ["FitSpresso", "Weight Loss Supplement", "How to lose weight fast"]
     semente_tempo = datetime.now().second
-    sugestao_ativa = sugestoes_pool[semente_tempo % 3]
+    sugestao_ativa = sugeroes_pool[semente_tempo % 3]
 
     produto_analisado = st.text_input("Insira o Nome do Produto, Beneficio ou Termo que deseja anunciar:", value=sugestao_ativa)
     
@@ -61,36 +61,16 @@ def main():
     txt_estrategia = "ESTRATÉGIA DO ROBÓ AFILIADO ELITE: O leilao para este termo e cirurgico! Como o lead esta buscando pelo nome exato do produto, a intencao de compra e maxima (fundo de funil). Use correspondencia de frase ou exata no Google Ads, crie uma estrutura de Pre-Sell direta de alta velocidade e foque em cliques qualificados."
     cor_grafico = "#00ffcc" 
     
-    # Variabilidade linear estrita para renderização geométrica
-    fator_topo = "0.3"
-    fator_meio = "0.3"
-    fator_fundo = "1.0"
-    borda_p1 = "1px solid #1e293b"
-    borda_p2 = "1px solid #1e293b"
-    borda_p3 = "3px solid #00ffcc; box-shadow: 0 0 20px rgba(0,255,204,0.6);"
-    
     # Classificação dinâmica livre de erros de interpolação cruzada
     if "supplement" in termo_limpo or "tonic" in termo_limpo or "remedy" in termo_limpo or "juice" in termo_limpo or "pills" in termo_limpo or "diet" in termo_limpo:
         nivel_funil = "MEIO DE FUNIL (Solucao / Categoria)"
         txt_estrategia = "ESTRATÉGIA DO ROBÓ AFILIADO ELITE: O lead sabe o que precisa (um suplemento, tonico ou capsula) mas ainda nao escolheu a marca. Voce deve usar uma Pre-Sell robusta do tipo 'Advertorial' ou comparativa (Top 3) para educar o lead antes de envia-lo para a oferta."
         cor_grafico = "#0066ff"
-        fator_topo = "0.3"
-        fator_meio = "1.0"
-        fator_fundo = "0.3"
-        borda_p1 = "1px solid #1e293b"
-        borda_p2 = "3px solid #0066ff; box-shadow: 0 0 20px #0066ff;"
-        borda_p3 = "1px solid #1e293b"
 
     if "how to" in termo_limpo or "lose" in termo_limpo or "cure" in termo_limpo or "fast" in termo_limpo or "ways to" in termo_limpo or "treatment" in termo_limpo:
         nivel_funil = "TOPO DE FUNIL (Sintoma / Nicho Amplo)"
         txt_estrategia = "ESTRATÉGIA DO ROBÓ AFILIADO ELITE: Intencao de descoberta! O lead possui uma dor (quer emagrecer ou tratar um sintoma) mas nao conhece nenhuma solucao comercial. Nao mande para a Pre-Sell de afiliado! Use paginas de captura ou YouTube Ads."
         cor_grafico = "#ff0055"
-        fator_topo = "1.0"
-        fator_meio = "0.3"
-        fator_fundo = "0.3"
-        borda_p1 = "3px solid #ff0055; box-shadow: 0 0 20px #ff0055;"
-        borda_p2 = "1px solid #1e293b"
-        borda_p3 = "1px solid #1e293b"
 
     num_whats = st.session_state.get("user_whatsapp_saved", "5511999999999")
     horario_atual = datetime.now().strftime("%H:%M:%S")
@@ -118,15 +98,12 @@ def main():
         st.markdown("<h3 style='color:#00ffcc; margin:0; text-align:center;'>📐 Arquitetura do Funil Viva</h3>", unsafe_allow_html=True)
         st.write("")
         
-        # 🪐 CORREÇÃO CRÍTICA SUPREMA V7: Remoção completa de concatenações dinâmicas de aspas dentro da string HTML
-        html_funil = "<div style='display:flex; flex-direction:column; align-items:center; width:100; font-family:monospace;'>"
-        html_funil += "<div style='width:90%; background-color:#111827; border:2px solid #ff0055; padding:10px; margin-bottom:5px; border-radius:6px; text-align:center; color:#ff0055; font-weight:bold;'>🎯 TOPO DO FUNIL (Sintomas / Dor Ampla)</div>"
-        html_funil += "<div style='color:#f3f4f6; margin-bottom:5px; font-size:1.1rem;'>▼</div>"
-        html_funil += "<div style='width:65%; background-color:#111827; border:2px solid #0066ff; padding:10px; margin-bottom:5px; border-radius:6px; text-align:center; color:#0066ff; font-weight:bold;'>🛡️ MEIO DO FUNIL (Solucoes / Presell)</div>"
-        html_funil += "<div style='color:#f3f4f6; margin-bottom:5px; font-size:1.1rem;'>▼</div>"
-        html_funil += "<div style='width:40%; background-color:#111827; border:2px solid #00ffcc; padding:10px; border-radius:6px; text-align:center; color:#00ffcc; font-weight:bold;'>💵 FUNDO DO FUNIL (Compra)</div>"
-        html_funil += "</div>"
-        st.markdown(html_funil, unsafe_allow_html=True)
+        # 🪐 CORREÇÃO CRÍTICA MÁXIMA V7: O desenho do funil agora usa caixas de texto com backgrounds de alto luxo sem nenhuma concatenação perigosa!
+        st.error("🎯 TOPO DO FUNIL (Sintomas / Dor Ampla) — [Volume Maximo]")
+        st.markdown("<div style='text-align:center; color:#f3f4f6; margin:-5px 0;'>▼</div>", unsafe_allow_html=True)
+        st.info("🛡️ MEIO DO FUNIL (Solucoes / Estrutura Pre-Sell) — [Volume Medio]")
+        st.markdown("<div style='text-align:center; color:#f3f4f6; margin:-5px 0;'>▼</div>", unsafe_allow_html=True)
+        st.success("💵 FUNDO DO FUNIL (Intencao de Compra / Marca) — [Foco em ROI]")
 
     st.markdown("---")
     st.markdown("<h3 style='color:#cc66ff;'>📊 Simulacao Operacional de Tráfego Gringo</h3>", unsafe_allow_html=True)
@@ -138,3 +115,24 @@ def main():
     with c_etapa1:
         st.subheader("📊 Volume de Cliques")
         st.metric(label="🔎 Cliques Totais (Dia)", value=f"{cliques_estimados:,}")
+        df_g1 = pd.DataFrame({"Dias": lista_dias, "Cliques": [cliques_estimados, int(cliques_estimados*1.08), int(cliques_estimados*0.92), int(cliques_estimados*1.15)]})
+        st.bar_chart(df_g1, x="Dias", y="Cliques", color=cor_grafico)
+
+    with c_etapa2:
+        st.subheader("🛡️ Retencao da Estrutura")
+        st.metric(label="🛰️ Visitas na Oferta (Dia)", value=f"{visitas_oferta:,}")
+        df_g2 = pd.DataFrame({"Dias": lista_dias, "Visitas": [visitas_oferta, int(visitas_oferta*1.1), int(visitas_oferta*0.88), int(visitas_oferta*1.12)]})
+        st.bar_chart(df_g2, x="Dias", y="Visitas", color=cor_grafico)
+
+    with c_etapa3:
+        st.subheader("💵 Lucratividade Liquida")
+        st.metric(label="🏆 Lucro Liquido (Dia)", value=f"${lucro_liquido:,.2f}")
+        df_g3 = pd.DataFrame({"Dias": lista_dias, "Lucro": [lucro_liquido, int(lucro_liquido*1.14), int(lucro_liquido*0.9), int(lucro_liquido*1.2)]})
+        st.bar_chart(df_g3, x="Dias", y="Lucro", color=cor_grafico)
+
+    st.markdown("---")
+
+    # 5. AUTOMACAO DE REDIRECIONAMENTO WHATSAPP
+    st.markdown("<h4 style='color:#00ffcc;'>📲 Compartilhar Diagnostico do Funil no WhatsApp</h4>", unsafe_allow_html=True)
+    st.write("Dispare o relatorio estrategico e o veredicto deste funil direto para o seu telefone cadastrado:")
+    
