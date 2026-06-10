@@ -2,15 +2,23 @@ import streamlit as st
 from datetime import datetime
 
 def main():
-    # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE SAAS 2026 (VISUAL SEGURO NATIVO COLA NO TETO)
-    st.title("🎯 ADRIELAI PRO - GERADOR")
+    # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE SAAS 2026 (RECOLHIMENTO FORÇADO DE BARRA)
+    st.set_page_config(page_title="Gerador Premium - AdrielAI", layout="wide", initial_sidebar_state="collapsed")
 
-    # Injeção segura de cores sem quebrar as barras laterais estruturais do servidor
+    # INJEÇÃO SUPREMA: SUMIÇO DA LATERAL BRANCA E PRESERVAÇÃO DAS CORES ESCURAS DO DESIGN
     st.markdown("""
     <style>
+    /* Ocultação total e cirúrgica da barra lateral sem quebrar rotas do Python 3.14 */
+    [data-testid="stSidebar"], section[data-testid="stSidebar"], .stSidebar { display: none !important; width: 0px !important; visibility: hidden !important; }
+    [data-testid="stHeader"] { display: none !important; background: transparent !important; }
+    .block-container { padding-top: 1rem !important; max-width: 100% !important; }
+    
+    /* Configuração escuro premium do chassi */
     html, body, [data-testid="stAppViewContainer"], .stApp { background-color: #030712 !important; color: #f9fafb !important; }
     h1, h2, h3, h4, p, span, label { color: #f3f4f6 !important; font-family: 'Segoe UI', sans-serif !important; }
     .stTextInput>div>div>input { background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; }
+    
+    /* Botões originais com borda cyber verde e hover reativo */
     .stButton>button { background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #00ffcc !important; border-radius: 8px !important; font-weight: bold !important; width: 100% !important; height: 45px !important; }
     .stButton>button:hover { background-color: #00ffcc !important; color: #030712 !important; box-shadow: 0 0 25px #00ffcc !important; }
     </style>
@@ -20,7 +28,7 @@ def main():
     st.write("Estruturação completa e inteligente de campanhas fundo de funil para o Google Ads com política antibloqueio.")
     st.markdown("---")
 
-    # 2. ENTRADA DE CONFIGURAÇÃO DA CAMPANHA (MODELO IGUAL AO PRINT DE TELA)
+    # 2. ENTRADA DE CONFIGURAÇÃO DA CAMPANHA (MODELO IGUAL AO SEU PRINT)
     st.markdown("<h3 style='color:#00ffcc;'>⚙️ Configuração da Oferta Gringa</h3>", unsafe_allow_html=True)
     produto_nome = st.text_input("Insira o nome exato do produto internacional para pesquisar:", value="Sugar Defender")
     
@@ -89,7 +97,7 @@ def main():
         st.markdown("---")
 
         # =============================================================================================================
-        # 3. CENTRAL DE PALAVRAS-CHAVE EXCLUSIVAS (4 COLUNAS HORIZONTAIS COMPACTADAS PLANAS SEM ERROS DE SINTAXE)
+        # 3. CENTRAL DE PALAVRAS-CHAVE EXCLUSIVAS (4 COLUNAS HORIZONTAIS COMPACTADAS PLANAS SEM ERROS DE RECUO)
         # =============================================================================================================
         st.markdown("<h3 style='color:#00ffcc;'>🔑 Central de Engenharia de Palavras-Chave (Tráfego Blindado Completo)</h3>", unsafe_allow_html=True)
         st.write("Estrutura cirúrgica de leilão dividida por correspondências de alta conversão e barreira de cliques desqualificados:")
@@ -115,7 +123,6 @@ def main():
             st.text_area("Copiar Exatas:", value=txt_exact, height=320, key="kw_colchetes")
 
         with c_negativa:
-            # CORREÇÃO DE SINTAXE REALIZADA AQUI: Retirado o caractere inválido ":,"
             st.markdown("<h4>❌ 15 Negativas (Negative)</h4>", unsafe_allow_html=True)
             st.text_area("Copiar Negativas:", value=txt_neg, height=320, key="kw_negativas")
 
