@@ -71,7 +71,7 @@ def main():
             {"id": "LeanBliss", "label": "🛡️ LeanBliss | 🔵 NORMAL - ESTÁVEL"}
         ]
 
-        # RECONSTRUÇÃO ENFILEIRADA DOS 18 BOTÕES PRETOS ORIGINAIS (SEM COMPONENTE CINZA)
+        # RECONSTRUÇÃO ENFILEIRADA DOS 18 BOTÕES PRETOS ORIGINAIS DO SEU PRINT
         for item in lista_completa_produtos:
             if st.session_state.produto_radar_ativo == item["id"]:
                 st.markdown("<div style='background-color:#0f172a; border:2px solid #00ffcc; padding:11px; border-radius:6px; margin-bottom:8px; color:#00ffcc; font-weight:bold; font-size:1rem;'>" + item['label'] + "</div>", unsafe_allow_html=True)
@@ -97,7 +97,7 @@ def main():
 
         st.write("")
         
-        # COPIES PROFISSIONAIS PURIFICADAS DE ALTO IMPACTO
+        # COPIES PROFISSIONAIS PURIFICADAS DE ALTO IMPACTO CORPORATIVO
         st.markdown("<h4 style='color:#00ffcc;'>❤️ Âncora Psicológica e Dor Cirúrgica do Comprador Gringo:</h4>", unsafe_allow_html=True)
         st.info("O sofrimento emocional profundo do comprador internacional é alimentado pelo acúmulo de gordura corporal resistente, o qual destrói a autoconfiança de forma devastadora. Essa dor gera um estado de urgência psicológica e física imediata. Essa vulnerabilidade ativa o gatilho perfeito para injetarmos uma estrutura de vendas de alta performance, capaz de converter essa necessidade latente em compras de alto rendimento com comissões robustas em dólares.")
 
@@ -116,4 +116,4 @@ def main():
         st.markdown(html_cpc, unsafe_allow_html=True)
         st.write("")
 
-        # 🪐 GRÁFICO SEMÁFORO INTEGRADO: Histórico de leilão real dos últimos 12 meses adaptado ao Semáforo de Densidade
+        # 🪐 GRÁFICO SEMÁFORO DE DENSIDADE E CONTAGEM REAL NOS ÚLTIMOS 12 MESES RÍGIDO
