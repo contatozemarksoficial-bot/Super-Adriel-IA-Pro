@@ -7,7 +7,7 @@ def main():
     # 1. CONFIGURACAO PREMIUM DA INTERFACE SAAS 2026
     st.set_page_config(page_title="Caçador Premium - AdrielAI", layout="wide")
 
-    # FORCADOR ULTRA LUXO CYBER-NEON COMPILADO (IMUNE AO BUG DO PYTHON 3.14)
+    # FORCADOR ULTRA LUXO CYBER-NEON COMPILADO COM CORREÇÃO DE GRÁFICOS ESCUROS (IMUNE AO BUG DO PYTHON 3.14)
     estilo_luxo = "<style>"
     estilo_luxo += "header, [data-testid='stHeader'] {background-color: rgba(0,0,0,0) !important; background: transparent !important; display: none !important;}"
     estilo_luxo += "[data-testid='stAppViewContainer'] {padding-top: 0px !important;}"
@@ -21,6 +21,12 @@ def main():
     estilo_luxo += "[data-testid='stMetricContainer'] {background: linear-gradient(135deg, #0f172a, #030712) !important; border: 1px solid #1e293b !important; border-left: 4px solid #00ffcc !important; padding: 15px !important; border-radius: 10px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;}"
     estilo_luxo += "h1, h2, h3, h4, span, p, label {color: #f3f4f6 !important;}"
     estilo_luxo += "[data-testid='stNotification'] {background-color: #0f172a !important; border: 1px solid #1e293b !important; border-radius: 10px !important;}"
+    
+    # 🪐 ENGENHARIA SUPREMA: Inversão total e remoção de fundos brancos nos blocos de gráficos nativos do Streamlit
+    estilo_luxo += "[data-testid='stVegaLiteChart'], .stVegaLiteChart, [data-testid='stDataFrame'] div {background-color: rgba(0,0,0,0) !important; background: transparent !important; border-radius: 10px !important;}"
+    estilo_luxo += "svg, g, rect, span, text {background: transparent !important; color: #f9fafb !important; fill: currentcolor !important;}"
+    estilo_luxo += "div[class^='vg-tooltip'] {background-color: #0f172a !important; border: 1px solid #1e293b !important; color: #00ffcc !important;}"
+    
     estilo_luxo += "</style>"
     st.markdown(estilo_luxo, unsafe_allow_html=True)
 
@@ -51,7 +57,7 @@ def main():
     if "cacador_semente_viva" not in st.session_state:
         st.session_state.cacador_semente_viva = 12
 
-    if ativar_busca:
+    if activar_busca:
         st.session_state.cacador_semente_viva = random.randint(10, 99)
 
     semente_ativa = st.session_state.cacador_semente_viva
@@ -60,12 +66,11 @@ def main():
     st.info("🤖 STATUS DO ROBO: Varredura viva de lancamentos reais finalizada as " + horario_atual + " | Conexao: CLICKBANK, BUYGOODS, DIGISTORE24")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 🪐 BANCO DE DADOS MASSIVO EXPANDIDO COM MAIS DE 18 PRODUTOS GLOBAIS REAIS
+    # BANCO DE DADOS MASSIVO EXPANDIDO COM PRODUTOS GLOBAIS REAIS
     pool_produtos_col1 = ["FitSpresso", "Puravive Launch", "Alpilean Custom", "Liv Pure Core", "Sugar Defender", "Cortexi Aud", "ZenCortex"]
     pool_produtos_col2 = ["Nagano Tonic", "Java Burn Pro", "Ikaria Juice V2", "LeanBliss Gringo", "Glucotrust", "ProDentim Elite", "Kerassentials"]
     pool_produtos_col3 = ["DentiCore", "Steel Bite Pro", "SightCare V2", "NeuroQuiet", "GlucoBerry", "Synapse XT", "Joint Genesis"]
 
-    # Rotação expandida usando o resto da divisão por 7 opções por coluna
     nome_topo_p1 = pool_produtos_col1[semente_ativa % 7]
     nome_topo_p2 = pool_produtos_col2[semente_ativa % 7]
     nome_topo_p3 = pool_produtos_col3[semente_ativa % 7]
@@ -95,7 +100,6 @@ def main():
     df_p3 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v3, int(v3 * 1.14), int(v3 * 1.26), int(v3 * 1.52)]})
 
     # 3. CONSTRUÇÃO DO LAYOUT EM COLUNAS NATIVAS PREMIUM
-    st.columns(3)
     c_prod1, c_prod2, c_prod3 = st.columns(3)
 
     # --- DOSSIÊ PRODUTO 1 REAL ---
@@ -140,7 +144,3 @@ def main():
     link_final_whats = "https://whatsapp.com" + num_destino + "&text=" + msg_whats
     
     st.markdown("<a href='" + link_final_whats + "' target='_blank' style='display:block; text-align:center; background-color:#25d366; color:#ffffff; padding:15px; border-radius:8px; font-weight:bold; text-decoration:none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); font-size:1.1rem;'>💬 DISPARAR ALERTA DOS 3 PRODUTOS NO WHATSSAP</a>", unsafe_allow_html=True)
-    st.markdown("<br>", unsafe_allow_html=True)
-
-if __name__ == "__main__":
-    main()
