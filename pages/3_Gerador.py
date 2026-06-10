@@ -28,7 +28,7 @@ def main():
     # 2. ENTRADA DE CONFIGURAÇÃO DA CAMPANHA
     st.markdown("<h3 style='color:#00ffcc;'>⚙️ Configuração da Oferta Gringa</h3>", unsafe_allow_html=True)
     
-    # 🪐 GATILHO REATIVO: A mudança do campo de texto força a remontagem síncrona dos anúncios na tela
+    # Gatilho Reativo de tempo real: atualiza os blocos imediatamente ao mudar o nome do ativo
     produto_nome = st.text_input("Insira o nome exato do produto internacional (Pressione Enter para atualizar):", value="Sugar Defender")
     st.markdown("---")
 
@@ -55,7 +55,7 @@ def main():
             st.markdown("<h3 style='color:#00ffcc;'>📌 Títulos do Anúncio (Máx 30 Caracteres)</h3>", unsafe_allow_html=True)
             st.write("Selecione e copie para as Headlines do Google Ads:")
             
-            # Geração de 8 Títulos de até 30 caracteres
+            # Geração rigorosa de 8 Títulos respeitando o tamanho máximo de 30 caracteres
             t1 = f"Buy {p_nome} Official"[:30]
             t2 = f"{p_nome} Official Store"[:30]
             t3 = f"{p_nome} Discount Today"[:30]
@@ -83,7 +83,7 @@ def main():
             st.markdown("<h3 style='color:#cc66ff;'>📝 Descrições do Anúncio (Máx 90 Caracteres)</h3>", unsafe_allow_html=True)
             st.write("Copie para as Descriptions do Google Ads:")
             
-            # Geração de 4 Descrições de até 90 caracteres
+            # Geração rigorosa de 4 Descrições longas respeitando o tamanho máximo de 90 caracteres
             d1 = f"Get {p_nome} directly from the official website. Enjoy safe delivery and special discount today."[:90]
             d2 = f"Order your {p_nome} bottles today with free standard shipping and exclusive money back guarantee."[:90]
             d3 = f"Shop {p_nome} original supplement online. Secure your package now before the stock runs out!"[:90]
@@ -97,7 +97,7 @@ def main():
         st.markdown("---")
 
         # =============================================================================================================
-        # 6. CENTRAL DE PALAVRAS-CHAVE REATIVAS (4 COLUNAS EM COMPACTAÇÃO LINEAR TOTAL)
+        # 6. CENTRAL DE PALAVRAS-CHAVE 100% EXCLUSIVAS (4 COLUNAS EM COMPACTAÇÃO LINEAR TOTAL)
         # =============================================================================================================
         st.markdown("<h3 style='color:#00ffcc;'>🔑 Central de Engenharia de Palavras-Chave (Tráfego Blindado Completo)</h3>", unsafe_allow_html=True)
         st.write("Estrutura cirúrgica de leilão dividida por correspondências de alta conversão e barreira de cliques desqualificados:")
@@ -105,25 +105,22 @@ def main():
 
         c_solta, c_aspas, c_colchete, c_negativa = st.columns(4)
 
-        # Matrizes de dados exclusivas (Sem nenhuma repetição entre si)
+        # 🪐 45 Sufixos de alta intenção comercial gringos totalmente diferentes entre si (zero repetição nas 3 colunas)
         suf_broad = ["official store", "buy online", "best price", "where to buy", "purchase original", "order discount", "secure package", "promo code", "retailer store", "sale online", "safest site", "lowest cost", "supply near me", "get bottles", "shop discount"]
         suf_phrase = ["official website", "supplement reviews", "ingredients list", "customer warning", "independent review", "real side effects", "fda approved status", "capsules directions", "weight loss drops", "complaints check", "scam alert report", "shipping tracking", "refund policy guarantee", "clinical studies results", "formula benefits"]
         suf_exact = ["brand bidding", "manufacturer direct", "authorized seller", "coupon code 2026", "moneyback guarantee", "exclusive offer matinal", "certified pure check", "stock availability", "wholesale price package", "official link gate", "verified checkout page", "vip client portal", "one time payment", "secured order processing", "original product checkout"]
         kw_negativas_gringas = ["free", "scam", "fake", "complaints", "side effects", "amazon", "ebay", "walmart", "bad review", "alternative", "ingredients", "cancer", "diabetes", "medical doctor", "hoax"]
 
         with c_solta:
-            st.markdown("<h4>🟢 15 Amplas (Broad)</h4>", unsafe_allow_html=True)
+            st.markdown("<h4>🟢 15 Amplas (Broad Match com o Nome do Produto)</h4>", unsafe_allow_html=True)
             st.text_area("Copiar Soltas:", value="\n".join([f"{p_nome} {s}" for s in suf_broad]), height=320, key="kw_soltas")
 
         with c_aspas:
-            st.markdown("<h4>🔵 15 Frases (Phrase)</h4>", unsafe_allow_html=True)
+            st.markdown("<h4>🔵 15 Frases (Phrase Match com o Nome do Produto)</h4>", unsafe_allow_html=True)
             st.text_area("Copiar Frases:", value="\n".join([f'"{p_nome} {s}"' for s in suf_phrase]), height=320, key="kw_aspas")
 
         with c_colchete:
-            st.markdown("<h4>🔴 15 Exatas (Exact)</h4>", unsafe_allow_html=True)
+            st.markdown("<h4>🔴 15 Exatas (Exact Match com o Nome do Produto)</h4>", unsafe_allow_html=True)
             st.text_area("Copiar Exatas:", value="\n".join([f"[{p_nome} {s}]" for s in suf_exact]), height=320, key="kw_colchetes")
 
         with c_negativa:
-            st.markdown("<h4>❌ 15 Negativas (Negative)</h4>", unsafe_allow_html=True)
-            st.text_area("Copiar Negativas:", value="\n".join(kw_negativas_gringas), height=320, key="kw_negativas")
-
