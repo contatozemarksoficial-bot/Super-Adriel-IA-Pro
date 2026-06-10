@@ -10,7 +10,7 @@ st.set_page_config(
 )
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS DE ALTO LUXO BLACK-LABEL (EXTINÇÃO DE BARRAS BRANCAS E DESIGN ESCURO DE CINEMA)
+# 2. INJEÇÃO DE CSS BLACK-LABEL (RESTAURA O PADRÃO EXATO DO SEU PRINT)
 # =============================================================================================================
 st.markdown("""
 <style>
@@ -25,10 +25,10 @@ h1, h2, h3, h4, p, span, div { font-family: 'Segoe UI', Roboto, sans-serif !impo
 .block-container { padding-top: 0.5rem !important; padding-bottom: 2rem !important; padding-left: 2rem !important; padding-right: 2rem !important; max-width: 100% !important; width: 100% !important; }
 [data-testid="stSidebar"] { display: none !important; width: 0px !important; }
 
-/* Moldura Hologrâmica de Sucesso */
+/* Moldura Hologrâmica de Sucesso do seu Print */
 .caixa-holografica-fundo {
     background-color: #080f1d !important;
-    border: 2px solid #9900ff !important;
+    border: 2px solid #1e293b !important;
     border-radius: 12px !important;
     padding: 24px !important;
     margin-bottom: 25px !important;
@@ -48,7 +48,7 @@ h1, h2, h3, h4, p, span, div { font-family: 'Segoe UI', Roboto, sans-serif !impo
     cursor: pointer !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: all 0.25s ease-in-out !important;
 }
 .stButton > button:hover {
     background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%) !important;
@@ -65,18 +65,6 @@ h1, h2, h3, h4, p, span, div { font-family: 'Segoe UI', Roboto, sans-serif !impo
     padding: 12px !important;
     font-size: 15px !important;
 }
-
-/* Customização das caixas de Palavras-Chave (Fundo escuro/Texto claro para sumir com o branco do print) */
-.stCodeBlock, div[data-testid="stMarkdownContainer"] pre {
-    background-color: #0b111e !important;
-    border: 1px solid #1e293b !important;
-    border-radius: 8px !important;
-}
-.stCodeBlock code, pre code {
-    color: #33ffdd !important;
-    font-size: 13px !important;
-    font-family: monospace !important;
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -87,7 +75,7 @@ st.write("---")
 # 3. CHASSI CENTRAL EM TELA CHEIA AMPLA
 st.markdown("""
 <div class="caixa-holografica-fundo">
-    <h3 style="color: #cc66ff; margin-top:0; font-size: 18px; font-weight: 800;">⚙️ CONFIGURAÇÃO DA OFERTA GRINGA</h3>
+    <h3 style="color: #60a5fa; margin-top:0; font-size: 18px; font-weight: 800;">⚙️ CONFIGURAÇÃO DA OFERTA GRINGA</h3>
     <p style="color: #cbd5e1; font-size: 13.5px; margin-bottom:0; line-height:1.6;">
         Insira o produto da ClickBank ou BuyGoods. O Adriel-AI Pro vai estruturar anúncios responsivos com títulos exatos de até 90 caracteres e minerar 45 palavras-chave completamente exclusivas de Fundo de Funil legítimo.
     </p>
@@ -101,7 +89,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 # 4. DISPARADOR DE PROCESSAMENTO DA IA
 if st.button("🎯 GERAR ANÚNCIOS E PALAVRAS-CHAVE COMPLETAS"):
-    with st.spinner("Estruturando banco de dados de alta intenção comercial e blindagem anti-bloqueio..."):
+    with st.spinner("Estruturando banco de dados de alta intenção comercial..."):
         import time
         time.sleep(1.0)
         
@@ -110,15 +98,15 @@ if st.button("🎯 GERAR ANÚNCIOS E PALAVRAS-CHAVE COMPLETAS"):
     
     # JUSTIFICATIVA LONGA DO MODO DE GUERRA (4 A 5 LINHAS COMPLETA)
     st.markdown(f"""
-    <div style="background-color: rgba(153, 0, 255, 0.05); border: 2px solid #9900ff; padding: 20px; border-radius: 12px;">
-        <h4 style="color: #cc66ff; margin-top: 0; font-weight: 900; font-size: 15px;">🏁 ÍNDICE DE BLINDAGEM ANTI-BLOQUEIO GOOGLE ADS DETECTADO:</h4>
+    <div style="background-color: rgba(30, 41, 59, 0.3); border: 2px solid #1e293b; padding: 20px; border-radius: 12px;">
+        <h4 style="color: #60a5fa; margin-top: 0; font-weight: 900; font-size: 15px;">🏁 ÍNDICE DE BLINDAGEM ANTI-BLOQUEIO GOOGLE ADS DETECTADO:</h4>
         <p style="color: #cbd5e1; font-size: 14px; margin-top: 8px; line-height: 1.6;">
             A cópia comercial gerada foi submetida ao filtro analítico de compliance estrito de publicidade internacional gringa. O motor algoritmo removeu com precisão cirúrgica 100% de quaisquer termos pretos ou alegações enganosas proibidas pelas diretrizes editoriais do Google Ads, tais como promessas médicas falsas, curas imediatas ou perdas calóricas sem esforço. A anatomia deste anúncio RSA encontra-se em estado de conformidade máxima, assegurando tração de lances estável e imunidade total contra suspensões em lote de contas de afiliados.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
-    # 5. FÁBRICA DOS 8 TÍTULOS RSA TRAVADOS EM NO MÁXIMO 90 CARACTERES REVISADOS
+    # 5. FÁBRICA DOS 8 TÍTULOS RSA TRAVADOS EM NO MÁXIMO 90 CARACTERES
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("### ✍️ Títulos do Anúncio (Máximo 90 Caracteres)")
     st.write("Selecione as copys ideais para injetar na sua campanha responsiva oficial:")
@@ -138,13 +126,13 @@ if st.button("🎯 GERAR ANÚNCIOS E PALAVRAS-CHAVE COMPLETAS"):
         tamanho = len(t) - 3
         st.markdown(f"📦 `{t}` | **Status:** `Aprovado` | **Tamanho:** `{tamanho}/90 Caracteres` ✅")
 
-    # Caminho de exibição corrigido
+    # Caminho de exibição
     st.markdown("<br>", unsafe_allow_html=True)
     st.write("🌐 **Caminhos de Exibição da URL (Display URL Paths):**")
     st.code(f"://seu-site.com{prod_alvo.lower().replace(' ', '-')}/official-store", language="text")
 
     # =============================================================================================================
-    # 6. EXCLUSIVIDADE ABSOLUTA: 45 PALAVRAS-CHAVE COMPLETAMENTE DIFERENTES (FUNDO DE FUNIL LEGÍTIMO)
+    # 6. EXCLUSIVIDADE ABSOLUTA: 45 PALAVRAS-CHAVE DIFERENTES (RESTAURADO O SEU PADRÃO ORIGINAL DO PRINT)
     # =============================================================================================================
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("### 🔑 Central de Palavras-Chave do Leilão (45 Termos Reais Fundo de Funil)")
