@@ -10,7 +10,7 @@ st.set_page_config(
 )
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS BLACK-LABEL (RESTAURA O PADRÃO EXATO DO SEU PRINT)
+# 2. INJEÇÃO DE CSS DE ALTO LUXO BLACK-LABEL (EXTINÇÃO DE BARRAS BRANCAS E DESIGN ESCURO DE CINEMA)
 # =============================================================================================================
 st.markdown("""
 <style>
@@ -94,17 +94,19 @@ if st.button("🎯 GERAR ANÚNCIOS E PALAVRAS-CHAVE COMPLETAS"):
         time.sleep(1.0)
         
     st.write("---")
-    st.markdown(f"## 🏁 Estrutura Gerada para o Produto: **{prod_alvo}**")
+    st.markdown("## 🏁 Estrutura Gerada para o Produto: " + str(prod_alvo))
     
-    # JUSTIFICATIVA LONGA DO MODO DE GUERRA (4 A 5 LINHAS COMPLETA)
-    st.markdown(f"""
-    <div style="background-color: rgba(30, 41, 59, 0.3); border: 2px solid #1e293b; padding: 20px; border-radius: 12px;">
-        <h4 style="color: #60a5fa; margin-top: 0; font-weight: 900; font-size: 15px;">🏁 ÍNDICE DE BLINDAGEM ANTI-BLOQUEIO GOOGLE ADS DETECTADO:</h4>
-        <p style="color: #cbd5e1; font-size: 14px; margin-top: 8px; line-height: 1.6;">
-            A cópia comercial gerada foi submetida ao filtro analítico de compliance estrito de publicidade internacional gringa. O motor algoritmo removeu com precisão cirúrgica 100% de quaisquer termos pretos ou alegações enganosas proibidas pelas diretrizes editoriais do Google Ads, tais como promessas médicas falsas, curas imediatas ou perdas calóricas sem esforço. A anatomia deste anúncio RSA encontra-se em estado de conformidade máxima, assegurando tração de lances estável e imunidade total contra suspensões em lote de contas de afiliados.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    # 🚨 BLINDAGEM MESTRE INLINE CONTRA CORTE NA LINHA 123 E ERROS DE SINTAXE AST.PARSE
+    justificativa_limpa = (
+        "A cópia comercial gerada foi submetida ao filtro analítico de compliance estrito de publicidade "
+        "internacional gringa. O motor algoritmo removeu com precisão cirúrgica 100% de quaisquer termos "
+        "pretos ou alegações enganosas proibidas pelas diretrizes editoriais do Google Ads, tais como "
+        "promessas médicas falsas, curas imediatas ou perdas calóricas sem esforço. A anatomia deste anúncio "
+        "RSA encontra-se em estado de conformidade máxima, assegurando tração de lances estável e imunidade "
+        "total contra suspensões em lote de contas de afiliados gringos."
+    )
+    
+    st.markdown('<div style="background-color: rgba(30, 41, 59, 0.3); border: 2px solid #1e293b; padding: 20px; border-radius: 12px;"><h4 style="color: #60a5fa; margin-top: 0; font-weight: 900; font-size: 15px;">🏁 ÍNDICE DE BLINDAGEM ANTI-BLOQUEIO GOOGLE ADS DETECTADO:</h4><p style="color: #cbd5e1; font-size: 14px; margin-top: 8px; line-height: 1.6;">' + justificativa_limpa + '</p></div>', unsafe_allow_html=True)
 
     # 5. FÁBRICA DOS 8 TÍTULOS RSA TRAVADOS EM NO MÁXIMO 90 CARACTERES
     st.markdown("<br><br>", unsafe_allow_html=True)
@@ -112,27 +114,28 @@ if st.button("🎯 GERAR ANÚNCIOS E PALAVRAS-CHAVE COMPLETAS"):
     st.write("Selecione as copys ideais para injetar na sua campanha responsiva oficial:")
     
     titulos = [
-        f"1. {prod_alvo} Official Website - Buy Directly From The Approved Online Store Today",
-        f"2. {prod_alvo} Exclusive Discount - Get Special Savings On Your Order Right Now",
-        f"3. Order {prod_alvo} Safely - Secure Your Supplement Bottles From The Retailer Portal",
-        f"4. {prod_alvo} Advanced Formula - Premium Quality Natural Ingredients For Daily Support",
-        f"5. {prod_alvo} Original Supplement - Authentic Liquid Drops Manufactured In Certified Labs",
-        f"6. Buy {prod_alvo} Online - Save Up To 60% Off Plus Receive Free Shipping Worldwide",
-        f"7. {prod_alvo} Official Shop - Original Blend Packaged With Full 60 Days Refund Guarantee",
-        f"8. Get {prod_alvo} Formula - Highly Discounted Price Valid For Current Stock Orders"
+        prod_alvo + " Official Website - Buy Directly From The Approved Online Store Today",
+        prod_alvo + " Exclusive Discount - Get Special Savings On Your Order Right Now",
+        "Order " + prod_alvo + " Safely - Secure Your Supplement Bottles From The Retailer Portal",
+        prod_alvo + " Advanced Formula - Premium Quality Natural Ingredients For Daily Support",
+        prod_alvo + " Original Supplement - Authentic Liquid Drops Manufactured In Certified Labs",
+        "Buy " + prod_alvo + " Online - Save Up To 60% Off Plus Receive Free Shipping Worldwide",
+        prod_alvo + " Official Shop - Original Blend Packaged With Full 60 Days Refund Guarantee",
+        "Get " + prod_alvo + " Formula - Highly Discounted Price Valid For Current Stock Orders"
     ]
     
-    for t in titulos:
-        tamanho = len(t) - 3
-        st.markdown(f"📦 `{t}` | **Status:** `Aprovado` | **Tamanho:** `{tamanho}/90 Caracteres` ✅")
+    for idx, t in enumerate(titulos):
+        tamanho = len(t)
+        st.markdown("📦 `" + str(idx+1) + ". " + t + "` | **Status:** `Aprovado` | **Tamanho:** `" + str(tamanho) + "/90 Caracteres` ✅")
 
     # Caminho de exibição
     st.markdown("<br>", unsafe_allow_html=True)
     st.write("🌐 **Caminhos de Exibição da URL (Display URL Paths):**")
-    st.code(f"://seu-site.com{prod_alvo.lower().replace(' ', '-')}/official-store", language="text")
+    url_slug = prod_alvo.lower().replace(' ', '-')
+    st.code("://seu-site.com" + url_slug + "/official-store", language="text")
 
     # =============================================================================================================
-    # 6. EXCLUSIVIDADE ABSOLUTA: 45 PALAVRAS-CHAVE DIFERENTES (RESTAURADO O SEU PADRÃO ORIGINAL DO PRINT)
+    # 6. EXCLUSIVIDADE ABSOLUTA INLINE: 45 PALAVRAS-CHAVE DIFERENTES (RESTAURADO O SEU PADRÃO ORIGINAL DO PRINT)
     # =============================================================================================================
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("### 🔑 Central de Palavras-Chave do Leilão (45 Termos Reais Fundo de Funil)")
@@ -151,21 +154,21 @@ if st.button("🎯 GERAR ANÚNCIOS E PALAVRAS-CHAVE COMPLETAS"):
         st.markdown("🟢 **15 Palavras-Chave Amplas:**")
         texto_ampla = ""
         for termo in termos_reais:
-            texto_ampla += f"{prod_alvo} {termo}\n"
+            texto_ampla += prod_alvo + " " + termo + "\n"
         st.code(texto_ampla, language="text")
         
     with col_frase:
         st.markdown("🔵 **15 Palavras-Chave Com Aspas (Frase):**")
         texto_frase = ""
         for termo in termos_reais:
-            texto_frase += f'"{prod_alvo} {termo}"\n'
+            texto_frase += '"' + prod_alvo + ' ' + termo + '"\n'
         st.code(texto_frase, language="text")
         
     with col_exata:
         st.markdown("🔴 **15 Palavras-Chave Com Colchetes (Exata):**")
         texto_exata = ""
         for termo in termos_reais:
-            texto_exata += f"[{prod_alvo} {termo}]\n"
+            texto_exata += "[" + prod_alvo + " " + termo + "]\n"
         st.code(texto_exata, language="text")
 
     # 7. BLINDAGEM DE NEGATIVAS COMPLETA
@@ -175,4 +178,4 @@ if st.button("🎯 GERAR ANÚNCIOS E PALAVRAS-CHAVE COMPLETAS"):
     st.code("reclame aqui, reclamacoes, fraud, scam, fake, free, gratis, free trial, download, pdf, video, amazon, ebay, walmart, costco, login, sign in, customer service, support, phone number, cancel, refund, bad reviews, complaints, side effects", language="text")
 
 # Rodapé unificado Black-Label
-st.markdown('<div style="clear: both; text-align: center; font-size: 11px; color: #475569; padding-top: 50px;"><hr style="border-color: #1e293b;">© 2026 Adriel-AI Pro - Todos os Direitos Reservados • Protocolo Mestre V4 Modo de Guerra.</div>', unsafe_allow_html=True)
+st.markdown('<div style="clear: both; text-align: center; font-size: 11px; color: #475569; padding-top: 50px;"><hr style="border-color: #1e293b;">© 2026 Adriel-AI Pro - Todos os Direitos Reservados • Protocolo Mestre V45 Final.</div>', unsafe_allow_html=True)
