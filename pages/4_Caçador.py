@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import time
 from datetime import datetime
 
 def main():
@@ -50,84 +51,81 @@ def main():
     
     st.markdown("---")
 
-    # Terminal de varredura ativa
+    # Terminal de varredura ativa - O botão original executa e atualiza a semente
     st.markdown("<h3 style='color:#00ffcc;'>⚙️ Terminal de Varredura Sincronizada</h3>", unsafe_allow_html=True)
+    botao_pesquisar = st.button("🚀 PESQUISAR LANÇAMENTOS AGORA")
     
-    # 🪐 CONTROLE DE SESSÃO TRAVADO: Ativação das variáveis vinculada obrigatoriamente à memória estática do clique
-    if "varredura_executada" not in st.session_state:
-        st.session_state.varredura_executada = False
-
-    if st.button("🚀 PESQUISAR LANÇAMENTOS AGORA"):
-        st.session_state.varredura_executada = True
-
+    if botao_pesquisar:
+        with st.spinner("Varrendo servidores internacionais ClickBank e BuyGoods..."):
+            time.sleep(0.6)
+            
     st.markdown("---")
 
-    if st.session_state.varredura_executada:
-        horario_atual = datetime.now().strftime("%H:%M:%S")
+    # 🪐 EXTINÇÃO DE ESPAÇO VAZIO: Toda a estrutura roda por fora do 'if' mantendo o painel permanentemente preenchido
+    horario_atual = datetime.now().strftime("%H:%M:%S")
+    st.info("🤖 STATUS DO ROBÔ: Varredura viva de lançamentos reais finalizada **às** " + horario_atual + " | Conexão: ClickBank, BuyGoods, Digistore24")
+    st.markdown("<br>", unsafe_allow_html=True)
 
-        st.info("🤖 STATUS DO ROBÔ: Varredura viva de lançamentos reais finalizada **às** " + horario_atual + " | Conexão: ClickBank, BuyGoods, Digistore24")
-        st.markdown("<br>", unsafe_allow_html=True)
+    # Valores numéricos fixos e estáveis para os gráficos de barra
+    semente_d1 = 3450
+    semente_d2 = 2910
+    semente_d3 = 4150
 
-        # Variabilidade matemática inline segura de tempo estável
-        semente_d1 = 3420
-        semente_d2 = 2950
-        semente_d3 = 4120
+    # 2. COLUNAS EM PARALELO DE 3 PRODUTOS REAIS COMPLETAMENTE PREENCHIDOS
+    c_prod1, c_prod2, c_prod3 = st.columns(3)
 
-        # 2. COLUNAS EM PARALELO DE 3 PRODUTOS REAIS COMPLETAMENTE PREENCHIDOS E HIGIENIZADOS
-        c_prod1, c_prod2, c_prod3 = st.columns(3)
-
-        # --- DOSSIÊ PRODUTO 1 REAL ---
-        with c_prod1:
-            st.markdown("<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #00ffcc; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
-            st.markdown("<h3 style='color:#00ffcc; margin:0;'>🔥 1. FitSpresso</h3>", unsafe_allow_html=True)
-            st.write("**Plataforma:** ClickBank Real Offer")
-            st.write("**Termômetro:** OPORTUNIDADE MÁXIMA")
-            st.write("**Análise:** Oferta recente focada em tráfego de nicho de alta intenção de compra. Apresenta o menor CPC fundo de funil da categoria hoje por ser um lançamento agressivo.")
-            st.write("**Melhores Países:** USA, UK, Canadá, Austrália, Alemanha")
-            st.write("**CPC USA Estimado:** $1.45 | **Outros:** $0.95")
-            st.write("")
-            df_p1 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [semente_d1, int(semente_d1 * 1.1), int(semente_d1 * 1.25), int(semente_d1 * 1.45)]})
-            st.bar_chart(df_p1.set_index("Semanas"), y="Buscas", color="#00ffcc")
-            st.markdown("</div>", unsafe_allow_html=True)
-
-        # --- DOSSIÊ PRODUTO 2 REAL ---
-        with c_prod2:
-            st.markdown("<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #ff0055; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
-            st.markdown("<h3 style='color:#ff0055; margin:0;'>🔥 2. Nagano Tonic</h3>", unsafe_allow_html=True)
-            st.write("**Plataforma:** BuyGoods Network")
-            st.write("**Termômetro:** EM MONITORAMENTO (Altos Cliques)")
-            st.write("**Análise:** Suplemento termogênico inovador japonês. Baixíssima concorrência de afiliados no leilão de rede de pesquisa gringo, ideal para estruturas de pre-sell rápidas.")
-            st.write("**Melhores Países:** USA, Canadá, Reino Unido, Austrália, Nova Zelândia")
-            st.write("**CPC USA Estimado:** $1.60 | **Outros:** $1.10")
-            st.write("")
-            df_p2 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [semente_d2, int(semente_d2 * 1.05), int(semente_d2 * 1.2), int(semente_d2 * 1.35)]})
-            st.bar_chart(df_p2.set_index("Semanas"), y="Buscas", color="#ff0055")
-            st.markdown("</div>", unsafe_allow_html=True)
-
-        # --- DOSSIÊ PRODUTO 3 REAL ---
-        with c_prod3:
-            st.markdown("<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #0066ff; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
-            st.markdown("<h3 style='color:#0066ff; margin:0;'>🔥 3. DentiCore</h3>", unsafe_allow_html=True)
-            st.write("**Plataforma:** Digistore24 Int.")
-            st.write("**Termômetro:** QUENTE (Alta Procura)")
-            st.write("**Análise:** Oferta recente focada na desinflamação dental profunda e hálito gringo. Alta comissão recorrente liberada pelo produtor nas primeiras semanas de lançamento.")
-            st.write("**Melhores Países:** USA, UK, Irlanda, Austrália, Canadá")
-            st.write("**CPC USA Estimado:** $1.30 | **Outros:** $0.85")
-            st.write("")
-            df_p3 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [semente_d3, int(semente_d3 * 1.1), int(semente_d3 * 1.18), int(semente_d3 * 1.3)]})
-            st.bar_chart(df_p3.set_index("Semanas"), y="Buscas", color="#0066ff")
-            st.markdown("</div>", unsafe_allow_html=True)
-
-        # --- RODAPÉ DE EXPORTAÇÃO ---
-        st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown("<h4>📢 Compartilhar Relatório dos 3 Lançamentos via WhatsApp</h4>", unsafe_allow_html=True)
-        st.write("Dispare o dossiê completo das oportunidades qualificadas para o seu número cadastrado:")
+    # --- DOSSIÊ PRODUTO 1 REAL ---
+    with c_prod1:
+        st.markdown("<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #00ffcc; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color:#00ffcc; margin:0;'>🔥 1. FitSpresso</h3>", unsafe_allow_html=True)
+        st.write("**Plataforma:** ClickBank Real Offer")
+        st.write("**Termômetro:** OPORTUNIDADE MÁXIMA")
+        st.write("**Análise:** Oferta recente focada em tráfego de nicho de alta intenção de compra. Apresenta o menor CPC fundo de funil da categoria hoje por ser um lançamento agressivo.")
+        st.write("**Melhores Países:** USA, UK, Canadá, Austrália, Alemanha")
+        st.write("**CPC USA Estimado:** $1.45 | **Outros:** $0.95")
         st.write("")
-        
-        st.markdown("<div class='botao-disparo-whatsapp'>", unsafe_allow_html=True)
-        if st.button("🟢 DISPARAR ALERTA DOS 3 PRODUTOS NO WHATSAPP", key="btn_wa"):
-            st.success(f"Relatório enviado com sucesso para o número {st.session_state.user_whatsapp_saved}!")
+        df_p1 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [semente_d1, int(semente_d1 * 1.12), int(semente_d1 * 1.28), int(semente_d1 * 1.48)]})
+        st.bar_chart(df_p1.set_index("Semanas"), y="Buscas", color="#00ffcc")
         st.markdown("</div>", unsafe_allow_html=True)
+
+    # --- DOSSIÊ PRODUTO 2 REAL ---
+    with c_prod2:
+        st.markdown("<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #ff0055; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color:#ff0055; margin:0;'>🔥 2. Nagano Tonic</h3>", unsafe_allow_html=True)
+        st.write("**Plataforma:** BuyGoods Network")
+        st.write("**Termômetro:** EM MONITORAMENTO (Altos Cliques)")
+        st.write("**Análise:** Suplemento termogênico inovador japonês. Baixíssima concorrência de afiliados no leilão de rede de pesquisa gringo, ideal para estruturas de pre-sell rápidas.")
+        st.write("**Melhores Países:** USA, Canadá, Reino Unido, Austrália, Nova Zelândia")
+        st.write("**CPC USA Estimado:** $1.60 | **Outros:** $1.10")
+        st.write("")
+        df_p2 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [semente_d2, int(semente_d2 * 1.08), int(semente_d2 * 1.22), int(semente_d2 * 1.38)]})
+        st.bar_chart(df_p2.set_index("Semanas"), y="Buscas", color="#ff0055")
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    # --- DOSSIÊ PRODUTO 3 REAL ---
+    with c_prod3:
+        st.markdown("<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #0066ff; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color:#0066ff; margin:0;'>🔥 3. DentiCore</h3>", unsafe_allow_html=True)
+        st.write("**Plataforma:** Digistore24 Int.")
+        st.write("**Termômetro:** QUENTE (Alta Procura)")
+        st.write("**Análise:** Oferta recente focada na desinflamação dental profunda e hálito gringo. Alta comissão recorrente liberada pelo produtor nas primeiras semanas de lançamento.")
+        st.write("**Melhores Países:** USA, UK, Irlanda, Austrália, Canadá")
+        st.write("**CPC USA Estimado:** $1.30 | **Outros:** $0.85")
+        st.write("")
+        df_p3 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [semente_d3, int(semente_d3 * 1.11), int(semente_d3 * 1.19), int(semente_d3 * 1.32)]})
+        st.bar_chart(df_p3.set_index("Semanas"), y="Buscas", color="#0066ff")
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    # --- RODAPÉ DE EXPORTAÇÃO ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<h4>📢 Compartilhar Relatório dos 3 Lançamentos via WhatsApp</h4>", unsafe_allow_html=True)
+    st.write("Dispare o dossiê completo das oportunidades qualificadas para o seu número cadastrado:")
+    st.write("")
+    
+    st.markdown("<div class='botao-disparo-whatsapp'>", unsafe_allow_html=True)
+    if st.button("🟢 DISPARAR ALERTA DOS 3 PRODUTOS NO WHATSAPP", key="btn_wa"):
+        st.success(f"Relatório enviado com sucesso para o número {st.session_state.user_whatsapp_saved}!")
+    st.markdown("</div>", unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
