@@ -21,47 +21,41 @@ def main():
     estilo_luxo += "[data-testid='stMetricContainer'] {background: linear-gradient(135deg, #0f172a, #030712) !important; border: 1px solid #1e293b !important; border-left: 4px solid #00ffcc !important; padding: 15px !important; border-radius: 10px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;}"
     estilo_luxo += "h1, h2, h3, h4, span, p, label, .stMarkdown p {color: #f3f4f6 !important;}"
     estilo_luxo += "[data-testid='stNotification'] {background-color: #0f172a !important; border: 1px solid #1e293b !important; border-radius: 10px !important;}"
-    
-    # CUSTOMIZAÇÃO E ANULAÇÃO DE FUNDO BRANCO NOS GRÁFICOS (FIXAÇÃO DARK LUXO)
-    estilo_luxo += "div[data-testid='stVegaLiteChart'], .stVegaLiteChart {background-color: rgba(0,0,0,0) !important; background: transparent !important; border: 1px solid #1e293b !important; padding: 10px !important; border-radius: 8px !important;}"
-    estilo_luxo += "svg, canvas, g, path, rect {background-color: transparent !important; background: transparent !important;}"
-    estilo_luxo += "text, span {fill: #f3f4f6 !important; color: #f3f4f6 !important; font-family: monospace !important;}"
     estilo_luxo += "</style>"
     st.markdown(estilo_luxo, unsafe_allow_html=True)
 
     st.markdown('<h1 style="font-size: 2.6rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">📐 ARQUITETO DE FUNIL INTELIGENTE</h1>', unsafe_allow_html=True)
-    st.write("Mapeador de intencao de busca. Analise se a sua oferta e Topo, Meio ou Fundo de Funil com projecao geometrica real.")
+    st.write("Mapeador de intencao de busca. Analise se a sua oferta e Topo, Meio ou Fundo de Funil com desenho estrutural nativo.")
     st.markdown("---")
 
     # 2. CENTRAL DE ENTRADA DO PRODUTO E ANÁLISE DE INTENÇÃO
     st.markdown("<h3 style='color:#00ffcc;'>🔍 Scanner de Intencao do Produto</h3>", unsafe_allow_html=True)
     
-    sugestoes_pool = ["FitSpresso", "Weight Loss Supplement", "How to lose weight fast"]
+    sugestoes_pool = ["FitSpresso buy", "Weight Loss Supplement", "How to lose weight fast"]
     semente_tempo = datetime.now().second
-    sugestao_ativa = sugeroes_pool[semente_tempo % 3]
+    sugestao_ativa = sugestoes_pool[semente_tempo % 3]
 
-    produto_analisado = st.text_input("Insira o Nome do Produto, Beneficio ou Termo que deseja anunciar:", value=sugestao_ativa)
+    produto_analisado = st.text_input("Insira o Nome do Produto, Palavra-Chave ou Termo que deseja analisar:", value=sugestao_ativa)
     
     col_in1, col_in2, col_in3 = st.columns(3)
     with col_in1:
-        orcamento = st.number_input("Orcamento diario estimado (USD):", min_value=10.0, value=50.0, step=5.0)
+        orcamento = st.number_input("Orcamento diario de teste (USD):", min_value=10.0, value=50.0, step=5.0)
     with col_in2:
-        cpc_medio = st.number_input("CPC Medio do Leilao (USD):", min_value=0.1, value=1.20, step=0.1)
+        cpc_medio = st.number_input("CPC Inicial Calculado (USD):", min_value=0.1, value=1.20, step=0.1)
     with col_in3:
-        comissao_produto = st.number_input("Comissao da Oferta (USD):", min_value=10.0, value=135.0, step=5.0)
+        comissao_produto = st.number_input("Comissao Oficial da Oferta (USD):", min_value=10.0, value=135.0, step=5.0)
 
-    ativar_analise = st.button("⚡ ANALISAR INTENÇÃO E CONSTRUIR FUNIL")
+    ativar_analise = st.button("⚡ ANALISAR INTENÇÃO E MODELAR FUNIL")
     st.markdown("---")
 
     # 3. ENGINE MATEMÁTICO DE CLASSIFICAÇÃO E MODELAGEM DE ESTRATÉGIA
     termo_limpo = produto_analisado.strip().lower()
     
-    # Defaults de simulação pura estável
+    # Defaults estritos para Fundo de Funil
     nivel_funil = "FUNDO DE FUNIL (Marca Exata)"
     txt_estrategia = "ESTRATÉGIA DO ROBÓ AFILIADO ELITE: O leilao para este termo e cirurgico! Como o lead esta buscando pelo nome exato do produto, a intencao de compra e maxima (fundo de funil). Use correspondencia de frase ou exata no Google Ads, crie uma estrutura de Pre-Sell direta de alta velocidade e foque em cliques qualificados."
     cor_grafico = "#00ffcc" 
     
-    # Classificação dinâmica livre de erros de interpolação cruzada
     if "supplement" in termo_limpo or "tonic" in termo_limpo or "remedy" in termo_limpo or "juice" in termo_limpo or "pills" in termo_limpo or "diet" in termo_limpo:
         nivel_funil = "MEIO DE FUNIL (Solucao / Categoria)"
         txt_estrategia = "ESTRATÉGIA DO ROBÓ AFILIADO ELITE: O lead sabe o que precisa (um suplemento, tonico ou capsula) mas ainda nao escolheu a marca. Voce deve usar uma Pre-Sell robusta do tipo 'Advertorial' ou comparativa (Top 3) para educar o lead antes de envia-lo para a oferta."
@@ -81,10 +75,10 @@ def main():
     lucro_liquido = (vendas_estimadas * comissao_produto) - orcamento
     roi_porcentagem = round((lucro_liquido / orcamento) * 100, 2)
 
-    st.info("🤖 STATUS DO ARQUITETO: Mapa funcional de funil ativo as " + horario_atual)
+    st.info("🤖 STATUS DO ARQUITETO: Funil operacional mapeado com sucesso as " + horario_atual)
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 4. CONSTRUÇÃO DO LAYOUT DAS DUAS COLUNAS PRINCIPAIS PREMIUM
+    # 4. EXIBIÇÃO DO DIAGNÓSTICO E O DESENHO DO FUNIL USANDO CORES NATIVAS IMPREQUÍVEIS
     c_diag_esq, c_desenho_dir = st.columns([1.2, 1.0])
     
     with c_diag_esq:
@@ -95,15 +89,13 @@ def main():
         st.write(txt_estrategia)
 
     with c_desenho_dir:
-        st.markdown("<h3 style='color:#00ffcc; margin:0; text-align:center;'>📐 Arquitetura do Funil Viva</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color:#00ffcc; margin:0; text-align:center;'>📐 Desenho Arquitetonico do Funil</h3>", unsafe_allow_html=True)
         st.write("")
         
-        # 🪐 CORREÇÃO CRÍTICA MÁXIMA V7: O desenho do funil agora usa caixas de texto com backgrounds de alto luxo sem nenhuma concatenação perigosa!
-        st.error("🎯 TOPO DO FUNIL (Sintomas / Dor Ampla) — [Volume Maximo]")
-        st.markdown("<div style='text-align:center; color:#f3f4f6; margin:-5px 0;'>▼</div>", unsafe_allow_html=True)
-        st.info("🛡️ MEIO DO FUNIL (Solucoes / Estrutura Pre-Sell) — [Volume Medio]")
-        st.markdown("<div style='text-align:center; color:#f3f4f6; margin:-5px 0;'>▼</div>", unsafe_allow_html=True)
-        st.success("💵 FUNDO DO FUNIL (Intencao de Compra / Marca) — [Foco em ROI]")
+        # 🪐 CORREÇÃO SUPREMA V8: Desenho estrutural geométrico do funil feito 100% em blocos de info nativos imunes a bugs de parser!
+        st.error("▼ [TOPO DO FUNIL] — Estagio Informativo Amplo / Atração de Trafego")
+        st.info("▼ [MEIO DO FUNIL] — Pagina Pre-Sell / Quebra de Objecoes e Filtro")
+        st.success("▼ [FUNDO DO FUNIL] — Intencao de Compra Direta / Foco em Conversao")
 
     st.markdown("---")
     st.markdown("<h3 style='color:#cc66ff;'>📊 Simulacao Operacional de Tráfego Gringo</h3>", unsafe_allow_html=True)
@@ -136,3 +128,7 @@ def main():
     st.markdown("<h4 style='color:#00ffcc;'>📲 Compartilhar Diagnostico do Funil no WhatsApp</h4>", unsafe_allow_html=True)
     st.write("Dispare o relatorio estrategico e o veredicto deste funil direto para o seu telefone cadastrado:")
     
+    msg_funil = "DIAGNOSTICO%20DE%20FUNIL%20ADRIEL-AI%0A%0A-%20Termo:%20" + produto_analisado.replace(" ", "%20") + "%0A-%20Nivel:%20" + nivel_funil.replace(" ", "%20") + "%0A-%20Cliques:%20" + str(cliques_estimados) + "%0A-%20Lucro%20Liquido:%20$" + str(lucro_liquido) + "%20USD%0A-%20ROI:%20" + str(roi_porcentagem) + "%25%0A%0A_Estrategia%20mapeada%20as%20" + horario_atual + "_"
+    
+    link_final_funil = "https://whatsapp.com" + num_whats + "&text=" + msg_funil
+    st.markdown("<a href='" + link_final_funil + "' target='_blank' style='display:block; text-align:center; background-color:#25d366; color:#ffffff; padding:15px; border-radius:8px; font-weight:bold; text-decoration:none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); font-size:1.1rem;'>💬 DISPARAR RELATÓRIO DO FUNIL NO WHATSAPP</a>", unsafe_allow_html=True)
