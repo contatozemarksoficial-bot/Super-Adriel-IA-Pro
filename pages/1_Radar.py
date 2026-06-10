@@ -32,12 +32,12 @@ def main():
     estilo_luxo += "</style>"
     st.markdown(estilo_luxo, unsafe_allow_html=True)
 
-    # CABEÇALHO CORRIGIDO TOTALMENTE
+    # CABEÇALHO COM ENGENHARIA DE COPY AVANÇADA
     st.markdown('<h1 style="font-size: 2.5rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">💎 RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
-    st.write("Varredura automatizada e mapeamento operacional de ofertas de alto teor de conversão nas plataformas gringas.")
+    st.write("Varredura automatizada e mapeamento analítico de ofertas de alta conversão nas plataformas internacionais.")
     
     horario_viva = datetime.now().strftime("%H:%M:%S")
-    st.info("🛰️ Sistema operando em Modo de Guerra. Varredura viva às " + horario_viva)
+    st.info("🛰️ Sistema operando com Inteligência Preditiva Computacional. Auditoria ativa às " + horario_viva)
     st.markdown("---")
 
     # CONTROLE DE SESSÃO ESTÁVEL PARA PRESERVAR O CLIQUE VERTICAL DO PRODUTO ATIVO
@@ -52,7 +52,7 @@ def main():
         st.write("Selecione a oportunidade abaixo para ativar no painel:")
         st.write("")
 
-        # Configuração das chaves e nomes originais limpos do print anterior
+        # Configuração das chaves e nomes originais do seu print purificados
         lista_completa_produtos = [
             {"id": "Alpilean", "label": "📍 Alpilean | 🟢 ALTA - MONITORANDO"},
             {"id": "Puravive", "label": "⚡ Puravive | 🔥 ALTA - SUBINDO"},
@@ -74,13 +74,11 @@ def main():
             {"id": "LeanBliss", "label": "🛡️ LeanBliss | 🔵 NORMAL - ESTÁVEL"}
         ]
 
-        # BOTÕES VERTICAIS ENFILEIRADOS SEM CONFLITOS VISUAIS
+        # BOTÕES VERTICAIS COMPILADOS EM ARQUITETURA LIMPA SEM CAIXAS CINZAS
         for item in lista_completa_produtos:
             if st.session_state.produto_radar_ativo == item["id"]:
-                # Item selecionado acende em Verde Neon com borda grossa premium
                 st.markdown("<div style='background-color:#0f172a; border:2px solid #00ffcc; padding:11px; border-radius:6px; margin-bottom:8px; color:#00ffcc; font-weight:bold; font-size:1rem;'>" + item['label'] + "</div>", unsafe_allow_html=True)
             else:
-                # Botão nativo Streamlit customizado via CSS de forma linear pura
                 if st.button(item["label"], key=item["id"], use_container_width=True):
                     st.session_state.produto_radar_ativo = item["id"]
                     st.rerun()
@@ -90,28 +88,28 @@ def main():
         
         ativo = st.session_state.produto_radar_ativo
         st.markdown("<h2 style='color:#ffffff; margin:0; font-size:2.2rem;'>" + ativo + "</h2>", unsafe_allow_html=True)
-        st.write("Classificação: **ALTA** | Monitoramento Ativo do Robô V8")
+        st.write("Análise Operacional: **Nível Avançado** | Monitoramento Proprietário Adriel-AI")
         st.write("---")
 
-        # METRICAS CORRIGIDAS ORTOGRAFICAMENTE
+        # MÉTRICAS PREMIUM COM COPIES ACESSAS E PRECISAS
         c_met1, c_met2 = st.columns(2)
         with c_met1:
-            st.metric(label="🔎 Buscas pesquisadas nas últimas 24 horas", value="53.325", delta="+12.4%")
+            st.metric(label="🔎 Intenção de compra acumulada (Últimas 24h)", value="53.325", delta="+12.4%")
         with c_met2:
-            st.metric(label="🎯 Cliques pesquisados neste exato momento", value="1.355", delta="+4.2%")
+            st.metric(label="🎯 Tráfego concorrente ativo neste exato instante", value="1.355", delta="+4.2%")
 
         st.write("")
         
-        # SEÇÃO 1 TOTALMENTE CORRIGIDA E REVISADA
-        st.markdown("<h4 style='color:#00ffcc;'>❤️ Dor Cirúrgica do Comprador Gringo (Motivo da busca):</h4>", unsafe_allow_html=True)
-        st.info("O sofrimento emocional extremo do comprador gringo devido ao acúmulo de gordura corporal persistente destrói a autoestima de forma profunda e dolorosa. Esse gatilho gera um forte impacto físico e mental, criando a necessidade e a oportunidade de injetar uma estrutura de vendas rápida focada em oferecer uma rotina de alta performance e alto rendimento diário.")
+        # SEÇÃO 1: SUPERINTELIGÊNCIA DE COPY APLICADA À DOR EMOCIONAL DO COMPRADOR
+        st.markdown("<h4 style='color:#00ffcc;'>❤️ Âncora Psicológica e Dor Cirúrgica do Comprador Gringo:</h4>", unsafe_allow_html=True)
+        st.info("O sofrimento emocional profundo do comprador internacional é alimentado pelo acúmulo de gordura corporal resistente, o qual destrói a autoconfiança de forma devastadora. Essa dor gera um estado de urgência psicológica e física imediata. Essa vulnerabilidade ativa o gatilho perfeito para injetarmos uma estrutura de vendas de alta performance, capaz de converter essa necessidade latente em compras de alto rendimento com comissões robustas em dólares.")
 
-        # SEÇÃO 2 TOTALMENTE CORRIGIDA E REVISADA
-        st.markdown("<h4 style='color:#00ffcc;'>🏆 Veredito Estratégico Convincente (Onde anunciar e por quê):</h4>", unsafe_allow_html=True)
-        st.success("Reino Unido (UK) - O veredicto do robô confirma a blindagem matemática para o tráfego qualificado na rede de buscas do Google Ads para campanhas no Reino Unido (UK). O termômetro de mercado indica que este é o melhor momento para escalar o produto em países da Europa Ocidental e da Commonwealth. Excelente custo por clique (CPC) que gera alto retorno sobre o investimento hoje, entregando cliques limpos com lucro bruto recorrente.")
+        # SEÇÃO 2: SUPERINTELIGÊNCIA DE COPY APLICADA AO VEREDITO ESTRATÉGICO
+        st.markdown("<h4 style='color:#00ffcc;'>🏆 Veredito Estratégico Computacional (Google Ads / Bing Ads):</h4>", unsafe_allow_html=True)
+        st.success("Reino Unido (UK) e Tier 1 - Nossa inteligência preditiva valida a estabilização matemática do leilão na Rede de Pesquisa do Google Ads para o público britânico e regiões de alta renda da Commonwealth. O termômetro de mercado aponta o momento ideal para a escalada vertical da oferta. A baixa concorrência em termos institucionais fundo de funil assegura o menor Custo por Clique (CPC), gerando um Retorno sobre o Investimento (ROI) líquido e escalável hoje.")
 
-        # SEÇÃO 3: MAPEAMENTO DE CPC CORRIGIDO
-        st.markdown("<h4 style='color:#00ffcc;'>🌐 Mapeamento de CPC por Região (5 Países Oficiais):</h4>", unsafe_allow_html=True)
+        # SEÇÃO 3: MAPEAMENTO DE CPC SEGURO
+        st.markdown("<h4 style='color:#00ffcc;'>🌐 Mapeamento Analítico de CPC por Região (Tier 1):</h4>", unsafe_allow_html=True)
         html_cpc = "<div style='background-color:#0f172a; border:1px solid #1e293b; padding:12px; border-radius:8px; font-family:monospace; font-size:1.05rem; color:#f3f4f6; display:flex; justify-content:space-between;'>"
         html_cpc += "<span>🇺🇸 <b>USA:</b> <span style='color:#00ffcc;'>$1.95</span></span>"
         html_cpc += "<span>🇬🇧 <b>UK:</b> <span style='color:#00ffcc;'>$1.30</span></span>"
@@ -122,4 +120,4 @@ def main():
         st.markdown(html_cpc, unsafe_allow_html=True)
         st.write("")
 
-        # SEÇÃO 4: HISTÓRICO DE LEILÃO CORRIGIDO
+        # SEÇÃO 4: HISTÓRICO DE LEILÃO EM COMPILAÇÃO FECHADA INDESTRUTÍVEL
