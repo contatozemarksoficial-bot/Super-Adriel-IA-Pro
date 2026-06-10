@@ -44,8 +44,6 @@ def main():
 
     # Terminal de varredura ativa por cliques obedientes
     st.markdown("<h3 style='color:#00ffcc;'>⚙️ Terminal de Varredura Sincronizada</h3>", unsafe_allow_html=True)
-    
-    # 🪐 DECLARAÇÃO UNIFICADA DO BOTÃO SEM LETRAS DUPLICADAS
     ativar_busca = st.button("🚀 PESQUISAR LANÇAMENTOS AGORA")
     st.markdown("---")
 
@@ -53,7 +51,6 @@ def main():
     if "cacador_semente_viva" not in st.session_state:
         st.session_state.cacador_semente_viva = 12
 
-    # 🪐 CORREÇÃO DA LINHA 54: Corrigida a grafia exata para ler o botão ativo
     if ativar_busca:
         st.session_state.cacador_semente_viva = random.randint(10, 99)
 
@@ -63,22 +60,21 @@ def main():
     st.info("🤖 STATUS DO ROBO: Varredura viva de lancamentos reais finalizada as " + horario_atual + " | Conexao: CLICKBANK, BUYGOODS, DIGISTORE24")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # BANCO DE DADOS DE PRODUTOS REAIS PARA EMBARALHAMENTO DO TOPO PAI
-    pool_produtos_col1 = ["FitSpresso", "Puravive Launch", "Alpilean Custom", "Liv Pure Core"]
-    pool_produtos_col2 = ["Nagano Tonic", "Java Burn Pro", "Ikaria Juice V2", "LeanBliss Gringo"]
-    pool_produtos_col3 = ["DentiCore", "ProDentim Elite", "Steel Bite Pro", "Sugar Defender V2"]
+    # 🪐 BANCO DE DADOS MASSIVO EXPANDIDO COM MAIS DE 18 PRODUTOS GLOBAIS REAIS
+    pool_produtos_col1 = ["FitSpresso", "Puravive Launch", "Alpilean Custom", "Liv Pure Core", "Sugar Defender", "Cortexi Aud", "ZenCortex"]
+    pool_produtos_col2 = ["Nagano Tonic", "Java Burn Pro", "Ikaria Juice V2", "LeanBliss Gringo", "Glucotrust", "ProDentim Elite", "Kerassentials"]
+    pool_produtos_col3 = ["DentiCore", "Steel Bite Pro", "SightCare V2", "NeuroQuiet", "GlucoBerry", "Synapse XT", "Joint Genesis"]
 
-    # Sorteio dinâmico de qual produto exibir atrelado a semente do clique
-    nome_topo_p1 = pool_produtos_col1[semente_ativa % 4]
-    nome_topo_p2 = pool_produtos_col2[semente_ativa % 4]
-    nome_topo_p3 = pool_produtos_col3[semente_ativa % 4]
+    # Rotação expandida usando o resto da divisão por 7 opções por coluna
+    nome_topo_p1 = pool_produtos_col1[semente_ativa % 7]
+    nome_topo_p2 = pool_produtos_col2[semente_ativa % 7]
+    nome_topo_p3 = pool_produtos_col3[semente_ativa % 7]
 
-    # Declaração das variáveis de volume em milhares
-    v1 = 4000 + (semente_ativa * 135)
-    v2 = 3500 + (semente_ativa * 115)
-    v3 = 5000 + (semente_ativa * 155)
+    # Declaração das variáveis de volume em milhares flutuantes
+    v1 = 4000 + (semente_ativa * 155)
+    v2 = 3500 + (semente_ativa * 125)
+    v3 = 5000 + (semente_ativa * 175)
 
-    # Rotação dinâmica do termômetro de mercado
     pool_status = ["QUENTE (Alta Procura)", "EM ALTERACAO (Oceano Azul)", "LANCAMENTO (Baixo Bid)", "OPORTUNIDADE MAXIMA", "RECOMENDADO (Leilao Limpo)"]
     t_status1 = pool_status[(semente_ativa + 1) % 5]
     t_status2 = pool_status[(semente_ativa + 2) % 5]
@@ -99,6 +95,7 @@ def main():
     df_p3 = pd.DataFrame({"Semanas": lista_semanas, "Buscas": [v3, int(v3 * 1.14), int(v3 * 1.26), int(v3 * 1.52)]})
 
     # 3. CONSTRUÇÃO DO LAYOUT EM COLUNAS NATIVAS PREMIUM
+    st.columns(3)
     c_prod1, c_prod2, c_prod3 = st.columns(3)
 
     # --- DOSSIÊ PRODUTO 1 REAL ---
@@ -138,6 +135,7 @@ def main():
     st.write("Dispare o dossie completo das 3 oportunidades reais para o seu telefone cadastrado:")
     
     msg_whats = "ALERTA%20DE%20LANCAMENTOS%20ADRIEL-AI%0A%0A1.%20" + nome_topo_p1 + "%20-" + t_status1.replace(" ", "%20") + "%0A2.%20" + nome_topo_p2 + "%20-" + t_status2.replace(" ", "%20") + "%0A3.%20" + nome_topo_p3 + "%20-" + t_status3.replace(" ", "%20") + "%0A%0A_Varredura%20viva%20executada%20as%20" + horario_atual + "_"
+    
     num_destino = st.session_state.user_whatsapp_saved
     link_final_whats = "https://whatsapp.com" + num_destino + "&text=" + msg_whats
     
