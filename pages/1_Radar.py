@@ -17,7 +17,7 @@ def main():
     estilo_luxo += ".stTextInput>div>div>input {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; font-size: 1.1rem !important;}"
     estilo_luxo += ".stTextInput>div>div>input:focus {border-color: #00ffcc !important; box-shadow: 0 0 15px rgba(0,255,204,0.3) !important;}"
     
-    # Customização cirúrgica dos botões laterais empilhados no padrão original escuro
+    # Customização cirúrgica dos botões laterais empilhados no padrão original escuro do print
     estilo_luxo += ".stButton>button {background-color: #070b13 !important; color: #f3f4f6 !important; border: 1px solid #1e293b !important; border-radius: 6px !important; font-weight: normal !important; text-align: left !important; padding-left: 15px !important; width: 100% !important; height: 42px !important; transition: all 0.2s ease-in-out !important;}"
     estilo_luxo += ".stButton>button:hover {border-color: #00ffcc !important; color: #00ffcc !important; box-shadow: 0 0 10px rgba(0,255,204,0.2) !important;}"
     
@@ -117,4 +117,3 @@ def main():
         html_cpc += "<span>🇦🇺 <b>AU:</b> <span style='color:#00ffcc;'>$1.40</span></span>"
         html_cpc += "<span>🇳🇿 <b>NZ:</b> <span style='color:#00ffcc;'>$1.25</span></span>"
         html_cpc += "</div>"
-        st.markdown(html_cpc, unsafe_allow_html=True)
