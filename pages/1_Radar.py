@@ -102,13 +102,13 @@ def main():
         
         # SEÇÃO 1: SUPERINTELIGÊNCIA DE COPY APLICADA À DOR EMOCIONAL DO COMPRADOR
         st.markdown("<h4 style='color:#00ffcc;'>❤️ Âncora Psicológica e Dor Cirúrgica do Comprador Gringo:</h4>", unsafe_allow_html=True)
-        st.info("O sofrimento emocional profundo do comprador internacional é alimentado pelo acúmulo de gordura corporal resistente, o qual destrói a autoconfiança de forma devastadora. Essa dor gera um estado de urgência psicológica e física imediata. Essa vulnerabilidade ativa o gatilho perfeito para injetarmos uma estrutura de vendas de alta performance, capaz de converter essa necessidade latente em compras de alto rendimento com comissões robustas em dólares.")
+        st.info("O sofrimento emocional profundo do comprador internacional é alimentado pelo acúmulo de gordura corporal resistente, o qual destrói a autoconfiança de forma devastadora. Essa dor gera um estado de urgência psicológica e física imediata. Essa vulnerabilidade activa o gatilho perfeito para injetarmos uma estrutura de vendas de alta performance, capaz de converter essa necessidade latente em compras de alto rendimento com comissões robustas em dólares.")
 
         # SEÇÃO 2: SUPERINTELIGÊNCIA DE COPY APLICADA AO VEREDITO ESTRATÉGICO
         st.markdown("<h4 style='color:#00ffcc;'>🏆 Veredito Estratégico Computacional (Google Ads / Bing Ads):</h4>", unsafe_allow_html=True)
         st.success("Reino Unido (UK) - Nossa inteligência preditiva valida a estabilização matemática do leilão na Rede de Pesquisa do Google Ads para o público britânico e regiões de alta renda da Commonwealth. O termômetro de mercado aponta o momento ideal para a escalada vertical da oferta. A baixa concorrência em termos institucionais fundo de funil assegura o menor Custo por Clique (CPC), gerando um Retorno sobre o Investimento (ROI) líquido e escalável hoje, entregando cliques limpos com lucro bruto recorrente.")
 
-        # SEÇÃO 3: MAPEAMENTO DE CPC SEGURO
+        # SEÇÃO 3: MAPEAMENTO DE CORE DE CPC SEGURO
         st.markdown("<h4 style='color:#00ffcc;'>🌐 Mapeamento Analítico de CPC por Região (Tier 1):</h4>", unsafe_allow_html=True)
         html_cpc = "<div style='background-color:#0f172a; border:1px solid #1e293b; padding:12px; border-radius:8px; font-family:monospace; font-size:1.05rem; color:#f3f4f6; display:flex; justify-content:space-between;'>"
         html_cpc += "<span>🇺🇸 <b>USA:</b> <span style='color:#00ffcc;'>$1.95</span></span>"
@@ -117,3 +117,4 @@ def main():
         html_cpc += "<span>🇦🇺 <b>AU:</b> <span style='color:#00ffcc;'>$1.40</span></span>"
         html_cpc += "<span>🇳🇿 <b>NZ:</b> <span style='color:#00ffcc;'>$1.25</span></span>"
         html_cpc += "</div>"
+        st.markdown(html_cpc, unsafe_allow_html=True)
