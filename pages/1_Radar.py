@@ -29,13 +29,11 @@ def main():
     st.markdown('<h1 style="font-size: 2.6rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">💎 RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
     st.write("Varredura automatizada e mapeamento operacional de ofertas de alta tração nas plataformas gringas.")
 
-    # Marcador de Varredura Viva Baseado no Relógio Atual do Servidor
     tempo_segundo = datetime.now().second
     horario_atual = datetime.now().strftime("%H:%M:%S")
     st.write("Sistemas operando em Modo de Guerra. Varredura ativa às " + horario_atual)
     st.markdown("---")
 
-    # 2. LISTA ESTÁTICA DOS 20 PRODUTOS OBRIGATÓRIOS DO ROTEIRO
     LISTA_PRODUTOS = [
         "Alpilean", "Puravive", "Java Burn", "GlucoTrust", "ProDentim",
         "Liv Pure", "Ikaria Juice", "Cortexi", "FlowForce Max", "Metanail Serum",
@@ -43,13 +41,11 @@ def main():
         "Prostadine", "Fast Lean Pro", "Amiclear", "Alpha Tonic", "Joint Genesis"
     ]
 
-    # Inicialização estável do estado de sessão de forma pura
     if "radar_nome_ativo" not in st.session_state:
         st.session_state.radar_nome_ativo = "Alpilean"
 
     p_nome = st.session_state.radar_nome_ativo
     
-    # 3. ENGINE DINÂMICO ANTI-TRAVAMENTO (SINTAXE 100% INDESTRUTÍVEL)
     posicao_lista = LISTA_PRODUTOS.index(p_nome) + 1
     p_status = "ALTA" if posicao_lista <= 10 else "NORMAL"
     
@@ -59,10 +55,9 @@ def main():
     p_paises = ["Estados Unidos (USA)", "Reino Unido (UK)", "Canadá (CA)", "Austrália (AU)", "Alemanha (DE)"]
     p_pais = p_paises[posicao_lista % 5]
 
-    p_dor = "Frustração emocional profunda do comprador internacional devido ao acúmulo de sintomas resistentes e dores biológicas associadas à necessidade latente mapeada por " + p_nome + ", gerando esgotamento físico crônico e bloqueando a autoconfiança de forma devastadora."
+    p_dor = "Frustração emocional profunda do comprador internacional devido ao acúmulo de sintomas resistentes e dores biológicas profundas associadas à necessidade mapeada por " + p_nome + ", gerando esgotamento físico crônico e bloqueando a autoconfiança de forma devastadora."
     p_porque = "O monitoramento automatizado confirma tráfego massivo e qualificado de fundo de funil para " + p_nome + ". O veredicto estratégico final aponta que o leilão para a região de " + p_pais + " é a melhor oportunidade operacional gringa hoje, entregando cliques limpos e comissão robusta em dólares com baixa concorrência institucional."
 
-    # 4. CONSTRUÇÃO DO LAYOUT EM DUAS COLUNAS PRINCIPAIS (MÁXIMO PREENCHIMENTO DE TELA)
     col_esquerda, col_direita = st.columns([1.0, 1.3])
 
     with col_esquerda:
@@ -70,7 +65,6 @@ def main():
         st.write("Selecione o produto abaixo para ativar os sinais:")
         st.write("")
         
-        # Geração dos botões luxuosos com iconografia dinâmica e movimentação real do robô
         for idx, nome_item in enumerate(LISTA_PRODUTOS):
             rank_item = idx + 1
             icone_fogo = "🔥 ALTA" if rank_item <= 10 else "✅ NORMAL"
@@ -89,37 +83,37 @@ def main():
         st.write("")
         
         c1, c2 = st.columns(2)
-        c1.metric(label="🔎 Pesquisas acumuladas nos últimos 12 meses (Contagem Real)", value=f"{p_mes:,}")
-        c2.metric(label="⚡ Pesquisas registradas no dia atual até o momento", value=f"{p_hoje:,}")
+        c1.metric(label="🔎 Volume de pesquisas nos últimos 12 meses", value=f"{p_mes:,}")
+        c2.metric(label="⚡ Volume de pesquisas registradas no dia atual", value=f"{p_hoje:,}")
         
         st.markdown("---")
         
-        st.markdown("<h4 style='color:#ff0055; text-shadow: 0 0 5px rgba(255,0,85,0.2);'>💔 Dor Cirúrgica do Comprador Gringo (Âncora Psicológica):</h4>", unsafe_allow_html=True)
+        # 🪐 NOVO ALINHAMENTO: Modificado de "Âncora Psicológica" para "Veredito Psicológico"
+        st.markdown("<h4 style='color:#ff0055; text-shadow: 0 0 5px rgba(255,0,85,0.2);'>❤️ Veredito Psicológico e Dor Cirúrgica do Comprador Gringo:</h4>", unsafe_allow_html=True)
         st.warning(p_dor)
         
+        # 🪐 PADRONIZADO: Mantido com a palavra Veredito Estratégico Computacional
         st.markdown("<h4 style='color:#00ffcc; text-shadow: 0 0 5px rgba(0,255,204,0.2);'>🏆 Veredito Estratégico Computacional (Google Ads / Bing Ads):</h4>", unsafe_allow_html=True)
         st.success(p_porque)
         
-        # CARD ESCURO PREMIUM IMUNE A FUNDO BRANCO NO MAPEAMENTO DE CPC
         st.markdown("<h4 style='color:#cc66ff;'>💵 Mapeamento Analítico de CPC por Região (Tier 1 Real):</h4>", unsafe_allow_html=True)
         cpc_base_dinamico = str(round(1.85 + (posicao_lista * 0.08), 2))
         st.markdown("<div style='background-color:#0f172a; border:2px solid #1e293b; border-radius:8px; padding:15px; font-family:monospace; color:#00ffcc; font-size:1.1rem; font-weight:bold; box-shadow:0 4px 15px rgba(0,0,0,0.5);'>USA: $" + cpc_base_dinamico + " | UK: $1.30 | CA: $1.50 | AU: $1.40 | DE: $1.25</div>", unsafe_allow_html=True)
         st.write("")
         
         st.markdown("---")
-        
-        # 📊 INTELIGÊNCIA COMPACTADA DO GRÁFICO SEMÁFORO DE DENSIDADE DE LEILÃO MENSAL
         st.markdown("<h4 style='color:#00ffcc;'>📊 Histórico de Volume de Buscas e Densidade de Leilão (Últimos 12 Meses)</h4>", unsafe_allow_html=True)
         
         meses_ano = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
         base_mes_real = p_mes // 12
         
-        # 🪐 BLINDAGEM MÁXIMA INLINE: Dataset estruturado via List Comprehension compacta de uma linha fechada imune a cortes!
-        df_comportamento = pd.DataFrame({"Meses": meses_ano, "Sinal": [int(base_mes_real + (i * 450) if i % 2 == 0 else base_mes_real - (i * 200)) for i in range(12)]})
+        # 🪐 AJUSTE DO EIXO X: Criado o DataFrame indexado textualmente pelas chaves dos meses
+        sinais_valores = [int(base_mes_real + (i * 450) if i % 2 == 0 else base_mes_real - (i * 200)) for i in range(12)]
+        df_comportamento = pd.DataFrame(list(zip(meses_ano, sinais_valores)), columns=["Mês", "Sinal"])
+        df_comportamento.set_index("Mês", inplace=True)
         
-        # Aplicação reativa da cor semáforo com base na classificação operacional estável
         cor_grafico = "#00ffcc" if p_status == "ALTA" else "#0066ff"
-        st.bar_chart(df_comportamento, x="Meses", y="Sinal", color=cor_grafico)
+        st.bar_chart(df_comportamento, y="Sinal", color=cor_grafico)
 
 if __name__ == "__main__":
     main()
