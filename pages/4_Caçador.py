@@ -4,8 +4,35 @@ import urllib.parse
 from datetime import datetime
 
 def main():
-    # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE NATIVA SEGURA (IMUNE A ERROS DE PARSER)
-    st.title("🛰️ CAÇADOR DE LANÇAMENTOS DO MERCADO")
+    # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE SAAS 2026 (VISUAL SEGURO COLA NO TETO)
+    st.set_page_config(page_title="Caçador Premium - AdrielAI", layout="wide", initial_sidebar_state="expanded")
+
+    # INJEÇÃO CIRÚRGICA ESTILO LUXO CYBER-NEON COMPILADO (IMUNE A TELA BRANCA)
+    st.markdown("""
+    <style>
+    /* Forçador escuro premium do chassi principal e fontes sem mexer no body global */
+    .stApp, [data-testid="stAppViewContainer"] { background-color: #030712 !important; color: #f9fafb !important; }
+    h1, h2, h3, h4, p, span, label, .stMarkdown p { color: #f3f4f6 !important; font-family: 'Segoe UI', sans-serif !important; }
+    
+    /* Remove o cabeçalho branco nativo para colar o conteúdo no teto do monitor */
+    [data-testid="stHeader"] { display: none !important; height: 0px !important; background: transparent !important; }
+    .block-container { padding-top: 0px !important; padding-bottom: 2rem !important; }
+    
+    /* Elementos de entrada de dados personalizados */
+    .stTextInput>div>div>input { background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; font-size: 1.1rem !important; }
+    .stTextInput>div>div>input:focus { border-color: #00ffcc !important; box-shadow: 0 0 15px rgba(0, 255, 204, 0.3) !important; }
+    
+    /* Botões originais com borda cyber verde e hover ativo do seu design */
+    .stButton>button { background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #00ffcc !important; border-radius: 8px !important; font-weight: bold !important; width: 100% !important; height: 45px !important; box-shadow: 0 0 10px rgba(0, 255, 204, 0.15) !important; transition: all 0.3s ease-in-out !important; }
+    .stButton>button:hover { background-color: #00ffcc !important; color: #030712 !important; box-shadow: 0 0 25px #00ffcc, 0 0 45px rgba(0,255,204,0.4) !important; transform: scale(1.01); }
+    
+    /* Customização dos contêineres nativos para integrar ao modo escuro */
+    [data-testid="stVerticalBlockBorderWrapper"] { background-color: #0f172a !important; border: 1px solid #1e293b !important; border-radius: 10px !important; }
+    [data-testid="stNotification"] { background-color: #0f172a !important; border: 1px solid #1e293b !important; border-radius: 10px !important; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<h1 style="font-size: 2.6rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">🛰️ CAÇADOR DE LANÇAMENTOS DO MERCADO</h1>', unsafe_allow_html=True)
     st.write("Varredura estrita e mapeamento simultâneo de no mínimo 3 ofertas reais e recentes nas plataformas gringas.")
     st.markdown("---")
 
@@ -16,7 +43,7 @@ def main():
         st.session_state.fase_ciclo_cacador = 0
 
     # 2. CONFIGURAÇÃO DA CENTRAL DE NOTIFICAÇÕES (PORTUGUÊS CORPORATIVO IMPECÁVEL)
-    st.subheader("📲 Central de Notificações Automatizadas")
+    st.markdown("<h3 style='color:#00ffcc;'>📲 Central de Notificações Automatizadas</h3>", unsafe_allow_html=True)
     whats_input = st.text_input("Insira seu WhatsApp com Código do País e DDD (Ex: 5511999999999):", value=st.session_state.user_whatsapp_saved)
     
     if st.button("💾 SALVAR CONFIGURAÇÃO DE TELEFONE"):
@@ -25,9 +52,9 @@ def main():
     
     st.markdown("---")
 
-    # Terminal de varredura activa por cliques obedientes
-    st.subheader("⚙️ Terminal de Varredura Sincronizada")
-    botao_pesquisar = st.button("🚀 PESQUISAR LANÇAMENTOS AGORA", type="primary")
+    # Terminal de varredura ativa por cliques obedientes
+    st.markdown("<h3 style='color:#00ffcc;'>⚙️ Terminal de Varredura Sincronizada</h3>", unsafe_allow_html=True)
+    botao_pesquisar = st.button("🚀 PESQUISAR LANÇAMENTOS AGORA")
     st.markdown("---")
 
     # GATILHO REATIVO SEGURO: Incrementa o ciclo estável no clique físico e altera os produtos de verdade
@@ -45,48 +72,54 @@ def main():
         p1_n, p1_p, p1_t, p1_c, p1_o, p1_v = "FitSpresso", "ClickBank Real Offer", "OPORTUNIDADE MÁXIMA", "$1.45", "Aceleração metabólica acelerada por café.", 3200
         p2_n, p2_p, p2_t, p2_c, p2_o, p2_v = "Nagano Tonic", "BuyGoods Network", "EM MONITORAMENTO", "$1.60", "Suplemento termogênico inovador japonês.", 2800
         p3_n, p3_p, p3_t, p3_c, p3_o, p3_v = "DentiCore", "Digistore24 Int.", "QUENTE (Alta Procura)", "$1.30", "Desinflamação dental profunda e hálito gringo.", 4100
+        b1_c, b2_c, b3_c = "#00ffcc", "#ff0055", "#0066ff"
     elif fase_ativa == 1:
         p1_n, p1_p, p1_t, p1_c, p1_o, p1_v = "Sugar Defender", "ClickBank Real Offer", "OCEANO AZUL (Baixo Bid)", "$1.85", "Suporte glicêmico natural de alta comissão.", 4500
         p2_n, p2_p, p2_t, p2_c, p2_o, p2_v = "Puravive", "BuyGoods Network", "TENDÊNCIA EXPLOSIVA", "$1.50", "Otimização de tecido adiposo marrom acelerado.", 3900
         p3_n, p3_p, p3_t, p3_c, p3_o, p3_v = "ProDentim", "Digistore24 Int.", "LEILÃO LIMPO (Fundo Puro)", "$1.20", "Reconstituição síncrona da flora bucal.", 3100
+        b1_c, b2_c, b3_c = "#cc66ff", "#00ff66", "#ffaa00"
     else:
         p1_n, p1_p, p1_t, p1_c, p1_o, p1_v = "Cortexi Aud", "ClickBank Real Offer", "QUENTE (Baixo CPC)", "$1.15", "Proteção auditiva sênior em gotas líquidas.", 3600
         p2_n, p2_p, p2_t, p2_c, p2_o, p2_v = "ZenCortex", "BuyGoods Network", "LANÇAMENTO AGRESSIVO", "$1.40", "Fórmula avançada de suporte cerebral e foco.", 4200
         p3_n, p3_p, p3_t, p3_c, p3_o, p3_v = "LivPure", "Digistore24 Int.", "ALTA INTENÇÃO DE COMPRA", "$1.10", "Purificação hepática voltada ao mercado Tier 1.", 2950
+        b1_c, b2_c, b3_c = "#ff5500", "#00ffaa", "#00aaff"
 
-    # 2. COLUNAS EM PARALELO DE 3 PRODUTOS VARIÁVEIS EM TEMPO REAL (MÓDULO SEGURO CONTEINERIZADO)
+    # 2. COLUNAS EM PARALELO DE 3 PRODUTOS VARIÁVEIS EM TEMPO REAL
     st_col1, st_col2, st_col3 = st.columns(3)
 
     with st_col1:
         with st.container(border=True):
-            st.markdown(f"### 🔥 1. {p1_n}")
+            st.markdown(f"<h3 style='color:{b1_c};'>🔥 1. {p1_n}</h3>", unsafe_allow_html=True)
             st.write(f"**Plataforma:** {p1_p} | **CPC USA:** {p1_c}")
             st.write(f"**Termômetro:** {p1_t}")
+            st.write(f"**Análise:** {p1_o}")
             df_p1 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [p1_v, int(p1_v * 1.12), int(p1_v * 1.25), int(p1_v * 1.42)]})
             st.bar_chart(df_p1.set_index("Semanas"), y="Buscas")
 
     with st_col2:
         with st.container(border=True):
-            st.markdown(f"### 🔥 2. {p2_n}")
+            st.markdown(f"<h3 style='color:{b2_c};'>🔥 2. {p2_n}</h3>", unsafe_allow_html=True)
             st.write(f"**Plataforma:** {p2_p} | **CPC USA:** {p2_c}")
             st.write(f"**Termômetro:** {p2_t}")
+            st.write(f"**Análise:** {p2_o}")
             df_p2 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [p2_v, int(p2_v * 1.05), int(p2_v * 1.18), int(p2_v * 1.32)]})
             st.bar_chart(df_p2.set_index("Semanas"), y="Buscas")
 
     with st_col3:
         with st.container(border=True):
-            st.markdown(f"### 🔥 3. {p3_n}")
+            st.markdown(f"<h3 style='color:{b3_c};'>🔥 3. {p3_n}</h3>", unsafe_allow_html=True)
             st.write(f"**Plataforma:** {p3_p} | **CPC USA:** {p3_c}")
             st.write(f"**Termômetro:** {p3_t}")
+            st.write(f"**Análise:** {p3_o}")
             df_p3 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [p3_v, int(p3_v * 1.1), int(p3_v * 1.15), int(p3_v * 1.28)]})
             st.bar_chart(df_p3.set_index("Semanas"), y="Buscas")
 
     st.markdown("---")
 
     # =============================================================================================================
-    # 🪐 EXCLUSIVO: PREENCHIMENTO E JUSTIFICATIVA DAS CAIXAS OPERACIONAIS INFERIORES
+    # 🪐 EXCLUSIVO BLACK-LABEL: PREENCHIMENTO E JUSTIFICATIVA DAS CAIXAS QUE ESTAVAM LIMPAS NO SEU PRINT
     # =============================================================================================================
-    st.subheader("📊 Relatório Analítico de Validação do Leilão (Dossiê Estratégico)")
+    st.markdown("<h3 style='color:#00ffcc;'>📊 Relatório Analítico de Validação do Leilão (Dossiê Estratégico)</h3>", unsafe_allow_html=True)
     st.write("Justificativas técnicas e métricas coletadas para validar a viabilidade dos lances internacionais:")
     st.write("")
 
@@ -108,26 +141,3 @@ def main():
         st.text_area("Análise de Custos:", value=txt_m3, height=140, key="just_m3")
 
     with c_b4:
-        st.markdown("#### 🏆 Veredito Final")
-        txt_m4 = f"VEREDITO AFILIADO: Recomenda-se iniciar imediatamente os lances fundo de funil para {p1_n} no mercado gringo. Utilize Pre-Sell blindada para reter os cliques qualificados e blindar sua conta contra suspensões."
-        st.text_area("Análise de Ação:", value=txt_m4, height=140, key="just_m4")
-
-    # --- RODAPÉ DE EXPORTAÇÃO AUTOMATIZADA WHATSAPP ---
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    st.subheader("📢 Central de Notificações em Tempo Real (WhatsApp Gateway)")
-    st.write("Envie instantaneamente o dossiê dos 3 lançamentos minerados direto para o WhatsApp cadastrado:")
-    st.write("")
-    
-    msg_txt = f"🚨 *NOTIFICAÇÃO ADRIELAI PRO - CAÇADOR DE LANÇAMENTOS* 🛰️\n\n"
-    msg_txt += f"🎯 *PRODUTO 1:* {p1_n} ({p1_p}) | CPC: {p1_c}\n"
-    msg_txt += f"🎯 *PRODUTO 2:* {p2_n} ({p2_p}) | CPC: {p2_c}\n"
-    msg_txt += f"🎯 *PRODUTO 3:* {p3_n} ({p3_p}) | CPC: {p3_c}\n\n"
-    msg_txt += f"🏆 *Veredito Técnico:* Mapeamento de leilões finalizado com sucesso."
-    
-    url_msg = urllib.parse.quote(msg_txt)
-    link_wa = f"https://whatsapp.com{st.session_state.user_whatsapp_saved}&text={url_msg}"
-
-    st.link_button("🟢 DISPARAR ALERTA DOS 3 PRODUTOS NO WHATSAPP", link_wa)
-
-if __name__ == "__main__":
-    main()
