@@ -6,13 +6,26 @@ def main():
     # 1. CONFIGURACAO PREMIUM DA INTERFACE SAAS 2026
     st.set_page_config(page_title="Radar Premium - AdrielAI", page_icon="💎", layout="wide")
 
-    # FORCADOR GLOBAL DE TEMA BLACK-LABEL CYBER-NEON 2026
+    # FORCADOR GLOBAL DE TEMA BLACK-LABEL CYBER-NEON E CORRECAO DO MENU LATERAL
     st.markdown("""
         <style>
+            /* Fundo principal da aplicação */
             html, body, [data-testid="stAppViewContainer"], .stApp {
                 background-color: #030712 !important;
                 color: #f9fafb !important;
             }
+            
+            /* 🚀 CORREÇÃO DO MENU LATERAL: Traz os botões de volta com estilo escuro e neon */
+            [data-testid="stSidebar"], section[data-testid="stSidebar"] div {
+                background-color: #090d16 !important;
+            }
+            [data-testid="stSidebar"] nav ul li div a span {
+                color: #00ffcc !important;
+                font-weight: bold !important;
+                text-shadow: 0 0 5px rgba(0,255,204,0.4) !important;
+            }
+            
+            /* Botões do painel global */
             .stButton>button {
                 background-color: #0f172a !important;
                 color: #00ffcc !important;
