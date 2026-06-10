@@ -7,7 +7,7 @@ def main():
     # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE SAAS 2026
     st.set_page_config(page_title="Radar Premium - AdrielAI", layout="wide")
 
-    # FORÇADOR ULTRA LUXO CYBER-NEON COMPILADO (IMUNE AO BUG DO PYTHON 3.14)
+    # FORÇADOR ULTRA LUXO CYBER-NEON COMPILADO (IMUNE AO BUG DE PARSER)
     estilo_luxo = "<style>"
     estilo_luxo += "header, [data-testid='stHeader'] {background-color: rgba(0,0,0,0) !important; background: transparent !important; display: none !important;}"
     estilo_luxo += "[data-testid='stAppViewContainer'] {padding-top: 0px !important;}"
@@ -52,7 +52,6 @@ def main():
         st.write("Selecione a oportunidade abaixo para ativar no painel:")
         st.write("")
 
-        # Configuração das chaves e nomes originais do seu print purificados
         lista_completa_produtos = [
             {"id": "Alpilean", "label": "📍 Alpilean | 🟢 ALTA - MONITORANDO"},
             {"id": "Puravive", "label": "⚡ Puravive | 🔥 ALTA - SUBINDO"},
@@ -88,7 +87,7 @@ def main():
         
         ativo = st.session_state.produto_radar_ativo
         st.markdown("<h2 style='color:#ffffff; margin:0; font-size:2.2rem;'>" + ativo + "</h2>", unsafe_allow_html=True)
-        st.write("Análise Operacional: **Nível Avançado** | Monitoramento Proprietário Adriel-AI")
+        st.write("Análise Operacional: **Nível Advanced** | Monitoramento Proprietário Adriel-AI")
         st.write("---")
 
         # MÉTRICAS PREMIUM COM COPIES ACESSAS E PRECISAS
@@ -102,13 +101,13 @@ def main():
         
         # SEÇÃO 1: SUPERINTELIGÊNCIA DE COPY APLICADA À DOR EMOCIONAL DO COMPRADOR
         st.markdown("<h4 style='color:#00ffcc;'>❤️ Âncora Psicológica e Dor Cirúrgica do Comprador Gringo:</h4>", unsafe_allow_html=True)
-        st.info("O sofrimento emocional profundo do comprador internacional é alimentado pelo acúmulo de gordura corporal resistente, o qual destrói a autoconfiança de forma devastadora. Essa dor gera um estado de urgência psicológica e física imediata. Essa vulnerabilidade activa o gatilho perfeito para injetarmos uma estrutura de vendas de alta performance, capaz de converter essa necessidade latente em compras de alto rendimento com comissões robustas em dólares.")
+        st.info("O sofrimento emocional profundo do comprador internacional é alimentado pelo acúmulo de gordura corporal resistente, o qual destrói a autoconfiança de forma devastadora. Essa dor gera um estado de urgência psicológica e física imediata. Essa vulnerabilidade ativa o gatilho perfeito para injetarmos uma estrutura de vendas de alta performance, capaz de converter essa necessidade latente em compras de alto rendimento com comissões robustas em dólares.")
 
         # SEÇÃO 2: SUPERINTELIGÊNCIA DE COPY APLICADA AO VEREDITO ESTRATÉGICO
         st.markdown("<h4 style='color:#00ffcc;'>🏆 Veredito Estratégico Computacional (Google Ads / Bing Ads):</h4>", unsafe_allow_html=True)
         st.success("Reino Unido (UK) - Nossa inteligência preditiva valida a estabilização matemática do leilão na Rede de Pesquisa do Google Ads para o público britânico e regiões de alta renda da Commonwealth. O termômetro de mercado aponta o momento ideal para a escalada vertical da oferta. A baixa concorrência em termos institucionais fundo de funil assegura o menor Custo por Clique (CPC), gerando um Retorno sobre o Investimento (ROI) líquido e escalável hoje, entregando cliques limpos com lucro bruto recorrente.")
 
-        # SEÇÃO 3: MAPEAMENTO DE CORE DE CPC SEGURO
+        # SEÇÃO 3: MAPEAMENTO DE CPC SEGURO
         st.markdown("<h4 style='color:#00ffcc;'>🌐 Mapeamento Analítico de CPC por Região (Tier 1):</h4>", unsafe_allow_html=True)
         html_cpc = "<div style='background-color:#0f172a; border:1px solid #1e293b; padding:12px; border-radius:8px; font-family:monospace; font-size:1.05rem; color:#f3f4f6; display:flex; justify-content:space-between;'>"
         html_cpc += "<span>🇺🇸 <b>USA:</b> <span style='color:#00ffcc;'>$1.95</span></span>"
@@ -118,3 +117,5 @@ def main():
         html_cpc += "<span>🇳🇿 <b>NZ:</b> <span style='color:#00ffcc;'>$1.25</span></span>"
         html_cpc += "</div>"
         st.markdown(html_cpc, unsafe_allow_html=True)
+        st.write("")
+
