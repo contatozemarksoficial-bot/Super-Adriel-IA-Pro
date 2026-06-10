@@ -32,7 +32,7 @@ def main():
     estilo_luxo += "</style>"
     st.markdown(estilo_luxo, unsafe_allow_html=True)
 
-    # CABEÇALHO COM ENGENHARIA DE COPY AVANÇADA E PORTUGUÊS PERFEITO
+    # CABEÇALHO CORRIGIDO COM ENGENHARIA DE COPY AVANÇADA E PORTUGUÊS PERFEITO
     st.markdown('<h1 style="font-size: 2.5rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">💎 RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
     st.write("Varredura automatizada e mapeamento analítico de ofertas de alta conversão nas plataformas internacionais.")
     
