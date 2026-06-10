@@ -25,11 +25,11 @@ def main():
     st.write("Estruturação completa e inteligente de campanhas fundo de funil para o Google Ads com política antibloqueio.")
     st.markdown("---")
 
-    # 2. ENTRADA DE CONFIGURAÇÃO DA CAMPANHA (MANTIDO SEU MODELO ORIGINAL)
+    # 2. ENTRADA DE CONFIGURAÇÃO DA CAMPANHA (MANTIDO SEU DESIGN ORIGINAL)
     st.markdown("<h3 style='color:#00ffcc;'>⚙️ Configuração da Oferta Gringa</h3>", unsafe_allow_html=True)
     produto_nome = st.text_input("Insira o nome exato do produto internacional para pesquisar:", value="Sugar Defender")
     
-    # O botão de disparo físico controla de forma segura a exibição das variáveis sem congelar
+    # O botão de disparo físico original controla de forma síncrona a renderização e evita o congelamento
     botao_gerar = st.button("⚡ GERAR ESQUELETO DA CAMPANHA")
     st.markdown("---")
 
