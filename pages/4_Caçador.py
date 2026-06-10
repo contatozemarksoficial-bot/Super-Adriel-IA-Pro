@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import urllib.parse
 from datetime import datetime
 
 def main():
@@ -41,8 +42,8 @@ def main():
     if "fase_ciclo_cacador" not in st.session_state:
         st.session_state.fase_ciclo_cacador = 0
 
-    # 📲 CENTRAL DE ALERTAS COM PORTUGUÊS 100% HIGIENIZADO
-    st.markdown("<h3 style='color:#00ffcc;'>📲 Central de Notificações Automatizadas</h3>", unsafe_allow_html=True)
+    # 2. CONFIGURAÇÃO DA CENTRAL DE NOTIFICAÇÕES (PORTUGUÊS PURIFICADO)
+    st.markdown("<h3 style='color:#00ffcc;'>⚙️ Central de Notificações Automatizadas</h3>", unsafe_allow_html=True)
     whats_input = st.text_input("Insira seu WhatsApp com Código do País e DDD (Ex: 5511999999999):", value=st.session_state.user_whatsapp_saved)
     
     if st.button("💾 SALVAR CONFIGURAÇÃO DE TELEFONE"):
@@ -56,7 +57,7 @@ def main():
     botao_pesquisar = st.button("🚀 PESQUISAR LANÇAMENTOS AGORA")
     st.markdown("---")
 
-    # 🪐 GATILHO REATIVO SEGURO: Incrementa o ciclo estável no clique físico e altera os produtos de verdade
+    # GATILHO REATIVO SEGURO: Incrementa o ciclo estável no clique físico e altera os produtos de verdade
     if botao_pesquisar:
         st.session_state.fase_ciclo_cacador = (st.session_state.fase_ciclo_cacador + 1) % 3
 
@@ -80,7 +81,7 @@ def main():
         p2_n, p2_p, p2_t, p2_c, p2_o, p2_v = "ZenCortex", "BuyGoods Network", "LANÇAMENTO AGRESSIVO", "$1.40", "Fórmula avançada de suporte cerebral e foco.", 4200
         p3_n, p3_p, p3_t, p3_c, p3_o, p3_v = "LivPure", "Digistore24 Int.", "ALTA INTENÇÃO DE COMPRA", "$1.10", "Purificação hepática voltada ao mercado Tier 1.", 2950
 
-    # 2. COLUNAS EM PARALELO DE 3 PRODUTOS VARIÁVEIS EM TEMPO REAL (MANTIDO SEU DESIGN ORIGINAL)
+    # 2. COLUNAS EM PARALELO DE 3 PRODUTOS VARIÁVEIS EM TEMPO REAL
     st_col1, st_col2, st_col3 = st.columns(3)
 
     with st_col1:
@@ -89,7 +90,6 @@ def main():
         st.write(f"**Plataforma:** {p1_p} | **CPC USA:** {p1_c}")
         st.write(f"**Termômetro:** {p1_t}")
         df_p1 = pd.DataFrame({"Semanas": ["S1", "S2", "S3", "S4"], "Buscas": [p1_v, int(p1_v * 1.12), int(p1_v * 1.25), int(p1_v * 1.42)]})
-        # 🪐 CORREÇÃO PROFISSONAL: Removido o parâmetro dinâmico 'color=' que quebrava o Vega-Lite em Tela Branca
         st.bar_chart(df_p1.set_index("Semanas"), y="Buscas")
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -136,3 +136,4 @@ def main():
 
     # Caixa 3 preenchida: Filtro de ROI
     with c_b3:
+        st.markdown("<h4 style='color:#00ffcc;'>💰 Filtro de ROI Líquido</h4>", unsafe_allow_html=True)
