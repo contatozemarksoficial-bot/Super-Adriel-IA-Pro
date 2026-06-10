@@ -16,7 +16,7 @@ def main():
     estilo_luxo += "[data-testid='stSidebar'] nav ul li div a span {color: #00ffcc !important; font-weight: bold !important; text-shadow: 0 0 8px rgba(0,255,204,0.5) !important;}"
     estilo_luxo += ".stTextInput>div>div>input {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; font-size: 1.1rem !important;}"
     estilo_luxo += ".stTextInput>div>div>input:focus {border-color: #00ffcc !important; box-shadow: 0 0 15px rgba(0,255,204,0.3) !important;}"
-    estilo_luxo += ".stButton>button {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #00ffcc !important; border-radius: 8px !important; font-weight: bold !important; box-shadow: 0 0 10px rgba(0,255,204,0.15) !important; transition: all 0.3s ease-in-out !important; width: 100% !important; height: 45px !important;}"
+    estilo_luxo += ".stButton>button {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #00ffcc !important; border-radius: 8px !important; font-weight: bold !important; box-shadow: 0 0 10px rgba(0, 255, 204, 0.15) !important; transition: all 0.3s ease-in-out !important; width: 100% !important; height: 45px !important;}"
     estilo_luxo += ".stButton>button:hover {background-color: #00ffcc !important; color: #030712 !important; box-shadow: 0 0 25px #00ffcc, 0 0 45px rgba(0,255,204,0.4) !important; transform: scale(1.01);}"
     estilo_luxo += "[data-testid='stMetricContainer'] {background: linear-gradient(135deg, #0f172a, #030712) !important; border: 1px solid #1e293b !important; border-left: 4px solid #00ffcc !important; padding: 15px !important; border-radius: 10px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;}"
     estilo_luxo += "h1, h2, h3, h4, span, p, label {color: #f3f4f6 !important;}"
@@ -47,21 +47,21 @@ def main():
     ativar_busca = st.button("🚀 PESQUISAR LANÇAMENTOS AGORA")
     st.markdown("---")
 
-    # 🪐 SEMENTE VOLÁTIL DE MOVIMENTAÇÃO VIVA: Captura microsegundos para forçar oscilação de dados a cada interação
+    # SEMENTE VOLÁTIL DE MOVIMENTAÇÃO VIVA: Captura microsegundos para forçar oscilação de dados a cada interação
     semente_viva = datetime.now().microsecond % 40
     horario_atual = datetime.now().strftime("%H:%M:%S")
 
     st.info("🤖 STATUS DO ROBO: Varredura viva de lancamentos reais finalizada as " + horario_atual + " | Conexao: CLICKBANK, BUYGOODS, DIGISTORE24")
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Multiplicadores flutuantes para dar o efeito visual de barras se movimentando e subindo
+    # Multiplicadores flutuantes puros gerados de forma estritamente linear antes de entrar no layout
     fator_movimento1 = random.randint(110, 190)
     fator_movimento2 = random.randint(90, 160)
     fator_movimento3 = random.randint(130, 210)
 
-    v1 = 4000 + (semente_viva * falar_fator1 := fator_movimento1)
-    v2 = 3500 + (semente_viva * falar_fator2 := fator_movimento2)
-    v3 = 5000 + (semente_viva * falar_fator3 := fator_movimento3)
+    v1 = 4000 + (semente_viva * fator_movimento1)
+    v2 = 3500 + (semente_viva * fator_movimento2)
+    v3 = 5000 + (semente_viva * fator_movimento3)
 
     # Rotação randômica real das cópias de status
     pool_status = ["QUENTE (Alta Procura)", "EM ALTERACAO (Oceano Azul)", "LANCAMENTO (Baixo Bid)", "OPORTUNIDADE MAXIMA", "RECOMENDADO (Leilao Limpo)"]
@@ -90,6 +90,7 @@ def main():
         st.write("**Termometro:** " + t_status1)
         st.write("**Analise:** Oferta recente focada no nicho de perda de peso acelerada por cafe. Apresenta o menor CPC fundo de funil da categoria hoje por ser um lancamento agressivo.")
         st.write("**Melhores Paises:** USA, UK, Canada, Australia, Alemanha")
+        # 🪐 FILTRAGEM DE LUXO: Caixa escura integrada via HTML sem caixas brancas
         st.markdown("<div style='background-color:#0f172a; border:1px solid #1e293b; padding:8px; border-radius:5px; font-family:monospace; color:#00ffcc;'><b>CPC Estimado:</b> USA: $" + cpc_calculado1 + " | Outros: $0.95</div>", unsafe_allow_html=True)
         st.write("")
         st.bar_chart(df_p1, x="Semanas", y="Buscas")
@@ -101,6 +102,7 @@ def main():
         st.write("**Termometro:** " + t_status2)
         st.write("**Analise:** Suplemento termogenico inovador japonês. Baixissima concorrencia de afiliados no leilao de rede de pesquisa gringo, ideal para estruturas de pre-sell rapidas.")
         st.write("**Melhores Paises:** USA, Canada, Reino Unido, Australia, Nova Zelandia")
+        # 🪐 FILTRAGEM DE LUXO: Caixa escura integrada via HTML sem caixas brancas
         st.markdown("<div style='background-color:#0f172a; border:1px solid #1e293b; padding:8px; border-radius:5px; font-family:monospace; color:#ff0055;'><b>CPC Estimado:</b> USA: $" + cpc_calculado2 + " | Outros: $1.10</div>", unsafe_allow_html=True)
         st.write("")
         st.bar_chart(df_p2, x="Semanas", y="Buscas")
@@ -112,6 +114,7 @@ def main():
         st.write("**Termometro:** " + t_status3)
         st.write("**Analise:** Oferta recente focada na desinflamacao dental profunda e hálito gringo. Alta comissao reuniu liberada pelo produtor nas primeiras semanas de lancamento.")
         st.write("**Melhores Paises:** USA, UK, Irlanda, Australia, Canada")
+        # 🪐 FILTRAGEM DE LUXO: Caixa escura integrada via HTML sem caixas brancas
         st.markdown("<div style='background-color:#0f172a; border:1px solid #1e293b; padding:8px; border-radius:5px; font-family:monospace; color:#0066ff;'><b>CPC Estimado:</b> USA: $" + cpc_calculado3 + " | Outros: $0.85</div>", unsafe_allow_html=True)
         st.write("")
         st.bar_chart(df_p3, x="Semanas", y="Buscas")
@@ -127,6 +130,3 @@ def main():
     num_destino = st.session_state.user_whatsapp_saved
     link_final_whats = "https://whatsapp.com" + num_destino + "&text=" + msg_whats
     
-    st.markdown("<a href='" + link_final_whats + "' target='_blank' style='display:block; text-align:center; background-color:#25d366; color:#ffffff; padding:15px; border-radius:8px; font-weight:bold; text-decoration:none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); font-size:1.1rem;'>💬 DISPARAR ALERTA DOS 3 PRODUTOS NO WHATSSAP</a>", unsafe_allow_html=True)
-    st.markdown("<br>", unsafe_allow_html=True)
-
