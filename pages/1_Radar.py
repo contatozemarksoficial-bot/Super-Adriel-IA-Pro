@@ -6,7 +6,7 @@ def main():
     # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE SAAS 2026
     st.set_page_config(page_title="Radar Premium - AdrielAI", layout="wide")
 
-    # FORÇADOR ULTRA LUXO CYBER-NEON COMPILADO (IMUNE AO BUG DE PARSER)
+    # FORÇADOR ULTRA LUXO CYBER-NEON COMPILADO (IMUNE AO BUG DE PARSER DO PYTHON 3.14)
     estilo_luxo = "<style>"
     estilo_luxo += "header, [data-testid='stHeader'] {background-color: rgba(0,0,0,0) !important; background: transparent !important; display: none !important;}"
     estilo_luxo += "[data-testid='stAppViewContainer'] {padding-top: 0px !important;}"
@@ -37,7 +37,7 @@ def main():
     st.write("Varredura automatizada e mapeamento analítico de ofertas de alta conversão nas plataformas internacionais.")
     
     horario_viva = datetime.now().strftime("%H:%M:%S")
-    st.info("🛰️ Sistema operando com Inteligência Preditiva Computacional. Auditoria ativa às " + horario_viva)
+    st.info("🛰_ Sistema operando com Inteligência Preditiva Computacional. Auditoria ativa às " + horario_viva)
     st.markdown("---")
 
     if "produto_radar_ativo" not in st.session_state:
