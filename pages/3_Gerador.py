@@ -13,7 +13,7 @@ def main():
     estilo_luxo += "[data-testid='stSidebar'], section[data-testid='stSidebar'] div {background-color: #090d16 !important;}"
     estilo_luxo += "[data-testid='stSidebar'] nav ul li div a span {color: #00ffcc !important; font-weight: bold !important; text-shadow: 0 0 8px rgba(0,255,204,0.5) !important;}"
     estilo_luxo += ".stTextInput>div>div>input {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; font-size: 1.1rem !important;}"
-    estilo_luxo += ".stTextInput>div>div>input:focus {border-color: #00ffcc !important; box-shadow: 0 0 15px rgba(0, 255, 204, 0.3) !important;}"
+    estilo_luxo += ".stTextInput>div>div>input:focus {border-color: #00ffcc !important; box-shadow: 0 0 15px rgba(0, 25 204, 0.3) !important;}"
     estilo_luxo += ".stButton>button {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #00ffcc !important; border-radius: 8px !important; font-weight: bold !important; box-shadow: 0 0 10px rgba(0, 255, 204, 0.15) !important; transition: all 0.3s ease-in-out !important; width: 100% !important; height: 45px !important;}"
     estilo_luxo += ".stButton>button:hover {background-color: #00ffcc !important; color: #030712 !important; box-shadow: 0 0 25px #00ffcc, 0 0 45px rgba(0,255,204,0.4) !important; transform: scale(1.01);}"
     estilo_luxo += "h1, h2, h3, h4, span, p, label, .stMarkdown p {color: #f3f4f6 !important;}"
@@ -21,15 +21,15 @@ def main():
     estilo_luxo += "</style>"
     st.markdown(estilo_luxo, unsafe_allow_html=True)
 
-    st.markdown('<h1 style="font-size: 2.6rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0, 255, 204, 0.4); margin-bottom: 5px;">✍️ GERADOR DE ANÚNCIOS BLINDADOS</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 style="font-size: 2.6rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">✍️ GERADOR DE ANÚNCIOS BLINDADOS</h1>', unsafe_allow_html=True)
     st.write("Estruturação completa e inteligente de campanhas fundo de funil para o Google Ads com política antibloqueio.")
     st.markdown("---")
 
-    # 2. ENTRADA DE CONFIGURAÇÃO DA CAMPANHA (MANTIDO SEU MODELO ORIGINAL DO PRINT)
+    # 2. ENTRADA DE CONFIGURAÇÃO DA CAMPANHA (LAYOUT EXATO DO SEU PRINT)
     st.markdown("<h3 style='color:#00ffcc;'>⚙️ Configuração da Oferta Gringa</h3>", unsafe_allow_html=True)
     produto_nome = st.text_input("Insira o nome exato do produto internacional para pesquisar:", value="Sugar Defender")
     
-    # O botão de disparo físico original agora controla de forma síncrona a renderização e evita o congelamento
+    # O botão físico original cyber verde controla de forma estática toda a execução da tela
     botao_gerar = st.button("⚡ GERAR ESQUELETO DA CAMPANHA")
     st.markdown("---")
 
@@ -41,7 +41,7 @@ def main():
         st.write("")
 
         # 🚨 SUPER BLINDAGEM CONTRA INFRAÇÕES DE POLÍTICA DO GOOGLE ADS
-        txt_politica = "Atenção Afiliado: Esta campanha foi gerada sob as diretrizes estritas do Google Ads Compliance. Os títulos evitam promessas milagrosas de cura, termos médicos proibidos e caixas de texto com pontuações apelativas. Toda a estrutura foi focada em intenção institucional (Brand Bidding), garantindo aprovação imediata do anúncio e risco zero de suspensão de conta."
+        txt_politica = "Atenção Afiliado: Esta campanha foi gerada sob as guidelines estritas do Google Ads Compliance. Os títulos evitam promessas milagrosas de cura, termos médicos proibidos e caixas de texto com pontuações apelativas. Toda a estrutura foi focada em intenção institucional (Brand Bidding), garantindo aprovação imediata do anúncio e risco zero de suspensão de conta."
 
         st.markdown("<h4 style='color:#ff0055;'>🛡️ ÍNDICE DE BLINDAGEM ANTIBLOQUEIO GOOGLE</h4>", unsafe_allow_html=True)
         st.warning(txt_politica)
@@ -51,10 +51,10 @@ def main():
         col_esquerda, col_direita = st.columns([1.0, 1.0])
 
         with col_esquerda:
-            st.markdown("<h3 style='color:#00ffcc;'>📌 Títulos do Anúncio (Máx 30 Caracteres)</h3>", unsafe_allow_html=True)
+            st.markdown("<h3 style='color:#00ffcc;'>📌 Títulos do Anúncio (Análise por Extenso)</h3>", unsafe_allow_html=True)
             st.write("Selecione e copie para as Headlines do Google Ads:")
             
-            # Geração de Títulos com corte preventivo de 30 caracteres para conformidade de leilão
+            # Geração de 8 Títulos cortados em 30 caracteres para segurança de leilão gringo
             t1 = f"Buy {p_nome} Official"[:30]
             t2 = f"{p_nome} Official Store"[:30]
             t3 = f"{p_nome} Discount Today"[:30]
@@ -82,7 +82,7 @@ def main():
             st.markdown("<h3 style='color:#cc66ff;'>📝 Descrições do Anúncio (Máx 90 Caracteres)</h3>", unsafe_allow_html=True)
             st.write("Copie para as Descriptions do Google Ads:")
             
-            # Geração de Descrições longas cortadas em 90 caracteres para conformidade de leilão
+            # Geração de Descrições longas cortadas em 90 caracteres para segurança de leilão gringo
             d1 = f"Get {p_nome} directly from the official website. Enjoy safe delivery and special discount today."[:90]
             d2 = f"Order your {p_nome} bottles today with free standard shipping and exclusive money back guarantee."[:90]
             d3 = f"Shop {p_nome} original supplement online. Secure your package now before the stock runs out!"[:90]
@@ -96,7 +96,7 @@ def main():
         st.markdown("---")
 
         # =============================================================================================================
-        # 3. CENTRAL DE PALAVRAS-CHAVE EXCLUSIVAS (4 COLUNAS HORIZONTAIS COMPACTADAS INLINE SEM RISCO DE CORTE)
+        # 3. CENTRAL DE PALAVRAS-CHAVE 100% ESTÁTICA (4 COLUNAS HORIZONTAIS COMPLETAMENTE REAIS E PLANAS)
         # =============================================================================================================
         st.markdown("<h3 style='color:#00ffcc;'>🔑 Central de Engenharia de Palavras-Chave (Tráfego Blindado Completo)</h3>", unsafe_allow_html=True)
         st.write("Estrutura cirúrgica de leilão dividida por correspondências de alta conversão e barreira de cliques desqualificados:")
@@ -104,22 +104,18 @@ def main():
 
         c_solta, c_aspas, c_colchete, c_negativa = st.columns(4)
 
-        # Matrizes de sufixos de mercado 100% livres de repetições nas 3 caixas principais
-        suf_broad = ["official store", "buy online", "best price", "where to buy", "purchase original", "order discount", "secure package", "promo code", "retailer store", "sale online", "safest site", "lowest cost", "supply near me", "get bottles", "shop discount"]
-        suf_phrase = ["official website", "supplement reviews", "ingredients list", "customer warning", "independent review", "real side effects", "fda approved status", "capsules directions", "weight loss drops", "complaints check", "scam alert report", "shipping tracking", "refund policy guarantee", "clinical studies results", "formula benefits"]
-        suf_exact = ["brand bidding", "manufacturer direct", "authorized seller", "coupon code 2026", "moneyback guarantee", "exclusive offer matinal", "certified pure check", "stock availability", "wholesale price package", "official link gate", "verified checkout page", "vip client portal", "one time payment", "secured order processing", "original product checkout"]
-        kw_negativas_gringas = ["free", "scam", "fake", "complaints", "side effects", "amazon", "ebay", "walmart", "bad review", "alternative", "ingredients", "cancer", "diabetes", "medical doctor", "hoax"]
-
+        # 🟢 CONSTRUÇÃO TOTALMENTE ESTÁTICA DA COLUNA 1 (BROAD) - SEM LOOPS
         with c_solta:
-            st.markdown("<h4>🟢 15 Amplas (Broad)</h4>", unsafe_allow_html=True)
-            st.text_area("Copiar Soltas:", value="\n".join([f"{p_nome} {s}" for s in suf_broad]), height=320, key="kw_soltas")
+            st.markdown("<h4>🟢 15 Amplas (Broad Match)</h4>", unsafe_allow_html=True)
+            txt_b = f"{p_nome} official store\n{p_nome} buy online\n{p_nome} best price\n{p_nome} where to buy\n{p_nome} purchase original\n{p_nome} order discount\n{p_nome} secure package\n{p_nome} promo code\n{p_nome} retailer store\n{p_nome} sale online\n{p_nome} safest site\n{p_nome} lowest cost\n{p_nome} supply near me\n{p_nome} get bottles\n{p_nome} shop discount"
+            st.text_area("Copiar Soltas:", value=txt_b, height=320, key="kw_soltas")
 
+        # 🔵 CONSTRUÇÃO TOTALMENTE ESTÁTICA DA COLUNA 2 (PHRASE) - SEM LOOPS
         with c_aspas:
-            st.markdown("<h4>🔵 15 Frases (Phrase)</h4>", unsafe_allow_html=True)
-            st.text_area("Copiar Frases:", value="\n".join([f'"{p_nome} {s}"' for s in suf_phrase]), height=320, key="kw_aspas")
+            st.markdown("<h4>🔵 15 Frases (Phrase Match)</h4>", unsafe_allow_html=True)
+            txt_p = f'"{p_nome} official website"\n"{p_nome} supplement reviews"\n"{p_nome} ingredients list"\n"{p_nome} customer warning"\n"{p_nome} independent review"\n"{p_nome} real side effects"\n"{p_nome} fda approved status"\n"{p_nome} capsules directions"\n"{p_nome} weight loss drops"\n"{p_nome} complaints check"\n"{p_nome} scam alert report"\n"{p_nome} shipping tracking"\n"{p_nome} refund policy guarantee"\n"{p_nome} clinical studies results"\n"{p_nome} formula benefits"'
+            st.text_area("Copiar Frases:", value=txt_p, height=320, key="kw_aspas")
 
+        # 🔴 CONSTRUÇÃO TOTALMENTE ESTÁTICA DA COLUNA 3 (EXACT) - SEM LOOPS
         with c_colchete:
-            st.markdown("<h4>🔴 15 Exatas (Exact)</h4>", unsafe_allow_html=True)
-            st.text_area("Copiar Exatas:", value="\n".join([f"[{p_nome} {s}]" for s in suf_exact]), height=320, key="kw_colchetes")
-
-        with c_negativa:
+            st.markdown("<h4>🔴 15 Exatas (Exact Match)</h4>", unsafe_allow_html=True)
