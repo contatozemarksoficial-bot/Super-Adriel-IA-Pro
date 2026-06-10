@@ -1,66 +1,74 @@
 import streamlit as st
 import random
+import pandas as pd
 from datetime import datetime
 
 def main():
     # 1. CONFIGURACAO PREMIUM DA INTERFACE SAAS 2026
     st.set_page_config(page_title="Radar Premium - AdrielAI", page_icon="💎", layout="wide")
 
-    # FORCADOR GLOBAL DE TEMA BLACK-LABEL CYBER-NEON E REMOCAO DA BARRA BRANCA SUPERIOR
+    # FORCADOR GLOBAL DE TEMA BLACK-LABEL COM BRILHO NEON NAS BORDAS E TEXTOS
     st.markdown("""
         <style>
-            /* 🪐 DESTRUIÇÃO DA BARRA BRANCA: Força ocultação total do cabeçalho nativo */
             header, [data-testid="stHeader"] {
                 background-color: rgba(0,0,0,0) !important;
                 background: transparent !important;
                 display: none !important;
             }
-            
-            /* Ajuste de margem superior para compensar a ocultação da barra */
             [data-testid="stAppViewContainer"] {
                 padding-top: 0px !important;
             }
-
-            /* Fundo principal da aplicação */
             html, body, [data-testid="stAppViewContainer"], .stApp {
-                background-color: #030712 !important;
+                background-color: #020617 !important;
                 color: #f9fafb !important;
             }
-            
-            /* CORREÇÃO DO MENU LATERAL: Traz os botões de volta com estilo escuro e neon */
             [data-testid="stSidebar"], section[data-testid="stSidebar"] div {
-                background-color: #090d16 !important;
+                background-color: #070a13 !important;
             }
             [data-testid="stSidebar"] nav ul li div a span {
                 color: #00ffcc !important;
                 font-weight: bold !important;
-                text-shadow: 0 0 5px rgba(0,255,204,0.4) !important;
+                text-shadow: 0 0 8px rgba(0,255,204,0.5) !important;
             }
             
-            /* Botões do painel global */
+            /* Botões Laterais com Brilho Pulsante */
             .stButton>button {
-                background-color: #0f172a !important;
+                background-color: #0b1329 !important;
                 color: #00ffcc !important;
                 border: 2px solid #00ffcc !important;
                 border-radius: 8px !important;
                 font-weight: bold !important;
-                box-shadow: 0 0 8px rgba(0, 255, 204, 0.2) !important;
+                box-shadow: 0 0 10px rgba(0, 255, 204, 0.15) !important;
+                transition: all 0.3s ease-in-out !important;
             }
             .stButton>button:hover {
                 background-color: #00ffcc !important;
-                color: #030312 !important;
-                box-shadow: 0 0 15px #00ffcc !important;
+                color: #020617 !important;
+                box-shadow: 0 0 20px #00ffcc, 0 0 40px rgba(0,255,204,0.3) !important;
+                transform: scale(1.01);
             }
+            
+            /* Customização das Caixas de Métricas Neon */
+            [data-testid="stMetricContainer"] {
+                background: linear-gradient(135deg, #0f172a, #020617) !important;
+                border: 1px solid #1e293b !important;
+                border-left: 4px solid #00ffcc !important;
+                padding: 15px !important;
+                border-radius: 10px !important;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
+            }
+            
             h1, h2, h3, h4, span, p, label {
                 color: #f3f4f6 !important;
             }
             h1 {
                 color: #00ffcc !important;
-                text-shadow: 0 0 10px rgba(0,255,204,0.3) !important;
+                text-shadow: 0 0 15px rgba(0,255,204,0.4) !important;
             }
             [data-testid="stNotification"] {
-                background-color: #111827 !important;
-                border: 1px solid #1f2937 !important;
+                background-color: #0b1329 !important;
+                border: 1px solid #1e293b !important;
+                border-radius: 10px !important;
             }
         </style>
     """, unsafe_allow_html=True)
@@ -96,18 +104,17 @@ def main():
     p_hoje = 1200 + (posicao_lista * 110) + (tempo_segundo * 2)
     p_semente = 10 + posicao_lista * 4
     
-    paises_oficiais = ["Estados Unidos (USA)", "Reino Unido (UK)", "Canada (CA)", "Australia (AU)", "Alemanha (DE)"]
-    p_pais = paises_oficiais[posicao_lista % 5]
+    p_paises = ["Estados Unidos (USA)", "Reino Unido (UK)", "Canada (CA)", "Australia (AU)", "Alemanha (DE)"]
+    p_pais = p_paises[posicao_lista % 5]
 
-    p_dor = "Frustracao emotional extrema do comprador gringo devido ao acumulo de sintomas persistentese dores biologicas profundas associadas a " + p_nome + ", gerando esgotamento fisico cronico e bloqueando a capacidade de focar no trabalho ou manter uma rotina de alto rendimento diario."
-    
+    p_dor = "Frustracao emotional extrema do comprador gringo devido ao acumulo de sintomas persistentese dores biologicas profundas associadas a " + p_nome + ", gerando esgotamento fisico cronico e bloqueando a capacidade de focar no trabalho ou manter uma routine de alto rendimento diario."
     p_porque = "O monitoramento do robo confirma trafego massivo e qualificado de fundo de funil para " + p_nome + ". O veredicto estrategico final indica que o leilao para o pais " + p_pais + " e a melhor oportunidade operacional gringo hoje, entregando cliques mais baratos e comissao limpa com baixa concorrencia."
 
     # 4. CONSTRUÇÃO DO LAYOUT EM DUAS COLUNAS PRINCIPAIS (MAXIMO PREENCHIMENTO DE TELA)
     col_esquerda, col_direita = st.columns([1.0, 1.3])
 
     with col_esquerda:
-        st.markdown("<h3 style='color:#00ffcc !important;'>🎯 Painel Estatistico Global</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color:#00ffcc; text-shadow: 0 0 10px rgba(0,255,204,0.2);'>🎯 Painel Estatistico Global</h3>", unsafe_allow_html=True)
         st.write("Selecione o produto abaixo para ativar os sinais:")
         st.write("")
         
@@ -124,8 +131,8 @@ def main():
                 st.rerun()
 
     with col_direita:
-        st.markdown("<h3 style='color:#00ffcc !important;'>⚡ Central de Inteligencia de Mercado</h3>", unsafe_allow_html=True)
-        st.header(p_sel_nome := p_nome)
+        st.markdown("<h3 style='color:#00ffcc; text-shadow: 0 0 10px rgba(0,255,204,0.2);'>⚡ Central de Inteligencia de Mercado</h3>", unsafe_allow_html=True)
+        st.header(p_nome)
         st.write("Classificacao: " + p_status + " - MONITORAMENTO ATIVO DO ROBO V5")
         st.write("")
         
@@ -135,22 +142,37 @@ def main():
         
         st.markdown("---")
         
-        st.markdown("<h4 style='color:#ff0055 !important;'>💔 Dor Cirurgica do Comprador Gringo (Motivo da busca):</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='color:#ff0055; text-shadow: 0 0 5px rgba(255,0,85,0.2);'>💔 Dor Cirurgica do Comprador Gringo (Motivo da busca):</h4>", unsafe_allow_html=True)
         st.warning(p_dor)
         
-        st.markdown("<h4 style='color:#00ffcc !important;'>🏆 Veredito Estrategico Convincente (Onde anunciar e por que):</h4>", unsafe_allow_html=True)
-        st.info("Melhor Pais para Subir Campanha: " + p_pais)
-        st.write(p_porque)
+        st.markdown("<h4 style='color:#00ffcc; text-shadow: 0 0 5px rgba(0,255,204,0.2);'>🏆 Veredito Estrategico Convincente (Onde anunciar e por que):</h4>", unsafe_allow_html=True)
+        st.info(p_pais + " - " + p_porque)
         
-        st.markdown("<h4 style='color:#cc66ff !important;'>💵 Mapeamento de CPC por Regiao (5 Paises Oficiais):</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='color:#cc66ff; text-shadow: 0 0 5px rgba(204,102,255,0.2);'>💵 Mapeamento de CPC por Regiao (5 Paises Oficiais):</h4>", unsafe_allow_html=True)
         cpc_base_dinamico = round(1.85 + (posicao_lista * 0.08), 2)
         st.code("USA: $" + str(cpc_base_dinamico) + " | UK: $1.90 | CA: $2.10 | AU: $2.30 | DE: $1.40", language="text")
         
         st.markdown("---")
         
-        st.markdown("<h4>📊 Historico de Demanda Coletado Agora (Grafico em Tempo Real)</h4>", unsafe_allow_html=True)
-        valores_barras = [p_semente * 2, p_semente * 3, p_semente * 4, p_semente * 3, p_semente * 5, p_semente * 6, p_semente * 7, p_semente * 6, p_semente * 8, p_semente * 9, p_semente * 10, p_semente * 9]
-        st.bar_chart(valores_barras)
+        # 🌟 GRÁFICO CYBER-NEON COM COLUNAS DE CORES SÓLIDAS E INDEPENDENTES
+        st.markdown("<h4 style='color:#00ffcc;'>📊 Movimentacao Historica de Leilao (Status do Sinal Mensal)</h4>", unsafe_allow_html=True)
+        
+        # Estrutura de dados reformulada de forma estrita: cada mês ganha um valor em apenas uma categoria de cor sólida
+        df_comportamento = pd.DataFrame({
+            "Meses": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+            "Verde Neon (Subindo)":    [p_semente * 3, 0, 0, p_semente * 4, 0, 0, p_semente * 5, 0, 0, p_semente * 6, 0, 0],
+            "Laser Vermelho (Decendo)": [0, p_semente * 2, 0, 0, p_semente * 3, 0, 0, p_semente * 4, 0, 0, p_semente * 5, 0],
+            "Azul Eletrico (Indecisao)": [0, 0, p_semente * 2, 0, 0, p_semente * 3, 0, 0, p_semente * 4, 0, 0, p_semente * 4]
+        })
+        
+        cores_comportamento = ["#00ffcc", "#ff0055", "#0066ff"]
+        
+        st.bar_chart(
+            df_comportamento, 
+            x="Meses", 
+            y=["Verde Neon (Subindo)", "Laser Vermelho (Decendo)", "Azul Eletrico (Indecisao)"],
+            color=cores_comportamento
+        )
 
 if __name__ == "__main__":
     main()
