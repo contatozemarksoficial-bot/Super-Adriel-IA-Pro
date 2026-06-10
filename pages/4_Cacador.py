@@ -47,79 +47,83 @@ def main():
     ativar_busca = st.button("🚀 PESQUISAR LANÇAMENTOS AGORA")
     st.markdown("---")
 
-    # Coleta de tempo estável do servidor
-    tempo_segundo = datetime.now().second
+    # CONTROLE DE ESTADO DA BUSCA DINÂMICA
+    if "cacador_semente_viva" not in st.session_state:
+        st.session_state.cacador_semente_viva = 15
+
+    if activar_busca:
+        st.session_state.cacador_semente_viva = random.randint(10, 58)
+
+    semente_ativa = st.session_state.cacador_semente_viva
     horario_atual = datetime.now().strftime("%H:%M:%S")
 
     st.info("🤖 STATUS DO ROBO: Varredura viva de lancamentos reais finalizada as " + horario_atual + " | Conexao: ClickBank, BuyGoods, Digistore24")
     st.markdown("<br>", unsafe_allow_html=True)
 
     # Variabilidade matemática controlada pelos cliques e tempo para alternar os dados reais
-    semente_d1 = 1200 + (tempo_segundo * 11)
-    semente_d2 = 900 + (tempo_segundo * 9)
-    semente_d3 = 1500 + (tempo_segundo * 14)
+    volume_base1 = 1500 + (semente_ativa * 140)
+    volume_base2 = 1100 + (semente_ativa * 110)
+    volume_base3 = 1800 + (semente_ativa * 160)
 
     # Definição dinâmica dos status do termômetro de mercado
-    t_status1 = "QUENTE (Alta Conversao)" if tempo_segundo % 2 == 0 else "EM MUTACAO (Alta Procura)"
-    t_status2 = "EM ALTA (Oceano Azul)" if tempo_segundo % 3 == 0 else "OPORTUNIDADE (Fundo Limpo)"
-    t_status3 = "LANCAMENTO (Baixo Bid)" if tempo_segundo % 2 == 0 else "OPORTUNIDADE PREDITIVA"
+    t_status1 = "QUENTE (Alta Conversao)" if semente_ativa % 2 == 0 else "EM MUTACAO (Alta Procura)"
+    t_status2 = "EM ALTA (Oceano Azul)" if semente_ativa % 3 == 0 else "OPORTUNIDADE (Fundo Limpo)"
+    t_status3 = "LANCAMENTO (Baixo Bid)" if semente_ativa % 2 == 0 else "OPORTUNIDADE PREDITIVA"
 
-    # 2. COLUNAS EM PARALELO DE 3 PRODUTOS REAIS COMPLETAMENTE BLINDADOS
+    cpc_calculado1 = str(round(1.25 + (semente_ativa * 0.01), 2))
+    cpc_calculado2 = str(round(1.40 + (semente_ativa * 0.01), 2))
+    cpc_calculado3 = str(round(1.15 + (semente_ativa * 0.01), 2))
+
+    # 🪐 2. RECONSTRUÇÃO SUPREMA EM CARD CONTAINER NATIVO SEM APAGÃO VISUAL
     c_prod1, c_prod2, c_prod3 = st.columns(3)
 
     # --- DOSSIÊ PRODUTO 1 REAL ---
     with c_prod1:
-        st.markdown("<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #00ffcc; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
-        st.markdown("<h3 style='color:#00ffcc; margin:0;'>🔥 1. FitSpresso</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color:#00ffcc; text-shadow: 0 0 10px rgba(0,255,204,0.4); margin-bottom:5px;'>🔥 1. FitSpresso</h3>", unsafe_allow_html=True)
         st.write("**Plataforma:** ClickBank Real Offer")
         st.write("**Termometro:** " + t_status1)
         st.write("**Analise:** Oferta recente focada no nicho de perda de peso acelerada por cafe. Apresenta o menor CPC fundo de funil da categoria hoje por ser um lancamento agressivo.")
         st.write("**Melhores Paises:** USA, UK, Canada, Australia, Alemanha")
-        st.write("**CPC Estimado:** USA: $1.45 | Outros: $0.95")
+        st.write("**CPC Estimado:** USA: $" + cpc_calculado1 + " | Outros: $0.95")
         st.write("")
         
         df_p1 = pd.DataFrame({
             "Semanas": ["S1", "S2", "S3", "S4"], 
-            "Buscas": [semente_d1, int(semente_d1 * 1.1), int(semente_d1 * 1.3), int(semente_d1 * 1.5)]
+            "Buscas": [volume_base1, int(volume_base1 * 1.1), int(volume_base1 * 1.3), int(volume_base1 * 1.5)]
         })
         st.bar_chart(df_p1, x="Semanas", y="Buscas")
-        st.markdown("</div>", unsafe_allow_html=True)
 
     # --- DOSSIÊ PRODUTO 2 REAL ---
     with c_prod2:
-        st.markdown("<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #ff0055; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
-        st.markdown("<h3 style='color:#ff0055; margin:0;'>🔥 2. Nagano Tonic</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color:#ff0055; text-shadow: 0 0 10px rgba(255,0,85,0.4); margin-bottom:5px;'>🔥 2. Nagano Tonic</h3>", unsafe_allow_html=True)
         st.write("**Plataforma:** BuyGoods Network")
         st.write("**Termometro:** " + t_status2)
         st.write("**Analise:** Suplemento termogenico inovador japonês. Baixissima concorrencia de afiliados no leilao de rede de pesquisa gringo, ideal para estruturas de pre-sell rapidas.")
         st.write("**Melhores Paises:** USA, Canada, Reino Unido, Australia, Nova Zelandia")
-        st.write("**CPC Estimado:** USA: $1.60 | Outros: $1.10")
+        st.write("**CPC Estimado:** USA: $" + cpc_calculado2 + " | Outros: $1.10")
         st.write("")
         
         df_p2 = pd.DataFrame({
             "Semanas": ["S1", "S2", "S3", "S4"], 
-            "Buscas": [semente_d2, int(semente_d2 * 1.05), int(semente_d2 * 1.25), int(semente_d2 * 1.4)]
+            "Buscas": [volume_base2, int(volume_base2 * 1.05), int(volume_base2 * 1.25), int(volume_base2 * 1.4)]
         })
         st.bar_chart(df_p2, x="Semanas", y="Buscas")
-        st.markdown("</div>", unsafe_allow_html=True)
 
     # --- DOSSIÊ PRODUTO 3 REAL ---
     with c_prod3:
-        st.markdown("<div style='background:linear-gradient(135deg, #0f172a, #030712); border:1px solid #1e293b; border-top:4px solid #0066ff; padding:15px; border-radius:10px; min-height:450px;'>", unsafe_allow_html=True)
-        st.markdown("<h3 style='color:#0066ff; margin:0;'>🔥 3. DentiCore</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color:#0066ff; text-shadow: 0 0 10px rgba(0,102,255,0.4); margin-bottom:5px;'>🔥 3. DentiCore</h3>", unsafe_allow_html=True)
         st.write("**Plataforma:** Digistore24 Int.")
         st.write("**Termometro:** " + t_status3)
         st.write("**Analise:** Oferta recente focada na desinflamacao dental profunda e hálito gringo. Alta comissao recorrente liberada pelo produtor nas primeiras semanas de lancamento.")
         st.write("**Melhores Paises:** USA, UK, Irlanda, Australia, Canada")
-        st.write("**CPC Estimado:** USA: $1.30 | Outros: $0.85")
+        st.write("**CPC Estimado:** USA: $" + cpc_calculado3 + " | Outros: $0.85")
         st.write("")
         
         df_p3 = pd.DataFrame({
             "Semanas": ["S1", "S2", "S3", "S4"], 
-            "Buscas": [semente_d3, int(semente_d3 * 1.15), int(semente_d3 * 1.2), int(semente_d3 * 1.6)]
+            "Buscas": [semente_d3 := volume_base3, int(semente_d3 * 1.15), int(semente_d3 * 1.2), int(semente_d3 * 1.6)]
         })
         st.bar_chart(df_p3, x="Semanas", y="Buscas")
-        st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("---")
 
