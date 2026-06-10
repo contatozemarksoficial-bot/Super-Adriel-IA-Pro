@@ -126,9 +126,10 @@ def main():
         st.markdown("<h3 style='color:#00ffcc; margin:0; text-align:center;'>📐 Arquitetura do Funil Viva</h3>", unsafe_allow_html=True)
         st.write("")
         
-        # CONSTRUÇÃO GEOMÉTRICA DA PIRÂMIDE INVERTIDA REATIVA VIA CSS PURO 
+        # CONSTRUÇÃO GEOMÉTRICA DA PIRÂMIDE INVERTIDA REATIVA VIA CSS PURO
         html_funil = "<div style='display:flex; flex-direction:column; align-items:center; width:100%; font-family:monospace;'>"
         html_funil += "<div style='width:90%; background:linear-gradient(90deg, #111827, #1f2937); border:" + borda_topo + "; opacity:" + opacidade_topo + "; padding:12px; margin-bottom:6px; border-radius:6px; text-align:center; color:#ff0055; font-weight:bold;'>🎯 TOPO DO FUNIL (Sintomas / Dor Ampla)</div>"
         html_funil += "<div style='color:#f3f4f6; margin-bottom:6px; font-size:1.1rem;'>▼</div>"
         html_funil += "<div style='width:65%; background:linear-gradient(90deg, #111827, #1f293b); border:" + borda_meio + "; opacity:" + opacidade_meio + "; padding:12px; margin-bottom:6px; border-radius:6px; text-align:center; color:#0066ff; font-weight:bold;'>🛡️ MEIO DO FUNIL (Soluções / Presell)</div>"
         html_funil += "<div style='color:#f3f4f6; margin-bottom:6px; font-size:1.1rem;'>▼</div>"
+        html_funil += "<div style='width:40%; background:linear-gradient(90deg, #111827, #0f172a); border:" + borda_fundo + "; opacity:" + opacidade_fundo + "; padding:12px; border-radius:6px; text-align:center; color:#00ffcc; font-weight:bold;'>💵 FUNDO DO FUNIL (Marca / Compra)</div>"
