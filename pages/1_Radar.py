@@ -118,3 +118,5 @@ def main():
         html_cpc += "<span>🇳🇿 <b>NZ:</b> <span style='color:#00ffcc;'>$1.25</span></span>"
         html_cpc += "</div>"
         st.markdown(html_cpc, unsafe_allow_html=True)
+        st.write("")
+
