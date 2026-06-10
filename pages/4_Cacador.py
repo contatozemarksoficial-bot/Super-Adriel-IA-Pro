@@ -7,7 +7,7 @@ def main():
     # 1. CONFIGURACAO PREMIUM DA INTERFACE SAAS 2026
     st.set_page_config(page_title="Caçador Premium - AdrielAI", layout="wide")
 
-    # FORCADOR ULTRA LUXO CYBER-NEON COMPILADO COM CORREÇÃO DE GRÁFICOS ESCUROS (IMUNE AO BUG DO PYTHON 3.14)
+    # FORCADOR ULTRA LUXO CYBER-NEON COMPILADO (IMUNE AO BUG DO PYTHON 3.14)
     estilo_luxo = "<style>"
     estilo_luxo += "header, [data-testid='stHeader'] {background-color: rgba(0,0,0,0) !important; background: transparent !important; display: none !important;}"
     estilo_luxo += "[data-testid='stAppViewContainer'] {padding-top: 0px !important;}"
@@ -19,13 +19,13 @@ def main():
     estilo_luxo += ".stButton>button {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #00ffcc !important; border-radius: 8px !important; font-weight: bold !important; box-shadow: 0 0 10px rgba(0,255,204,0.15) !important; transition: all 0.3s ease-in-out !important; width: 100% !important; height: 45px !important;}"
     estilo_luxo += ".stButton>button:hover {background-color: #00ffcc !important; color: #030712 !important; box-shadow: 0 0 25px #00ffcc, 0 0 45px rgba(0,255,204,0.4) !important; transform: scale(1.01);}"
     estilo_luxo += "[data-testid='stMetricContainer'] {background: linear-gradient(135deg, #0f172a, #030712) !important; border: 1px solid #1e293b !important; border-left: 4px solid #00ffcc !important; padding: 15px !important; border-radius: 10px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;}"
-    estilo_luxo += "h1, h2, h3, h4, span, p, label {color: #f3f4f6 !important;}"
+    estilo_luxo += "h1, h2, h3, h4, span, p, label, .stMarkdown p {color: #f3f4f6 !important;}"
     estilo_luxo += "[data-testid='stNotification'] {background-color: #0f172a !important; border: 1px solid #1e293b !important; border-radius: 10px !important;}"
     
-    # 🪐 ENGENHARIA SUPREMA: Inversão total e remoção de fundos brancos nos blocos de gráficos nativos do Streamlit
-    estilo_luxo += "[data-testid='stVegaLiteChart'], .stVegaLiteChart, [data-testid='stDataFrame'] div {background-color: rgba(0,0,0,0) !important; background: transparent !important; border-radius: 10px !important;}"
-    estilo_luxo += "svg, g, rect, span, text {background: transparent !important; color: #f9fafb !important; fill: currentcolor !important;}"
-    estilo_luxo += "div[class^='vg-tooltip'] {background-color: #0f172a !important; border: 1px solid #1e293b !important; color: #00ffcc !important;}"
+    # 🪐 CUSTOMIZAÇÃO E ANULAÇÃO DE FUNDO BRANCO NOS GRÁFICOS (FIXAÇÃO DARK LUXO)
+    estilo_luxo += "div[data-testid='stVegaLiteChart'], .stVegaLiteChart {background-color: rgba(0,0,0,0) !important; background: transparent !important; border: 1px solid #1e293b !important; padding: 10px !important; border-radius: 8px !important;}"
+    estilo_luxo += "svg, canvas, g, path, rect {background-color: transparent !important; background: transparent !important;}"
+    estilo_luxo += "text, span {fill: #f3f4f6 !important; color: #f3f4f6 !important; font-family: monospace !important;}"
     
     estilo_luxo += "</style>"
     st.markdown(estilo_luxo, unsafe_allow_html=True)
@@ -57,7 +57,7 @@ def main():
     if "cacador_semente_viva" not in st.session_state:
         st.session_state.cacador_semente_viva = 12
 
-    if activar_busca:
+    if ativar_busca:
         st.session_state.cacador_semente_viva = random.randint(10, 99)
 
     semente_ativa = st.session_state.cacador_semente_viva
@@ -144,3 +144,7 @@ def main():
     link_final_whats = "https://whatsapp.com" + num_destino + "&text=" + msg_whats
     
     st.markdown("<a href='" + link_final_whats + "' target='_blank' style='display:block; text-align:center; background-color:#25d366; color:#ffffff; padding:15px; border-radius:8px; font-weight:bold; text-decoration:none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); font-size:1.1rem;'>💬 DISPARAR ALERTA DOS 3 PRODUTOS NO WHATSSAP</a>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()
