@@ -113,7 +113,7 @@ def main():
         df_comportamento = pd.DataFrame({
             "Meses": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
             "Verde Neon (Subindo)":    [base_mes_real, 0, 0, int(base_mes_real * 1.1), 0, 0, int(base_mes_real * 1.2), 0, 0, int(base_mes_real * 1.3), 0, 0],
-            "Laser Vermelho (Decendo)": [0, int(base_mes_real * 0.9), 0, 0, int(base_mes_real * 0.95), 0, 0, int(base_mes_real * 1.05), 0, 0, int(base_mes_real * 1.15), 0],
+            "Laser Vermelho (Descendo)": [0, int(base_mes_real * 0.9), 0, 0, int(base_mes_real * 0.95), 0, 0, int(base_mes_real * 1.05), 0, 0, int(base_mes_real * 1.15), 0],
             "Azul Eletrico (Indecisao)": [0, 0, int(base_mes_real * 0.85), 0, 0, int(base_mes_real * 1.0), 0, 0, int(base_mes_real * 1.1), 0, 0, int(base_mes_real * 1.2)]
         })
         
