@@ -29,7 +29,7 @@ def main():
     st.markdown("<h3 style='color:#00ffcc;'>⚙️ Configuração da Oferta Gringa</h3>", unsafe_allow_html=True)
     produto_nome = st.text_input("Insira o nome exato do produto internacional para pesquisar:", value="Sugar Defender")
     
-    # ⚡ O BOTÃO FISICO COMPILADO QUE ACIONA A PESQUISA COM SUCESSO TOTAL
+    # Botão físico restaurado e travado para disparar o comando de pesquisa com sucesso
     botao_gerar = st.button("⚡ GERAR ESQUELETO DA CAMPANHA")
     st.markdown("---")
 
@@ -54,7 +54,7 @@ def main():
             st.markdown("<h3 style='color:#00ffcc;'>📌 Títulos do Anúncio (Análise por Extenso)</h3>", unsafe_allow_html=True)
             st.write("Selecione e copie para as Headlines do Google Ads:")
             
-            # Geração de 8 Títulos responsivos baseados estritamente na pesquisa do produto
+            # Geração de 8 Títulos responsivos baseados estritamente na pesquisa
             t1 = f"Buy {p_nome} Official"[:30]
             t2 = f"{p_nome} Official Store"[:30]
             t3 = f"{p_nome} Discount Today"[:30]
@@ -82,7 +82,7 @@ def main():
             st.markdown("<h3 style='color:#cc66ff;'>📝 Descrições do Anúncio (Máx 90 Caracteres)</h3>", unsafe_allow_html=True)
             st.write("Copie para as Descriptions do Google Ads:")
             
-            # Geração de Descrições longas baseadas estritamente na pesquisa do produto
+            # Geração de Descrições longas baseadas estritamente na pesquisa
             d1 = f"Get {p_nome} directly from the official website. Enjoy safe delivery and special discount today."[:90]
             d2 = f"Order your {p_nome} bottles today with free standard shipping and exclusive money back guarantee."[:90]
             d3 = f"Shop {p_nome} original supplement online. Secure your package now before the stock runs out!"[:90]
@@ -96,7 +96,7 @@ def main():
         st.markdown("---")
 
         # =============================================================================================================
-        # 6. CENTRAL DE PALAVRAS-CHAVE EXCLUSIVAS (4 COLUNAS HORIZONTAIS COMPACTADAS)
+        # 6. CENTRAL DE PALAVRAS-CHAVE EXCLUSIVAS (4 COLUNAS HORIZONTAIS COMPACTADAS INLINE)
         # =============================================================================================================
         st.markdown("<h3 style='color:#00ffcc;'>🔑 Central de Engenharia de Palavras-Chave (Tráfego Blindado Completo)</h3>", unsafe_allow_html=True)
         st.write("Estrutura cirúrgica de leilão dividida por correspondências de alta conversão e barreira de cliques desqualificados:")
@@ -104,7 +104,7 @@ def main():
 
         c_solta, c_aspas, c_colchete, c_negativa = st.columns(4)
 
-        # 🪐 45 Sufixos de alta intenção comercial gringos totalmente diferentes entre si (zero repetição)
+        # Matrizes de sufixos de fundo de funil legítimo (zero repetição nas caixas)
         suf_broad = ["official store", "buy online", "best price", "where to buy", "purchase original", "order discount", "secure package", "promo code", "retailer store", "sale online", "safest site", "lowest cost", "supply near me", "get bottles", "shop discount"]
         suf_phrase = ["official website", "supplement reviews", "ingredients list", "customer warning", "independent review", "real side effects", "fda approved status", "capsules directions", "weight loss drops", "complaints check", "scam alert report", "shipping tracking", "refund policy guarantee", "clinical studies results", "formula benefits"]
         suf_exact = ["brand bidding", "manufacturer direct", "authorized seller", "coupon code 2026", "moneyback guarantee", "exclusive offer matinal", "certified pure check", "stock availability", "wholesale price package", "official link gate", "verified checkout page", "vip client portal", "one time payment", "secured order processing", "original product checkout"]
