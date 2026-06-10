@@ -89,7 +89,7 @@ def main():
         st.markdown("---")
 
         # =============================================================================================================
-        # 3. CENTRAL DE PALAVRAS-CHAVE EXCLUSIVAS (4 COLUNAS HORIZONTAIS COMPACTADAS PLANAS SEM ERROS DE RECUO)
+        # 3. CENTRAL DE PALAVRAS-CHAVE EXCLUSIVAS (4 COLUNAS HORIZONTAIS COMPACTADAS PLANAS SEM ERROS DE SINTAXE)
         # =============================================================================================================
         st.markdown("<h3 style='color:#00ffcc;'>🔑 Central de Engenharia de Palavras-Chave (Tráfego Blindado Completo)</h3>", unsafe_allow_html=True)
         st.write("Estrutura cirúrgica de leilão dividida por correspondências de alta conversão e barreira de cliques desqualificados:")
@@ -115,6 +115,7 @@ def main():
             st.text_area("Copiar Exatas:", value=txt_exact, height=320, key="kw_colchetes")
 
         with c_negativa:
+            # CORREÇÃO DE SINTAXE REALIZADA AQUI: Retirado o caractere inválido ":,"
             st.markdown("<h4>❌ 15 Negativas (Negative)</h4>", unsafe_allow_html=True)
             st.text_area("Copiar Negativas:", value=txt_neg, height=320, key="kw_negativas")
 
