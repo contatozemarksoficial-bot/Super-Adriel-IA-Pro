@@ -1,187 +1,99 @@
 import streamlit as st
-import pandas as pd
+from datetime import datetime
 
-# 1. CONFIGURAÇÃO PREMIUM DA PÁGINA (COLADO NO TETO DO MONITOR)
-st.set_page_config(
-    page_title="Gerador de Anúncios - AdrielAI", 
-    page_icon="🎯", 
-    layout="wide", 
-    initial_sidebar_state="collapsed"
-)
+def main():
+    # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE NATIVA SEGURA (RISCO ZERO DE TELA BRANCA)
+    st.title("🏭 FABRICANTE DE PÁGINAS PRÉ-SELL")
+    st.write("Estrutura e roteiro analítico de cópia para construir páginas de alta conversão blindadas contra bloqueios.")
+    st.markdown("---")
 
-# =============================================================================================================
-# 2. INJEÇÃO DE CSS DE ALTO LUXO BLACK-LABEL (EXTINÇÃO DE BARRAS BRANCAS E DESIGN ESCURO DE CINEMA)
-# =============================================================================================================
-st.markdown("""
-<style>
-/* 🌌 Fundo Escuro Premium Cyber Onyx Original do seu Print */
-.stApp { background-color: #060913 !important; color: #f8fafc !important; }
-h1, h2, h3, h4, p, span, div { font-family: 'Segoe UI', Roboto, sans-serif !important; }
-.titulo-cyber-fundo { font-size: 2.3rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0, 255, 204, 0.4); margin-bottom: 0px; }
+    # 💾 STORAGE DE SEGURANÇA CONTRA RESETS DA NUVEM
+    if "campo_nome_ativo" not in st.session_state:
+        st.session_state.campo_nome_ativo = "Sugar Defender"
 
-/* 🚨 DELEÇÃO CIRÚRGICA DA BARRA BRANCA SUPERIOR DO STREAMLIT */
-[data-testid="stHeader"] { display: none !important; height: 0px !important; background: transparent !important; }
-.stHeader { display: none !important; }
-.block-container { padding-top: 0.5rem !important; padding-bottom: 2rem !important; padding-left: 2rem !important; padding-right: 2rem !important; max-width: 100% !important; width: 100% !important; }
-[data-testid="stSidebar"] { display: none !important; width: 0px !important; }
-
-/* Moldura Hologrâmica de Sucesso do seu Print */
-.caixa-holografica-fundo {
-    background-color: #080f1d !important;
-    border: 2px solid #1e293b !important;
-    border-radius: 12px !important;
-    padding: 24px !important;
-    margin-bottom: 25px !important;
-    width: 100% !important;
-}
-
-/* 🚨 REPROGRAMAÇÃO DO BOTÃO DE PROCESSAMENTO EM NEON DE LED ROXO */
-.stButton > button {
-    background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%) !important;
-    color: #ffffff !important;
-    font-weight: 900 !important;
-    font-size: 14px !important;
-    border-radius: 30px !important; /* Formato Cápsula Premium */
-    padding: 14px 28px !important;
-    width: 100% !important;
-    border: none !important;
-    cursor: pointer !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    transition: all 0.25s ease-in-out !important;
-}
-.stButton > button:hover {
-    background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%) !important;
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.6) !important;
-    transform: scale(1.01) !important;
-}
-
-/* Campos de entrada estilizados */
-.stTextInput > div > div > input {
-    background-color: #0f1526 !important;
-    color: #ffffff !important;
-    border: 2px solid #1e293b !important;
-    border-radius: 8px !important;
-    padding: 12px !important;
-    font-size: 15px !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
-st.markdown('<h1 class="titulo-cyber-fundo">🎯 Gerador de Anúncios e Palavras-Chave</h1>', unsafe_allow_html=True)
-st.write("Fábrica de criativos RSA baseada em robôs de correspondência profunda de termos para tráfego pago na gringa.")
-st.write("---")
-
-# 3. CHASSI CENTRAL EM TELA CHEIA AMPLA
-st.markdown("""
-<div class="caixa-holografica-fundo">
-    <h3 style="color: #60a5fa; margin-top:0; font-size: 18px; font-weight: 800;">⚙️ CONFIGURAÇÃO DA OFERTA GRINGA</h3>
-    <p style="color: #cbd5e1; font-size: 13.5px; margin-bottom:0; line-height:1.6;">
-        Insira o produto da ClickBank ou BuyGoods. O Adriel-AI Pro vai estruturar anúncios responsivos com títulos exatos de até 90 caracteres e minerar 45 palavras-chave completamente exclusivas de Fundo de Funil legítimo.
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
-# Entrada de dados real
-prod_alvo = st.text_input("Insira o Nome do Produto Alvo para Gerar a Campanha:", value="Sugar Defender")
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-# 4. DISPARADOR DE PROCESSAMENTO DA IA
-if st.button("🎯 GERAR ANÚNCIOS E PALAVRAS-CHAVE COMPLETAS"):
-    with st.spinner("Estruturando banco de dados de alta intenção comercial..."):
-        import time
-        time.sleep(1.0)
-        
-    st.write("---")
-    st.markdown("## 🏁 Estrutura Gerada para o Produto: " + str(prod_alvo))
+    # PASSO 1 - REGISTRO E HOSPEDAGEM
+    st.subheader("📌 PASSO 1: Registro de Domínio e Hospedagem de Elite")
+    st.write("Orientações iniciais para fixar sua estrutura própria internacional antes de colar a sua cópia comercial de vendas:")
     
-    # JUSTIFICATIVA LONGA DO MODO DE GUERRA (4 A 5 LINHAS COMPLETA)
-    justificativa_limpa = (
-        "A cópia comercial gerada foi submetida ao filtro analítico de compliance estrito de publicidade "
-        "internacional gringa. O motor algoritmo removeu com precisão cirúrgica 100% de quaisquer termos "
-        "pretos ou alegações enganosas proibidas pelas diretrizes editoriais do Google Ads, tais como "
-        "promessas médicas falsas, curas imediatas ou perdas calóricas sem esforço. A anatomia deste anúncio "
-        "RSA encontra-se em estado de conformidade máxima, assegurando tração de lances estável e imunidade "
-        "total contra suspensões em lote de contas de afiliados gringos."
-    )
-    
-    st.markdown('<div style="background-color: rgba(30, 41, 59, 0.3); border: 2px solid #1e293b; padding: 20px; border-radius: 12px;"><h4 style="color: #60a5fa; margin-top: 0; font-weight: 900; font-size: 15px;">🏁 ÍNDICE DE BLINDAGEM ANTI-BLOQUEIO GOOGLE ADS DETECTADO:</h4><p style="color: #cbd5e1; font-size: 14px; margin-top: 8px; line-height: 1.6;">' + justificativa_limpa + '</p></div>', unsafe_allow_html=True)
-
-    # 5. FÁBRICA DOS 8 TÍTULOS RSA TRAVADOS EM NO MÁXIMO 90 CARACTERES
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown("### ✍ guide Títulos do Anúncio (Máximo 90 Caracteres)")
-    st.write("Selecione as copys ideais para injetar na sua campanha responsiva oficial:")
-    
-    titulos = [
-        prod_alvo + " Official Website - Buy Directly From The Approved Online Store Today",
-        prod_alvo + " Exclusive Discount - Get Special Savings On Your Order Right Now",
-        "Order " + prod_alvo + " Safely - Secure Your Supplement Bottles From The Retailer Portal",
-        prod_alvo + " Advanced Formula - Premium Quality Natural Ingredients For Daily Support",
-        prod_alvo + " Original Supplement - Authentic Liquid Drops Manufactured In Certified Labs",
-        "Buy " + prod_alvo + " Online - Save Up To 60% Off Plus Receive Free Shipping Worldwide",
-        prod_alvo + " Official Shop - Original Blend Packaged With Full 60 Days Refund Guarantee",
-        "Get " + prod_alvo + " Formula - Highly Discounted Price Valid For Current Stock Orders"
-    ]
-    
-    for idx, t in enumerate(titulos):
-        tamanho = len(t)
-        st.markdown("📦 `" + str(idx+1) + ". " + t + "` | **Status:** `Aprovado` | **Tamanho:** `" + str(tamanho) + "/90 Caracteres` ✅")
-
-    # Caminho de exibição
+    # Caixa nativa premium de recomendação compliance
+    txt_rec = "💡 RECOMENDAÇÃO CRÍTICA DO ROBÔ ADRIELAI: Para anunciar os produtos líderes do mercado gringo sem sofrer suspensões, adquira um domínio genérico com terminação .com ou .org (Ex: healthportal.com). Garanta no mínimo o certificado SSL ativo na sua hospedagem Hostinger para blindar a página contra alertas de vírus dos navegadores."
+    st.warning(txt_rec)
     st.markdown("<br>", unsafe_allow_html=True)
-    st.write("🌐 **Caminhos de Exibição da URL (Display URL Paths):**")
-    url_slug = prod_alvo.lower().replace(' ', '-')
-    st.code("://seu-site.com" + url_slug + "/official-store", language="text")
 
-    # =============================================================================================================
-    # 6. EXCLUSIVIDADE ABSOLUTA INLINE: 45 PALAVRAS-CHAVE DIFERENTES
-    # =============================================================================================================
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown("### 🔑 Central de Palavras-Chave do Leilão (45 Termos Reais Fundo de Funil)")
-    st.write("Cada caixa abaixo contém 15 termos de busca inteiramente exclusivos extraídos das métricas reais gringas, sem repetição de palavras.")
+    # INTERFACE DE CUSTOMIZAÇÃO DO PRODUTO
+    st.subheader("⚙️ Customizar Textos da sua Pré-Sell")
+    prod_input = st.text_input("Insira o nome exato do produto internacional para gerar a estrutura:", value=st.session_state.campo_nome_ativo)
     
-    termos_reais = [
-        "official site", "official website", "buy now", "order online", "discount code",
-        "coupon zone", "where to buy", "best price", "supplement shop", "original formula",
-        "purchase store", "bottle cost", "shipping rate", "discount order", "authorized retailer"
-    ]
-    
-    col_ampla, col_frase, col_exata = st.columns(3)
-    
-    with col_ampla:
-        st.markdown("🟢 **15 Palavras-Chave Amplas:**")
-        texto_ampla = ""
-        for termo in termos_reais:
-            texto_ampla += prod_alvo + " " + termo + "\n"
-        st.code(texto_ampla, language="text")
+    if st.button("⚡ CONSOLIDAR DADOS DO CLONE", type="primary"):
+        st.session_state.campo_nome_ativo = prod_input.strip()
+        st.success("Variáveis integradas com sucesso em lote!")
+
+    # Atribuição síncrona da variável central limpa
+    p_nome = st.session_state.campo_nome_ativo
+    st.markdown("---")
+
+    # PASSO 2 - ANATOMIA DA PRÉ-SELL CONVERSIVA
+    st.subheader("📋 PASSO 2: A Anatomia Perfeita de uma Pré-Sell Conversiva")
+    st.write("Abaixo está a divisão modular da cópia estratégica focada em intenção institucional (Brand Bidding) para aprovação imediata no Google Ads:")
+    st.write("")
+
+    col_esq, col_dir = st.columns(2)
+
+    with col_esq:
+        with st.container(border=True):
+            st.markdown("#### 🔴 Bloco 1: Headline de Segurança Governamental")
+            st.write("Aviso técnico superior de redirecionamento seguro para evitar promessas agressivas de cura ou termos médicos bloqueados pelo leilão:")
+            st.text_area("Cópia Bloco 1:", value="⚠️ SPECIAL SECURITY REDIRECTION PROTOCOL ACTIVE", height=80, key="b1_txt")
         
-    with col_frase:
-        st.markdown("🔵 **15 Palavras-Chave Com Aspas (Frase):**")
-        texto_frase = ""
-        for termo in termos_reais:
-            texto_frase += '"' + prod_alvo + ' ' + termo + '"\n'
-        st.code(texto_frase, language="text")
+        st.markdown("<br>", unsafe_allow_html=True)
         
-    with col_exata:
-        st.markdown("🔴 **15 Palavras-Chave Com Colchetes (Exata):**")
-        texto_exata = ""
-        for termo in termos_reais:
-            texto_exata += "[" + prod_alvo + " " + termo + "]\n"
-        st.code(texto_exata, language="text")
+        with st.container(border=True):
+            st.markdown("#### 🟢 Bloco 2: Pergunta Filtro (Gatilho de Qualificação)")
+            st.write("Caixa de engajamento do lead gringo para aumentar o Score de Qualidade e reter cliques acidentais de curiosos:")
+            st.text_area("Cópia Bloco 2:", value=f"Are you looking for the official online supplier of original {p_nome} bottles to claim the morning discount code?", height=80, key="b2_txt")
 
-    # 7. BLINDAGEM DE NEGATIVAS COMPLETA
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### 🛡️ Lista de Palavras-Chave Negativas Maximizada")
-    st.write("Injete este bloco denso de exclusão para blindar sua verba contra cliques falsos, curiosos ou buscas de suporte:")
-    st.code("reclame aqui, reclamacoes, fraud, scam, fake, free, gratis, free trial, download, pdf, video, amazon, ebay, walmart, costco, login, sign in, customer service, support, phone number, cancel, refund, bad reviews, complaints, side effects", language="text")
+    with col_dir:
+        with st.container(border=True):
+            st.markdown("#### 🔵 Bloco 3: Chamada para Ação Central (CTA Brilhante)")
+            st.write("Botão com comando de clique em alta intensidade visual direcionando para o site oficial do fabricante internacional:")
+            st.text_area("Cópia Bloco 3:", value="PROCEED TO OFFICIAL MANUFACTURER WEBSITE", height=80, key="b3_txt")
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        with st.container(border=True):
+            st.markdown("#### 🔵 Bloco 4: Rodapé de Conformidade Legal (Antibloqueio)")
+            st.write("Termos de políticas obrigatórios exigidos pelos robôs do Google Ads, declarando isenção de responsabilidade de marcas:")
+            st.text_area("Cópia Bloco 4:", value=f"Copyright 2026. All Rights Reserved. This site is a review portal of {p_nome} and is not associated with Google Corporation, Facebook Inc or alternative medical associations.", height=80, key="b4_txt")
 
-    # =============================================================================================================
-    # 🚨 SEU PEDIDO CRÍTICO: MÓDULO 5 — ESTEIRA DE CONVERSÃO E MONETIZAÇÃO HOSTINGER INJETADA POR EXTENSO
-    # =============================================================================================================
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown("""
-    <div style="background-color: #04251d; border: 2px solid #00ffcc; border-radius: 12px; padding: 25px;">
-        <h3 style="color: #00ffcc; font-size: 18px; font-weight: 900; margin-top:0; margin-bottom:10px;">
-            🌐 MÓDULO 5: REQUISITO DE INFRAESTRUTURA PARA PÁGINAS PRE-SELL PRE-REQUISITO
-        </h3>
+    st.markdown("---")
+
+    # PASSO 3 - TEXTOS PRONTOS PARA COPIAR E COLAR
+    st.subheader("✍️ PASSO 3: Textos Prontos para Copiar e Colar no Criador de Sites")
+    st.write("Utilize os campos abaixo estruturados na horizontal para extrair e colar o roteiro limpo gerado pelo robô de forma idêntica para o Elementor ou WordPress:")
+    st.write("")
+
+    c_c1, c_c2, c_c3, c_c4 = st.columns(4)
+
+    with c_c1:
+        with st.container(border=True):
+            st.markdown("##### 🌐 Headline Principal")
+            st.text_area("Copiar Headline:", value="WELCOME TO THE OFFICIAL INBOUND REDIRECTION PORTAL", height=120, key="copy_c1")
+
+    with c_c2:
+        with st.container(border=True):
+            st.markdown("##### 📋 Texto de Demanda")
+            st.text_area("Copiar Demanda:", value=f"You are being safely routed to verify the current availability for {p_nome}.", height=120, key="copy_c2")
+
+    with c_c3:
+        with st.container(border=True):
+            st.markdown("##### 🎯 Link de Botão CTA")
+            st.text_area("Copiar Link CTA:", value="🔒 CLICK HERE TO VERIFY ORIGINAL PRODUCT AND SPECIAL DISCOUNT", height=120, key="copy_c3")
+
+    with c_c4:
+        with st.container(border=True):
+            # Fielmente travado em Veredito (sem a letra C) conforme as regras de português corporativo limpo
+            st.markdown("##### 🏆 Veredito Legal")
+            st.text_area("Copiar Veredito:", value=f"Disclaimer: This platform belongs to an independent affiliate. Every verified order processed is routed directly to the secure gateway server of {p_nome}.", height=120, key="copy_c4")
+
+if __name__ == "__main__":
+    main()
