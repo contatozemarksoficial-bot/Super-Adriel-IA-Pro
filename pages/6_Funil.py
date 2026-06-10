@@ -34,7 +34,7 @@ def main():
     
     # Defaults estritos para Fundo de Funil
     nivel_funil = "FUNDO DE FUNIL (Marca Exata)"
-    txt_estrategia = "ESTRATÉGIA DO ROBÓ AFILIADO ELITE: O leilao para este termo e cirurgico! Como o lead esta buscando pelo nome exato do produto, a intencao de compra e maxima (fundo de funil). Use correspondencia de frase ou exata no Google Ads, crie uma estrutura de Pre-Sell direta de alta velocidade e foque em cliques qualificados."
+    txt_estrategia = "ESTRATÉGIA DO ROBÓ AFILIADO ELITE: O leilao para este termo e cirurgico! Como o lead esta buscando pelo nome exato do produto, a intencao de compra e maxima (fundo de funil). Use correspondencia de frase ou exata no Google Ads, crie uma estrutura de Pre-Sell direta de alta velocidade e foque in cliques qualificados."
     
     if "supplement" in termo_limpo or "tonic" in termo_limpo or "remedy" in termo_limpo or "juice" in termo_limpo or "pills" in termo_limpo or "diet" in termo_limpo:
         nivel_funil = "MEIO DE FUNIL (Solucao / Categoria)"
@@ -47,10 +47,15 @@ def main():
     num_whats = st.session_state.get("user_whatsapp_saved", "5511999999999")
     horario_atual = datetime.now().strftime("%H:%M:%S")
 
+    # Cálculos lineares primitivos
     cliques_estimados = int(orcamento / cpc_medio)
     visitas_oferta = int(cliques_estimados * 0.38)
-    vendas_estimadas = max(1, int(visitas_oferta * 0.028))
-    lucro_liquido = (vendas_estimadas * comissao_produto) - orcamento
+    vendas_estimadas = int(visitas_oferta * 0.028)
+    if vendas_estimadas < 1:
+        vendas_estimadas = 1
+        
+    faturamento_bruto = vendas_estimadas * comissao_produto
+    lucro_liquido = faturamento_bruto - orcamento
     roi_porcentagem = round((lucro_liquido / orcamento) * 100, 2)
 
     st.info("🤖 STATUS DO ARQUITETO: Funil operacional mapeado com sucesso as " + horario_atual)
@@ -75,26 +80,32 @@ def main():
     st.markdown("---")
     st.subheader("📊 Simulacao Operacional de Tráfego Gringo")
 
-    # Grids de Etapas e seus respectivos Gráficos Nativo-Pure
+    # Grids de Etapas e seus respectivos Gráficos Nativo-Pure com listas lineares separadas
     c_etapa1, c_etapa2, c_etapa3 = st.columns(3)
     lista_dias = ["D1", "D2", "D3", "D4"]
+    
+    # Listas numéricas brutas e fechadas para os DataFrames para garantir estabilidade absoluta
+    lista_c1 = [cliques_estimados, int(cliques_estimados*1.08), int(cliques_estimados*0.92), int(cliques_estimados*1.15)]
+    lista_c2 = [visitas_oferta, int(visitas_oferta*1.1), int(visitas_oferta*0.88), int(visitas_oferta*1.12)]
+    lista_c3 = [lucro_liquido, int(lucro_liquido*1.14), int(lucro_liquido*0.9), int(lucro_liquido*1.2)]
+
+    df_g1 = pd.DataFrame({"Dias": lista_dias, "Cliques": lista_c1})
+    df_g2 = pd.DataFrame({"Dias": lista_dias, "Visitas": lista_c2})
+    df_g3 = pd.DataFrame({"Dias": lista_dias, "Lucro": lista_c3})
     
     with c_etapa1:
         st.write("**Volume de Cliques**")
         st.metric(label="🔎 Cliques Totais (Dia)", value=f"{cliques_estimados:,}")
-        df_g1 = pd.DataFrame({"Dias": lista_dias, "Cliques": [cliques_estimados, int(cliques_estimados*1.08), int(cliques_estimados*0.92), int(cliques_estimados*1.15)]})
         st.bar_chart(df_g1, x="Dias", y="Cliques")
 
     with c_etapa2:
         st.write("**Retencao da Estrutura**")
         st.metric(label="🛰️ Visitas na Oferta (Dia)", value=f"{visitas_oferta:,}")
-        df_g2 = pd.DataFrame({"Dias": lista_dias, "Visitas": [visitas_oferta, int(visitas_oferta*1.1), int(visitas_oferta*0.88), int(visitas_oferta*1.12)]})
         st.bar_chart(df_g2, x="Dias", y="Visitas")
 
     with c_etapa3:
         st.write("**Lucratividade Liquida**")
         st.metric(label="🏆 Lucro Liquido (Dia)", value=f"${lucro_liquido:,.2f}")
-        df_g3 = pd.DataFrame({"Dias": lista_dias, "Lucro": [lucro_liquido, int(lucro_liquido*1.14), int(lucro_liquido*0.9), int(lucro_liquido*1.2)]})
         st.bar_chart(df_g3, x="Dias", y="Lucro")
 
     st.markdown("---")
@@ -103,6 +114,7 @@ def main():
     st.subheader("📲 Compartilhar Diagnostico do Funil no WhatsApp")
     st.write("Dispare o relatorio estrategico e o veredicto deste funil direto para o seu telefone cadastrado:")
     
+    # Texto limpo preparado linearmente sem interpolações complexas no link
     msg_funil = "DIAGNOSTICO%20DE%20FUNIL%20ADRIEL-AI%0A%0A-%20Termo:%20" + produto_analisado.replace(" ", "%20") + "%0A-%20Nivel:%20" + nivel_funil.replace(" ", "%20") + "%0A-%20Cliques:%20" + str(cliques_estimados) + "%0A-%20Lucro%20Liquido:%20$" + str(lucro_liquido) + "%20USD%0A-%20ROI:%20" + str(roi_porcentagem) + "%25%0A%0A_Estrategia%20mapeada%20as%20" + horario_atual + "_"
     
     link_final_funil = "https://whatsapp.com" + num_whats + "&text=" + msg_funil
