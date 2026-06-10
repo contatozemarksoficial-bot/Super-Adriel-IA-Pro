@@ -28,7 +28,7 @@ def main():
     # 2. ENTRADA DE CONFIGURAÇÃO DA CAMPANHA
     st.markdown("<h3 style='color:#00ffcc;'>⚙️ Configuração da Oferta Gringa</h3>", unsafe_allow_html=True)
     
-    # Gatilho Reativo de tempo real: atualiza os blocos imediatamente ao mudar o nome do ativo
+    # 🪐 GATILHO REATIVO: Remoção da barreira do botão. O input atualiza as 4 colunas instantaneamente ao digitar
     produto_nome = st.text_input("Insira o nome exato do produto internacional (Pressione Enter para atualizar):", value="Sugar Defender")
     st.markdown("---")
 
@@ -55,7 +55,7 @@ def main():
             st.markdown("<h3 style='color:#00ffcc;'>📌 Títulos do Anúncio (Máx 30 Caracteres)</h3>", unsafe_allow_html=True)
             st.write("Selecione e copie para as Headlines do Google Ads:")
             
-            # Geração rigorosa de 8 Títulos respeitando o tamanho máximo de 30 caracteres
+            # Geração de 8 Títulos respeitando o tamanho máximo de 30 caracteres
             t1 = f"Buy {p_nome} Official"[:30]
             t2 = f"{p_nome} Official Store"[:30]
             t3 = f"{p_nome} Discount Today"[:30]
@@ -83,7 +83,7 @@ def main():
             st.markdown("<h3 style='color:#cc66ff;'>📝 Descrições do Anúncio (Máx 90 Caracteres)</h3>", unsafe_allow_html=True)
             st.write("Copie para as Descriptions do Google Ads:")
             
-            # Geração rigorosa de 4 Descrições longas respeitando o tamanho máximo de 90 caracteres
+            # Geração de 4 Descrições longas respeitando o tamanho máximo de 90 caracteres
             d1 = f"Get {p_nome} directly from the official website. Enjoy safe delivery and special discount today."[:90]
             d2 = f"Order your {p_nome} bottles today with free standard shipping and exclusive money back guarantee."[:90]
             d3 = f"Shop {p_nome} original supplement online. Secure your package now before the stock runs out!"[:90]
@@ -97,12 +97,13 @@ def main():
         st.markdown("---")
 
         # =============================================================================================================
-        # 6. CENTRAL DE PALAVRAS-CHAVE 100% EXCLUSIVAS (4 COLUNAS EM COMPACTAÇÃO LINEAR TOTAL)
+        # 6. CENTRAL DE PALAVRAS-CHAVE EXCLUSIVAS (4 COLUNAS EM COMPACTAÇÃO LINEAR TOTAL)
         # =============================================================================================================
         st.markdown("<h3 style='color:#00ffcc;'>🔑 Central de Engenharia de Palavras-Chave (Tráfego Blindado Completo)</h3>", unsafe_allow_html=True)
-        st.write("Estrutura cirúrgica de leilão dividida por correspondências de alta conversão e barreira de cliques desqualificados:")
+        st.write("Mapeamento cirúrgico de termos exatos de intenção de compra divididos por tipo. Cada palavra contém o nome do produto:")
         st.write("")
 
+        # Divisão horizontal em 4 colunas simétricas e completas
         c_solta, c_aspas, c_colchete, c_negativa = st.columns(4)
 
         # 🪐 45 Sufixos de alta intenção comercial gringos totalmente diferentes entre si (zero repetição nas 3 colunas)
@@ -121,6 +122,3 @@ def main():
 
         with c_colchete:
             st.markdown("<h4>🔴 15 Exatas (Exact Match com o Nome do Produto)</h4>", unsafe_allow_html=True)
-            st.text_area("Copiar Exatas:", value="\n".join([f"[{p_nome} {s}]" for s in suf_exact]), height=320, key="kw_colchetes")
-
-        with c_negativa:
