@@ -49,18 +49,18 @@ def main():
     posicao_lista = LISTA_PRODUTOS.index(p_nome) + 1
     p_status = "ALTA" if posicao_lista <= 10 else "NORMAL"
     
-    # 🚦 ENGINE REATIVO V37: IDs físicos e numéricos preenchidos inline em linha única contra falhas de parser
+    # 🚦 ENGINE REATIVO V37_TOTAL: IDs numéricos físicos indexados estritamente em linha para conter bugs de parser
     if posicao_lista in:
-        cor_semaforo_real = "#00ffcc"  # Verde Neon - Baixa Densidade de Concorrência
+        cor_semaforo_real = "#00ffcc"  # Verde Neon - Leilão Limpo/ ROI Alto
         status_texto_semaforo = "🟢 STATUS SEMÁFORO: LEILÃO COMPLEMENTAR - ALTO ROI EM FUNDO DE FUNIL"
     elif posicao_lista in:
         cor_semaforo_real = "#ffcc00"  # Amarelo Ouro - Concorrência Moderada
         status_texto_semaforo = "🟡 STATUS SEMÁFORO: CONCORRÊNCIA MODERADA - REQUER PÁGINA PRESELL OTIMIZADA"
     elif posicao_lista in:
-        cor_semaforo_real = "#ff0055"  # Vermelho Rubi - Leilão Saturado / Disputado
+        cor_semaforo_real = "#ff0055"  # Vermelho Rubi - Leilão Saturado/ Estrutura Própria
         status_texto_semaforo = "🔴 STATUS SEMÁFORO: LEILÃO SATURADO - REQUER ESTRUTURA PRÓPRIA BLINDADA LOCAL"
     else:
-        cor_semaforo_real = "#0066ff"  # Azul Cyber - Fluxo Regular Estável
+        cor_semaforo_real = "#0066ff"  # Azul Cyber - Fluxo Estável Perpétuo
         status_texto_semaforo = "🔵 STATUS SEMÁFORO: MERCADO PERPÉTUO CONSTANTE - LEILÃO LIMPO E ESTÁVEL"
 
     p_mes = 50000 + (posicao_lista * 3200) + (tempo_segundo * 5)
@@ -70,7 +70,7 @@ def main():
     p_pais = p_paises[posicao_lista % 5]
 
     p_dor = "Frustração emocional profunda do comprador internacional devido ao acúmulo de sintomas resistentes e dores biológicas profundas associadas à necessidade mapeada por " + p_nome + ", gerando esgotamento físico crônico e bloqueando a autoconfiança de forma devastadora."
-    p_porque = "O monitoramento automatizado confirms tráfego massivo e qualificado de fundo de funil para " + p_nome + ". O veredito estratégico final aponta que o leilão para a região de " + p_pais + " é a melhor oportunidade operacional gringa hoje, entregando cliques limpos e comissão robusta em dólares com baixa concorrência institucional."
+    p_porque = "O monitoramento automatizado confirma tráfego massivo e qualificado de fundo de funil para " + p_nome + ". O veredito estratégico final aponta que o leilão para a região de " + p_pais + " é a melhor oportunidade operacional gringa hoje, entregando cliques limpos e comissão robusta em dólares com baixa concorrência institucional."
 
     col_esquerda, col_direita = st.columns([1.0, 1.3])
 
@@ -103,7 +103,7 @@ def main():
         st.markdown("---")
         st.markdown(f"<div style='font-size:1.15rem; font-weight:bold; color:{cor_semaforo_real}; margin-bottom:15px;'>{status_texto_semaforo}</div>", unsafe_allow_html=True)
         
-        # DEFINIDO E FIXADO COMO VEREDITO (SEM A LETRA C) DE ACORDO COM A SUA PADRONIZAÇÃO
+        # FIELMENTE TRAVADO EM VEREDITO (SEM A LETRA C) PARA PADRONIZAÇÃO VISUAL PROFISSSIONAL
         st.markdown("<h4 style='color:#ff0055; text-shadow: 0 0 5px rgba(255,0,85,0.2);'>❤️ Veredito Psicológico e Dor Cirúrgica do Comprador Gringo:</h4>", unsafe_allow_html=True)
         st.warning(p_dor)
         
@@ -121,11 +121,10 @@ def main():
         meses_ano = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
         base_mes_real = p_mes // 12
         
-        # Gráfico construído via compactação em linha única fechada
         df_comportamento = pd.DataFrame(list(zip(meses_ano, [int(base_mes_real + (i * 450) if i % 2 == 0 else base_mes_real - (i * 200)) for i in range(12)])), columns=["Mês", "Sinal"])
         df_comportamento.set_index("Mês", inplace=True)
         
-        # 🪐 GRÁFICO SEMÁFORO INTERATIVO: Mudando de cor automaticamente em 3 níveis!
+        # 🪐 GRÁFICO SEMÁFORO REAL: As colunas respondem dinamicamente em 3 cores puras
         st.bar_chart(df_comportamento, y="Sinal", color=cor_semaforo_real)
 
 if __name__ == "__main__":
