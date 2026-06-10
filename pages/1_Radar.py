@@ -16,7 +16,7 @@ def main():
     estilo_luxo += ".stTextInput>div>div>input {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; font-size: 1.1rem !important;}"
     estilo_luxo += ".stTextInput>div>div>input:focus {border-color: #00ffcc !important; box-shadow: 0 0 15px rgba(0,255,204,0.3) !important;}"
     
-    # Customização cirúrgica dos 18 botões laterais empilhados no padrão original escuro
+    # Customização cirúrgica dos 18 botões laterais empilhados no padrão original escuro do print
     estilo_luxo += ".stButton>button {background-color: #070b13 !important; color: #f3f4f6 !important; border: 1px solid #1e293b !important; border-radius: 6px !important; font-weight: normal !important; text-align: left !important; padding-left: 15px !important; width: 100% !important; height: 42px !important; transition: all 0.2s ease-in-out !important;}"
     estilo_luxo += ".stButton>button:hover {border-color: #00ffcc !important; color: #00ffcc !important; box-shadow: 0 0 10px rgba(0,255,204,0.2) !important;}"
     
@@ -31,7 +31,7 @@ def main():
     estilo_luxo += "</style>"
     st.markdown(estilo_luxo, unsafe_allow_html=True)
 
-    # CABEÇALHO CORRIGIDO E INTEGRADO COM SUPERINTELIGÊNCIA
+    # CABEÇALHO CORRIGIDO COM ENGENHARIA DE COPY AVANÇADA E PORTUGUÊS PERFEITO
     st.markdown('<h1 style="font-size: 2.5rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">💎 RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
     st.write("Varredura automatizada e mapeamento analítico de ofertas de alta conversão nas plataformas internacionais.")
     
@@ -72,7 +72,7 @@ def main():
             {"id": "LeanBliss", "label": "🛡️ LeanBliss | 🔵 NORMAL - ESTÁVEL"}
         ]
 
-        # RECONSTRUÇÃO DOS 18 BOTÕES ORIGINAIS EMPILHADOS E LIVRES DE COMPONENTES CINZAS
+        # BOTÕES VERTICAIS COMPILADOS EM ARQUITETURA LIMPA SEM CAIXAS CINZAS
         for item in lista_completa_produtos:
             if st.session_state.produto_radar_ativo == item["id"]:
                 st.markdown("<div style='background-color:#0f172a; border:2px solid #00ffcc; padding:11px; border-radius:6px; margin-bottom:8px; color:#00ffcc; font-weight:bold; font-size:1rem;'>" + item['label'] + "</div>", unsafe_allow_html=True)
@@ -89,7 +89,7 @@ def main():
         st.write("Análise Operacional: **Nível Avançado** | Monitoramento Proprietário Adriel-AI")
         st.write("---")
 
-        # MÉTRICAS PREMIUM COM PORTUGUÊS 100% PURIFICADO
+        # MÉTRICAS PREMIUM COM COPIES ACESSAS E PRECISAS
         c_met1, c_met2 = st.columns(2)
         with c_met1:
             st.metric(label="🔎 Intenção de compra acumulada (Últimas 24h)", value="53.325", delta="+12.4%")
@@ -98,15 +98,15 @@ def main():
 
         st.write("")
         
-        # SEÇÃO 1: INTEL DE PERSUASÃO E DOR REVISADA
+        # SEÇÃO 1: SUPERINTELIGÊNCIA DE COPY APLICADA À DOR EMOCIONAL DO COMPRADOR
         st.markdown("<h4 style='color:#00ffcc;'>❤️ Âncora Psicológica e Dor Cirúrgica do Comprador Gringo:</h4>", unsafe_allow_html=True)
         st.info("O sofrimento emocional profundo do comprador internacional é alimentado pelo acúmulo de gordura corporal resistente, o qual destrói a autoconfiança de forma devastadora. Essa dor gera um estado de urgência psicológica e física imediata. Essa vulnerabilidade ativa o gatilho perfeito para injetarmos uma estrutura de vendas de alta performance, capaz de converter essa necessidade latente em compras de alto rendimento com comissões robustas em dólares.")
 
-        # SEÇÃO 2: VEREDITO ESTRATÉGICO TOTALMENTE ACENTUADO E SEPARADO
+        # SEÇÃO 2: SUPERINTELIGÊNCIA DE COPY APLICADA AO VEREDITO ESTRATÉGICO
         st.markdown("<h4 style='color:#00ffcc;'>🏆 Veredito Estratégico Computacional (Google Ads / Bing Ads):</h4>", unsafe_allow_html=True)
         st.success("Reino Unido (UK) - Nossa inteligência preditiva valida a estabilização matemática do leilão na Rede de Pesquisa do Google Ads para o público britânico e regiões de alta renda da Commonwealth. O termômetro de mercado aponta o momento ideal para a escalada vertical da oferta. A baixa concorrência em termos institucionais fundo de funil assegura o menor Custo por Clique (CPC), gerando um Retorno sobre o Investimento (ROI) líquido e escalável hoje, entregando cliques limpos com lucro bruto recorrente.")
 
-        # SEÇÃO 3: MAPEAMENTO DE CPC SEM ERROS
+        # SEÇÃO 3: MAPEAMENTO DE CPC SEGURO
         st.markdown("<h4 style='color:#00ffcc;'>🌐 Mapeamento Analítico de CPC por Região (Tier 1):</h4>", unsafe_allow_html=True)
         html_cpc = "<div style='background-color:#0f172a; border:1px solid #1e293b; padding:12px; border-radius:8px; font-family:monospace; font-size:1.05rem; color:#f3f4f6; display:flex; justify-content:space-between;'>"
         html_cpc += "<span>🇺🇸 <b>USA:</b> <span style='color:#00ffcc;'>$1.95</span></span>"
@@ -118,4 +118,3 @@ def main():
         st.markdown(html_cpc, unsafe_allow_html=True)
         st.write("")
 
-        # SEÇÃO 4: HISTÓRICO DE LEILÃO DINÂMICO COMPACTADO (IMUNE A TELA BRANCA)
