@@ -1,160 +1,112 @@
 import streamlit as st
 import pandas as pd
-import altair as alt
 import time
 import random
-from datetime import datetime, timedelta
 
-# 1. CONFIGURAÇÃO DE ELITE
-st.set_page_config(page_title="Adriel-AI Pro | Dashboard", layout="wide", initial_sidebar_state="expanded")
+def main():
+    # 1. CONFIGURAÇÃO DE ELITE (Design Cinema Dark em Tela Cheia)
+    st.set_page_config(page_title="Adriel-AI Pro | Gestão de Assinantes", layout="wide", initial_sidebar_state="expanded")
 
-if "ativado" not in st.session_state: st.session_state.ativado = False
-
-# 2. CSS MASTER LUXO - TEMA TRIPLE BLACK (Corrigindo o fundo dos botões)
-st.markdown("""
-<style>
+    # CSS MASTER LUXO - PROTOCOLO GATEWAY DE PAGAMENTOS
+    st.markdown("""
+    <style>
     header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
     .stApp { background-color: #010409 !important; }
     
-    .main-logo {
-        color: #ffffff; font-size: 3rem; font-weight: 900; letter-spacing: -2px;
-        display: flex; align-items: center; gap: 15px;
-        text-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
-    }
-    .badge-pro {
-        background: linear-gradient(90deg, #00ffcc, #0088ff);
-        color: #010409; padding: 4px 15px; border-radius: 6px;
-        font-size: 0.9rem; font-weight: 900; box-shadow: 0 0 20px #00ffcc88;
-    }
+    /* Métrica Executiva com Gradiente de Faturamento */
+    [data-testid="stMetricValue"] { color: #00ffcc !important; font-size: 2.2rem !important; font-weight: 900 !important; }
+    [data-testid="stMetricLabel"] { color: #94a3b8 !important; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* Card de Membro Blindado */
-    .member-card {
-        border: 1px solid #1e293b; padding: 40px; border-radius: 25px;
-        background: rgba(13, 17, 23, 0.9); margin-bottom: 35px;
-        border-top: 5px solid #00ffcc; box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+    /* Estilo dos Cards de Pagamento */
+    .payment-card {
+        border: 1px solid #1e293b; padding: 25px; border-radius: 16px;
+        background: linear-gradient(145deg, #0d1117, #010409);
+        margin-bottom: 20px; border-top: 4px solid #00ffcc;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
-
-    /* DESIGN DOS BOTÕES (CORRIGIDO) */
-    .btn-container { 
-        display: flex; 
-        gap: 15px; 
-        margin-top: 25px; 
-        background: transparent !important; 
-    }
-    
-    .btn-pro {
-        flex: 1;
-        display: inline-block;
-        padding: 16px 20px;
-        background-color: #010409;
-        color: #00ffcc !important;
-        border: 2px solid #00ffcc;
-        border-radius: 12px;
-        text-align: center;
-        text-decoration: none !important;
-        font-weight: 900;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        transition: 0.4s all;
-    }
-    .btn-pro:hover {
-        background-color: #00ffcc;
-        color: #010409 !important;
-        box-shadow: 0 0 30px #00ffcc;
-        transform: translateY(-3px);
-    }
-    
-    .btn-secondary {
-        border-color: #94a3b8;
-        color: #94a3b8 !important;
-    }
-    .btn-secondary:hover {
-        background-color: #94a3b8;
-        color: #010409 !important;
-        box-shadow: 0 0 20px #94a3b8;
-    }
-
-    .metric-hero { color: #ffffff; font-size: 2.8rem; font-weight: 900; letter-spacing: -2px; }
     .neon-text { color: #00ffcc !important; font-weight: bold; }
-</style>
-""", unsafe_allow_html=True)
-
-# --- CABEÇALHO ---
-st.markdown('<div class="main-logo">🤖 Adriel-AI <span class="badge-pro">PRO</span></div>', unsafe_allow_html=True)
-st.markdown('<p style="color:#94a3b8; margin-top:-10px; margin-left:65px; font-weight:600;">Inteligência de Fundo de Funil e Brand Bidding</p>', unsafe_allow_html=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-# --- COMANDO ---
-col_v1, col_btn, col_v2 = st.columns([1, 1.8, 1])
-with col_btn:
-    if st.button("🚀 ATIVAR VARREDURA E VALIDAR LINKS"):
-        st.session_state.ativado = True
-
-st.markdown('<div style="height:1px; background:linear-gradient(90deg, transparent, #1e293b, transparent); margin:40px 0;"></div>', unsafe_allow_html=True)
-
-# --- RESULTADOS ---
-if st.session_state.ativado:
-    hoje = datetime.now()
-    meses = [(hoje - timedelta(days=30*i)).strftime('%b') for i in range(12)][::-1]
     
-    # BANCO DE DADOS COM OS LINKS REAIS
-    produtos = [
-        {
-            "n": "Nagano Lean Body Tonic", 
-            "v24": "5.412", "st": "ESCALA AGRESSIVA", 
-            "plat": "BuyGoods", "com": "$127", "peso": 1.7,
-            "mkt_link": "https://buygoods.com",
-            "aff_link": "https://leanbodytoniconline.com"
-        },
-        {
-            "n": "FitSpresso", 
-            "v24": "9.120", "st": "DOMÍNIO TOTAL", 
-            "plat": "ClickBank", "com": "$145", "peso": 2.5,
-            "mkt_link": "https://clickbank.com",
-            "aff_link": "https://getfitspresso.com"
-        }
+    /* Botões Executivos de Checkout */
+    .btn-checkout {
+        display: block; width: 100%; padding: 12px;
+        background: transparent; color: #00ffcc !important;
+        border: 2px solid #00ffcc; border-radius: 8px;
+        text-align: center; text-decoration: none !important;
+        font-weight: 800; font-size: 0.85rem; text-transform: uppercase;
+        transition: 0.4s; margin-top: 10px;
+    }
+    .btn-checkout:hover { background: #00ffcc; color: #010409 !important; box-shadow: 0 0 20px #00ffcc; }
+
+    /* Badge de Status de Assinatura */
+    .status-active { color: #00ffcc; background: rgba(0, 255, 204, 0.1); padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # --- CABEÇALHO EXCLUSIVO ---
+    st.markdown('<h1 style="color: #ffffff; font-size: 2.5rem; font-weight: 900; letter-spacing: -2px;">💎 ÁREA DE <span style="color: #00ffcc;">MEMBROS & PAGAMENTOS</span></h1>', unsafe_allow_html=True)
+    st.markdown('<p style="color: #94a3b8; font-weight: 600;">Monitoramento de Licenças Ativas e Faturamento Automático</p>', unsafe_allow_html=True)
+
+    # --- DASHBOARD DE FATURAMENTO (MÉTRICAS) ---
+    st.markdown("<br>", unsafe_allow_html=True)
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("FATURAMENTO TOTAL", "R$ 142.840,00", "+12%")
+    c2.metric("LICENÇAS ATIVAS", "1.584", "85% Cap.")
+    c3.metric("CHURN RATE", "1.2%", "-0.5%")
+    c4.metric("MRR (MENSAL)", "R$ 48.200,00", "+R$ 4.2k")
+
+    st.markdown('<div style="height:1px; background:linear-gradient(90deg, transparent, #1e293b, transparent); margin:40px 0;"></div>', unsafe_allow_html=True)
+
+    # --- BLOCO 1: GATEWAY DE PAGAMENTO (VENDA DE ACESSO) ---
+    st.markdown('<h3 style="color:white; margin-bottom:20px;">💳 GATEWAY DE ACESSO IMEDIATO</h3>', unsafe_allow_html=True)
+    cp1, cp2, cp3 = st.columns(3)
+
+    planos = [
+        {"nome": "PLANO MENSAL", "preco": "R$ 297,00", "vant": "Acesso ao Caçador Pro + Radar"},
+        {"nome": "PLANO ANUAL", "preco": "R$ 1.997,00", "vant": "Acesso VIP + Funil Clone + IA Extra"},
+        {"nome": "PLANO LIFETIME", "preco": "R$ 4.997,00", "vant": "Acesso Vitalício + Todas as 6 Telas"}
     ]
 
-    for p in produtos:
-        st.markdown(f'<div class="member-card">', unsafe_allow_html=True)
-        c_txt, c_chart = st.columns([1, 1.3], gap="large")
-        
-        with c_txt:
-            # AQUI ESTÁ A CORREÇÃO: O comando st.markdown com unsafe_allow_html=True
+    cols = [cp1, cp2, cp3]
+    for i, p in enumerate(planos):
+        with cols[i]:
             st.markdown(f"""
-                <span style="color:#00ffcc; font-size:0.75rem; font-weight:800; letter-spacing:2px;">● {p['st']}</span>
-                <div style="color:white; font-size:2.3rem; font-weight:900; margin:5px 0;">🔥 {p['n']}</div>
-                
-                <div style="margin: 20px 0;">
-                    <span style="color:#94a3b8; font-size:0.85rem; text-transform:uppercase; font-weight:700;">Cliques Reais (24h)</span><br>
-                    <span class="metric-hero">{p['v24']}</span> <span style="color:#00ffcc; font-weight:900;">VIVO</span>
-                </div>
-                
-                <p><span class="neon-text">⚖️ VEREDITO:</span> O produto <b>{p['n']}</b> é validado para <b>Fundo de Funil</b>.</p>
-                <p style="color:#94a3b8; margin-bottom:15px;">Plataforma: <b style="color:white;">{p['plat']}</b> | Comissão: <b style="color:#00ffcc;">{p['com']}</b></p>
-                
-                <div class="btn-container">
-                    <a href="{p['mkt_link']}" target="_blank" class="btn-pro">🔌 ABRIR MARKETPLACE</a>
-                    <a href="{p['aff_link']}" target="_blank" class="btn-pro btn-secondary">📄 MATERIAL</a>
-                </div>
+            <div class="payment-card">
+                <span class="status-active">OPORTUNIDADE</span>
+                <h2 style="color:white; margin:10px 0;">{p['nome']}</h2>
+                <div style="font-size:2rem; color:#00ffcc; font-weight:900; margin-bottom:10px;">{p['preco']}</div>
+                <p style="color:#94a3b8; font-size:0.85rem;">{p['vant']}</p>
+                <a href="#" class="btn-checkout">💳 COMPRAR LICENÇA VIA CARTÃO / PIX</a>
+            </div>
             """, unsafe_allow_html=True)
-        
-        with c_chart:
-            st.markdown("<p style='color:white; font-weight:900; font-size:0.9rem; letter-spacing:1.5px; margin-bottom:15px;'>📈 TENDÊNCIA ESTATÍSTICA (12 MESES)</p>", unsafe_allow_html=True)
-            vol_mensal = [int((40 + (i * 4.5)) * p['peso'] * 1000) for i in range(12)]
-            df = pd.DataFrame({"Mês": meses, "Volume": vol_mensal})
-            
-            chart = alt.Chart(df).mark_bar(
-                color='#00ffcc', cornerRadiusTopLeft=6, cornerRadiusTopRight=6
-            ).encode(
-                x=alt.X('Mês', sort=None, axis=alt.Axis(labelColor='#94a3b8', title=None, labelAngle=0, labelFontWeight=700)),
-                y=alt.Y('Volume', axis=alt.Axis(labelColor='#94a3b8', title=None, grid=False))
-            ).properties(width='container', height=260, background='transparent').configure_view(strokeWidth=0)
-            
-            st.altair_chart(chart, use_container_width=True)
-        
-        st.markdown('</div>', unsafe_allow_html=True)
-else:
-    st.info("Painel Adriel-AI pronto. Clique acima para ativar.")
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
+    # --- BLOCO 2: GESTÃO DE ASSINANTES (TABELA EXECUTIVA) ---
+    st.markdown('<h3 style="color:white; margin-bottom:20px;">👥 GESTÃO DE LICENÇAS E SEGURANÇA</h3>', unsafe_allow_html=True)
+    
+    # Simulação de Banco de Dados de Assinantes
+    dados_membros = {
+        "Usuário": ["Jose Marques", "Ana Silva", "Carlos Gringo", "Elite Traffic", "Base 44 Clone", "Robo King"],
+        "Plano": ["LIFETIME", "ANUAL", "MENSAL", "LIFETIME", "ANUAL", "ANUAL"],
+        "Status": ["✓ ATIVO", "✓ ATIVO", "✓ ATIVO", "✓ ATIVO", "⚠ PENDENTE", "✓ ATIVO"],
+        "Último Acesso": ["Agora", "2h atrás", "5h atrás", "Ontem", "3 dias", "12min"],
+        "Faturamento": ["R$ 4.997", "R$ 1.997", "R$ 297", "R$ 4.997", "R$ 0", "R$ 1.997"]
+    }
+    df = pd.DataFrame(dados_membros)
+    st.dataframe(df, use_container_width=True)
+
+    # BOTÕES EXECUTIVOS DE COMANDO
+    st.markdown("<br>", unsafe_allow_html=True)
+    cb1, cb2, cb3 = st.columns([1, 1, 1])
+    with cb1:
+        if st.button("🔓 LIBERAR ACESSO MANUAL"):
+            st.toast("Comando de Criptografia enviado para a Base 44!", icon="🟢")
+    with cb2:
+        if st.button("🔒 BLOQUEAR LICENÇA"):
+            st.toast("Acesso trancado nos servidores globais.", icon="🔴")
+    with cb3:
+        if st.button("📑 GERAR RELATÓRIO DE MRR"):
+            st.success("Dossiê de faturamento gerado com sucesso!")
+
+if __name__ == "__main__":
+    main()
