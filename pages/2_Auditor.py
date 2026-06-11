@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
-import urllib.parse
+from gtts import gTTS
+import io
 
 def main():
     # 1. CONFIGURACAO PREMIUM DA INTERFACE SAAS 2026
@@ -65,7 +66,7 @@ def main():
         txt_dor = f"O comprador gringo que busca por {nome_prod} sofre com uma dor psicologica severa gerada pela falta de resultados in tratamentos anteriores, acumulando cansaco cronico, indisposicao matinal e bloqueio biologico profundo."
         txt_estrategia = f"A melhor estrategia operacional para o {nome_prod} e subir uma campanha estruturada focada no canal recomendado. Monte uma estrutura de Pre-Sell ou pagina de Review nativo direto, blindando o link de afiliado contra bloqueios e focando fundo de funil."
 
-        # 4. CONSTRUÇÃO DO LAYOUT EM DUAS COLUNAS PRINCIPAIS LUXO
+        # 4. CONSTRUÇÃO DO LAYOUT EM DUAS COLUNAS PRINCIGAIS LUXO
         col_esquerda, col_direita = st.columns([1.0, 1.3])
 
         with col_esquerda:
@@ -101,17 +102,20 @@ def main():
             
             st.markdown("<h4 style='color:#ff0055;'>🏆 VEREDITO OPERACIONAL FINAL (ALVO DE GUERRA):</h4>", unsafe_allow_html=True)
             
-            # CORREÇÃO E FECHAMENTO DO SEU CÓDIGO ORIGINAL
             texto_veredito = f"RECOMENDACAO ADRIEL-AI: Para o produto {nome_prod}, o melhor país absoluto para anunciar agora é o Canadá (CA), utilizando o Google Ads para máxima conversão."
             st.success(texto_veredito)
             
-            # SISTEMA DE ÁUDIO INTEGRADO VIA LINK DO NAVEGADOR
+            # NOVO MOTOR DE VOZ LOCAL IMPERMEÁVEL A BLOQUEIOS
             texto_falado = f"Para o produto {nome_prod}, o melhor país absoluto para anunciar agora é o Canadá, utilizando o Google Ads para máxima conversão."
-            texto_codificado = urllib.parse.quote(texto_falado)
-            url_audio = f"https://google.com{url_audio}" if False else f"https://google.com{texto_codificado}"
             
-            st.markdown("🎵 **Clique no Play abaixo para ouvir o veredito do robô:**")
-            st.audio(url_audio, format="audio/mp3")
+            # Cria o arquivo de áudio diretamente na memória do Python
+            tts = gTTS(text=texto_falado, lang='pt', tld='com.br')
+            fp = io.BytesIO()
+            tts.write_to_fp(fp)
+            fp.seek(0)
+            
+            st.markdown("🎵 **Aperte o Play abaixo para escutar o robô falar:**")
+            st.audio(fp.read(), format="audio/mp3")
 
 if __name__ == "__main__":
     main()
