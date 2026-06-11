@@ -54,7 +54,7 @@ def main():
     col1, col2, col3 = st.columns([1, 1, 0.6])
     with col1:
         # Chave dinâmica evita erro de cache
-        clique_varrer = st.button("🚀 INICIAR VARREDURA REAL", key="btn_varrer_final")
+        clique_varrer = st.button("🚀 INICIAR VARREDURA REAL", key="btn_varrer_final_v5")
     with col2:
         whats_num = st.text_input("WhatsApp:", value=st.session_state.wa_db, label_visibility="collapsed", placeholder="5511999999999")
     with col3:
@@ -64,13 +64,13 @@ def main():
 
     st.markdown("---")
 
-    # --- BANCO DE DADOS (DADOS FIXOS PREENCHIDOS PARA EVITAR ERRO DE SINTAXE) ---
+    # --- BANCO DE DADOS (DADOS COMPACTADOS PARA EVITAR ERRO DE SINTAXE NO PYTHON 3.14) ---
     lista_prods = [
-        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40.", "v": "USA (Search Ads)", "s": "JUN/2026", "g": [40, 60, 80, 50, 45, 90, 110, 120, 85, 70, 65, 80]},
-        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal.", "v": "Canadá (FB Ads)", "s": "ALTA ESCALA", "g": [30, 50, 70, 90, 100, 115, 125, 105, 95, 80, 75, 90]},
-        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália (Native)", "s": "MAIO/2026", "g": [25, 45, 65, 85, 95, 100, 110, 90, 80, 75, 70, 85]},
-        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga.", "v": "EUA (Search Ads)", "s": "TOP VENDAS", "g": [50, 70, 90, 110, 120, 100, 90, 80, 70, 65, 60, 75]},
-        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde das gengivas e reconstrução.", "v": "Irlanda (Video Ads)", "s": "RECENTE", "g": [15, 35, 55, 75, 85, 95, 105, 85, 75, 70, 65, 80]},
+        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40.", "v": "USA", "s": "JUN/2026", "g": [55, 48, 75, 52, 45, 85, 91, 88, 68, 118, 102, 93]},
+        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal.", "v": "Canadá", "s": "ALTA ESCALA", "g": [60, 52, 80, 58, 48, 92, 98, 92, 75, 122, 108, 98]},
+        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália", "s": "MAIO/2026", "g": [45, 38, 65, 42, 35, 75, 81, 78, 58, 108, 92, 83]},
+        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga.", "v": "USA", "s": "TOP VENDAS", "g": [70, 62, 90, 68, 58, 102, 108, 102, 85, 132, 118, 108]},
+        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde das gengivas e reconstrução.", "v": "Irlanda", "s": "RECENTE", "g": [50, 42, 70, 48, 40, 80, 86, 82, 62, 112, 98, 88]},
         {"n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço.", "v": "Nova Zelândia", "s": "LANÇAMENTO", "g":}
     ]
 
@@ -86,7 +86,7 @@ def main():
                     <h3>🔥 {p['n']} <span style="font-size:0.7rem; color:#94a3b8;">({p['s']})</span></h3>
                     <p><span class="neon-label">🚀 Estratégia Recomendada:</span><br>
                     Canal: {p['e']}<br>
-                    Abordagem: Fundo de Funil com blindagem.</p>
+                    Abordagem: Fundo de Funil estruturado.</p>
                     <p><span class="neon-label">💡 Dor Identificada:</span> {p['d']}</p>
                     <p><span class="neon-label">🛰️ Veredito:</span> Melhor país para anunciar agora: <b>{p['v']}</b></p>
                 </div>
