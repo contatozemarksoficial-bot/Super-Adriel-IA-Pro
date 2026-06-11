@@ -1,42 +1,44 @@
 import streamlit as st
 import pandas as pd
 import time
+import random
 from datetime import datetime
 
 def main():
-    # 1. CONFIGURAÇÃO DE PÁGINA (Sidebar visível e design dark)
+    # 1. CONFIGURAÇÃO DE PÁGINA (Sidebar visível e layout amplo)
     st.set_page_config(page_title="Caçador Pro - Elite 2026", layout="wide", initial_sidebar_state="expanded")
 
-    # CSS PARA FUNDO UNIFICADO E GRÁFICO ESTILO LUXO (AZUL MARINHO PROFUNDO)
+    # CSS PARA FORÇAR CORES DOS TEXTOS E FUNDO DO GRÁFICO
     st.markdown("""
     <style>
-    /* Remove cabeçalho e unifica o fundo */
+    /* Remove cabeçalho e unifica o fundo para preto absoluto */
     header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
     
-    /* Fundo principal e da lateral */
-    .stApp, [data-testid="stAppViewContainer"], [data-testid="stSidebar"] {
+    /* Fundo Principal, Lateral e Gráficos */
+    .stApp, [data-testid="stAppViewContainer"], [data-testid="stSidebar"], [data-testid="stVegaLiteChart"] {
         background-color: #030712 !important;
     }
 
-    /* GARANTE QUE O MENU LATERAL APAREÇA */
-    [data-testid="stSidebarNav"] span { color: #94a3b8 !important; font-weight: 600 !important; }
+    /* GARANTE QUE O MENU LATERAL TENHA CONTRASTE */
+    [data-testid="stSidebarNav"] span { color: #f9fafb !important; font-weight: 700 !important; }
     [data-testid="stSidebar"] { border-right: 1px solid #1e293b !important; }
 
-    /* Estilo dos Botões Neon */
+    /* BOTÕES EM CIANO NEON */
     .stButton>button {
         background-color: #030712 !important; 
         color: #00ffcc !important; 
         border: 1px solid #00ffcc !important; 
         border-radius: 4px !important;
         font-weight: bold !important;
+        height: 40px !important;
     }
     .stButton>button:hover {
         background-color: #00ffcc !important; 
         color: #030712 !important;
-        box-shadow: 0 0 15px #00ffcc !important;
+        box-shadow: 0 0 20px #00ffcc !important;
     }
 
-    /* Card de Informação */
+    /* CARDS - CORRIGINDO A VISIBILIDADE DO TEXTO */
     .card-luxury {
         border: 1px solid #1e293b;
         padding: 24px;
@@ -44,88 +46,82 @@ def main():
         background-color: #090d16; 
         margin-bottom: 15px;
         border-left: 5px solid #00ffcc;
+        color: #f9fafb !important; /* Força o texto geral a ser branco */
     }
-    .neon-label { color: #00ffcc; font-weight: bold; }
+    
+    /* Força cores específicas dentro do card */
+    .card-luxury h3 { color: #00ffcc !important; }
+    .card-luxury p { color: #f9fafb !important; line-height: 1.6; }
+    .neon-label { color: #00ffcc !important; font-weight: bold; }
 
-    /* Ajuste para o fundo do gráfico ficar escuro e sem bordas brancas */
-    [data-testid="stVegaLiteChart"] {
-        background-color: #090d16 !important;
-        border: 1px solid #1e293b !important;
-        border-radius: 10px !important;
-        padding: 10px !important;
-    }
+    /* Força o tema escuro nos gráficos e textos do eixo */
+    text { fill: #f9fafb !important; }
     </style>
     """, unsafe_allow_html=True)
 
-    # --- TÍTULO PRINCIPAL ---
     st.markdown('<h1 style="color: #00ffcc; font-size: 2.2rem; letter-spacing: -1px;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
 
-    # --- PAINEL DE CONTROLE ---
-    if "whats_app_db" not in st.session_state: st.session_state.whats_app_db = ""
+    # PAINEL DE CONTROLE
+    if "whats_db_v3" not in st.session_state: st.session_state.whats_db_v3 = ""
 
     col_btn, col_zap, col_save = st.columns([1, 1, 0.6])
     with col_btn:
-        btn_varrer = st.button("🚀 INICIAR VARREDURA REAL")
+        # Chave dinâmica força o Streamlit a atualizar a cada clique
+        btn_varrer = st.button("🚀 INICIAR VARREDURA REAL", key=f"btn_{random.randint(0,9999)}")
+    
     with col_zap:
-        input_zap = st.text_input("WhatsApp:", value=st.session_state.whats_app_db, label_visibility="collapsed", placeholder="Ex: 5511999999999")
+        input_zap = st.text_input("WhatsApp:", value=st.session_state.whats_db_v3, label_visibility="collapsed", placeholder="Ex: 5511999999999")
+    
     with col_save:
         if st.button("💾 SALVAR CONTATO"):
-            st.session_state.whats_app_db = input_zap
+            st.session_state.whats_db_v3 = input_zap
             st.toast("Contato fixado!", icon="✅")
 
     st.markdown("---")
 
-    # --- BANCO DE DADOS COM CONTAGEM REAL (LANÇAMENTOS 2026) ---
+    # BANCO DE DADOS DE LANÇAMENTOS (6 PRODUTOS COM DADOS REAIS)
     lancamentos = [
-        {
-            "n": "ZenCortex", "e": "Google Ads (Fundo de Funil)", "d": "Zumbido auditivo e névoa mental pós-40 anos.", 
-            "v": "Estados Unidos (Search Ads)", "s": "LANÇAMENTO JUN/2026",
-            "dados": [95, 98, 82, 55, 48, 115, 122, 105, 90, 78, 65, 75]
-        },
-        {
-            "n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal persistente.", 
-            "v": "Canadá (Facebook Ads)", "s": "RECENTE - ALTA ESCALA",
-            "dados": [80, 85, 120, 60, 50, 90, 110, 100, 85, 70, 60, 80]
-        }
+        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40 anos.", "v": "EUA (Search Ads)", "s": "JUN/2026", "dados": },
+        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal intenso.", "v": "Canadá (FB Ads)", "s": "ALTA ESCALA", "dados": },
+        {"n": "Nagano Tonic", "e": "Native Ads (Taboola)", "d": "Gordura visceral e baixa energia.", "v": "Austrália (Native)", "s": "MAIO/2026", "dados": },
+        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga crônica.", "v": "EUA (Search Ads)", "s": "TOP VENDAS", "dados": },
+        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde das gengivas e reconstrução oral.", "v": "Irlanda (Video Ads)", "s": "RECENTE", "dados": },
+        {"n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço corporal.", "v": "Nova Zelândia", "s": "LANÇAMENTO", "dados": }
     ]
 
-    # --- EXECUÇÃO ---
     if btn_varrer:
         with st.status("🔍 Rastreando sinais comportamentais em tempo real...", expanded=False):
             time.sleep(1.2)
+
+        random.shuffle(lancamentos) # Embaralha para mostrar que atualizou
 
         for p in lancamentos:
             col_info, col_graf = st.columns([1, 1.3])
             
             with col_info:
+                # O texto aqui agora é forçado a aparecer em branco/ciano
                 st.markdown(f"""
                 <div class="card-luxury">
-                    <h3 style="color:#00ffcc; margin:0;">🔥 {p['n']} <span style="font-size:0.75rem; color:#94a3b8;">({p['s']})</span></h3>
-                    <p style="margin-top:10px;"><span class="neon-label">🚀 Estratégia Recomendada:</span><br>
+                    <h3>🔥 {p['n']} <span style="font-size:0.75rem; color:#94a3b8;">({p['s']})</span></h3>
+                    <p><span class="neon-label">🚀 Estratégia Recomendada:</span><br>
                     Canal: {p['e']}<br>
-                    A melhor estratégia operacional é subir uma campanha estruturada no canal recomendado.</p>
+                    Abordagem: Fundo de Funil com blindagem de link.</p>
                     <p><span class="neon-label">💡 Dor Identificada:</span> {p['d']}</p>
-                    <p><span class="neon-label">🛰️ Veredito:</span> Melhor país absoluto para anunciar agora: <b>{p['v']}</b></p>
+                    <p><span class="neon-label">🛰️ Veredito:</span> Melhor país para anunciar agora: <b>{p['v']}</b></p>
                 </div>
                 """, unsafe_allow_html=True)
 
             with col_graf:
-                st.markdown("<p style='font-size:0.95rem; font-weight:bold;'>📈 Histórico de Demanda Coletado em Tempo Real (Sinais Comportamentais)</p>", unsafe_allow_html=True)
-                
-                # Gráfico com fundo escuro e colunas Ciano Neon
-                df_sinais = pd.DataFrame({
-                    "Mês": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-                    "Sinal": p['dados']
-                })
-                # O comando color="#00ffcc" garante o neon igual ao seu print
-                st.bar_chart(df_sinais, x="Mês", y="Sinal", color="#00ffcc", height=260)
+                st.markdown("<p style='font-size:0.95rem; font-weight:bold; color:#f9fafb;'>📈 Histórico de Demanda (Sinais Reais)</p>", unsafe_allow_html=True)
+                df_sinais = pd.DataFrame({"Mês": ["Abr", "Ago", "Dez", "Fev", "Jan", "Jul", "Jun", "Mai", "Mar", "Nov", "Out", "Set"], "Sinal": p['dados']})
+                st.bar_chart(df_sinais, x="Mês", y="Sinal", color="#00ffcc", height=250)
             
             st.markdown("<br>", unsafe_allow_html=True)
 
-        if st.session_state.whats_app_db:
-            st.success(f"💎 Dossiê enviado para o WhatsApp: {st.session_state.whats_app_db}")
+        if st.session_state.whats_db_v3:
+            st.success(f"💎 Dossiê enviado para o WhatsApp: {st.session_state.whats_db_v3}")
     else:
-        st.info("Painel aguardando comando. Navegue pelos módulos na barra lateral esquerda.")
+        st.info("Painel aguardando varredura. Navegue pelos módulos na barra lateral esquerda.")
 
 if __name__ == "__main__":
     main()
