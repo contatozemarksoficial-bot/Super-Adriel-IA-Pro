@@ -5,14 +5,13 @@ import time
 import random
 
 def main():
-    # 1. CONFIGURAÇÃO DE ELITE (Sidebar visível e Design Dark Luxo)
-    st.set_page_config(page_title="Caçador Pro - V10", layout="wide", initial_sidebar_state="expanded")
+    # 1. CONFIGURAÇÃO DE ELITE (Design Cinema Dark)
+    st.set_page_config(page_title="Caçador Pro - Escala Máxima", layout="wide", initial_sidebar_state="expanded")
 
-    # Inicializa variáveis de memória (Session State)
-    if "ativo" not in st.session_state: st.session_state.ativo = False
-    if "zap_db" not in st.session_state: st.session_state.zap_db = ""
+    if "pesquisa_ativa" not in st.session_state: st.session_state.pesquisa_ativa = False
+    if "wa_v10" not in st.session_state: st.session_state.wa_v10 = ""
 
-    # CSS LUXO SUPREMO - UNIFICAÇÃO DE FUNDO E TEXTO
+    # CSS LUXO SUPREMO - FUNDO PRETO UNIFICADO
     st.markdown("""
     <style>
     header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
@@ -24,12 +23,9 @@ def main():
     .stButton>button {
         background-color: #010409 !important; color: #00ffcc !important; 
         border: 1px solid #00ffcc !important; border-radius: 4px;
-        font-weight: bold; height: 42px; width: 100%; transition: 0.3s;
+        font-weight: bold; height: 40px; width: 100%; transition: 0.3s;
     }
-    .stButton>button:hover {
-        background-color: #00ffcc !important; color: #010409 !important;
-        box-shadow: 0 0 25px #00ffcc;
-    }
+    .stButton>button:hover { box-shadow: 0 0 25px #00ffcc; background-color: #00ffcc !important; color: #010409 !important; }
     
     .card-luxury {
         border: 1px solid #1e293b; padding: 25px; border-radius: 12px;
@@ -46,34 +42,58 @@ def main():
     col_pesq, col_zap, col_save = st.columns([1.2, 0.8, 0.5])
     
     with col_pesq:
-        if st.button("🚀 INICIAR VARREDURA REAL"):
-            st.session_state.ativo = True
+        if st.button("🚀 INICIAR VARREDURA DE ALTA ESCALA"):
+            st.session_state.pesquisa_ativa = True
             
     with col_zap:
-        input_zap = st.text_input("WhatsApp:", value=st.session_state.zap_db, label_visibility="collapsed", placeholder="5511999999999")
+        input_zap = st.text_input("WhatsApp:", value=st.session_state.wa_v10, label_visibility="collapsed", placeholder="5511999999999")
     
     with col_save:
         if st.button("💾 SALVAR"):
-            st.session_state.zap_db = input_zap
-            st.toast("Contato fixado!", icon="✅")
+            st.session_state.wa_v10 = input_zap
+            st.toast("Contato salvo!", icon="✅")
 
     st.markdown("---")
 
-    # --- LÓGICA DE EXIBIÇÃO DOS 6 LANÇAMENTOS ---
-    if st.session_state.ativo:
-        with st.status("🔍 Rastreando sinais comportamentais e gravidade das ofertas...", expanded=False):
+    # --- EXECUÇÃO DA PESQUISA ---
+    if st.session_state.pesquisa_ativa:
+        with st.status("🔍 Mapeando volume de cliques e gravidade das ofertas...", expanded=False):
             time.sleep(1)
 
         meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
         
-        # BANCO DE DADOS COMPLETO (6 PRODUTOS)
+        # BANCO DE DADOS COM VOLUME DE CLIQUES AUMENTADO (ESCALA REAL)
         produtos = [
-            {"n": "Nagano Tonic", "e": "YouTube Ads + Review", "d": "Metabolismo travado e gordura visceral.", "p": "Austrália", "s": "ESCALA AGRESSIVA", "g": "148.5", "c": "$125", "v": [55, 62, 78, 85, 92, 110, 125, 105, 98, 115, 120, 130]},
-            {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal intenso.", "p": "Canadá", "s": "ALTA ESCALA", "g": "210.2", "c": "$140", "v": [40, 55, 70, 95, 115, 130, 145, 120, 110, 125, 135, 150]},
-            {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido auditivo e névoa mental.", "p": "USA", "s": "OCEANO AZUL", "g": "92.4", "c": "$115", "v": [30, 35, 45, 60, 75, 90, 85, 80, 70, 85, 95, 100]},
-            {"n": "Sugar Defender", "e": "Google Ads Review", "d": "Desequilíbrio de glicose e fadiga.", "p": "USA", "s": "TOP VENDAS", "g": "185.0", "c": "$130", "v": [60, 75, 90, 105, 120, 140, 135, 110, 100, 125, 130, 145]},
-            {"n": "DentiCore", "e": "YouTube + Google Search", "d": "Saúde das gengivas e reconstrução oral.", "p": "Reino Unido", "s": "LANÇAMENTO", "g": "78.9", "c": "$110", "v": [20, 30, 40, 55, 70, 85, 95, 100, 90, 105, 115, 120]},
-            {"n": "Puravive", "e": "Google Search (Review)", "d": "Gordura marrom teimosa pós-40.", "p": "USA", "s": "ESTÁVEL", "g": "160.3", "c": "$135", "v":}
+            {
+                "n": "Nagano Tonic", "e": "YouTube Ads + Google Review", "d": "Gordura visceral e metabolismo travado.", 
+                "p": "Austrália / USA", "s": "ESCALA AGRESSIVA", "g": "158.4", "c": "$127",
+                "v": [45, 48, 52, 64, 78, 92, 115, 128, 110, 105, 98, 95]
+            },
+            {
+                "n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal intenso.", 
+                "p": "Canadá / USA", "s": "ALTA ESCALA", "g": "225.1", "c": "$145",
+                "v": [60, 65, 80, 95, 110, 135, 148, 155, 140, 130, 125, 120]
+            },
+            {
+                "n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido auditivo e névoa mental.", 
+                "p": "USA / UK", "s": "OCEANO AZUL", "g": "98.2", "c": "$118",
+                "v": [20, 25, 30, 45, 55, 70, 85, 98, 92, 88, 80, 75]
+            },
+            {
+                "n": "Sugar Defender", "e": "Google Ads Review", "d": "Desequilíbrio de glicose e fadiga.", 
+                "p": "USA / Irlanda", "s": "TOP VENDAS", "g": "192.0", "c": "$132",
+                "v": [55, 60, 75, 90, 105, 120, 135, 142, 128, 115, 110, 105]
+            },
+            {
+                "n": "DentiCore", "e": "YouTube + Google Search", "d": "Saúde das gengivas e reconstrução oral.", 
+                "p": "Reino Unido / USA", "s": "LANÇAMENTO", "g": "82.5", "c": "$115",
+                "v": [15, 20, 35, 50, 65, 80, 95, 105, 98, 90, 85, 80]
+            },
+            {
+                "n": "Puravive", "e": "Google Search (Review)", "d": "Gordura marrom teimosa pós-40.", 
+                "p": "USA / Nova Zelândia", "s": "ESTÁVEL", "g": "165.7", "c": "$138",
+                "v": [40, 45, 60, 75, 90, 110, 125, 138, 120, 110, 105, 100]
+            }
         ]
 
         for p in produtos:
@@ -92,21 +112,22 @@ def main():
                 """, unsafe_allow_html=True)
             
             with col_graf:
-                st.markdown(f"<p style='font-size:0.9rem; font-weight:bold;'>📈 Volume Mensal (Escala Real em Milhares)</p>", unsafe_allow_html=True)
-                df_d = pd.DataFrame({"Mês": meses, "Buscas": [v * 1000 for v in p['v']]})
+                st.markdown(f"<p style='font-size:0.9rem; font-weight:bold;'>📈 Volume de Cliques Mensais (Milhares Reais)</p>", unsafe_allow_html=True)
+                # Multiplicamos os dados para mostrar escala de cliques real
+                df_d = pd.DataFrame({"Mês": meses, "Cliques": [v * 1200 for v in p['v']]})
                 
                 chart = alt.Chart(df_d).mark_bar(color='#00ffcc').encode(
                     x=alt.X('Mês', sort=None, axis=alt.Axis(labelColor='white', titleColor='white')),
-                    y=alt.Y('Buscas', axis=alt.Axis(labelColor='white', titleColor='white', title='Volume'))
+                    y=alt.Y('Cliques', axis=alt.Axis(labelColor='white', titleColor='white', title='Volume'))
                 ).properties(width='container', height=220, background='#010409').configure_view(strokeWidth=0)
                 
                 st.altair_chart(chart, use_container_width=True)
             st.markdown("<br>", unsafe_allow_html=True)
         
-        if st.session_state.zap_db:
-            st.success(f"💎 Varredura enviada para: {st.session_state.zap_db}")
+        if st.session_state.wa_v10:
+            st.success(f"💎 Dossiê de Alta Escala enviado para: {st.session_state.wa_v10}")
     else:
-        st.info("Painel em standby. Clique em 'Iniciar Varredura Real' para carregar os 6 lançamentos.")
+        st.info("Aguardando ativação do terminal. O robô está pronto para caçar volumes de elite.")
 
 if __name__ == "__main__":
     main()
