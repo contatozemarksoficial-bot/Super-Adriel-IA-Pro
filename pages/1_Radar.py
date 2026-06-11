@@ -58,12 +58,11 @@ def main():
         st.write(f"Sistemas operando em Modo de Guerra. Varredura viva para o produto **{nome_prod}** às " + horario_atual)
         st.write("")
 
-        # TRAVADO APENAS EM GOOGLE ADS E CANADA
         canal_ideal = "Google Ads (Rede de Pesquisa)"
         pais_vencedor = "Canadá (CA)"
 
         txt_beneficios = f"Os beneficios principais do {nome_prod} consistem na imediata estabilizacao dos indices metabolicos profundos do organismo, promovendo a desinflamacao celular acelerada de tecidos sobrecarregados, eliminando a retencao de liquidos de forma venda e devolvendo o vigor organico total."
-        txt_dor = f"O comprador gringo que busca por {nome_prod} sofre com uma dor psicologica severa gerada pela falta de resultados em tratamentos anteriores, acumulando cansaco cronico, indisposicao matinal e bloqueio biologico profundo."
+        txt_dor = f"O comprador gringo que busca por {nome_prod} sofre com uma dor psicologica severa gerada pela falta de resultados in tratamentos anteriores, acumulando cansaco cronico, indisposicao matinal e bloqueio biologico profundo."
         txt_estrategia = f"A melhor estrategia operacional para o {nome_prod} e subir uma campanha estruturada focada no canal recomendado. Monte uma estrutura de Pre-Sell ou pagina de Review nativo direto, blindando o link de afiliado contra bloqueios e focando fundo de funil."
 
         # 4. CONSTRUÇÃO DO LAYOUT EM DUAS COLUNAS PRINCIPAIS LUXO
@@ -102,17 +101,17 @@ def main():
             
             st.markdown("<h4 style='color:#ff0055;'>🏆 VEREDITO OPERACIONAL FINAL (ALVO DE GUERRA):</h4>", unsafe_allow_html=True)
             
-            # TEXTOS ATUALIZADOS APENAS COM GOOGLE ADS
             texto_veredito = f"RECOMENDACAO ADRIEL-AI: Para o produto {nome_prod}, o melhor país absoluto para anunciar agora é o Canadá (CA), utilizando o Google Ads para máxima conversão."
             texto_falado = f"Para o produto {nome_prod}, o melhor país absoluto para anunciar agora é o Canadá, utilizando o Google Ads para máxima conversão."
             
             st.success(texto_veredito)
             
-            # Mecanismo de fala injetado via HTML Invisível no navegador
+            # NOVO SISTEMA: Player de áudio visível que contorna o bloqueio do navegador
             texto_codificado = urllib.parse.quote(texto_falado)
             url_audio = f"https://google.com{texto_codificado}"
-            html_audio = f'<iframe src="{url_audio}" allow="autoplay" style="display:none"></iframe>'
-            st.markdown(html_audio, unsafe_allow_html=True)
+            
+            st.markdown("🎵 **Clique no Play abaixo para ouvir o veredito:**")
+            st.audio(url_audio, format="audio/mp3")
 
 if __name__ == "__main__":
     main()
