@@ -6,10 +6,11 @@ import random
 
 def main():
     # 1. CONFIGURAÇÃO DE ELITE (Design Cinema Dark)
-    st.set_page_config(page_title="Caçador Pro - V10 Final", layout="wide", initial_sidebar_state="expanded")
+    st.set_page_config(page_title="Caçador Pro - Elite", layout="wide", initial_sidebar_state="expanded")
 
-    # Memória de Sessão para manter a pesquisa viva
-    if "lista_atual" not in st.session_state: st.session_state.lista_atual = []
+    # Memória de Sessão para manter a pesquisa ativa
+    if "lista_atual" not in st.session_state: 
+        st.session_state.lista_atual = []
 
     # CSS LUXO SUPREMO - DESIGN LIMPO E INTEGRADO
     st.markdown("""
@@ -39,7 +40,7 @@ def main():
 
     st.markdown('<h1 style="color: #00ffcc; font-size: 2.2rem; letter-spacing: -1px; text-align: center;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
 
-    # --- TERMINAL DE COMANDO ÚNICO ---
+    # --- TERMINAL DE COMANDO ---
     col_vazia1, col_btn, col_vazia2 = st.columns([1, 1.5, 1])
     
     with col_btn:
@@ -47,16 +48,16 @@ def main():
             with st.status("🔍 Mapeando oportunidades de elite...", expanded=False):
                 time.sleep(1)
                 
-                # BANCO DE DADOS DE LANÇAMENTOS
+                # BANCO DE DADOS DE LANÇAMENTOS (TEXTO REVISADO)
                 pool_alvos = [
                     {"n": "Nagano Tonic", "e": "YouTube Ads", "d": "Metabolismo travado.", "p": "Austrália", "s": "AGRESSIVO", "g": "158.4", "c": "$127"},
-                    {"n": "FitSpresso", "e": "Facebook Ads", "d": "Bloqueio biológico.", "p": "Canadá", "s": "ALTA ESCALA", "g": "210.2", "c": "$145"},
-                    {"n": "ZenCortex", "e": "Google Ads", "d": "Zumbido auditivo.", "p": "USA", "s": "OCEANO AZUL", "g": "98.2", "c": "$118"},
-                    {"n": "Sugar Defender", "e": "Google Review", "d": "Picos de glicose.", "p": "USA", "s": "TOP VENDAS", "g": "192.0", "c": "$132"},
+                    {"n": "FitSpresso", "e": "Facebook Ads", "d": "Bloqueio metabólico.", "p": "Canadá", "s": "ALTA ESCALA", "g": "210.2", "c": "$145"},
+                    {"n": "ZenCortex", "e": "Google Ads", "d": "Zumbido auditivo.", "p": "EUA", "s": "OCEANO AZUL", "g": "98.2", "c": "$118"},
+                    {"n": "Sugar Defender", "e": "Google Review", "d": "Picos de glicose.", "p": "EUA", "s": "TOP VENDAS", "g": "192.0", "c": "$132"},
                     {"n": "DentiCore", "e": "YouTube Search", "d": "Saúde das gengivas.", "p": "Reino Unido", "s": "LANÇAMENTO", "g": "82.5", "c": "$115"},
-                    {"n": "Puravive", "e": "Google Search", "d": "Gordura teimosa.", "p": "USA", "s": "ESTÁVEL", "g": "165.7", "c": "$138"},
-                    {"n": "Java Burn", "e": "TikTok Ads", "d": "Energia baixa.", "p": "USA", "s": "PERPÉTUO", "g": "180.1", "c": "$110"},
-                    {"n": "Liv Pure", "e": "Google Ads", "d": "Detox hepático.", "p": "Canada", "s": "ALTA ESCALA", "g": "145.3", "c": "$125"}
+                    {"n": "Puravive", "e": "Google Search", "d": "Gordura teimosa.", "p": "EUA", "s": "ESTÁVEL", "g": "165.7", "c": "$138"},
+                    {"n": "Java Burn", "e": "TikTok Ads", "d": "Energia baixa.", "p": "EUA", "s": "PERPÉTUO", "g": "180.1", "c": "$110"},
+                    {"n": "Liv Pure", "e": "Google Ads", "d": "Detox hepático.", "p": "Canadá", "s": "ALTA ESCALA", "g": "145.3", "c": "$125"}
                 ]
                 st.session_state.lista_atual = random.sample(pool_alvos, 6)
 
@@ -97,7 +98,7 @@ def main():
                 st.altair_chart(chart, use_container_width=True)
             st.markdown("<br>", unsafe_allow_html=True)
     else:
-        st.info("Terminal pronto. Clique no botão acima para iniciar a varredura dinâmica de 6 produtos.")
+        st.info("Terminal operacional. Clique no botão acima para iniciar a varredura dinâmica.")
 
 if __name__ == "__main__":
     main()
