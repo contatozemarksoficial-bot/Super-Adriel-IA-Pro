@@ -1,112 +1,138 @@
 import streamlit as st
 import pandas as pd
-import time
 import random
+import time
 
 def main():
-    # 1. CONFIGURAÇÃO DE ELITE (Design Cinema Dark em Tela Cheia)
-    st.set_page_config(page_title="Adriel-AI Pro | Gestão de Assinantes", layout="wide", initial_sidebar_state="expanded")
+    # 1. CONFIGURAÇÃO DE ELITE (Design Cinema Dark)
+    st.set_page_config(page_title="Adriel-AI Pro | Gestão Suprema", layout="wide", initial_sidebar_state="expanded")
 
-    # CSS MASTER LUXO - PROTOCOLO GATEWAY DE PAGAMENTOS
+    if "sessao_ativa" not in st.session_state: st.session_state.sessao_ativa = True
+
+    # 2. CSS MASTER LUXO - PROTOCOLO TRIPLE BLACK & NEON
     st.markdown("""
     <style>
-    header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
-    .stApp { background-color: #010409 !important; }
-    
-    /* Métrica Executiva com Gradiente de Faturamento */
-    [data-testid="stMetricValue"] { color: #00ffcc !important; font-size: 2.2rem !important; font-weight: 900 !important; }
-    [data-testid="stMetricLabel"] { color: #94a3b8 !important; text-transform: uppercase; letter-spacing: 1px; }
+        header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
+        .stApp { background-color: #010409 !important; }
+        
+        /* Logo e Contador Live */
+        .main-logo {
+            color: #ffffff; font-size: 2.8rem; font-weight: 900; letter-spacing: -2px;
+            display: flex; align-items: center; gap: 15px;
+            text-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
+        }
+        .badge-pro {
+            background: linear-gradient(90deg, #00ffcc, #0088ff);
+            color: #010409; padding: 4px 15px; border-radius: 6px;
+            font-size: 0.9rem; font-weight: 900; box-shadow: 0 0 20px #00ffcc88;
+        }
+        .live-counter {
+            background: rgba(0, 255, 204, 0.05); border: 1px solid #00ffcc22;
+            padding: 10px 20px; border-radius: 50px; color: #00ffcc; font-weight: 800;
+            display: inline-flex; align-items: center; gap: 10px; font-size: 0.8rem;
+        }
+        .blink { height: 8px; width: 8px; background-color: #00ffcc; border-radius: 50%; animation: pulse 1.2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-    /* Estilo dos Cards de Pagamento */
-    .payment-card {
-        border: 1px solid #1e293b; padding: 25px; border-radius: 16px;
-        background: linear-gradient(145deg, #0d1117, #010409);
-        margin-bottom: 20px; border-top: 4px solid #00ffcc;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-    .neon-text { color: #00ffcc !important; font-weight: bold; }
-    
-    /* Botões Executivos de Checkout */
-    .btn-checkout {
-        display: block; width: 100%; padding: 12px;
-        background: transparent; color: #00ffcc !important;
-        border: 2px solid #00ffcc; border-radius: 8px;
-        text-align: center; text-decoration: none !important;
-        font-weight: 800; font-size: 0.85rem; text-transform: uppercase;
-        transition: 0.4s; margin-top: 10px;
-    }
-    .btn-checkout:hover { background: #00ffcc; color: #010409 !important; box-shadow: 0 0 20px #00ffcc; }
+        /* Métrica Executiva */
+        .metric-box {
+            background: rgba(13, 17, 23, 0.9); border: 1px solid #1e293b;
+            padding: 20px; border-radius: 15px; border-bottom: 4px solid #00ffcc;
+            text-align: center;
+        }
+        .metric-label { color: #94a3b8; font-size: 0.7rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+        .metric-value { color: #ffffff; font-size: 1.6rem; font-weight: 900; margin-top: 5px; }
 
-    /* Badge de Status de Assinatura */
-    .status-active { color: #00ffcc; background: rgba(0, 255, 204, 0.1); padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; }
+        /* Cards de Planos e Checkout */
+        .plan-card {
+            border: 1px solid #1e293b; padding: 30px; border-radius: 20px;
+            background: linear-gradient(145deg, #0d1117, #010409);
+            margin-bottom: 20px; transition: 0.4s; text-align: center;
+        }
+        .plan-card:hover { border-color: #00ffcc66; transform: translateY(-5px); }
+        .btn-pay {
+            display: block; width: 100%; padding: 12px; margin-top: 15px;
+            background: transparent; color: #00ffcc !important;
+            border: 2px solid #00ffcc; border-radius: 8px;
+            text-align: center; text-decoration: none !important;
+            font-weight: 900; font-size: 0.8rem; text-transform: uppercase;
+        }
+        .btn-pay:hover { background: #00ffcc; color: #010409 !important; box-shadow: 0 0 20px #00ffcc; }
+
+        /* Tabela Suprema */
+        .sub-table { width: 100%; border-collapse: collapse; color: #f9fafb; margin-top: 20px; }
+        .sub-table th { background: #0d1117; color: #00ffcc; padding: 15px; text-align: left; border-bottom: 2px solid #1e293b; font-size: 0.7rem; text-transform: uppercase; }
+        .sub-table td { padding: 15px; border-bottom: 1px solid #1e293b; font-size: 0.85rem; vertical-align: top; }
     </style>
     """, unsafe_allow_html=True)
 
-    # --- CABEÇALHO EXCLUSIVO ---
-    st.markdown('<h1 style="color: #ffffff; font-size: 2.5rem; font-weight: 900; letter-spacing: -2px;">💎 ÁREA DE <span style="color: #00ffcc;">MEMBROS & PAGAMENTOS</span></h1>', unsafe_allow_html=True)
-    st.markdown('<p style="color: #94a3b8; font-weight: 600;">Monitoramento de Licenças Ativas e Faturamento Automático</p>', unsafe_allow_html=True)
+    # --- TOP BAR (LOGO + LIVE) ---
+    c_logo, c_live = st.columns([1.5, 1])
+    with c_logo:
+        st.markdown('<div class="main-logo">🤖 Adriel-AI <span class="badge-pro">PRO</span></div>', unsafe_allow_html=True)
+        st.markdown('<p style="color:#94a3b8; margin-top:-10px; margin-left:65px; font-weight:600;">Comando Geral de Assinantes e Faturamento Síncrono</p>', unsafe_allow_html=True)
+    with c_live:
+        st.markdown(f'<div style="text-align:right; padding-top:10px;"><div class="live-counter"><div class="blink"></div> {random.randint(1420, 1680):,} OPERADORES CONECTADOS AGORA</div></div>', unsafe_allow_html=True)
 
-    # --- DASHBOARD DE FATURAMENTO (MÉTRICAS) ---
+    # --- DASHBOARD FINANCEIRO ---
     st.markdown("<br>", unsafe_allow_html=True)
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("FATURAMENTO TOTAL", "R$ 142.840,00", "+12%")
-    c2.metric("LICENÇAS ATIVAS", "1.584", "85% Cap.")
-    c3.metric("CHURN RATE", "1.2%", "-0.5%")
-    c4.metric("MRR (MENSAL)", "R$ 48.200,00", "+R$ 4.2k")
+    m1, m2, m3, m4 = st.columns(4)
+    with m1: st.markdown('<div class="metric-box"><div class="metric-label">Faturamento Total</div><div class="metric-value">R$ 142.580</div></div>', unsafe_allow_html=True)
+    with m2: st.markdown('<div class="metric-box"><div class="metric-label">Assinantes Ativos</div><div class="metric-value">1.842</div></div>', unsafe_allow_html=True)
+    with m3: st.markdown('<div class="metric-box"><div class="metric-label">Recorrência (MRR)</div><div class="metric-value">R$ 98.400</div></div>', unsafe_allow_html=True)
+    with m4: st.markdown('<div class="metric-box" style="border-bottom-color:#ff0055;"><div class="metric-label">Churn Rate</div><div class="metric-value">1.2%</div></div>', unsafe_allow_html=True)
 
     st.markdown('<div style="height:1px; background:linear-gradient(90deg, transparent, #1e293b, transparent); margin:40px 0;"></div>', unsafe_allow_html=True)
 
-    # --- BLOCO 1: GATEWAY DE PAGAMENTO (VENDA DE ACESSO) ---
-    st.markdown('<h3 style="color:white; margin-bottom:20px;">💳 GATEWAY DE ACESSO IMEDIATO</h3>', unsafe_allow_html=True)
-    cp1, cp2, cp3 = st.columns(3)
-
+    # --- PLANOS DE ACESSO (GATEWAY) ---
+    st.markdown('<h3 style="color:white; margin-bottom:25px; letter-spacing:1px;">💳 ADESÃO À LICENÇA ADRIEL-AI PRO</h3>', unsafe_allow_html=True)
+    p1, p2, p3 = st.columns(3)
+    
     planos = [
-        {"nome": "PLANO MENSAL", "preco": "R$ 297,00", "vant": "Acesso ao Caçador Pro + Radar"},
-        {"nome": "PLANO ANUAL", "preco": "R$ 1.997,00", "vant": "Acesso VIP + Funil Clone + IA Extra"},
-        {"nome": "PLANO LIFETIME", "preco": "R$ 4.997,00", "vant": "Acesso Vitalício + Todas as 6 Telas"}
+        {"n": "PLANO MENSAL", "v": "R$ 297", "desc": "Acesso ao Caçador de Produtos + Radar de Elite."},
+        {"n": "PLANO ANUAL", "v": "R$ 1.997", "desc": "Acesso Premium + Gerador de Pre-sell + Auditor IA."},
+        {"n": "PLANO LIFETIME", "v": "R$ 4.997", "desc": "Acesso Vitalício + Todas as 6 Telas + Base 44."}
     ]
 
-    cols = [cp1, cp2, cp3]
-    for i, p in enumerate(planos):
+    cols = [p1, p2, p3]
+    for i, plan in enumerate(planos):
         with cols[i]:
             st.markdown(f"""
-            <div class="payment-card">
-                <span class="status-active">OPORTUNIDADE</span>
-                <h2 style="color:white; margin:10px 0;">{p['nome']}</h2>
-                <div style="font-size:2rem; color:#00ffcc; font-weight:900; margin-bottom:10px;">{p['preco']}</div>
-                <p style="color:#94a3b8; font-size:0.85rem;">{p['vant']}</p>
-                <a href="#" class="btn-checkout">💳 COMPRAR LICENÇA VIA CARTÃO / PIX</a>
+            <div class="plan-card">
+                <div class="metric-label">{plan['n']}</div>
+                <div style="font-size:2.5rem; color:#ffffff; font-weight:900; margin:10px 0;">{plan['v']}</div>
+                <p style="color:#94a3b8; font-size:0.8rem;">{plan['desc']}</p>
+                <a href="#" class="btn-pay">💳 LIBERAR ACESSO AGORA</a>
             </div>
             """, unsafe_allow_html=True)
 
+    # --- TABELA DE GESTÃO (BASE 44) ---
     st.markdown("<br><br>", unsafe_allow_html=True)
-
-    # --- BLOCO 2: GESTÃO DE ASSINANTES (TABELA EXECUTIVA) ---
-    st.markdown('<h3 style="color:white; margin-bottom:20px;">👥 GESTÃO DE LICENÇAS E SEGURANÇA</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color:#00ffcc; margin-bottom:20px; letter-spacing:1px;">🛡️ MONITORAMENTO DE OPERADORES (BASE 44)</h3>', unsafe_allow_html=True)
     
-    # Simulação de Banco de Dados de Assinantes
-    dados_membros = {
-        "Usuário": ["Jose Marques", "Ana Silva", "Carlos Gringo", "Elite Traffic", "Base 44 Clone", "Robo King"],
-        "Plano": ["LIFETIME", "ANUAL", "MENSAL", "LIFETIME", "ANUAL", "ANUAL"],
-        "Status": ["✓ ATIVO", "✓ ATIVO", "✓ ATIVO", "✓ ATIVO", "⚠ PENDENTE", "✓ ATIVO"],
-        "Último Acesso": ["Agora", "2h atrás", "5h atrás", "Ontem", "3 dias", "12min"],
-        "Faturamento": ["R$ 4.997", "R$ 1.997", "R$ 297", "R$ 4.997", "R$ 0", "R$ 1.997"]
-    }
-    df = pd.DataFrame(dados_membros)
-    st.dataframe(df, use_container_width=True)
+    membros = [
+        {"u": "Marcos Oliveira", "p": "Diamond", "s": "ATIVO", "j": "Operador de elite focado em escala agressiva no mercado americano via BuyGoods. Utiliza a infraestrutura do Adriel-AI para antecipar lançamentos com ROI de 315%. Sua licença permite acesso total aos servidores de tráfego frio sem limitações geográficas, garantindo o domínio das ofertas rastreadas."},
+        {"u": "Ana Júlia Sampaio", "p": "Platinum", "s": "ATIVO", "j": "Especialista em Brand Bidding e fundo de funil gringo. Ana opera com blindagem de cookies através do nosso sistema síncrono, protegendo suas comissões em cada clique gerado no Google Ads. Este membro mantém taxa de conversão 4x superior devido ao uso das métricas de gravidade."}
+    ]
 
-    # BOTÕES EXECUTIVOS DE COMANDO
-    st.markdown("<br>", unsafe_allow_html=True)
-    cb1, cb2, cb3 = st.columns([1, 1, 1])
-    with cb1:
-        if st.button("🔓 LIBERAR ACESSO MANUAL"):
-            st.toast("Comando de Criptografia enviado para a Base 44!", icon="🟢")
-    with cb2:
-        if st.button("🔒 BLOQUEAR LICENÇA"):
-            st.toast("Acesso trancado nos servidores globais.", icon="🔴")
-    with cb3:
-        if st.button("📑 GERAR RELATÓRIO DE MRR"):
-            st.success("Dossiê de faturamento gerado com sucesso!")
+    t_html = """<table class="sub-table"><thead><tr><th>Operador / Plano</th><th>Justificativa Estratégica Adriel-AI</th><th>Status / Comando</th></tr></thead><tbody>"""
+    for m in membros:
+        t_html += f"""
+        <tr>
+            <td><b style='color:white;'>{m['u']}</b><br><span style='color:#00ffcc; font-size:0.7rem;'>PLANO: {m['p']}</span></td>
+            <td style='color:#94a3b8; font-style:italic; line-height:1.5;'>"{m['j']}"</td>
+            <td><span style='color:#00ffcc; font-weight:800;'>● {m['s']}</span><br><br>
+                <div style='display:flex; gap:5px;'>
+                    <div style='padding:5px 10px; border:1px solid #ff0055; color:#ff0055; border-radius:4px; font-size:0.6rem; font-weight:800; cursor:pointer;'>BLOQUEAR</div>
+                </div>
+            </td>
+        </tr>"""
+    t_html += "</tbody></table>"
+    st.markdown(t_html, unsafe_allow_html=True)
+
+    # --- FOOTER LINCADO ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown('<p style="color:#475569; font-size:0.7rem; text-align:center;">PLATAFORMAS LINCADAS: CLICKBANK | BUYGOODS | DIGISTORE24 | STRIPE GATEWAY</p>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
