@@ -2,133 +2,130 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 import time
+import random
 from datetime import datetime, timedelta
 
 def main():
-    # 1. CONFIGURAÇÃO DE ELITE
-    st.set_page_config(page_title="Adriel-AI Pro", layout="wide", initial_sidebar_state="expanded")
+    # 1. CONFIGURAÇÃO DE ALTA PERFORMANCE
+    st.set_page_config(page_title="Adriel-AI Pro | Área de Membros", layout="wide", initial_sidebar_state="expanded")
 
-    if "caça_ativa" not in st.session_state: st.session_state.caça_ativa = False
+    if "sessao_ativa" not in st.session_state: st.session_state.sessao_ativa = False
 
-    # 2. CSS DE ALTA PERFORMANCE (Design com Divisões Neon)
+    # 2. CSS DE LUXO (Protocolo Triple Black + Neon)
     st.markdown("""
     <style>
     header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
     .stApp { background-color: #010409 !important; }
     
-    /* Menu Lateral Premium */
+    /* Logo e Header Top */
+    .main-logo {
+        color: #ffffff; font-size: 3rem; font-weight: 900; letter-spacing: -2px;
+        display: flex; align-items: center; gap: 15px;
+        text-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+    }
+    .badge-pro {
+        background: linear-gradient(90deg, #00ffcc, #00ccaa);
+        color: #010409; padding: 4px 15px; border-radius: 6px;
+        font-size: 1rem; font-weight: 900; box-shadow: 0 0 20px #00ffcc88;
+    }
+    
+    /* Contador de Acessos */
+    .live-counter {
+        background: rgba(0, 255, 204, 0.1);
+        border: 1px solid #00ffcc33;
+        padding: 10px 20px; border-radius: 50px;
+        color: #00ffcc; font-weight: 700; font-size: 0.9rem;
+        display: inline-flex; align-items: center; gap: 8px;
+    }
+    .dot { height: 8px; width: 8px; background-color: #00ffcc; border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+    /* Botões de Afiliado Luxo */
+    .btn-afiliado {
+        display: inline-block; padding: 12px 20px;
+        border: 1px solid #00ffcc; border-radius: 8px;
+        color: #00ffcc !important; text-decoration: none;
+        font-weight: 800; font-size: 0.8rem; text-transform: uppercase;
+        transition: 0.4s; text-align: center; width: 100%;
+        background: transparent; margin-top: 10px;
+    }
+    .btn-afiliado:hover { background: #00ffcc; color: #010409 !important; box-shadow: 0 0 20px #00ffcc; }
+
+    /* Cards de Membro */
+    .member-card {
+        border: 1px solid #1e293b; padding: 35px; border-radius: 24px;
+        background: linear-gradient(160deg, #0d1117 0%, #010409 100%);
+        margin-bottom: 30px; border-top: 4px solid #00ffcc;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+    
+    .status-badge { color: #00ffcc; font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; }
+    .product-title { color: #ffffff; font-size: 2.2rem; font-weight: 900; margin: 5px 0; }
+    .metric-hero { color: #ffffff; font-size: 2.5rem; font-weight: 900; letter-spacing: -1px; }
+    
+    /* Sidebar */
     [data-testid="stSidebar"] { background-color: #010409 !important; border-right: 1px solid #1e293b !important; }
-    [data-testid="stSidebarNav"] span { color: #ffffff !important; font-weight: 700; }
-
-    /* Divisória Neon Pulsante */
-    .divider-neon {
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #00ffcc, transparent);
-        margin: 40px 0;
-        opacity: 0.6;
-    }
-
-    /* Cabeçalho de Luxo */
-    .header-box {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px 0;
-    }
-    .brand-text { color: #ffffff; font-size: 2.5rem; font-weight: 900; letter-spacing: -1.5px; }
-    .pro-badge { 
-        background: #00ffcc; color: #010409; padding: 3px 12px; 
-        border-radius: 4px; font-size: 0.9rem; font-weight: 800;
-        box-shadow: 0 0 15px #00ffcc; margin-left: 10px;
-    }
-
-    /* Botão de Ativação */
-    .stButton>button {
-        background: #010409 !important; color: #00ffcc !important; 
-        border: 1px solid #00ffcc !important; border-radius: 8px;
-        font-weight: 800; height: 50px; text-transform: uppercase;
-        letter-spacing: 1.5px; transition: 0.4s;
-    }
-    .stButton>button:hover {
-        box-shadow: 0 0 30px rgba(0, 255, 204, 0.4);
-        transform: scale(1.02);
-    }
-
-    /* Cards de Produtos com Divisão Interna */
-    .product-card {
-        border: 1px solid #1e293b;
-        padding: 30px;
-        border-radius: 20px;
-        background: rgba(13, 17, 23, 0.8);
-        margin-bottom: 30px;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-    }
-    .status-tag { color: #00ffcc; font-size: 0.75rem; font-weight: bold; letter-spacing: 2px; }
-    .product-name { color: #ffffff; font-size: 2rem; font-weight: 800; margin: 10px 0; }
-    .metric-value { color: #ffffff; font-size: 2.2rem; font-weight: 900; }
-    .metric-label { color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; }
     </style>
     """, unsafe_allow_html=True)
 
-    # --- TOP BAR ---
-    st.markdown("""
-        <div class="header-box">
-            <div class="brand-text">🤖 Adriel-AI <span class="pro-badge">PRO</span></div>
-            <div style="color: #94a3b8; font-weight: 500;">Inteligência Preditiva de Tráfego</div>
-        </div>
-    """, unsafe_allow_html=True)
+    # --- HEADER ÁREA DE MEMBROS ---
+    c_logo, c_live = st.columns([2, 1])
+    with c_logo:
+        st.markdown('<div class="main-logo">🤖 Adriel-AI <span class="badge-pro">PRO</span></div>', unsafe_allow_html=True)
+        st.markdown('<p style="color:#94a3b8; margin-top:-10px; margin-left:65px;">Dashboard Exclusivo de Inteligência Preditiva</p>', unsafe_allow_html=True)
+    with c_live:
+        # Simula contagem de pessoas acessando agora
+        acessos = random.randint(1240, 1580)
+        st.markdown(f'<div style="text-align:right;"><div class="live-counter"><span class="dot"></span> {acessos:,} USUÁRIOS ONLINE AGORA</div></div>', unsafe_allow_html=True)
 
-    # --- ÁREA DE COMANDO (DIVISÃO 1) ---
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # --- COMANDO DE VARREDURA ---
     col_v1, col_btn, col_v2 = st.columns([1, 2, 1])
     with col_btn:
-        if st.button("🚀 ATIVAR VARREDURA DO ROBÔ"):
-            st.session_state.caça_ativa = True
+        if st.button("🚀 INICIAR VARREDURA EM TEMPO REAL"):
+            st.session_state.sessao_ativa = True
 
-    # LINHA DIVISÓRIA NEON
-    st.markdown('<div class="divider-neon"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:1px; background:linear-gradient(90deg, transparent, #1e293b, transparent); margin:40px 0;"></div>', unsafe_allow_html=True)
 
-    # --- ÁREA DE RESULTADOS (DIVISÃO 2) ---
-    if st.session_state.caça_ativa:
-        with st.status("🤖 Robô processando Big Data gringo...", expanded=False):
+    # --- LISTA DE PRODUTOS ELITE ---
+    if st.session_state.sessao_ativa:
+        with st.status("🤖 Robô Adriel-AI acessando Big Data Gringo...", expanded=False):
             time.sleep(1)
 
         hoje = datetime.now()
-        meses_eixo = [(hoje - timedelta(days=30*i)).strftime('%b') for i in range(12)][::-1]
+        meses = [(hoje - timedelta(days=30*i)).strftime('%b') for i in range(12)][::-1]
         
         produtos = [
-            {"n": "Nagano Tonic", "e": "YouTube Ads", "v24": "4.812", "st": "ESCALA AGRESSIVA", "p": "USA/Austrália", "peso": 1.6},
-            {"n": "FitSpresso", "e": "Facebook Ads", "v24": "7.329", "st": "DOMÍNIO TOTAL", "p": "Canadá/USA", "peso": 2.3},
-            {"n": "Sugar Defender", "e": "Google Review", "v24": "5.610", "st": "ESCALA ESTÁVEL", "p": "UK/USA", "peso": 1.9}
+            {"n": "Nagano Tonic", "v24": "4.812", "st": "ESCALA AGRESSIVA", "p": "USA/AUSTRALIA", "plat": "BuyGoods", "com": "$127", "peso": 1.6},
+            {"n": "FitSpresso", "v24": "7.329", "st": "DOMÍNIO TOTAL", "p": "CANADA/USA", "plat": "ClickBank", "com": "$145", "peso": 2.3},
+            {"n": "Sugar Defender", "v24": "5.610", "st": "ESCALA ESTÁVEL", "p": "UK/USA", "plat": "Digistore24", "com": "$132", "peso": 1.9}
         ]
 
         for p in produtos:
-            # Estrutura de Card com Divisão de Colunas
-            st.markdown(f'<div class="product-card">', unsafe_allow_html=True)
-            c_txt, c_chart = st.columns([1, 1.2], gap="large")
+            st.markdown(f'<div class="member-card">', unsafe_allow_html=True)
+            c_txt, c_chart = st.columns([1, 1.3], gap="large")
             
             with c_txt:
                 st.markdown(f"""
-                    <span class="status-tag">● STATUS: {p['st']}</span>
-                    <div class="product-name">🔥 {p['n']}</div>
-                    <p style="color: #94a3b8; font-weight: 500;">
-                        <span style="color:#00ffcc;">⚖️ Veredito:</span> Oferta validada para escala agressiva no canal <b>{p['e']}</b>.
-                    </p>
-                    <div style="margin-top:25px;">
-                        <span class="metric-label">Volume de Buscas (24h)</span><br>
-                        <span class="metric-value">{p['v24']}</span> <span style="color:#94a3b8;">pesquisas</span>
+                    <span class="status-badge">● {p['st']}</span>
+                    <div class="product-title">🔥 {p['n']}</div>
+                    <div style="margin: 20px 0;">
+                        <span style="color:#94a3b8; font-size:0.8rem; text-transform:uppercase;">Volume de Buscas (24h)</span><br>
+                        <span class="metric-hero">{p['v24']}</span> <span style="color:#00ffcc; font-weight:700;">LIVE</span>
                     </div>
-                    <div style="margin-top:15px;">
-                        <span class="metric-label">Foco Geográfico</span><br>
-                        <b style="color:white; font-size:1.1rem;">{p['p']}</b>
-                    </div>
+                    <p style="color:#94a3b8; margin-bottom:5px;">Plataforma: <b style="color:white;">{p['plat']}</b></p>
+                    <p style="color:#94a3b8;">Comissão Média: <b style="color:#00ffcc;">{p['com']}</b></p>
+                    
+                    <a href="#" class="btn-afiliado">🔑 SOLICITAR AFILIAÇÃO {p['plat'].upper()}</a>
                 """, unsafe_allow_html=True)
             
             with c_chart:
-                st.markdown("<p style='color:white; font-weight:bold; font-size:0.9rem;'>📊 TENDÊNCIA ESTATÍSTICA (12 MESES)</p>", unsafe_allow_html=True)
+                st.markdown("<p style='color:white; font-weight:bold; font-size:0.8rem; letter-spacing:1px;'>📈 TENDÊNCIA ESTATÍSTICA (12 MESES)</p>", unsafe_allow_html=True)
                 vol_mensal = [int((35 + (i * 4)) * p['peso'] * 1000) for i in range(12)]
-                df_graf = pd.DataFrame({"Mês": meses_eixo, "Volume": vol_mensal})
+                df = pd.DataFrame({"Mês": meses, "Volume": vol_mensal})
                 
-                chart = alt.Chart(df_graf).mark_bar(
+                chart = alt.Chart(df).mark_bar(
                     color='#00ffcc', cornerRadiusTopLeft=5, cornerRadiusTopRight=5
                 ).encode(
                     x=alt.X('Mês', sort=None, axis=alt.Axis(labelColor='#94a3b8', title=None, labelAngle=0)),
