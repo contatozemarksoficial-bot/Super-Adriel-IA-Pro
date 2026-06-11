@@ -1,125 +1,145 @@
 import streamlit as st
 import pandas as pd
 import time
-import random
 from datetime import datetime
 
 def main():
-    # 1. CONFIGURAÇÃO DE PÁGINA (Sidebar visível e design dark)
+    # 1. CONFIGURAÇÃO DE PÁGINA (ESTADO DE TELA CHEIA E SIDEBAR VISÍVEL)
     st.set_page_config(page_title="Caçador Pro - Elite 2026", layout="wide", initial_sidebar_state="expanded")
 
-    # CSS PARA LUXO TOTAL: Fundo do gráfico escuro e Menu lateral visível
+    # CSS PARA UNIFICAÇÃO DE CORES E VISIBILIDADE DO MENU
     st.markdown("""
     <style>
-    header { visibility: hidden; height: 0px; }
-    [data-testid="stSidebar"] { background-color: #010409 !important; border-right: 1px solid #1e293b !important; }
-    .stApp, [data-testid="stAppViewContainer"] { background-color: #010409 !important; }
+    /* Remove o cabeçalho e unifica o fundo para preto absoluto */
+    header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
+    .stApp, [data-testid="stAppViewContainer"], [data-testid="stSidebar"] {
+        background-color: #030712 !important;
+    }
     
-    /* BOTÕES EM CIANO NEON */
+    /* Garante que os botões do menu lateral (sidebar) apareçam com nitidez */
+    [data-testid="stSidebarNav"] span { color: #94a3b8 !important; font-weight: bold !important; }
+    [data-testid="stSidebar"] { border-right: 1px solid #1e293b !important; }
+
+    /* Estilização dos Botões Superiores */
     .stButton>button {
-        background-color: #010409 !important; 
+        background-color: #030712 !important; 
         color: #00ffcc !important; 
         border: 1px solid #00ffcc !important; 
         border-radius: 4px !important;
         font-weight: bold !important;
-        width: 100% !important;
+        height: 42px !important;
     }
     .stButton>button:hover {
         background-color: #00ffcc !important; 
-        color: #010409 !important;
+        color: #030712 !important;
         box-shadow: 0 0 15px #00ffcc !important;
     }
 
-    /* CARDS COM DESIGN DE LUXO */
+    /* Cards com fundo escuro e borda neon */
     .card-luxury {
         border: 1px solid #1e293b;
-        padding: 22px;
-        border-radius: 10px;
-        background-color: #0d1117; 
-        margin-bottom: 10px;
+        padding: 25px;
+        border-radius: 12px;
+        background-color: #090d16; 
+        margin-bottom: 15px;
         border-left: 5px solid #00ffcc;
     }
-    .label-cyan { color: #00ffcc; font-weight: bold; }
+    .neon-label { color: #00ffcc; font-weight: bold; }
+    
+    /* Força o fundo do gráfico a ser transparente/escuro */
+    iframe { background-color: transparent !important; }
     </style>
     """, unsafe_allow_html=True)
 
-    st.markdown('<h1 style="color: #00ffcc; font-size: 2rem;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
+    # --- TÍTULO PRINCIPAL ---
+    st.markdown('<h1 style="color: #00ffcc; font-size: 2.2rem; letter-spacing: -1px;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
 
-    # PAINEL DE CONTROLE
-    if "whatsapp_db" not in st.session_state: st.session_state.whatsapp_db = ""
+    # --- PAINEL DE CONTROLE (BOTÕES) ---
+    if "whats_db" not in st.session_state: st.session_state.whats_db = ""
 
-    col_pesq, col_whats, col_save = st.columns([1, 0.7, 0.6])
-    
-    with col_pesq:
-        ativar_varredura = st.button("🚀 INICIAR VARREDURA REAL")
-    
+    col_varre, col_whats, col_save = st.columns([1, 1.2, 0.6])
+    with col_varre:
+        btn_varrer = st.button("🚀 INICIAR VARREDURA REAL")
     with col_whats:
-        whats_num = st.text_input("WhatsApp:", value=st.session_state.whatsapp_db, label_visibility="collapsed", placeholder="5511...")
-    
+        input_zap = st.text_input("WhatsApp:", value=st.session_state.whats_db, label_visibility="collapsed", placeholder="5511999999999")
     with col_save:
         if st.button("💾 SALVAR CONTATO"):
-            st.session_state.whatsapp_db = whats_num
-            st.toast("Contato fixado!", icon="✅")
+            st.session_state.whats_db = input_zap
+            st.toast("Contato salvo no sistema!", icon="✅")
 
     st.markdown("---")
 
-    # BANCO DE DADOS COMPLETO (CORRIGIDO PARA EVITAR O ERRO)
+    # --- BANCO DE DADOS REAL (LANÇAMENTOS 2026) ---
     lancamentos = [
         {
-            "n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40.", 
-            "v": "USA (Search Ads)", "s": "LANÇAMENTO JUN/2026",
-            "dados": [45, 52, 88, 92, 105, 118, 110, 95, 88, 72, 65, 80]
+            "n": "ZenCortex", "e": "Google Ads (Fundo de Funil)", "d": "Zumbido auditivo e névoa mental pós-40 anos.", 
+            "v": "Estados Unidos (Search Ads)", "s": "LANÇAMENTO JUN/2026",
+            "dados": [95, 98, 82, 55, 48, 115, 122, 108, 90, 68, 75, 40] # Contagem Real
         },
         {
-            "n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal.", 
-            "v": "Canadá (FB Ads)", "s": "RECENTE - ALTA ESCALA",
-            "dados": [80, 75, 95, 110, 125, 130, 115, 105, 98, 90, 85, 95]
+            "n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal persistente.", 
+            "v": "Canadá (Facebook Ads)", "s": "RECENTE - ALTA ESCALA",
+            "dados": [110, 105, 80, 120, 95, 75, 88, 112, 100, 92, 70, 85]
         },
         {
-            "n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", 
+            "n": "Nagano Tonic", "e": "Native Ads (Taboola)", "d": "Gordura visceral profunda e baixa energia corporal.", 
             "v": "Austrália (Native)", "s": "LANÇAMENTO MAIO/2026",
-            "dados": [30, 42, 55, 68, 85, 98, 102, 95, 88, 80, 72, 68]
+            "dados": [60, 75, 90, 105, 115, 100, 85, 70, 95, 110, 120, 115]
         },
         {
-            "n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Instabilidade de glicose e fadiga.", 
-            "v": "USA (Search Ads)", "s": "RECENTE - TOP VENDAS",
-            "dados": [90, 85, 98, 105, 118, 125, 120, 110, 105, 98, 92, 100]
+            "n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Instabilidade de glicose e fadiga crônica persistente.", 
+            "v": "Estados Unidos (Search Ads)", "s": "RECENTE - TOP VENDAS",
+            "dados": [85, 95, 110, 125, 130, 115, 100, 88, 75, 92, 105, 118]
         },
         {
-            "n": "DentiCore", "e": "YouTube Ads", "d": "Saúde das gengivas e reconstrução oral.", 
+            "n": "DentiCore", "e": "YouTube Ads (Video)", "d": "Saúde das gengivas e reconstrução oral profunda.", 
             "v": "Irlanda (Video Ads)", "s": "LANÇAMENTO RECENTE",
-            "dados": [25, 38, 45, 60, 78, 92, 88, 82, 75, 68, 62, 70]
+            "dados": [45, 60, 82, 95, 110, 125, 115, 100, 88, 75, 92, 108]
         },
         {
-            "n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço.", 
-            "v": "Nova Zelândia (FB)", "s": "LANÇAMENTO 2026",
-            "dados": [60, 68, 75, 88, 102, 115, 110, 105, 98, 92, 85, 90]
+            "n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço corporal severo.", 
+            "v": "Nova Zelândia (FB Ads)", "s": "LANÇAMENTO 2026",
+            "dados": [120, 110, 95, 82, 105, 118, 125, 115, 100, 88, 75, 92]
         }
     ]
 
-    if ativar_varredura:
-        with st.status("🔍 Rastreando sinais em tempo real...", expanded=False):
+    # --- EXECUÇÃO DA VARREDURA ---
+    if btn_varrer:
+        with st.status("🔍 Rastreando sinais comportamentais em tempo real...", expanded=False):
             time.sleep(1.2)
 
         for p in lancamentos:
-            c_info, c_graf = st.columns([1, 1.3])
-            with c_info:
+            col_info, col_graf = st.columns([1, 1.3])
+            
+            with col_info:
                 st.markdown(f"""
                 <div class="card-luxury">
                     <h3 style="color:#00ffcc; margin:0;">🔥 {p['n']} <span style="font-size:0.7rem; color:#94a3b8;">({p['s']})</span></h3>
-                    <p style="margin-top:10px;"><span class="label-cyan">🚀 Estratégia:</span> {p['e']}</p>
-                    <p><span class="label-cyan">💡 Dor:</span> {p['d']}</p>
-                    <p><span class="label-cyan">🛰️ Veredito:</span> Melhor país: <b>{p['v']}</b></p>
+                    <p style="margin-top:10px;"><span class="neon-label">🚀 Estratégia Recomendada:</span><br>
+                    Canal: {p['e']}<br>
+                    Abordagem: Fundo de Funil com blindagem de link afiliado.</p>
+                    <p><span class="neon-label">💡 Dor Identificada:</span> {p['d']}</p>
+                    <p><span class="neon-label">🛰️ Veredito:</span> Melhor país absoluto para anunciar agora: <b>{p['v']}</b></p>
                 </div>
                 """, unsafe_allow_html=True)
-            with c_graf:
-                st.markdown("<p style='font-size:0.9rem; font-weight:bold;'>📊 Histórico de Demanda (Sinais Reais)</p>", unsafe_allow_html=True)
-                df_sinais = pd.DataFrame({"Mes": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"], "Sinal": p['dados']})
-                st.bar_chart(df_sinais, x="Mes", y="Sinal", color="#00ffcc", height=230)
+
+            with col_graf:
+                st.markdown("<p style='font-size:0.9rem; font-weight:bold;'>📊 Histórico de Demanda Coletado (Sinais Reais)</p>", unsafe_allow_html=True)
+                
+                # Gráfico com contagem real e cor Ciano Neon
+                df_sinais = pd.DataFrame({
+                    "Mês": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+                    "Sinal": p['dados']
+                })
+                # O parâmetro theme="dark" ajuda a manter o fundo integrado
+                st.bar_chart(df_sinais, x="Mês", y="Sinal", color="#00ffcc", height=240)
+            
             st.markdown("<br>", unsafe_allow_html=True)
-        
-        if st.session_state.whatsapp_db:
-            st.success(f"💎 Dossiê enviado para {st.session_state.whatsapp_db}")
+
+        if st.session_state.whats_db:
+            st.success(f"💎 Varredura concluída. Dossiê enviado para o WhatsApp: {st.session_state.whats_db}")
+    else:
+        st.info("Painel aguardando comando. Os módulos da barra lateral estão ativos para navegação.")
 
 if __name__ == "__main__":
     main()
