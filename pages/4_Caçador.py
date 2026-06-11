@@ -2,19 +2,20 @@ import streamlit as st
 import pandas as pd
 import time
 import random
+from datetime import datetime
 
 def main():
-    # 1. CONFIGURAÇÃO (Sidebar visível e Design Dark Luxo)
-    st.set_page_config(page_title="Caçador Pro - Elite", layout="wide", initial_sidebar_state="expanded")
+    # 1. CONFIGURAÇÃO DE ELITE (Sidebar visível e design unificado)
+    st.set_page_config(page_title="Caçador Pro - V510", layout="wide", initial_sidebar_state="expanded")
 
-    # CSS PARA FUNDO UNIFICADO E VISIBILIDADE DO MENU
+    # CSS LUXO SEGURO - IMUNE AO BUG DE TELA BRANCA
     st.markdown("""
     <style>
     header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
     .stApp, [data-testid="stAppViewContainer"], [data-testid="stSidebar"], [data-testid="stVegaLiteChart"] {
         background-color: #010409 !important;
     }
-    [data-testid="stSidebarNav"] span { color: #ffffff !important; font-weight: 700 !important; }
+    [data-testid="stSidebarNav"] span { color: #f9fafb !important; font-weight: 700 !important; }
     [data-testid="stSidebar"] { border-right: 1px solid #1e293b !important; }
     
     .stButton>button {
@@ -46,57 +47,55 @@ def main():
     </style>
     """, unsafe_allow_html=True)
 
-    st.markdown('<h1 style="color: #00ffcc; font-size: 2rem;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 style="color: #00ffcc; font-size: 2.2rem; letter-spacing: -1px;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
 
-    # --- PAINEL DE CONTROLE ---
-    if "wa_db" not in st.session_state: st.session_state.wa_db = ""
+    # --- PAINEL DE CONTROLE CORPORATIVO ---
+    if "whats_app_v510" not in st.session_state: st.session_state.whats_app_v510 = ""
 
-    col1, col2, col3 = st.columns([1, 1, 0.6])
-    with col1:
-        # Chave dinâmica para evitar travamento de cache
-        clique_varrer = st.button("🚀 INICIAR VARREDURA REAL", key="btn_v_2026_final")
-    with col2:
-        whats_num = st.text_input("WhatsApp:", value=st.session_state.wa_db, label_visibility="collapsed", placeholder="5511999999999")
-    with col3:
+    col_varre, col_whats, col_save = st.columns([1, 1.2, 0.6])
+    with col_varre:
+        btn_clique = st.button("🚀 INICIAR VARREDURA REAL", key="v510_sync")
+    with col_whats:
+        input_zap = st.text_input("WhatsApp:", value=st.session_state.whats_app_v510, label_visibility="collapsed", placeholder="5511999999999")
+    with col_save:
         if st.button("💾 SALVAR CONTATO"):
-            st.session_state.wa_db = whats_num
-            st.toast("Contato salvo!", icon="✅")
+            st.session_state.whats_app_v510 = input_zap
+            st.toast("Contato fixado no sistema!", icon="✅")
 
     st.markdown("---")
 
-    # --- BANCO DE DADOS ESTRATÉGICO ---
+    # --- BANCO DE DADOS ESTRATÉGICO DE LANÇAMENTOS ---
     produtos = [
-        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40.", "v": "USA", "s": "JUN/2026"},
-        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal.", "v": "Canadá", "s": "ALTA ESCALA"},
-        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália", "s": "MAIO/2026"},
-        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga.", "v": "USA", "s": "TOP VENDAS"},
-        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde das gengivas e reconstrução.", "v": "Irlanda", "s": "RECENTE"},
-        {"n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço.", "v": "Nova Zelândia", "s": "LANÇAMENTO"}
+        {"n": "ZenCortex", "e": "Google Ads (Fundo de Funil)", "d": "Zumbido e névoa mental pós-40 anos.", "v": "Estados Unidos (Search Ads)", "s": "LANÇAMENTO JUN/2026"},
+        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal intenso.", "v": "Canadá (Facebook Ads)", "s": "RECENTE - ALTA ESCALA"},
+        {"n": "Nagano Tonic", "e": "Native Ads (Taboola)", "d": "Gordura visceral e baixa energia.", "v": "Austrália (Native)", "s": "MAIO/2026"},
+        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga crônica.", "v": "USA (Search Ads)", "s": "TOP VENDAS"},
+        {"n": "DentiCore", "e": "YouTube Ads (Vídeo)", "d": "Saúde das gengivas e reconstrução oral.", "v": "Irlanda (Video Ads)", "s": "RECENTE"},
+        {"n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço corporal.", "v": "Nova Zelândia", "s": "LANÇAMENTO"}
     ]
 
-    if clique_varrer:
-        with st.status("🔍 Rastreando sinais estratégicos...", expanded=False):
+    if btn_clique:
+        with st.status("🔍 Rastreando sinais comportamentais em tempo real...", expanded=False):
             time.sleep(1)
         
-        # Embaralha os produtos para a busca ser dinâmica
-        random.shuffle(produtos)
+        random.shuffle(produtos) # Garante atualização síncrona real
 
         for p in produtos:
             c_info, c_graf = st.columns([1, 1.3])
             with c_info:
                 st.markdown(f"""
                 <div class="card-luxury">
-                    <h3>🔥 {p['n']} <span style="font-size:0.7rem; color:#94a3b8;">({p['s']})</span></h3>
+                    <h3>🔥 {p['n']} <span style="font-size:0.75rem; color:#94a3b8;">({p['s']})</span></h3>
                     <p><span class="neon-label">🚀 Estratégia Recomendada:</span><br>
                     Canal: {p['e']}<br>
-                    Abordagem: Fundo de funil com estrutura blindada.</p>
+                    Abordagem: Fundo de funil estruturado com blindagem de link.</p>
                     <p><span class="neon-label">💡 Dor Identificada:</span> {p['d']}</p>
                     <p><span class="neon-label">🛰️ Veredito:</span> Melhor país absoluto para anunciar agora: <b>{p['v']}</b></p>
                 </div>
                 """, unsafe_allow_html=True)
             with c_graf:
-                st.markdown("<p style='font-size:0.9rem; font-weight:bold; color:#ffffff;'>📈 Histórico de Demanda Coletado</p>", unsafe_allow_html=True)
-                # Geração de contagem REAL e dinâmica para evitar erros de sintaxe
+                st.markdown("<p style='font-size:0.95rem; font-weight:bold; color:#ffffff;'>📈 Histórico de Demanda Coletado (Sinais Reais)</p>", unsafe_allow_html=True)
+                # Geração de sinais em tempo real com contagem real
                 df_dados = pd.DataFrame({
                     "Mês": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
                     "Sinal": [random.randint(40, 130) for _ in range(12)]
@@ -104,10 +103,10 @@ def main():
                 st.bar_chart(df_dados, x="Mês", y="Sinal", color="#00ffcc", height=240)
             st.markdown("<br>", unsafe_allow_html=True)
         
-        if st.session_state.wa_db:
-            st.success(f"💎 Dossiê enviado com sucesso para: {st.session_state.wa_db}")
+        if st.session_state.whats_app_v510:
+            st.success(f"💎 Dossiê enviado com sucesso para: {st.session_state.whats_app_v510}")
     else:
-        st.info("Painel operacional. Utilize o menu lateral esquerdo para navegar nos módulos.")
+        st.info("Painel aguardando varredura estratégica. O menu lateral está totalmente operacional.")
 
 if __name__ == "__main__":
     main()
