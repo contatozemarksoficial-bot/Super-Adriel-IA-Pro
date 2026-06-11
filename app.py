@@ -5,148 +5,139 @@ import time
 from datetime import datetime, timedelta
 
 def main():
-    # 1. CONFIGURAÇÃO DE ELITE (Design Cinema Dark)
+    # 1. CONFIGURAÇÃO DE ELITE
     st.set_page_config(page_title="Adriel-AI Pro", layout="wide", initial_sidebar_state="expanded")
 
-    if "varredura_ativa" not in st.session_state: st.session_state.varredura_active = False
+    if "caça_ativa" not in st.session_state: st.session_state.caça_ativa = False
 
-    # 2. CSS DE ALTA COSTURA (Layout Adriel-AI Pro)
+    # 2. CSS DE ALTA PERFORMANCE (Design com Divisões Neon)
     st.markdown("""
     <style>
-    /* Reset total para Fundo Triple Black */
     header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
-    .stApp, [data-testid="stAppViewContainer"], [data-testid="stSidebar"] {
-        background-color: #010409 !important;
+    .stApp { background-color: #010409 !important; }
+    
+    /* Menu Lateral Premium */
+    [data-testid="stSidebar"] { background-color: #010409 !important; border-right: 1px solid #1e293b !important; }
+    [data-testid="stSidebarNav"] span { color: #ffffff !important; font-weight: 700; }
+
+    /* Divisória Neon Pulsante */
+    .divider-neon {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+        margin: 40px 0;
+        opacity: 0.6;
     }
 
-    /* Título Adriel-AI Pro com robô e charme neon */
-    .brand-title {
-        color: #ffffff;
-        font-size: 2.8rem;
-        font-weight: 900;
-        letter-spacing: -1.5px;
-        margin-bottom: 0px;
+    /* Cabeçalho de Luxo */
+    .header-box {
         display: flex;
         align-items: center;
-        gap: 15px;
+        justify-content: space-between;
+        padding: 20px 0;
     }
-    .brand-pro {
-        background: #00ffcc;
-        color: #010409;
-        padding: 2px 12px;
-        border-radius: 4px;
-        font-size: 1rem;
-        vertical-align: middle;
-        margin-left: 10px;
-        box-shadow: 0 0 15px #00ffcc;
+    .brand-text { color: #ffffff; font-size: 2.5rem; font-weight: 900; letter-spacing: -1.5px; }
+    .pro-badge { 
+        background: #00ffcc; color: #010409; padding: 3px 12px; 
+        border-radius: 4px; font-size: 0.9rem; font-weight: 800;
+        box-shadow: 0 0 15px #00ffcc; margin-left: 10px;
     }
 
-    /* Menu Lateral Premium */
-    [data-testid="stSidebarNav"] span { color: #f9fafb !important; font-weight: 700; }
-    [data-testid="stSidebar"] { border-right: 1px solid #1e293b !important; }
-
-    /* Botão de Varredura Estilo Radar */
+    /* Botão de Ativação */
     .stButton>button {
-        background-color: #010409 !important; color: #00ffcc !important; 
+        background: #010409 !important; color: #00ffcc !important; 
         border: 1px solid #00ffcc !important; border-radius: 8px;
-        font-weight: 800; height: 55px; width: 100%;
-        text-transform: uppercase; letter-spacing: 2px;
-        transition: 0.4s all ease;
+        font-weight: 800; height: 50px; text-transform: uppercase;
+        letter-spacing: 1.5px; transition: 0.4s;
     }
     .stButton>button:hover {
-        background-color: #00ffcc !important; color: #010409 !important;
-        box-shadow: 0 0 40px rgba(0, 255, 204, 0.5);
-        transform: translateY(-2px);
+        box-shadow: 0 0 30px rgba(0, 255, 204, 0.4);
+        transform: scale(1.02);
     }
 
-    /* Cards Estilo Adriel-AI (Borda Neon Total) */
-    .card-luxury {
+    /* Cards de Produtos com Divisão Interna */
+    .product-card {
         border: 1px solid #1e293b;
         padding: 30px;
-        border-radius: 16px;
-        background: linear-gradient(145deg, #0d1117, #010409);
-        margin-bottom: 25px;
-        border-top: 1px solid #00ffcc33;
-        border-bottom: 1px solid #00ffcc33;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        border-radius: 20px;
+        background: rgba(13, 17, 23, 0.8);
+        margin-bottom: 30px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5);
     }
-    
-    .neon-title { color: #00ffcc; text-shadow: 0 0 10px rgba(0, 255, 204, 0.3); font-weight: 800; }
-    .label-meta { color: #94a3b8; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; }
-    .valor-grande { font-size: 2.2rem; color: #ffffff; font-weight: 900; margin: 10px 0; }
-    
-    hr { border-color: #1e293b; opacity: 0.3; margin: 20px 0; }
+    .status-tag { color: #00ffcc; font-size: 0.75rem; font-weight: bold; letter-spacing: 2px; }
+    .product-name { color: #ffffff; font-size: 2rem; font-weight: 800; margin: 10px 0; }
+    .metric-value { color: #ffffff; font-size: 2.2rem; font-weight: 900; }
+    .metric-label { color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; }
     </style>
     """, unsafe_allow_html=True)
 
-    # --- CABEÇALHO PERSONALIZADO ---
+    # --- TOP BAR ---
     st.markdown("""
-        <div class="brand-title">
-            🤖 Adriel-AI <span class="brand-pro">PRO</span>
+        <div class="header-box">
+            <div class="brand-text">🤖 Adriel-AI <span class="pro-badge">PRO</span></div>
+            <div style="color: #94a3b8; font-weight: 500;">Inteligência Preditiva de Tráfego</div>
         </div>
-        <p style="color: #94a3b8; margin-top: -10px; margin-left: 55px; font-weight: 500;">
-            Sistemas de Inteligência Preditiva em Tráfego Global
-        </p>
     """, unsafe_allow_html=True)
 
-    # --- COMANDO CENTRAL ---
-    st.markdown("<br>", unsafe_allow_html=True)
-    col_v1, col_btn, col_v2 = st.columns([1, 1.8, 1])
+    # --- ÁREA DE COMANDO (DIVISÃO 1) ---
+    col_v1, col_btn, col_v2 = st.columns([1, 2, 1])
     with col_btn:
         if st.button("🚀 ATIVAR VARREDURA DO ROBÔ"):
-            st.session_state.varredura_active = True
+            st.session_state.caça_ativa = True
 
-    st.markdown("<hr>", unsafe_allow_html=True)
+    # LINHA DIVISÓRIA NEON
+    st.markdown('<div class="divider-neon"></div>', unsafe_allow_html=True)
 
-    # --- LAYOUT DE RESULTADOS ---
-    if st.session_state.varredura_active:
-        with st.status("🤖 Robô Adriel-AI acessando redes gringas...", expanded=False):
-            time.sleep(1.2)
+    # --- ÁREA DE RESULTADOS (DIVISÃO 2) ---
+    if st.session_state.caça_ativa:
+        with st.status("🤖 Robô processando Big Data gringo...", expanded=False):
+            time.sleep(1)
 
         hoje = datetime.now()
         meses_eixo = [(hoje - timedelta(days=30*i)).strftime('%b') for i in range(12)][::-1]
         
         produtos = [
-            {"n": "Nagano Tonic", "e": "YouTube/Native", "p": "USA/Australia", "v24": 4812, "st": "ESCALA AGRESSIVA", "peso": 1.6},
-            {"n": "FitSpresso", "e": "Facebook VSL", "p": "Canada/USA", "v24": 7329, "st": "DOMÍNIO TOTAL", "peso": 2.3},
-            {"n": "Sugar Defender", "e": "Google Review", "p": "UK/USA", "v24": 5610, "st": "ESCALA ESTÁVEL", "peso": 1.9}
+            {"n": "Nagano Tonic", "e": "YouTube Ads", "v24": "4.812", "st": "ESCALA AGRESSIVA", "p": "USA/Austrália", "peso": 1.6},
+            {"n": "FitSpresso", "e": "Facebook Ads", "v24": "7.329", "st": "DOMÍNIO TOTAL", "p": "Canadá/USA", "peso": 2.3},
+            {"n": "Sugar Defender", "e": "Google Review", "v24": "5.610", "st": "ESCALA ESTÁVEL", "p": "UK/USA", "peso": 1.9}
         ]
 
         for p in produtos:
-            c_info, c_graf = st.columns([1, 1.2], gap="large")
+            # Estrutura de Card com Divisão de Colunas
+            st.markdown(f'<div class="product-card">', unsafe_allow_html=True)
+            c_txt, c_chart = st.columns([1, 1.2], gap="large")
             
-            with c_info:
+            with c_txt:
                 st.markdown(f"""
-                <div class="card-luxury">
-                    <span class="label-meta">🤖 STATUS: {p['st']}</span>
-                    <h2 class="neon-title">🔥 {p['n']}</h2>
-                    <hr>
-                    <p><span style="color:#00ffcc; font-weight:bold;">⚖️ VEREDITO:</span> Oferta validada para escala agressiva no canal <b>{p['e']}</b>.</p>
-                    <p style="margin-top:15px;" class="label-meta">VOLUME DE BUSCAS (24H):</p>
-                    <div class="valor-grande">{p['v24']:,} <span style="font-size:1rem; color:#94a3b8; font-weight:400;">pesquisas</span></div>
-                    <p class="label-meta">FOCO GEOGRÁFICO: <b style="color:white;">{p['p']}</b></p>
-                </div>
+                    <span class="status-tag">● STATUS: {p['st']}</span>
+                    <div class="product-name">🔥 {p['n']}</div>
+                    <p style="color: #94a3b8; font-weight: 500;">
+                        <span style="color:#00ffcc;">⚖️ Veredito:</span> Oferta validada para escala agressiva no canal <b>{p['e']}</b>.
+                    </p>
+                    <div style="margin-top:25px;">
+                        <span class="metric-label">Volume de Buscas (24h)</span><br>
+                        <span class="metric-value">{p['v24']}</span> <span style="color:#94a3b8;">pesquisas</span>
+                    </div>
+                    <div style="margin-top:15px;">
+                        <span class="metric-label">Foco Geográfico</span><br>
+                        <b style="color:white; font-size:1.1rem;">{p['p']}</b>
+                    </div>
                 """, unsafe_allow_html=True)
             
-            with c_graf:
-                st.markdown(f"<p style='color:white; font-weight:bold; margin-left:10px; letter-spacing:1px;'>📈 TENDÊNCIA ESTATÍSTICA (12 MESES)</p>", unsafe_allow_html=True)
-                
+            with c_chart:
+                st.markdown("<p style='color:white; font-weight:bold; font-size:0.9rem;'>📊 TENDÊNCIA ESTATÍSTICA (12 MESES)</p>", unsafe_allow_html=True)
                 vol_mensal = [int((35 + (i * 4)) * p['peso'] * 1000) for i in range(12)]
                 df_graf = pd.DataFrame({"Mês": meses_eixo, "Volume": vol_mensal})
                 
                 chart = alt.Chart(df_graf).mark_bar(
-                    color='#00ffcc', 
-                    cornerRadiusTopLeft=5, 
-                    cornerRadiusTopRight=5,
-                    opacity=0.85
+                    color='#00ffcc', cornerRadiusTopLeft=5, cornerRadiusTopRight=5
                 ).encode(
-                    x=alt.X('Mês', sort=None, axis=alt.Axis(labelColor='#94a3b8', title=None, labelAngle=0, labelFontWeight=600)),
-                    y=alt.Y('Volume', axis=alt.Axis(labelColor='#94a3b8', title='Volume Anual', grid=False))
-                ).properties(width='container', height=280, background='transparent').configure_view(strokeWidth=0)
+                    x=alt.X('Mês', sort=None, axis=alt.Axis(labelColor='#94a3b8', title=None, labelAngle=0)),
+                    y=alt.Y('Volume', axis=alt.Axis(labelColor='#94a3b8', title=None, grid=False))
+                ).properties(width='container', height=250, background='transparent').configure_view(strokeWidth=0)
                 
                 st.altair_chart(chart, use_container_width=True)
             
-            st.markdown("<br><br>", unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
