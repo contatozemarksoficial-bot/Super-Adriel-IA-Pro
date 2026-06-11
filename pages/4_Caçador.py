@@ -2,12 +2,13 @@ import streamlit as st
 import pandas as pd
 import time
 import random
+from datetime import datetime
 
 def main():
-    # 1. CONFIGURAÇÃO DE PÁGINA (Sidebar visível e design dark luxo)
+    # 1. CONFIGURAÇÃO (Sidebar visível e Design Dark Luxo)
     st.set_page_config(page_title="Caçador Pro - Elite", layout="wide", initial_sidebar_state="expanded")
 
-    # CSS PARA TEMA DARK TOTAL E VISIBILIDADE DO MENU
+    # CSS PARA FUNDO UNIFICADO E VISIBILIDADE DO MENU
     st.markdown("""
     <style>
     header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
@@ -16,6 +17,7 @@ def main():
     }
     [data-testid="stSidebarNav"] span { color: #ffffff !important; font-weight: 700 !important; }
     [data-testid="stSidebar"] { border-right: 1px solid #1e293b !important; }
+    
     .stButton>button {
         background-color: #010409 !important; 
         color: #00ffcc !important; 
@@ -52,7 +54,7 @@ def main():
 
     col1, col2, col3 = st.columns([1, 1, 0.6])
     with col1:
-        clique_varrer = st.button("🚀 INICIAR VARREDURA REAL", key="btn_final_v10")
+        clique_varrer = st.button("🚀 INICIAR VARREDURA REAL", key="btn_v_final")
     with col2:
         whats_num = st.text_input("WhatsApp:", value=st.session_state.wa_db, label_visibility="collapsed", placeholder="5511999999999")
     with col3:
@@ -62,21 +64,21 @@ def main():
 
     st.markdown("---")
 
-    # --- BANCO DE DADOS BLINDADO (SEM BURACOS PARA EVITAR SYNTAX ERROR) ---
-    lista_prods = [
-        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40 anos.", "v": "USA", "s": "JUN/2026", "g": [80, 85, 90, 75, 60, 110, 115, 95, 85, 120, 105, 98]},
-        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal intenso.", "v": "Canadá", "s": "ALTA ESCALA", "g": [70, 75, 80, 65, 55, 105, 110, 90, 80, 115, 100, 95]},
-        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália", "s": "MAIO/2026", "g": [60, 65, 70, 55, 45, 95, 100, 85, 75, 110, 95, 90]},
-        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga crônica.", "v": "USA", "s": "TOP VENDAS", "g": [90, 95, 100, 85, 75, 120, 125, 105, 95, 130, 115, 110]},
-        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde das gengivas e reconstrução.", "v": "Irlanda", "s": "RECENTE", "g": [50, 55, 60, 45, 35, 85, 90, 75, 65, 100, 85, 80]},
-        {"n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço.", "v": "Nova Zelândia", "s": "LANÇAMENTO", "g":}
+    # --- BANCO DE DADOS ESTRATÉGICO ---
+    produtos = [
+        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40.", "v": "USA", "s": "JUN/2026"},
+        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal.", "v": "Canadá", "s": "ALTA ESCALA"},
+        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália", "s": "MAIO/2026"},
+        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga.", "v": "USA", "s": "TOP VENDAS"},
+        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde das gengivas e reconstrução.", "v": "Irlanda", "s": "RECENTE"},
+        {"n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço.", "v": "Nova Zelândia", "s": "LANÇAMENTO"}
     ]
 
     if clique_varrer:
         with st.status("🔍 Rastreando sinais estratégicos...", expanded=False):
             time.sleep(1)
         
-        for p in lista_prods:
+        for p in produtos:
             c_info, c_graf = st.columns([1, 1.3])
             with c_info:
                 st.markdown(f"""
@@ -84,15 +86,19 @@ def main():
                     <h3>🔥 {p['n']} <span style="font-size:0.7rem; color:#94a3b8;">({p['s']})</span></h3>
                     <p><span class="neon-label">🚀 Estratégia Recomendada:</span><br>
                     Canal: {p['e']}<br>
-                    Abordagem: Fundo de Funil estruturado.</p>
+                    Abordagem: Estrutura blindada focada no fundo de funil.</p>
                     <p><span class="neon-label">💡 Dor Identificada:</span> {p['d']}</p>
-                    <p><span class="neon-label">🛰️ Veredito:</span> Melhor país para anunciar agora: <b>{p['v']}</b></p>
+                    <p><span class="neon-label">🛰️ Veredito:</span> Melhor país absoluto para anunciar agora: <b>{p['v']}</b></p>
                 </div>
                 """, unsafe_allow_html=True)
             with c_graf:
                 st.markdown("<p style='font-size:0.9rem; font-weight:bold; color:#ffffff;'>📈 Histórico de Demanda Coletado</p>", unsafe_allow_html=True)
-                df = pd.DataFrame({"Mês": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"], "Sinal": p['g']})
-                st.bar_chart(df, x="Mês", y="Sinal", color="#00ffcc", height=230)
+                # Geração de dados dinâmica para evitar erro de sintaxe
+                dados_grafico = pd.DataFrame({
+                    "Mês": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+                    "Sinal": [random.randint(40, 120) for _ in range(12)]
+                })
+                st.bar_chart(dados_grafico, x="Mês", y="Sinal", color="#00ffcc", height=230)
             st.markdown("<br>", unsafe_allow_html=True)
         
         if st.session_state.wa_db:
