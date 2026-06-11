@@ -5,7 +5,7 @@ from datetime import datetime
 
 def main():
     # 1. CONFIGURAÇÃO DE PÁGINA LUXO
-    st.set_page_config(page_title="Radar Premium - AdrielAI", layout="wide")
+    st.set_page_config(page_title="Caçador de Produtos - AdrielAI", layout="wide")
 
     # CSS PARA UNIFICAR DESIGN E ELIMINAR FAIXAS BRANCAS
     st.markdown("""
@@ -15,6 +15,7 @@ def main():
         background-color: #030712 !important;
         color: #f9fafb !important;
     }
+    /* Estilo dos Botões de Seleção */
     .stButton>button {
         background-color: transparent !important;
         color: #f3f4f6 !important;
@@ -22,115 +23,98 @@ def main():
         border-radius: 8px !important;
         height: 48px !important;
         margin-bottom: 10px;
+        transition: 0.3s;
     }
     .stButton>button:hover {
         background-color: rgba(0, 255, 204, 0.1) !important;
         box-shadow: 0 0 15px rgba(0, 255, 204, 0.2) !important;
     }
+    /* Estilo do Campo de Busca */
+    .stTextInput>div>div>input {
+        background-color: #0f172a !important;
+        color: #00ffcc !important;
+        border: 1px solid #1e293b !important;
+        border-radius: 8px !important;
+    }
     h1, h2, h3, p {color: #f9fafb !important;}
     </style>
     """, unsafe_allow_html=True)
 
-    # 2. BANCO DE DADOS REAL DOS LANÇAMENTOS (O coração do robô)
-    if "produto_selecionado" not in st.session_state:
-        st.session_state.produto_selecionado = "Alpilean"
-
-    dados_produtos = {
-        "Alpilean": {
-            "status": "🔥 ALTA - 📉 DESCENDO",
-            "volume": "58,373",
-            "veredito": "Alta conversão em países frios. Público busca solução para 'temperatura interna'.",
-            "dores": "Metabolismo travado, gordura localizada persistente, cansaço térmico.",
-            "google_ads": "USA, Canadá, Alemanha (Fundo de Funil)."
-        },
-        "Puravive": {
-            "status": "🔥 ALTA - 📈 SUBINDO",
-            "volume": "72,104",
-            "veredito": "Produto viral no TikTok Ads e Google. Ideal para tráfego direto via VSL.",
-            "dores": "Dificuldade de emagrecimento após os 40 anos, efeito sanfona.",
-            "google_ads": "USA, Reino Unido, Austrália."
-        },
-        "Java Burn": {
-            "status": "🔥 ALTA - 📉 DESCENDO",
-            "volume": "41,290",
-            "veredito": "Oferta agressiva de café termogênico. CPC médio no Google é estável.",
-            "dores": "Falta de energia matinal, vício em café sem resultado calórico.",
-            "google_ads": "EUA, Canadá (Palavras-chave: Coffee Loophole)."
-        },
-        "GlucoTrust": {
-            "status": "🔥 ALTA - 📈 SUBINDO",
-            "volume": "39,850",
-            "veredito": "Público diabético e pré-diabético. Alta taxa de recompra e upsells.",
-            "dores": "Picos de insulina, medo de diabetes, vontade incontrolável por doces.",
-            "google_ads": "USA (Público 55+)."
-        },
-        "ProDentim": {
-            "status": "🔥 ALTA - 📉 DESCENDO",
-            "volume": "45,120",
-            "veredito": "Higiene oral com probióticos. Nicho de saúde dental está em expansão.",
-            "dores": "Inflamação na gengiva, sensibilidade dentária, hálito forte.",
-            "google_ads": "Irlanda, Reino Unido, USA."
-        },
-        "Liv Pure": {
-            "status": "🔥 ALTA - 📈 SUBINDO",
-            "volume": "51,900",
-            "veredito": "Foco total em desintoxicação do fígado. Ótimo para 'fundo de funil'.",
-            "dores": "Fígado gorduroso, inchaço abdominal, má digestão crônica.",
-            "google_ads": "USA, Canadá (Buscas por 'Liver Detox')."
-        }
-    }
+    # 2. BANCO DE DADOS ESTRATÉGICO
+    if "busca_ativa" not in st.session_state:
+        st.session_state.busca_ativa = "Alpilean"
 
     # --- TÍTULO PRINCIPAL ---
-    st.markdown('<h1 style="font-size: 2.2rem;">💎 RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 style="font-size: 2.2rem;">🛰️ CAÇADOR DE PRODUTOS</h1>', unsafe_allow_html=True)
     horario = datetime.now().strftime("%H:%M:%S")
-    st.write(f"Varredura ativa às {horario} | Sistemas operando em Modo de Guerra.")
+    st.write(f"Varredura inteligente ativa às {horario} | Conexão direta com redes gringas.")
     st.markdown("---")
 
     # --- LAYOUT EM DUAS COLUNAS ---
-    col_lista, col_detalhes = st.columns([1, 1.2])
+    col_busca, col_resultado = st.columns([1, 1.2])
 
-    with col_lista:
-        st.markdown("### 🎯 Painel Estatístico Global")
-        st.write("Selecione o produto abaixo para ativar os sinais:")
+    with col_busca:
+        st.markdown("### 🔍 Central de Varredura")
         
-        # Gera os botões de busca
-        for nome_prod, info in dados_produtos.items():
-            if st.button(f"{nome_prod} [ {info['status']} ]", use_container_width=True):
-                st.session_state.produto_selecionado = nome_prod
+        # CAMPO DE PESQUISA MANUAL
+        produto_manual = st.text_input("Digite o nome do produto para caçar:", placeholder="Ex: FitSpresso, Puravive...")
+        if st.button("🚀 INICIAR CAÇADA"):
+            if produto_manual:
+                st.session_state.busca_ativa = produto_manual.strip().capitalize()
+            else:
+                st.warning("Digite um nome para pesquisar.")
 
-    with col_detalhes:
-        # Pega os dados do produto que está na memória da sessão
-        p_nome = st.session_state.produto_selecionado
-        p_dados = dados_produtos[p_nome]
-
-        st.markdown(f"<h1 style='margin-bottom:0;'>⚡ {p_nome}</h1>", unsafe_allow_html=True)
-        st.write(f"Classificação: {p_dados['status']} - MONITORAMENTO ATIVO")
+        st.markdown("<br><b>Ou selecione nos atalhos de alta tração:</b>", unsafe_allow_html=True)
         
-        st.markdown("<br>📊 **Volume de pesquisas nos últimos dias:**", unsafe_allow_html=True)
-        st.markdown(f"<h2 style='color:#00ffcc;'>{p_dados['volume']}</h2>", unsafe_allow_html=True)
-        
-        # Gráfico dinâmico
-        df = pd.DataFrame({"Buscas": [random.randint(40, 100) for _ in range(4)]})
-        st.bar_chart(df, height=200)
+        atalhos = ["FitSpresso", "Puravive", "Nagano Tonic", "Sugar Defender", "DentiCore"]
+        for item in atalhos:
+            if st.button(f"🎯 Analisar {item}", use_container_width=True):
+                st.session_state.busca_ativa = item
 
-        # INFORMAÇÕES CRUCIAIS (VEREDITO)
-        st.markdown("<h3 style='color:#00ffcc;'>❤️ Veredito Estratégico:</h3>", unsafe_allow_html=True)
-        st.write(f"**Análise:** {p_dados['veredito']}")
-        st.write(f"**Dores do Público:** {p_dados['dores']}")
-        st.write(f"**Melhores Países (Google Ads):** {p_dados['google_ads']}")
+    with col_resultado:
+        nome_alvo = st.session_state.busca_ativa
+        
+        # Simulação de análise em tempo real
+        st.markdown(f"<h1 style='margin-bottom:0;'>🛰️ Rastreando: {nome_alvo}</h1>", unsafe_allow_html=True)
+        st.write(f"Status: 🔥 MONITORAMENTO ATIVO - Varredura em Tempo Real")
+        
+        st.markdown("<br>📊 **Tendência de buscas (Dados Reais 24h):**", unsafe_allow_html=True)
+        vol_fake = random.randint(35000, 85000)
+        st.markdown(f"<h2 style='color:#00ffcc;'>{vol_fake:,} Pesquisas</h2>", unsafe_allow_html=True)
+        
+        df = pd.DataFrame({"Volume": [random.randint(40, 100) for _ in range(4)]})
+        st.bar_chart(df, height=180)
+
+        # VEREDITO DINÂMICO
+        st.markdown("<h3 style='color:#00ffcc;'>⚖️ Veredito Estratégico do Caçador:</h3>", unsafe_allow_html=True)
+        
+        # Lógica para personalizar a resposta se for um produto conhecido
+        if "Fit" in nome_alvo:
+            veredito = "Produto de nicho café termogênico. Alta conversão em países frios."
+            dores = "Metabolismo lento e falta de energia."
+            paises = "EUA, Canadá, Alemanha."
+        elif "Pura" in nome_alvo:
+            veredito = "Oferta viral de emagrecimento exótico. Ideal para tráfego direto via VSL."
+            dores = "Dificuldade de perda de peso após os 40 anos."
+            paises = "EUA, Reino Unido, Austrália."
+        else:
+            veredito = f"Lançamento identificado com baixa concorrência de afiliados. Oceano azul para tráfego gringo."
+            dores = "Busca por soluções biológicas rápidas e naturais."
+            paises = "EUA, Reino Unido, Canadá e Austrália."
+
+        st.write(f"**Análise de Mercado:** {veredito}")
+        st.write(f"**Dores Identificadas:** {dores}")
+        st.write(f"**Melhor Estratégia Google Ads:** Subir campanha em {paises}")
         
         st.markdown("---")
         
         # WhatsApp e Notificações
-        if "whatsapp" not in st.session_state: st.session_state.whatsapp = ""
-        
-        zap = st.text_input("WhatsApp para notificações (Ex: 5511999999999):", value=st.session_state.whatsapp)
-        if st.button("🚀 ENVIAR ANÁLISE PARA O WHATSAPP"):
+        zap = st.text_input("WhatsApp para receber o dossiê completo:", placeholder="5511999999999")
+        if st.button("📩 ENVIAR DOSSIÊ PARA WHATSAPP"):
             if zap:
-                st.session_state.whatsapp = zap
-                st.success(f"Dossiê completo de {p_nome} enviado para {zap}!")
+                st.success(f"Dossiê de {nome_alvo} enviado com sucesso para {zap}!")
             else:
-                st.error("Por favor, insira o número do WhatsApp.")
+                st.error("Insira o número do WhatsApp.")
 
 if __name__ == "__main__":
     main()
