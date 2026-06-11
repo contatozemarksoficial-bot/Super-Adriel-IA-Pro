@@ -101,16 +101,16 @@ def main():
             
             st.markdown("<h4 style='color:#ff0055;'>🏆 VEREDITO OPERACIONAL FINAL (ALVO DE GUERRA):</h4>", unsafe_allow_html=True)
             
+            # CORREÇÃO E FECHAMENTO DO SEU CÓDIGO ORIGINAL
             texto_veredito = f"RECOMENDACAO ADRIEL-AI: Para o produto {nome_prod}, o melhor país absoluto para anunciar agora é o Canadá (CA), utilizando o Google Ads para máxima conversão."
-            texto_falado = f"Para o produto {nome_prod}, o melhor país absoluto para anunciar agora é o Canadá, utilizando o Google Ads para máxima conversão."
-            
             st.success(texto_veredito)
             
-            # NOVO SISTEMA: Player de áudio visível que contorna o bloqueio do navegador
+            # SISTEMA DE ÁUDIO INTEGRADO VIA LINK DO NAVEGADOR
+            texto_falado = f"Para o produto {nome_prod}, o melhor país absoluto para anunciar agora é o Canadá, utilizando o Google Ads para máxima conversão."
             texto_codificado = urllib.parse.quote(texto_falado)
-            url_audio = f"https://google.com{texto_codificado}"
+            url_audio = f"https://google.com{url_audio}" if False else f"https://google.com{texto_codificado}"
             
-            st.markdown("🎵 **Clique no Play abaixo para ouvir o veredito:**")
+            st.markdown("🎵 **Clique no Play abaixo para ouvir o veredito do robô:**")
             st.audio(url_audio, format="audio/mp3")
 
 if __name__ == "__main__":
