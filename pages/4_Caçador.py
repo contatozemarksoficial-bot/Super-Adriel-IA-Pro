@@ -4,18 +4,26 @@ import pandas as pd
 from datetime import datetime
 
 def main():
-    # 1. CONFIGURAÇÃO DE PÁGINA (ESTADO DE TELA CHEIA)
-    st.set_page_config(page_title="Caçador Premium - AdrielAI", layout="wide", initial_sidebar_state="collapsed")
+    # 1. CONFIGURAÇÃO DA PÁGINA (ESTADO DE TELA CHEIA)
+    st.set_page_config(page_title="Caçador Premium - AdrielAI", layout="wide")
 
-    # CSS PARA MATAR A FAIXA BRANCA E DEIXAR TUDO DARK
+    # CSS PARA ELIMINAR O BRANCO E MANTER OS MÓDULOS VISÍVEIS
     st.markdown("""
     <style>
-    /* Remove faixa branca lateral e fundo do menu */
-    [data-testid="stSidebar"] {display: none;}
-    [data-testid="stAppViewContainer"] {background-color: #030712 !important;}
-    .stApp {background-color: #030712 !important;}
+    /* Muda a cor de fundo da barra lateral (módulos) para preto */
+    [data-testid="stSidebar"] {
+        background-color: #030712 !important;
+    }
     
-    /* Estilização dos Botões */
+    /* Remove qualquer borda branca ou linha clara */
+    [data-testid="stSidebar"] section {
+        background-color: #030712 !important;
+    }
+
+    /* Fundo principal e textos */
+    .stApp {background-color: #030712 !important; color: #f9fafb !important;}
+    
+    /* Estilização dos Botões de Pesquisa */
     .stButton>button {
         background-color: #0f172a !important; 
         color: #00ffcc !important; 
@@ -23,20 +31,20 @@ def main():
         border-radius: 8px !important;
         font-weight: bold !important;
         width: 100% !important;
-        height: 50px !important;
     }
     .stButton>button:hover {
         background-color: #00ffcc !important; 
         color: #030712 !important;
         box-shadow: 0 0 20px #00ffcc !important;
     }
-    /* Estilo dos Cards */
+    
+    /* Estilo dos Cards de Produto */
     .card-oportunidade {
         border: 1px solid #1e293b;
-        padding: 20px;
+        padding: 15px;
         border-radius: 12px;
         background-color: #090d16;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -44,7 +52,7 @@ def main():
     st.markdown('<h1 style="color: #00ffcc; text-align: center;">🛰️ CAÇADOR DE LANÇAMENTOS DO MERCADO</h1>', unsafe_allow_html=True)
     st.markdown("---")
 
-    # 📲 CENTRAL DE CONFIGURAÇÃO WHATSAPP
+    # 📲 CONFIGURAÇÃO WHATSAPP
     st.markdown("<h3 style='color:#00ffcc;'>📲 Configuração de Notificações</h3>", unsafe_allow_html=True)
     
     if "whats_numero" not in st.session_state:
@@ -52,60 +60,60 @@ def main():
 
     col_input, col_save = st.columns([3, 1])
     with col_input:
-        whats_input = st.text_input("Insira seu WhatsApp com DDD (Ex: 5511999999999):", value=st.session_state.whats_numero, label_visibility="collapsed")
+        whats_input = st.text_input("WhatsApp com DDD (Ex: 5511999999999):", value=st.session_state.whats_numero)
     with col_save:
+        st.write("##") # Alinhamento
         if st.button("💾 SALVAR"):
             st.session_state.whats_numero = whats_input
-            st.success("Configuração salva!")
+            st.success("Salvo!")
 
     st.markdown("---")
 
     # ⚙️ TERMINAL DE BUSCA
     st.markdown("<h3 style='color:#00ffcc;'>⚙️ Terminal de Varredura Estratégica</h3>", unsafe_allow_html=True)
     
-    # Botão de pesquisa que agora funciona independente
+    # O botão agora dispara a varredura
     if st.button("🚀 INICIAR BUSCA EM TEMPO REAL (6 PRODUTOS)"):
         if not st.session_state.whats_numero:
-            st.error("⚠️ Erro: Salve seu WhatsApp antes de iniciar o rastreio.")
+            st.warning("⚠️ Salve seu WhatsApp antes de realizar a pesquisa.")
         else:
             horario = datetime.now().strftime("%H:%M:%S")
-            st.info(f"🤖 Varredura completa às {horario}. Relatórios enviados para: {st.session_state.whats_numero}")
+            st.info(f"🤖 Varredura finalizada às {horario}. Relatórios gerados para: {st.session_state.whats_numero}")
 
-            # BANCO DE DADOS DE LANÇAMENTOS
-            db_produtos = [
-                {"n": "FitSpresso", "p": "ClickBank", "c": "#00ffcc", "o": "Baixo CPC em fundo de funil.", "d": "Perda de peso lenta.", "g": "USA, UK"},
-                {"n": "Nagano Tonic", "p": "BuyGoods", "c": "#ff0055", "o": "Nicho japonês alta conversão.", "d": "Gordura abdominal.", "g": "AU, NZ, USA"},
-                {"n": "DentiCore", "p": "Digistore24", "c": "#0066ff", "o": "Higiene oral profunda em alta.", "d": "Inflamação gengival.", "g": "Irlanda, UK"},
-                {"n": "Sugar Defender", "p": "ClickBank", "c": "#facc15", "o": "Taxa de recompra agressiva.", "d": "Controle de açúcar.", "g": "USA, Canada"},
-                {"n": "Puravive", "p": "BuyGoods", "c": "#22c55e", "o": "VSL viral com forte apelo visual.", "d": "Metabolismo travado.", "g": "USA, UK, DE"},
-                {"n": "ZenCortex", "p": "ClickBank", "c": "#a855f7", "o": "Pouca concorrência no Ads.", "d": "Zumbido e falta de foco.", "g": "Austrália, USA"}
+            # LISTA DE PRODUTOS PARA ROTAÇÃO
+            pool = [
+                {"n": "FitSpresso", "p": "ClickBank", "c": "#00ffcc", "o": "Demanda explosiva por termogênese de café.", "d": "Metabolismo lento e falta de foco.", "g": "EUA, Canadá, Reino Unido"},
+                {"n": "Nagano Tonic", "p": "BuyGoods", "c": "#ff0055", "o": "Fórmula japonesa com baixa concorrência.", "d": "Gordura visceral e retenção hídrica.", "g": "Austrália, EUA, NZ"},
+                {"n": "DentiCore", "p": "Digistore24", "c": "#0066ff", "o": "Nicho de higiene dental está saturando agora.", "d": "Problemas na gengiva e hálito.", "g": "Irlanda, Reino Unido"},
+                {"n": "Sugar Defender", "p": "ClickBank", "c": "#facc15", "o": "Melhor conversão para público 50+.", "d": "Desequilíbrio glicêmico.", "g": "EUA, Canadá"},
+                {"n": "Puravive", "p": "BuyGoods", "c": "#22c55e", "o": "Oferta de emagrecimento exótico viral.", "d": "Dificuldade de perda de peso pós-40.", "g": "EUA, Reino Unido, Alemanha"},
+                {"n": "ZenCortex", "p": "ClickBank", "c": "#a855f7", "o": "Zumbido no ouvido é a nova dor do ano.", "d": "Perda auditiva e ruídos constantes.", "g": "Canadá, Austrália, EUA"}
             ]
             
-            random.shuffle(db_produtos)
+            random.shuffle(pool)
 
-            # EXIBIÇÃO EM 2 COLUNAS LARGAS PARA EVITAR ERRO
+            # EXIBIÇÃO EM 2 COLUNAS PARA NÃO QUEBRAR O LAYOUT
             for i in range(0, 6, 2):
                 c1, c2 = st.columns(2)
                 for idx, col in enumerate([c1, c2]):
-                    prod = db_produtos[i + idx]
+                    prod = pool[i + idx]
                     with col:
                         st.markdown(f"""
                         <div class="card-oportunidade" style="border-top: 4px solid {prod['c']};">
                             <h4 style="color:{prod['c']}; margin:0;">🔥 {prod['n']}</h4>
-                            <p style="font-size:0.9rem; margin:10px 0;">
+                            <p style="font-size:0.85rem; margin:10px 0;">
                             <b>Oportunidade:</b> {prod['o']}<br>
-                            <b>Dor do Público:</b> {prod['d']}<br>
+                            <b>Dor:</b> {prod['d']}<br>
                             <b>Google Ads:</b> {prod['g']}</p>
                         </div>
                         """, unsafe_allow_html=True)
                         
-                        # Gráfico Dinâmico
-                        df = pd.DataFrame({"Vol": [random.randint(10, 100) for _ in range(4)]})
+                        df = pd.DataFrame({"Vol": [random.randint(20, 100) for _ in range(4)]})
                         st.bar_chart(df)
             
-            st.success("✅ Vereditos gerados e disparados via WhatsApp!")
+            st.success("✅ Vereditos enviados via WhatsApp com sucesso!")
     else:
-        st.write("Aguardando ativação do terminal...")
+        st.write("Aguardando comando de varredura...")
 
 if __name__ == "__main__":
     main()
