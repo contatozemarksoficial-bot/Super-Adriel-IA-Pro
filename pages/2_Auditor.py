@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
-from gtts import gTTS
-import io
 
 def main():
     # 1. CONFIGURACAO PREMIUM DA INTERFACE SAAS 2026
@@ -66,7 +64,7 @@ def main():
         txt_dor = f"O comprador gringo que busca por {nome_prod} sofre com uma dor psicologica severa gerada pela falta de resultados in tratamentos anteriores, acumulando cansaco cronico, indisposicao matinal e bloqueio biologico profundo."
         txt_estrategia = f"A melhor estrategia operacional para o {nome_prod} e subir uma campanha estruturada focada no canal recomendado. Monte uma estrutura de Pre-Sell ou pagina de Review nativo direto, blindando o link de afiliado contra bloqueios e focando fundo de funil."
 
-        # 4. CONSTRUÇÃO DO LAYOUT EM DUAS COLUNAS PRINCIGAIS LUXO
+        # 4. CONSTRUÇÃO DO LAYOUT EM DUAS COLUNAS PRINCIPAIS LUXO
         col_esquerda, col_direita = st.columns([1.0, 1.3])
 
         with col_esquerda:
@@ -105,17 +103,23 @@ def main():
             texto_veredito = f"RECOMENDACAO ADRIEL-AI: Para o produto {nome_prod}, o melhor país absoluto para anunciar agora é o Canadá (CA), utilizando o Google Ads para máxima conversão."
             st.success(texto_veredito)
             
-            # NOVO MOTOR DE VOZ LOCAL IMPERMEÁVEL A BLOQUEIOS
+            # TEXTO COMPLETO QUE SERÁ FALADO PELO COMPUTADOR
             texto_falado = f"Para o produto {nome_prod}, o melhor país absoluto para anunciar agora é o Canadá, utilizando o Google Ads para máxima conversão."
             
-            # Cria o arquivo de áudio diretamente na memória do Python
-            tts = gTTS(text=texto_falado, lang='pt', tld='com.br')
-            fp = io.BytesIO()
-            tts.write_to_fp(fp)
-            fp.seek(0)
-            
-            st.markdown("🎵 **Aperte o Play abaixo para escutar o robô falar:**")
-            st.audio(fp.read(), format="audio/mp3")
+            # INJEÇÃO JAVASCRIPT INFALÍVEL: Executa a fala nativa do sistema operacional
+            codigo_javascript = f"""
+            <script>
+                var msg = new SpeechSynthesisUtterance();
+                msg.text = "{texto_falado}";
+                msg.lang = "pt-BR";
+                msg.volume = 1;
+                msg.rate = 1;
+                msg.pitch = 1;
+                window.speechSynthesis.cancel(); // Limpa falas anteriores presas
+                window.speechSynthesis.speak(msg);
+            </script>
+            """
+            st.markdown(codigo_javascript, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
