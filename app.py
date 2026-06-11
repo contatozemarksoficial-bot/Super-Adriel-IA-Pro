@@ -7,7 +7,7 @@ from datetime import datetime
 st.set_page_config(page_title="Adriel-AI Pro", layout="wide", initial_sidebar_state="collapsed")
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL (TRAVA O TEMA COMPLETO E CORRIGE TEXTOS E BOTÕES)
+# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL (TRAVA O DESIGN DO SEU PRINT COM BOTÕES 100% FUNCIONAIS)
 # =============================================================================================================
 st.markdown("""
 <style>
@@ -29,7 +29,7 @@ st.markdown("""
     padding: 10px !important; text-align: center; font-size: 10px !important; font-weight: 900 !important; color: #cbd5e1 !important; letter-spacing: 1px;
 }
 
-/* 🚨 CORREÇÃO DAS MÉTRICAS: FORÇA OS NÚMEROS E TÍTULOS A FICAREM 100% VISÍVEIS EM BRANCO */
+/* 🚨 RECLAREAMENTO DAS CORES DAS MÉTRICAS EM BRANCO ACESO BRILHANTE IDÊNTICO AO PRINT */
 [data-testid="stMetricContainer"] {
     background: linear-gradient(135deg, #0f172a, #030712) !important; 
     border: 1px solid #1e293b !important;
@@ -40,44 +40,27 @@ st.markdown("""
 }
 div[data-testid="stMetricContainer"]:nth-of-type(4) { border-bottom: 3px solid #ff0055 !important; }
 
-/* Forçador de cor branca nas métricas do Streamlit */
-[data-testid="stMetricLabel"], [data-testid="stMetricValue"] {
-    color: #ffffff !important;
-}
-[data-testid="stMetricValue"] {
-    font-size: 1.8rem !important;
-    font-weight: 800 !important;
-}
+[data-testid="stMetricLabel"], [data-testid="stMetricValue"] { color: #ffffff !important; }
+[data-testid="stMetricValue"] { font-size: 1.8rem !important; font-weight: 800 !important; }
 
-/* 🧱 CARDS DOS PLANOS E SEÇÕES INTERNES */
+/* 🧱 CARDS DOS PLANOS DA ADESÃO COM ARREMATES DE LUXO */
 .card-plano-luxo { 
     background-color: #080f1d !important; 
     border: 1px solid #1e293b !important; 
     border-radius: 14px !important; 
-    padding: 25px !important; 
-    min-height: 200px; 
+    padding: 25px 25px 5px 25px !important; 
+    min-height: 190px; 
 }
 .caixa-holografica-master { background-color: #080f1d !important; border: 2px solid #1e293b !important; border-radius: 12px !important; padding: 24px !important; margin-bottom: 25px !important; width: 100% !important; }
 
-/* 🚨 CORREÇÃO DO SELETOR DE ABAS: CONFIGURAÇÃO DE LARGURA CORRETA */
-.stSelectbox > div {
-    background-color: #0f172a !important;
-    border: 2px solid #00ffcc !important;
-    border-radius: 8px !important;
-}
-.stSelectbox div[role="button"] {
-    color: #00ffcc !important;
-    font-weight: 800 !important;
-}
-
-/* 🚨 CORREÇÃO MESTRE DOS BOTÕES: FORÇA O FORMATO CÁPSULA ARREDONDADO E A COR CIANO NEON DO SEU PRINT */
-.stButton > button {
+/* 🚨 SOLUÇÃO DE ENGENHARIA: REPROGRAMAÇÃO COMPILADA DOS BOTÕES NATIVOS LINK DO STREAMLIT */
+div.stLinkButton > a {
     background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%) !important; 
     color: #030712 !important;
     font-weight: 900 !important; 
-    font-size: 13px !important; 
-    border-radius: 30px !important; /* Formato cápsula executivo da Apple */
-    padding: 14px 20px !important; 
+    font-size: 12.5px !important; 
+    border-radius: 30px !important; /* Força o formato pílula/cápsula arredondado da Apple */
+    padding: 12px 20px !important; 
     width: 100% !important; 
     border: none !important; 
     cursor: pointer !important;
@@ -85,27 +68,32 @@ div[data-testid="stMetricContainer"]:nth-of-type(4) { border-bottom: 3px solid #
     letter-spacing: 0.5px !important; 
     box-shadow: 0 0 15px rgba(0, 255, 204, 0.4) !important; 
     transition: all 0.25s ease-in-out !important;
+    display: block !important;
+    text-align: center !important;
 }
-.stButton > button:hover { 
+div.stLinkButton > a:hover { 
     box-shadow: 0 0 25px rgba(0, 255, 135, 0.8) !important; 
-    transform: scale(1.01) !important; 
+    transform: scale(1.02) !important; 
     color: #030712 !important;
 }
-.stButton > button p {
+div.stLinkButton > a p {
     color: #030712 !important;
     font-weight: 900 !important;
 }
 
-/* Títulos gerais */
-h1, h2, h3, h4, .stMarkdown p { color: #ffffff !important; }
+/* Customização fina para a caixa de seleção de abas */
+.stSelectbox > div { background-color: #0f172a !important; border: 2px solid #1e293b !important; border-radius: 8px !important; }
+.stSelectbox div[role="button"] { color: #00ffcc !important; font-weight: 800 !important; }
 
-/* Entradas de dados limpas */
+/* Botões do painel interno do Radar */
+.stButton > button { background-color: #0f1526 !important; color: #cbd5e1 !important; font-weight: 800 !important; border-radius: 10px !important; border: 1px solid #1e293b !important; text-align: left !important; }
+.stButton > button:hover { color: #00ffcc !important; border-color: #00ffcc !important; }
+
+/* Títulos Gerais */
+h1, h2, h3, h4, .stMarkdown p { color: #ffffff !important; }
 .stTextInput > div > div > input { background-color: #0f1526 !important; color: #ffffff !important; border: 2px solid #1e293b !important; border-radius: 8px !important; padding: 12px !important; }
 .stCodeBlock, pre { background-color: #0b111e !important; border: 1px solid #1e293b !important; border-radius: 8px !important; }
 .stCodeBlock code, pre code { color: #33ffdd !important; font-size: 13.5px !important; }
-
-/* Lista vertical interna do radar */
-.lista-vertical-master div.stButton > button { background-color: #0f1526 !important; color: #cbd5e1 !important; font-weight: 800 !important; border-radius: 10px !important; border: 1px solid #1e293b !important; text-align: left !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -157,21 +145,21 @@ url_hostinger = "https://hostinger.com"
 # ROTEADOR DE TELAS: CONTEÚDO ABRE EXATAMENTE ABAIXO SEGUINDO O MESMO TEMA DE LUXO
 # =============================================================================================================
 
-# 💳 TELA 1: EXIBIÇÃO ORIGINAL DO SEU PRINT (OS 3 CARD DE VALORES)
+# 💳 TELA 1: RESOLUÇÃO DA IDEIA REAL (CARDS DO PRINT + BOTÕES CÁPSULA 100% FUNCIONAIS)
 if st.session_state.modulo_ativo == "Área de Membros (Faturamento)":
     st.markdown('<h3 style="font-size: 1.6rem; font-weight: 800; color: #ffffff;">💳 ADESÃO ÀS NOVAS LICENÇAS SUPREMAS</h3>', unsafe_allow_html=True)
     st.write("")
+    
     col_v1, col_v2, col_v3 = st.columns(3)
+    
     with col_v1:
-        st.markdown('<div class="card-plano-luxo"><span style="color:#94a3b8; font-weight:bold; font-size:11px;">PLANO MENSAL START</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#fff !important;">R$ 47</h2><p style="font-size:13px; color:#94a3b8;">Liberação do Módulo 1 (Radar) + Tendências. Acesso básico para validação imediata.</p></div>', unsafe_allow_html=True)
-        st.link_button("💳 PAGAR COM CARTÃO / PIX", url_hostinger, use_container_width=True)
+        st.markdown('<div class="card-plano-luxo"><span style="color:#94a3b8; font-weight:bold; font-size:11px;">PLANO MENSAL START</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#fff !important;">R$ 47</h2><p style="font-size:13px; color:#94a3b8; line-height:1.5;">Liberação do Módulo 1 (Radar) + Tendências. Acesso básico para validação imediata.</p></div>', unsafe_allow_html=True)
+        # Botão nativo Python redirecionador cravado de forma funcional na estrutura
+        st.link_button("💳 PAGAR COM CARTÃO / PIX", url_hostinger, use_container_width=True, key="lnk_start_v5")
+        
     with col_v2:
-        st.markdown('<div class="card-plano-luxo"><span style="color:#94a3b8; font-weight:bold; font-size:11px;">PLANO MENSAL PRO</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#fff !important;">R$ 97</h2><p style="font-size:13px; color:#94a3b8;">Start + Módulo RSA (45 Keywords) + Arquiteto de Funil. Foco em quem já escala.</p></div>', unsafe_allow_html=True)
-        st.link_button("💳 PAGAR COM CARTÃO / PIX ", url_hostinger, use_container_width=True)
+        st.markdown('<div class="card-plano-luxo"><span style="color:#94a3b8; font-weight:bold; font-size:11px;">PLANO MENSAL PRO</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#fff !important;">R$ 97</h2><p style="font-size:13px; color:#94a3b8; line-height:1.5;">Start + Módulo RSA (45 Keywords) + Arquiteto de Funil. Foco em quem já escala.</p></div>', unsafe_allow_html=True)
+        # Botão nativo Python redirecionador cravado de forma funcional na estrutura
+        st.link_button("💳 PAGAR COM CARTÃO / PIX", url_hostinger, use_container_width=True, key="lnk_pro_v5")
+        
     with col_v3:
-        st.markdown('<div class="card-plano-luxo"><span style="color:#94a3b8; font-weight:bold; font-size:11px;">PLANO ELITE MASTER</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#fff !important;">R$ 197</h2><p style="font-size:13px; color:#94a3b8;">ACESSO TOTAL ILIMITADO + Construtor Pre-Sell Hostinger. O poder máximo do robô.</p></div>', unsafe_allow_html=True)
-        st.link_button("💳 PAGAR COM CARTÃO / PIX  ", url_hostinger, use_container_width=True)
-
-# 🛰️ TELA 2: RADAR DE PRODUTOS VERTICAL
-elif st.session_state.modulo_ativo == "Módulo 1: Radar de Produtos":
-    st.markdown('### 🛰️ Módulo 1: Radar de Produtos Perpétuos')
