@@ -48,12 +48,13 @@ def main():
     st.markdown('<h1 style="color: #00ffcc; font-size: 2rem;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
 
     # --- PAINEL DE CONTROLE ---
-    if "wa_db" not in st.session_state: st.session_state.wa_db = ""
+    if "wa_db" not in st.session_state: 
+        st.session_state.wa_db = ""
 
     col1, col2, col3 = st.columns([1, 1, 0.6])
     with col1:
         # Chave dinâmica evita erro de cache
-        clique_varrer = st.button("🚀 INICIAR VARREDURA REAL", key=f"run_{random.randint(1,999)}")
+        clique_varrer = st.button("🚀 INICIAR VARREDURA REAL", key="btn_varrer_final")
     with col2:
         whats_num = st.text_input("WhatsApp:", value=st.session_state.wa_db, label_visibility="collapsed", placeholder="5511999999999")
     with col3:
@@ -63,13 +64,13 @@ def main():
 
     st.markdown("---")
 
-    # --- BANCO DE DADOS (DADOS FIXOS PARA EVITAR ERRO DE SINTAXE) ---
+    # --- BANCO DE DADOS (DADOS FIXOS PREENCHIDOS PARA EVITAR ERRO DE SINTAXE) ---
     lista_prods = [
-        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40.", "v": "USA (Search Ads)", "s": "JUN/2026", "g": [60, 50, 110, 55, 120, 115, 65, 85, 75, 65, 80, 95]},
-        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal.", "v": "Canadá (FB Ads)", "s": "ALTA ESCALA", "g": [80, 70, 90, 110, 100, 125, 95, 65, 120, 110, 90, 85]},
-        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália (Native)", "s": "MAIO/2026", "g": [55, 65, 85, 75, 95, 110, 80, 120, 105, 90, 75, 60]},
-        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga.", "v": "EUA (Search Ads)", "s": "TOP VENDAS", "g": [110, 95, 80, 65, 85, 90, 120, 105, 75, 80, 115, 100]},
-        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde das gengivas e reconstrução.", "v": "Irlanda (Video Ads)", "s": "RECENTE", "g": [40, 55, 75, 95, 110, 100, 90, 85, 115, 105, 80, 70]},
+        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40.", "v": "USA (Search Ads)", "s": "JUN/2026", "g": [40, 60, 80, 50, 45, 90, 110, 120, 85, 70, 65, 80]},
+        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal.", "v": "Canadá (FB Ads)", "s": "ALTA ESCALA", "g": [30, 50, 70, 90, 100, 115, 125, 105, 95, 80, 75, 90]},
+        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália (Native)", "s": "MAIO/2026", "g": [25, 45, 65, 85, 95, 100, 110, 90, 80, 75, 70, 85]},
+        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga.", "v": "EUA (Search Ads)", "s": "TOP VENDAS", "g": [50, 70, 90, 110, 120, 100, 90, 80, 70, 65, 60, 75]},
+        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde das gengivas e reconstrução.", "v": "Irlanda (Video Ads)", "s": "RECENTE", "g": [15, 35, 55, 75, 85, 95, 105, 85, 75, 70, 65, 80]},
         {"n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço.", "v": "Nova Zelândia", "s": "LANÇAMENTO", "g":}
     ]
 
@@ -77,9 +78,6 @@ def main():
         with st.status("🔍 Rastreando sinais estratégicos...", expanded=False):
             time.sleep(1)
         
-        # Embaralha para mostrar que a busca é dinâmica
-        random.shuffle(lista_prods)
-
         for p in lista_prods:
             c_info, c_graf = st.columns([1, 1.3])
             with c_info:
@@ -90,7 +88,7 @@ def main():
                     Canal: {p['e']}<br>
                     Abordagem: Fundo de Funil com blindagem.</p>
                     <p><span class="neon-label">💡 Dor Identificada:</span> {p['d']}</p>
-                    <p><span class="neon-label">🛰️ Veredito:</span> Melhor país: <b>{p['v']}</b></p>
+                    <p><span class="neon-label">🛰️ Veredito:</span> Melhor país para anunciar agora: <b>{p['v']}</b></p>
                 </div>
                 """, unsafe_allow_html=True)
             with c_graf:
