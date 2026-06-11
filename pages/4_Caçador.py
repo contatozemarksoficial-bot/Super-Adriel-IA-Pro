@@ -4,114 +4,87 @@ import pandas as pd
 from datetime import datetime
 
 def main():
-    # 1. CONFIGURAÇÃO DE PÁGINA LUXO
-    st.set_page_config(page_title="Radar Premium - AdrielAI", layout="wide")
+    # 1. CONFIGURAÇÃO DE PÁGINA (TELA CHEIA)
+    st.set_page_config(page_title="Radar Premium", layout="wide")
 
-    # CSS PARA TEMA DARK TOTAL E REMOÇÃO DE FAIXAS BRANCAS
+    # CSS ULTRA LIMPO: Remove faixas brancas e unifica o fundo
     st.markdown("""
     <style>
-    /* Fundo total e lateral */
-    [data-testid="stSidebar"], .stApp, [data-testid="stAppViewContainer"] {
+    /* Remove a barra branca do topo e o header padrão */
+    header, [data-testid="stHeader"] {display: none !important;}
+    
+    /* Unifica o fundo de tudo (lateral e principal) para preto profundo */
+    [data-testid="stSidebar"], .stApp, [data-testid="stAppViewContainer"], [data-testid="stSidebarNav"] {
         background-color: #030712 !important;
-        color: #f9fafb !important;
-    }
-    /* Estilo dos botões do menu lateral */
-    .stSidebar .stButton>button {
-        background: transparent !important;
-        color: #94a3b8 !important;
         border: none !important;
-        text-align: left !important;
-        font-size: 1rem !important;
     }
-    .stSidebar .stButton>button:hover {
-        color: #00ffcc !important;
-        background: rgba(0, 255, 204, 0.05) !important;
-    }
-    /* Estilo dos Botões de Seleção de Produto (Painel Estatístico) */
-    .btn-produto > button {
-        background: #030712 !important;
+
+    /* Estiliza os botões de seleção do Painel Estatístico */
+    .stButton>button {
+        background-color: transparent !important;
         color: #f3f4f6 !important;
         border: 1px solid #00ffcc !important;
         border-radius: 8px !important;
-        margin-bottom: 10px !important;
-        width: 100% !important;
-        height: 50px !important;
-        font-size: 0.9rem !important;
+        height: 45px !important;
+        transition: 0.3s;
     }
-    .btn-produto > button:hover {
-        background: rgba(0, 255, 204, 0.1) !important;
-        box-shadow: 0 0 15px rgba(0, 255, 204, 0.3) !important;
+    .stButton>button:hover {
+        background-color: rgba(0, 255, 204, 0.1) !important;
+        box-shadow: 0 0 15px rgba(0, 255, 204, 0.2) !important;
     }
+
+    /* Títulos e textos */
+    h1, h2, h3, p, span {color: #f9fafb !important;}
     </style>
     """, unsafe_allow_html=True)
 
-    # --- BARRA LATERAL (MENU DE MÓDULOS) ---
-    with st.sidebar:
-        st.markdown("<br><br>", unsafe_allow_html=True)
-        modulos = ["app", "Radar", "Auditor", "Gerador", "Caçador", "Presell", "Funil", "Assinantes"]
-        for mod in modulos:
-            st.button(mod)
-
-    # --- CONTEÚDO PRINCIPAL ---
-    st.markdown('<h1 style="color: #f9fafb; font-size: 2.2rem;">💎 RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
-    st.write("Varredura automatizada e mapeamento operacional de ofertas de alta tração nas plataformas gringas.")
+    # --- CONTEÚDO PRINCIPAL (SEM REPETIR OS BOTÕES DA LATERAL) ---
+    st.markdown('<h1 style="font-size: 2rem;">💎 RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
     horario_agora = datetime.now().strftime("%H:%M:%S")
-    st.write(f"Sistemas operando em Modo de Guerra. Varredura ativa às {horario_agora}")
+    st.write(f"Varredura automatizada ativa às {horario_agora} | Modo de Guerra Operacional.")
     
     st.markdown("---")
 
-    # Layout de Duas Colunas Principal
-    col_lista, col_detalhes = st.columns([1, 1.2])
+    # Layout de Duas Colunas para o Painel
+    col_esquerda, col_direita = st.columns([1, 1.2])
 
-    with col_lista:
-        st.markdown("<h3 style='color:#f9fafb;'>🎯 Painel Estatístico Global</h3>", unsafe_allow_html=True)
-        st.write("Selecione o produto abaixo para ativar os sinais:")
+    with col_esquerda:
+        st.markdown("### 🎯 Painel Estatístico Global")
+        st.write("Selecione o produto para ativar os sinais:")
         
-        # Lista de produtos com status
-        produtos = [
-            {"n": "Alpilean", "s": "🔥 ALTA - 📉 DESCENDO", "c": "#00ffcc"},
-            {"n": "Puravive", "s": "🔥 ALTA - 📈 SUBINDO", "c": "#00ffcc"},
-            {"n": "Java Burn", "s": "🔥 ALTA - 📉 DESCENDO", "c": "#00ffcc"},
-            {"n": "GlucoTrust", "s": "🔥 ALTA - 📈 SUBINDO", "c": "#00ffcc"},
-            {"n": "ProDentim", "s": "🔥 ALTA - 📉 DESCENDO", "c": "#00ffcc"},
-            {"n": "Liv Pure", "s": "🔥 ALTA - 📈 SUBINDO", "c": "#00ffcc"}
+        # Lista de produtos para os botões centrais
+        lista_prods = [
+            "Alpilean [ 🔥 ALTA - 📉 DESCENDO ]",
+            "Puravive [ 🔥 ALTA - 📈 SUBINDO ]",
+            "Java Burn [ 🔥 ALTA - 📉 DESCENDO ]",
+            "GlucoTrust [ 🔥 ALTA - 📈 SUBINDO ]",
+            "ProDentim [ 🔥 ALTA - 📉 DESCENDO ]",
+            "Liv Pure [ 🔥 ALTA - 📈 SUBINDO ]"
         ]
 
-        # Criar os botões de seleção (painel da esquerda)
-        selecionado = produtos[0] # Padrão
-        for p in produtos:
-            if st.button(f"{p['n']} [ {p['s']} ]", key=p['n'], help=f"Ver detalhes de {p['n']}", use_container_width=True):
-                selecionado = p
+        for p in lista_prods:
+            st.button(p, use_container_width=True)
 
-    with col_detalhes:
-        # Título do Produto Selecionado
-        st.markdown(f"<h1 style='color:#f9fafb; margin-bottom:0;'>⚡ {selecionado['n']}</h1>", unsafe_allow_html=True)
-        st.write(f"Classificação: {selecionado['s'].split('-')[0]} - MONITORAMENTO ATIVO")
+    with col_direita:
+        # Exemplo com o primeiro produto (Alpilean)
+        st.markdown("<h1 style='margin-bottom:0;'>⚡ Alpilean</h1>", unsafe_allow_html=True)
+        st.write("Classificação: 🔥 ALTA - MONITORAMENTO ATIVO")
         
-        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("<br>📊 **Volume de pesquisas nos últimos dias:**", unsafe_allow_html=True)
+        st.markdown("<h2 style='color:#00ffcc;'>58,373</h2>", unsafe_allow_html=True)
         
-        # Gráfico de Tendência (Volume)
-        st.markdown("📈 **Volume de pesquisas nos últimos dias:**")
-        volume_fake = random.randint(45000, 65000)
-        st.markdown(f"<h2 style='color:#00ffcc;'>{volume_fake:,}</h2>", unsafe_allow_html=True)
-        
-        df = pd.DataFrame({"Buscas": [random.randint(30, 100) for _ in range(5)]})
-        st.bar_chart(df, height=200)
+        # Gráfico
+        df = pd.DataFrame({"Buscas": [40, 80, 75, 45, 60]})
+        st.bar_chart(df, height=220)
 
-        # Veredito Psicológico
         st.markdown("<h3 style='color:#00ffcc;'>❤️ Veredito Psicológico Gringo:</h3>", unsafe_allow_html=True)
         st.write("Frustração emocional profunda e busca por soluções biológicas associadas ao bem-estar imediato.")
         
+        # Campo de WhatsApp simplificado no final
         st.markdown("---")
-        
-        # Área de WhatsApp
-        st.markdown("**Notificação de Oportunidade:**")
-        zap = st.text_input("WhatsApp para alertas:", placeholder="Ex: 5511999999999")
-        if st.button("🚀 ENVIAR ANÁLISE COMPLETA"):
-            if zap:
-                st.success(f"Dossiê de {selecionado['n']} enviado para {zap}!")
-            else:
-                st.warning("Insira o número do WhatsApp.")
+        zap = st.text_input("WhatsApp para notificações:", placeholder="5511999999999")
+        if st.button("🚀 ENVIAR ANÁLISE"):
+            st.success("Dossiê enviado com sucesso!")
 
 if __name__ == "__main__":
     main()
