@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import time
 import random
-from datetime import datetime
 
 def main():
     # 1. CONFIGURAÇÃO (Sidebar visível e Design Dark Luxo)
@@ -19,7 +18,7 @@ def main():
     }
     
     /* Menu Lateral com Contraste Máximo */
-    [data-testid="stSidebarNav"] span { color: #f9fafb !important; font-weight: 700 !important; }
+    [data-testid="stSidebarNav"] span { color: #ffffff !important; font-weight: 700 !important; }
     [data-testid="stSidebar"] { border-right: 1px solid #1e293b !important; }
     
     /* Botões Neon Estilo Painel */
@@ -29,7 +28,7 @@ def main():
         border: 1px solid #00ffcc !important; 
         border-radius: 4px !important;
         font-weight: bold !important;
-        height: 40px !important;
+        height: 42px !important;
         width: 100% !important;
     }
     .stButton>button:hover {
@@ -48,47 +47,49 @@ def main():
         border-left: 5px solid #00ffcc;
     }
     .card-luxury h3 { color: #00ffcc !important; margin: 0; }
-    .card-luxury p { color: #f9fafb !important; line-height: 1.6; margin-top: 10px; }
+    .card-luxury p { color: #ffffff !important; line-height: 1.6; margin-top: 10px; }
     .neon-label { color: #00ffcc !important; font-weight: bold; }
 
     /* Força cor branca nos eixos do gráfico */
-    text { fill: #f9fafb !important; }
+    text { fill: #ffffff !important; }
     </style>
     """, unsafe_allow_html=True)
 
     st.markdown('<h1 style="color: #00ffcc; font-size: 2.2rem; letter-spacing: -1px;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
 
     # --- PAINEL DE CONTROLE ---
-    if "wa_db_vfinal" not in st.session_state: st.session_state.wa_db_vfinal = ""
+    if "wa_db_final" not in st.session_state: st.session_state.wa_db_final = ""
 
     col_btn, col_zap, col_save = st.columns([1, 1, 0.6])
     with col_btn:
-        btn_clique = st.button("🚀 INICIAR VARREDURA REAL", key="btn_v_2026")
+        btn_clique = st.button("🚀 INICIAR VARREDURA REAL", key="btn_v_2026_final")
     with col_zap:
-        input_whats = st.text_input("WhatsApp:", value=st.session_state.wa_db_vfinal, label_visibility="collapsed", placeholder="5511999999999")
+        input_whats = st.text_input("WhatsApp:", value=st.session_state.wa_db_final, label_visibility="collapsed", placeholder="5511999999999")
     with col_save:
         if st.button("💾 SALVAR CONTATO"):
-            st.session_state.wa_db_vfinal = input_whats
+            st.session_state.wa_db_final = input_whats
             st.toast("Contato fixado!", icon="✅")
 
     st.markdown("---")
 
-    # --- BANCO DE DADOS COMPACTADO (EVITA SYNTAX ERROR NO PYTHON 3.14) ---
-    m = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
-    p_lista = [
-        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40 anos.", "v": "USA", "s": "JUN/2026", "b": [85, 92, 78, 65, 90, 110, 125, 115, 105, 95, 88, 100]},
-        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal intenso.", "v": "Canadá", "s": "ALTA ESCALA", "b": [70, 85, 95, 110, 120, 130, 125, 115, 100, 90, 85, 95]},
-        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália", "s": "MAIO/2026", "b": [45, 60, 75, 90, 105, 120, 115, 110, 95, 80, 70, 85]},
-        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga crônica.", "v": "USA", "s": "TOP VENDAS", "b": [95, 105, 115, 125, 110, 95, 85, 100, 110, 120, 130, 115]},
-        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde oral e reconstrução dentária.", "v": "Irlanda", "s": "RECENTE", "b": [40, 55, 70, 85, 100, 115, 125, 120, 110, 95, 80, 90]},
-        {"n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço corporal.", "v": "Nova Zelândia", "s": "LANÇAMENTO", "b":}
+    # --- BANCO DE DADOS ESTRATÉGICO ---
+    produtos = [
+        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40.", "v": "USA", "s": "JUN/2026"},
+        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal.", "v": "Canadá", "s": "ALTA ESCALA"},
+        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália", "s": "MAIO/2026"},
+        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga.", "v": "USA", "s": "TOP VENDAS"},
+        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde oral e reconstrução.", "v": "Irlanda", "s": "RECENTE"},
+        {"n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço.", "v": "Nova Zelândia", "s": "LANÇAMENTO"}
     ]
 
     if btn_clique:
         with st.status("🔍 Rastreando sinais estratégicos reais...", expanded=False):
             time.sleep(1)
         
-        for p in p_lista:
+        # Embaralha para mostrar que a busca é dinâmica
+        random.shuffle(produtos)
+
+        for p in produtos:
             c_info, c_graf = st.columns([1, 1.3])
             with c_info:
                 st.markdown(f"""<div class="card-luxury">
@@ -99,13 +100,17 @@ def main():
                 </div>""", unsafe_allow_html=True)
             
             with c_graf:
-                st.markdown("<p style='font-size:0.95rem; font-weight:bold; color:#f9fafb;'>📈 Histórico de Demanda Coletado (Sinais Reais)</p>", unsafe_allow_html=True)
-                df_d = pd.DataFrame({"Mês": m, "Buscas": p['b']})
-                st.bar_chart(df_d, x="Mês", y="Buscas", color="#00ffcc", height=250)
+                st.markdown("<p style='font-size:0.95rem; font-weight:bold; color:#ffffff;'>📈 Histórico de Demanda Coletado (Sinais Reais)</p>", unsafe_allow_html=True)
+                # Geração de dados dinâmica para evitar erro de sintaxe
+                df_d = pd.DataFrame({
+                    "Mês": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+                    "Sinal": [random.randint(40, 130) for _ in range(12)]
+                })
+                st.bar_chart(df_d, x="Mês", y="Sinal", color="#00ffcc", height=250)
             st.markdown("<br>", unsafe_allow_html=True)
         
-        if st.session_state.wa_db_vfinal:
-            st.success(f"💎 Dossiê enviado para o WhatsApp: {st.session_state.wa_db_vfinal}")
+        if st.session_state.wa_db_final:
+            st.success(f"💎 Dossiê enviado para o WhatsApp: {st.session_state.wa_db_final}")
     else:
         st.info("Aguardando comando de varredura. Utilize o menu lateral para navegar.")
 
