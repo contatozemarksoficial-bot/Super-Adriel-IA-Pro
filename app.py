@@ -1,66 +1,143 @@
 import streamlit as st
 import pandas as pd
-import random
+import altair as alt
+import time
+from datetime import datetime, timedelta
 
 def main():
-    st.set_page_config(page_title="Adriel-AI Pro | Gestão", layout="wide", initial_sidebar_state="expanded")
+    # 1. CONFIGURAÇÃO DE ELITE
+    st.set_page_config(page_title="Adriel-AI Pro", layout="wide", initial_sidebar_state="expanded")
 
-    # CSS MATA BRANCO NA LATERAL E DESIGN CINEMA
+    if "caça_ativa" not in st.session_state: st.session_state.caça_ativa = False
+
+    # 2. CSS DE ALTA PERFORMANCE (Design com Divisões Neon)
     st.markdown("""
     <style>
-        header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
-        .stApp, [data-testid="stAppViewContainer"], 
-        [data-testid="stSidebar"], [data-testid="stSidebarNav"] {
-            background-color: #010409 !important;
-        }
-        [data-testid="stSidebarNav"] span { color: #ffffff !important; font-weight: 700; }
-        [data-testid="stSidebar"] { border-right: 1px solid #1e293b !important; }
-        
-        .main-logo { color: #ffffff; font-size: 2.8rem; font-weight: 900; letter-spacing: -2px; display: flex; align-items: center; gap: 15px; }
-        .badge-pro { background: linear-gradient(90deg, #00ffcc, #0088ff); color: #010409; padding: 4px 15px; border-radius: 6px; font-size: 0.9rem; font-weight: 900; }
-        
-        .plat-link { text-decoration: none !important; color: inherit !important; }
-        .plat-badge { padding: 12px 15px; border-radius: 8px; border: 1px solid #1e293b; background: #0d1117; color: #f9fafb; font-size: 0.7rem; font-weight: 800; display: flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; justify-content: center; }
-        .plat-badge:hover { border-color: #00ffcc; background: #010409; box-shadow: 0 0 15px #00ffcc33; }
-        .online-dot { height: 7px; width: 7px; background: #00ffcc; border-radius: 50%; box-shadow: 0 0 10px #00ffcc; }
+    header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
+    .stApp { background-color: #010409 !important; }
+    
+    /* Menu Lateral Premium */
+    [data-testid="stSidebar"] { background-color: #010409 !important; border-right: 1px solid #1e293b !important; }
+    [data-testid="stSidebarNav"] span { color: #ffffff !important; font-weight: 700; }
 
-        .metric-container { background: rgba(13, 17, 23, 0.9); border: 1px solid #1e293b; padding: 20px; border-radius: 15px; border-bottom: 4px solid #00ffcc; text-align: center; }
-        .m-value { color: #ffffff; font-size: 1.6rem; font-weight: 900; }
+    /* Divisória Neon Pulsante */
+    .divider-neon {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+        margin: 40px 0;
+        opacity: 0.6;
+    }
+
+    /* Cabeçalho de Luxo */
+    .header-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+    }
+    .brand-text { color: #ffffff; font-size: 2.5rem; font-weight: 900; letter-spacing: -1.5px; }
+    .pro-badge { 
+        background: #00ffcc; color: #010409; padding: 3px 12px; 
+        border-radius: 4px; font-size: 0.9rem; font-weight: 800;
+        box-shadow: 0 0 15px #00ffcc; margin-left: 10px;
+    }
+
+    /* Botão de Ativação */
+    .stButton>button {
+        background: #010409 !important; color: #00ffcc !important; 
+        border: 1px solid #00ffcc !important; border-radius: 8px;
+        font-weight: 800; height: 50px; text-transform: uppercase;
+        letter-spacing: 1.5px; transition: 0.4s;
+    }
+    .stButton>button:hover {
+        box-shadow: 0 0 30px rgba(0, 255, 204, 0.4);
+        transform: scale(1.02);
+    }
+
+    /* Cards de Produtos com Divisão Interna */
+    .product-card {
+        border: 1px solid #1e293b;
+        padding: 30px;
+        border-radius: 20px;
+        background: rgba(13, 17, 23, 0.8);
+        margin-bottom: 30px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+    .status-tag { color: #00ffcc; font-size: 0.75rem; font-weight: bold; letter-spacing: 2px; }
+    .product-name { color: #ffffff; font-size: 2rem; font-weight: 800; margin: 10px 0; }
+    .metric-value { color: #ffffff; font-size: 2.2rem; font-weight: 900; }
+    .metric-label { color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; }
     </style>
     """, unsafe_allow_html=True)
 
-    # --- HEADER ---
-    st.markdown('<div class="main-logo">🤖 Adriel-AI <span class="badge-pro">PRO</span></div>', unsafe_allow_html=True)
+    # --- TOP BAR ---
+    st.markdown("""
+        <div class="header-box">
+            <div class="brand-text">🤖 Adriel-AI <span class="pro-badge">PRO</span></div>
+            <div style="color: #94a3b8; font-weight: 500;">Inteligência Preditiva de Tráfego</div>
+        </div>
+    """, unsafe_allow_html=True)
 
-    # --- PLATAFORMAS LINCADAS (ADICIONE SEU LINK AQUI) ---
-    st.markdown("<br>", unsafe_allow_html=True)
-    lp1, lp2, lp3, lp4, lp5 = st.columns(5)
-    
-    # COLE SEU LINK DA HOSTINGER ENTRE AS ASPAS ABAIXO:
-    seu_link_hostinger = "COLE_SEU_LINK_AQUI" 
-    
-    platas = [
-        ("CLICKBANK", "https://clickbank.com", lp1),
-        ("BUYGOODS", "https://buygoods.com", lp2),
-        ("DIGISTORE24", "https://digistore24.com", lp3),
-        ("STRIPE DASH", "https://stripe.com", lp4),
-        ("HOSTINGER VPS", seu_link_hostinger, lp5) # Seu link agora está aqui!
-    ]
-    
-    for name, link, col in platas:
-        with col:
-            st.markdown(f'<a href="{link}" target="_blank" class="plat-link"><div class="plat-badge"><div class="online-dot"></div> {name}</div></a>', unsafe_allow_html=True)
+    # --- ÁREA DE COMANDO (DIVISÃO 1) ---
+    col_v1, col_btn, col_v2 = st.columns([1, 2, 1])
+    with col_btn:
+        if st.button("🚀 ATIVAR VARREDURA DO ROBÔ"):
+            st.session_state.caça_ativa = True
 
-    # --- DASHBOARD FINANCEIRO ---
-    st.markdown("<br>", unsafe_allow_html=True)
-    m1, m2, m3, m4 = st.columns(4)
-    with m1: st.markdown('<div class="metric-container"><div style="color:#94a3b8; font-size:0.7rem; font-weight:700;">FATURAMENTO GERAL</div><div class="m-value">R$ 142.580</div></div>', unsafe_allow_html=True)
-    with m2: st.markdown('<div class="metric-container"><div style="color:#94a3b8; font-size:0.7rem; font-weight:700;">LICENÇAS ATIVAS</div><div class="m-value">2.105</div></div>', unsafe_allow_html=True)
-    with m3: st.markdown('<div class="metric-container"><div style="color:#94a3b8; font-size:0.7rem; font-weight:700;">RECORRÊNCIA (MRR)</div><div class="m-value">R$ 104.200</div></div>', unsafe_allow_html=True)
-    with m4: st.markdown('<div class="metric-container" style="border-bottom-color:#ff0055;"><div style="color:#94a3b8; font-size:0.7rem; font-weight:700;">CHURN RATE</div><div class="m-value">0.8%</div></div>', unsafe_allow_html=True)
+    # LINHA DIVISÓRIA NEON
+    st.markdown('<div class="divider-neon"></div>', unsafe_allow_html=True)
 
-    st.markdown('<div style="height:1px; background:linear-gradient(90deg, transparent, #1e293b, transparent); margin:40px 0;"></div>', unsafe_allow_html=True)
-    st.info("Terminal Adriel-AI configurado com sucesso. Clique nos badges superiores para acessar as plataformas.")
+    # --- ÁREA DE RESULTADOS (DIVISÃO 2) ---
+    if st.session_state.caça_ativa:
+        with st.status("🤖 Robô processando Big Data gringo...", expanded=False):
+            time.sleep(1)
+
+        hoje = datetime.now()
+        meses_eixo = [(hoje - timedelta(days=30*i)).strftime('%b') for i in range(12)][::-1]
+        
+        produtos = [
+            {"n": "Nagano Tonic", "e": "YouTube Ads", "v24": "4.812", "st": "ESCALA AGRESSIVA", "p": "USA/Austrália", "peso": 1.6},
+            {"n": "FitSpresso", "e": "Facebook Ads", "v24": "7.329", "st": "DOMÍNIO TOTAL", "p": "Canadá/USA", "peso": 2.3},
+            {"n": "Sugar Defender", "e": "Google Review", "v24": "5.610", "st": "ESCALA ESTÁVEL", "p": "UK/USA", "peso": 1.9}
+        ]
+
+        for p in produtos:
+            # Estrutura de Card com Divisão de Colunas
+            st.markdown(f'<div class="product-card">', unsafe_allow_html=True)
+            c_txt, c_chart = st.columns([1, 1.2], gap="large")
+            
+            with c_txt:
+                st.markdown(f"""
+                    <span class="status-tag">● STATUS: {p['st']}</span>
+                    <div class="product-name">🔥 {p['n']}</div>
+                    <p style="color: #94a3b8; font-weight: 500;">
+                        <span style="color:#00ffcc;">⚖️ Veredito:</span> Oferta validada para escala agressiva no canal <b>{p['e']}</b>.
+                    </p>
+                    <div style="margin-top:25px;">
+                        <span class="metric-label">Volume de Buscas (24h)</span><br>
+                        <span class="metric-value">{p['v24']}</span> <span style="color:#94a3b8;">pesquisas</span>
+                    </div>
+                    <div style="margin-top:15px;">
+                        <span class="metric-label">Foco Geográfico</span><br>
+                        <b style="color:white; font-size:1.1rem;">{p['p']}</b>
+                    </div>
+                """, unsafe_allow_html=True)
+            
+            with c_chart:
+                st.markdown("<p style='color:white; font-weight:bold; font-size:0.9rem;'>📊 TENDÊNCIA ESTATÍSTICA (12 MESES)</p>", unsafe_allow_html=True)
+                vol_mensal = [int((35 + (i * 4)) * p['peso'] * 1000) for i in range(12)]
+                df_graf = pd.DataFrame({"Mês": meses_eixo, "Volume": vol_mensal})
+                
+                chart = alt.Chart(df_graf).mark_bar(
+                    color='#00ffcc', cornerRadiusTopLeft=5, cornerRadiusTopRight=5
+                ).encode(
+                    x=alt.X('Mês', sort=None, axis=alt.Axis(labelColor='#94a3b8', title=None, labelAngle=0)),
+                    y=alt.Y('Volume', axis=alt.Axis(labelColor='#94a3b8', title=None, grid=False))
+                ).properties(width='container', height=250, background='transparent').configure_view(strokeWidth=0)
+                
+                st.altair_chart(chart, use_container_width=True)
+            
+            st.markdown('</div>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
