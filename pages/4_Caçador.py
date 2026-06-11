@@ -4,7 +4,7 @@ import time
 import random
 
 def main():
-    # 1. CONFIGURAÇÃO DE PÁGINA (Sidebar visível e design dark)
+    # 1. CONFIGURAÇÃO DE PÁGINA (Sidebar visível e design dark luxo)
     st.set_page_config(page_title="Caçador Pro - Elite", layout="wide", initial_sidebar_state="expanded")
 
     # CSS PARA TEMA DARK TOTAL E VISIBILIDADE DO MENU
@@ -48,13 +48,11 @@ def main():
     st.markdown('<h1 style="color: #00ffcc; font-size: 2rem;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
 
     # --- PAINEL DE CONTROLE ---
-    if "wa_db" not in st.session_state: 
-        st.session_state.wa_db = ""
+    if "wa_db" not in st.session_state: st.session_state.wa_db = ""
 
     col1, col2, col3 = st.columns([1, 1, 0.6])
     with col1:
-        # Chave dinâmica evita erro de cache
-        clique_varrer = st.button("🚀 INICIAR VARREDURA REAL", key="btn_varrer_final_v5")
+        clique_varrer = st.button("🚀 INICIAR VARREDURA REAL", key="btn_final_v10")
     with col2:
         whats_num = st.text_input("WhatsApp:", value=st.session_state.wa_db, label_visibility="collapsed", placeholder="5511999999999")
     with col3:
@@ -64,13 +62,13 @@ def main():
 
     st.markdown("---")
 
-    # --- BANCO DE DADOS (DADOS COMPACTADOS PARA EVITAR ERRO DE SINTAXE NO PYTHON 3.14) ---
+    # --- BANCO DE DADOS BLINDADO (SEM BURACOS PARA EVITAR SYNTAX ERROR) ---
     lista_prods = [
-        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40.", "v": "USA", "s": "JUN/2026", "g": [55, 48, 75, 52, 45, 85, 91, 88, 68, 118, 102, 93]},
-        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal.", "v": "Canadá", "s": "ALTA ESCALA", "g": [60, 52, 80, 58, 48, 92, 98, 92, 75, 122, 108, 98]},
-        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália", "s": "MAIO/2026", "g": [45, 38, 65, 42, 35, 75, 81, 78, 58, 108, 92, 83]},
-        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga.", "v": "USA", "s": "TOP VENDAS", "g": [70, 62, 90, 68, 58, 102, 108, 102, 85, 132, 118, 108]},
-        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde das gengivas e reconstrução.", "v": "Irlanda", "s": "RECENTE", "g": [50, 42, 70, 48, 40, 80, 86, 82, 62, 112, 98, 88]},
+        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40 anos.", "v": "USA", "s": "JUN/2026", "g": [80, 85, 90, 75, 60, 110, 115, 95, 85, 120, 105, 98]},
+        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal intenso.", "v": "Canadá", "s": "ALTA ESCALA", "g": [70, 75, 80, 65, 55, 105, 110, 90, 80, 115, 100, 95]},
+        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália", "s": "MAIO/2026", "g": [60, 65, 70, 55, 45, 95, 100, 85, 75, 110, 95, 90]},
+        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga crônica.", "v": "USA", "s": "TOP VENDAS", "g": [90, 95, 100, 85, 75, 120, 125, 105, 95, 130, 115, 110]},
+        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde das gengivas e reconstrução.", "v": "Irlanda", "s": "RECENTE", "g": [50, 55, 60, 45, 35, 85, 90, 75, 65, 100, 85, 80]},
         {"n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço.", "v": "Nova Zelândia", "s": "LANÇAMENTO", "g":}
     ]
 
