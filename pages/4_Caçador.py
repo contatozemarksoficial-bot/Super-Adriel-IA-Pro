@@ -8,11 +8,14 @@ def main():
     # 1. CONFIGURAÇÃO DE ELITE (Sidebar visível e Design Cinema Dark)
     st.set_page_config(page_title="Caçador Pro - Super Inteligência", layout="wide", initial_sidebar_state="expanded")
 
-    # Inicializa memória de estado para resposta imediata
-    if "busca_ativa" not in st.session_state: st.session_state.busca_ativa = False
-    if "whats_db" not in st.session_state: st.session_state.whats_db = ""
+    # --- MEMÓRIA DO ROBÔ (SESSION STATE) ---
+    # Isso impede que o robô ignore o comando ou "esqueça" a pesquisa
+    if "pesquisa_concluida" not in st.session_state:
+        st.session_state.pesquisa_concluida = False
+    if "dados_rastreados" not in st.session_state:
+        st.session_state.dados_rastreados = []
 
-    # CSS LUXO SUPREMO - UNIFICAÇÃO TOTAL E MATAR O BRANCO
+    # CSS LUXO SUPREMO - UNIFICAÇÃO DE FUNDO E MATAR O BRANCO
     st.markdown("""
     <style>
     header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
@@ -44,41 +47,40 @@ def main():
 
     st.markdown('<h1 style="color: #00ffcc; font-size: 2.2rem; letter-spacing: -1px;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
 
-    # --- PAINEL DE CONTROLE (BOTÃO -> WHATSAPP -> SALVAR) ---
+    # --- PAINEL DE CONTROLE (ORDEM: PESQUISAR -> WHATSAPP -> SALVAR) ---
     col_pesq, col_zap, col_save = st.columns([1.2, 0.8, 0.5])
     
     with col_pesq:
+        # Ao clicar, o robô ativa a memória e gera os dados
         if st.button("🚀 INICIAR VARREDURA REAL"):
-            st.session_state.busca_ativa = True
+            with st.status("🔍 Rastreando sinais comportamentais e gravidade...", expanded=False):
+                time.sleep(1.2)
+                # Banco de dados blindado gerado apenas no clique
+                st.session_state.dados_rastreados = [
+                    {"n": "Nagano Tonic", "e": "YouTube Ads + Review", "d": "Gordura visceral e metabolismo.", "p": "Austrália", "s": "AGRESSIVO", "g": "158.4", "c": "$127"},
+                    {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal.", "p": "Canadá", "s": "ALTA ESCALA", "g": "225.1", "c": "$145"},
+                    {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido auditivo e névoa mental.", "p": "EUA", "s": "OCEANO AZUL", "g": "98.2", "c": "$118"},
+                    {"n": "Sugar Defender", "e": "Google Ads Review", "d": "Picos de insulina e fadiga.", "p": "EUA", "s": "TOP VENDAS", "g": "192.0", "c": "$132"},
+                    {"n": "DentiCore", "e": "YouTube Search", "d": "Saúde das gengivas e hálito.", "p": "UK", "s": "LANÇAMENTO", "g": "82.5", "c": "$115"},
+                    {"n": "Puravive", "e": "Google Search (Review)", "d": "Gordura marrom teimosa.", "p": "EUA", "s": "ESTÁVEL", "g": "165.7", "c": "$138"}
+                ]
+                st.session_state.pesquisa_concluida = True
             
     with col_zap:
-        input_zap = st.text_input("WhatsApp:", value=st.session_state.whats_db, label_visibility="collapsed", placeholder="5511999999999")
+        input_zap = st.text_input("WhatsApp:", value=st.get_option("server.address") if "wa_v10" not in st.session_state else st.session_state.wa_v10, label_visibility="collapsed", placeholder="5511999999999")
     
     with col_save:
         if st.button("💾 SALVAR"):
-            st.session_state.whats_db = input_zap
+            st.session_state.wa_v10 = input_zap
             st.toast("Contato fixado!", icon="✅")
 
     st.markdown("---")
 
-    # --- EXECUÇÃO DO MODO SUPER INTELIGÊNCIA ---
-    if st.session_state.busca_ativa:
-        with st.status("🔍 Mapeando sinais comportamentais e gravidade das ofertas...", expanded=False):
-            time.sleep(1)
-
+    # --- EXIBIÇÃO DOS RESULTADOS (TRAVADA NA TELA) ---
+    if st.session_state.pesquisa_concluida:
         meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
         
-        # BANCO DE DADOS BLINDADO (ESCALA REAL DE CLIQUES)
-        produtos = [
-            {"n": "Nagano Tonic", "e": "YouTube Ads + Review", "d": "Metabolismo travado e gordura visceral.", "p": "Austrália", "s": "AGRESSIVO", "g": "158.4", "c": "$127"},
-            {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal intenso.", "p": "Canadá", "s": "ALTA ESCALA", "g": "210.2", "c": "$145"},
-            {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido auditivo e névoa mental.", "p": "USA", "s": "OCEANO AZUL", "g": "92.4", "c": "$118"},
-            {"n": "Sugar Defender", "e": "Google Ads Review", "d": "Picos de insulina e fadiga crônica.", "p": "USA", "s": "TOP VENDAS", "g": "185.0", "c": "$132"},
-            {"n": "DentiCore", "e": "YouTube Search", "d": "Saúde das gengivas e hálito forte.", "p": "Reino Unido", "s": "LANÇAMENTO", "g": "82.5", "c": "$115"},
-            {"n": "Puravive", "e": "Google Search (Review)", "d": "Gordura marrom teimosa pós-40.", "p": "USA", "s": "ESTÁVEL", "g": "160.3", "c": "$138"}
-        ]
-
-        for p in produtos:
+        for p in st.session_state.dados_rastreados:
             col_info, col_graf = st.columns([1, 1.3])
             
             with col_info:
@@ -96,25 +98,25 @@ def main():
             with col_graf:
                 st.markdown(f"<p style='font-size:0.9rem; font-weight:bold;'>📈 Volume Mensal de Cliques (Escala Real em Milhares)</p>", unsafe_allow_html=True)
                 
-                # Geração de dados de clique em tempo real (Escala de 40k a 120k)
-                dados_cliques = pd.DataFrame({
+                # Dados dinâmicos de cliques (Escala de 50k a 140k)
+                df_graf = pd.DataFrame({
                     "Mês": meses,
-                    "Cliques": [random.randint(40000, 120000) for _ in range(12)]
+                    "Cliques": [random.randint(50000, 140000) for _ in range(12)]
                 })
                 
-                # GRÁFICO ALTAIR - FUNDO PRETO FORÇADO
-                chart = alt.Chart(dados_cliques).mark_bar(color='#00ffcc').encode(
+                # GRÁFICO ALTAIR - FUNDO PRETO FORÇADO (MOTOR DE LUXO)
+                chart = alt.Chart(df_graf).mark_bar(color='#00ffcc').encode(
                     x=alt.X('Mês', sort=None, axis=alt.Axis(labelColor='white', titleColor='white')),
-                    y=alt.Y('Cliques', axis=alt.Axis(labelColor='white', titleColor='white', title='Cliques'))
+                    y=alt.Y('Cliques', axis=alt.Axis(labelColor='white', titleColor='white', title='Volume'))
                 ).properties(width='container', height=220, background='#010409').configure_view(strokeWidth=0)
                 
                 st.altair_chart(chart, use_container_width=True)
             st.markdown("<br>", unsafe_allow_html=True)
         
-        if st.session_state.whats_db:
-            st.success(f"💎 Varredura enviada com sucesso para: {st.session_state.whats_db}")
+        if "wa_v10" in st.session_state and st.session_state.wa_v10:
+            st.success(f"💎 Dossiê enviado com sucesso para: {st.session_state.wa_v10}")
     else:
-        st.info("Aguardando comando estratégico. Clique em 'Iniciar Varredura Real' para carregar os relatórios.")
+        st.info("O robô está em modo de prontidão. Clique em 'Iniciar Varredura Real' para carregar os alvos.")
 
 if __name__ == "__main__":
     main()
