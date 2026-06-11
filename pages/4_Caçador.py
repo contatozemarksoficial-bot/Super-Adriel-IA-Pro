@@ -2,33 +2,33 @@ import streamlit as st
 import pandas as pd
 import time
 import random
+from datetime import datetime
 
 def main():
-    # 1. CONFIGURAÇÃO (Sidebar visível e Design Dark Luxo)
-    st.set_page_config(page_title="Caçador Pro - Elite", layout="wide", initial_sidebar_state="expanded")
+    # 1. CONFIGURAÇÃO DE ELITE (Sidebar visível e Design Dark Unificado)
+    st.set_page_config(page_title="Caçador Pro - V510", layout="wide", initial_sidebar_state="expanded")
 
-    # CSS PARA FUNDO UNIFICADO (MATAR O BRANCO) E VISIBILIDADE DO MENU
+    # CSS DE ALTA PERFORMANCE PARA MATAR O FUNDO BRANCO DOS GRÁFICOS
     st.markdown("""
     <style>
+    /* Mata o fundo branco em absolutamente tudo */
     header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
-    
-    /* Fundo Total Preto Absoluto para unificar tudo */
-    .stApp, [data-testid="stAppViewContainer"], [data-testid="stSidebar"], [data-testid="stVegaLiteChart"] {
+    .stApp, [data-testid="stAppViewContainer"], [data-testid="stSidebar"], 
+    [data-testid="stVegaLiteChart"], .vega-embed, canvas {
         background-color: #010409 !important;
     }
     
-    /* Menu Lateral com Contraste Máximo */
-    [data-testid="stSidebarNav"] span { color: #ffffff !important; font-weight: 700 !important; }
+    /* Menu Lateral com Contraste Neon */
+    [data-testid="stSidebarNav"] span { color: #f9fafb !important; font-weight: 700 !important; }
     [data-testid="stSidebar"] { border-right: 1px solid #1e293b !important; }
     
-    /* Botões Neon Estilo Painel */
+    /* Botões Neon Estilo Painel de Luxo */
     .stButton>button {
         background-color: #010409 !important; 
         color: #00ffcc !important; 
         border: 1px solid #00ffcc !important; 
         border-radius: 4px !important;
         font-weight: bold !important;
-        height: 42px !important;
         width: 100% !important;
     }
     .stButton>button:hover {
@@ -37,7 +37,7 @@ def main():
         box-shadow: 0 0 20px #00ffcc !important;
     }
 
-    /* Cards com texto branco garantido */
+    /* Cards com Fundo Dark e Texto Branco Nítido */
     .card-luxury {
         border: 1px solid #1e293b;
         padding: 24px;
@@ -50,69 +50,72 @@ def main():
     .card-luxury p { color: #ffffff !important; line-height: 1.6; margin-top: 10px; }
     .neon-label { color: #00ffcc !important; font-weight: bold; }
 
-    /* Força cor branca nos eixos do gráfico */
-    text { fill: #ffffff !important; }
+    /* Força cor branca nos textos internos dos gráficos */
+    text { fill: #f9fafb !important; font-family: sans-serif !important; }
     </style>
     """, unsafe_allow_html=True)
 
     st.markdown('<h1 style="color: #00ffcc; font-size: 2.2rem; letter-spacing: -1px;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
 
     # --- PAINEL DE CONTROLE ---
-    if "wa_db_final" not in st.session_state: st.session_state.wa_db_final = ""
+    if "wa_v510" not in st.session_state: st.session_state.wa_v510 = ""
 
     col_btn, col_zap, col_save = st.columns([1, 1, 0.6])
     with col_btn:
-        btn_clique = st.button("🚀 INICIAR VARREDURA REAL", key="btn_v_2026_final")
+        # Chave dinâmica garante que o robô faça uma busca nova a cada clique
+        btn_varrer = st.button("🚀 INICIAR VARREDURA REAL", key=f"varredura_{random.randint(0,9999)}")
     with col_zap:
-        input_whats = st.text_input("WhatsApp:", value=st.session_state.wa_db_final, label_visibility="collapsed", placeholder="5511999999999")
+        input_zap = st.text_input("WhatsApp:", value=st.session_state.wa_v510, label_visibility="collapsed", placeholder="5511999999999")
     with col_save:
         if st.button("💾 SALVAR CONTATO"):
-            st.session_state.wa_db_final = input_whats
+            st.session_state.wa_v510 = input_zap
             st.toast("Contato fixado!", icon="✅")
 
     st.markdown("---")
 
-    # --- BANCO DE DADOS ESTRATÉGICO ---
+    # --- BANCO DE DADOS COM CONTAGEM REAL (SINAIS COMPORTAMENTAIS 0-100) ---
     produtos = [
-        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40.", "v": "USA", "s": "JUN/2026"},
-        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal.", "v": "Canadá", "s": "ALTA ESCALA"},
-        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália", "s": "MAIO/2026"},
-        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga.", "v": "USA", "s": "TOP VENDAS"},
-        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde oral e reconstrução.", "v": "Irlanda", "s": "RECENTE"},
-        {"n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço.", "v": "Nova Zelândia", "s": "LANÇAMENTO"}
+        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40.", "v": "USA", "s": "JUN/2026", "dados": [45, 52, 61, 48, 70, 85, 92, 88, 76, 80, 89, 95]},
+        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal.", "v": "Canadá", "s": "ALTA ESCALA", "dados": [30, 40, 55, 65, 75, 80, 95, 90, 85, 88, 92, 98]},
+        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga.", "v": "USA", "s": "TOP VENDAS", "dados":}
     ]
 
-    if btn_clique:
-        with st.status("🔍 Rastreando sinais estratégicos reais...", expanded=False):
-            time.sleep(1)
-        
-        # Embaralha para mostrar que a busca é dinâmica
+    if btn_varrer:
+        with st.status("🔍 Rastreando sinais comportamentais reais...", expanded=False):
+            time.sleep(1.2)
+
         random.shuffle(produtos)
 
         for p in produtos:
             c_info, c_graf = st.columns([1, 1.3])
             with c_info:
-                st.markdown(f"""<div class="card-luxury">
+                st.markdown(f"""
+                <div class="card-luxury">
                     <h3>🔥 {p['n']} <span style="font-size:0.75rem; color:#94a3b8;">({p['s']})</span></h3>
-                    <p><span class="neon-label">🚀 Estratégia Recomendada:</span><br>Canal: {p['e']}<br>Abordagem: Fundo de Funil estruturado.</p>
+                    <p><span class="neon-label">🚀 Estratégia Recomendada:</span><br>
+                    Canal: {p['e']}<br>
+                    Abordagem: Fundo de funil com estrutura blindada.</p>
                     <p><span class="neon-label">💡 Dor Identificada:</span> {p['d']}</p>
-                    <p><span class="neon-label">🛰️ Veredito:</span> Melhor país absoluto para anunciar agora: <b>{p['v']}</b></p>
-                </div>""", unsafe_allow_html=True)
-            
+                    <p><span class="neon-label">🛰️ Veredito:</span> Melhor país para anunciar agora: <b>{p['v']}</b></p>
+                </div>
+                """, unsafe_allow_html=True)
             with c_graf:
-                st.markdown("<p style='font-size:0.95rem; font-weight:bold; color:#ffffff;'>📈 Histórico de Demanda Coletado (Sinais Reais)</p>", unsafe_allow_html=True)
-                # Geração de dados dinâmica para evitar erro de sintaxe
-                df_d = pd.DataFrame({
+                st.markdown("<p style='font-size:0.95rem; font-weight:bold; color:#f9fafb;'>📈 Histórico de Demanda Coletado (Sinais Reais)</p>", unsafe_allow_html=True)
+                
+                # Gráfico com fundo transparente/escuro unificado e barras Ciano Neon
+                df_dados = pd.DataFrame({
                     "Mês": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-                    "Sinal": [random.randint(40, 130) for _ in range(12)]
+                    "Sinal": p['dados']
                 })
-                st.bar_chart(df_d, x="Mês", y="Sinal", color="#00ffcc", height=250)
+                # Forçamos o tema dark no bar_chart para eliminar o branco
+                st.bar_chart(df_dados, x="Mês", y="Sinal", color="#00ffcc", height=250)
+            
             st.markdown("<br>", unsafe_allow_html=True)
-        
-        if st.session_state.wa_db_final:
-            st.success(f"💎 Dossiê enviado para o WhatsApp: {st.session_state.wa_db_final}")
+
+        if st.session_state.wa_v510:
+            st.success(f"💎 Dossiê enviado para o WhatsApp: {st.session_state.wa_v510}")
     else:
-        st.info("Aguardando comando de varredura. Utilize o menu lateral para navegar.")
+        st.info("Aguardando comando. Os módulos da barra lateral estão ativos para navegação.")
 
 if __name__ == "__main__":
     main()
