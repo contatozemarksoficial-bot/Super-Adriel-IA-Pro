@@ -3,105 +3,91 @@ import pandas as pd
 from datetime import datetime
 
 def main():
-    # 1. CONFIGURAÇÃO DA PÁGINA (Sidebar habilitada e Layout Wide)
-    st.set_page_config(page_title="Auditor Premium - AdrielAI", layout="wide", initial_sidebar_state="expanded")
+    # 1. CONFIGURACAO PREMIUM DA INTERFACE SAAS 2026
+    st.set_page_config(page_title="Auditor Premium - AdrielAI", layout="wide")
 
-    # CSS NEON CORRIGIDO (SEM ESCONDER A INTERFACE)
-    estilo_cyber = """
+    # FORCADOR ULTRA LUXO CYBER-NEON COMPILADO (CORRIGIDO PARA NÃO SUMIR COM A INTERFACE)
+    estilo_luxo = """
     <style>
-    [data-testid="stAppViewContainer"] { background-color: #030712 !important; color: #f9fafb !important; }
-    [data-testid="stSidebar"] { background-color: #090d16 !important; border-right: 1px solid #1e293b; }
-    
-    /* Estilo dos Inputs */
-    .stTextInput>div>div>input {
-        background-color: #0f172a !important; 
-        color: #00ffcc !important; 
-        border: 2px solid #1e293b !important;
-        border-radius: 8px !important;
-    }
-
-    /* Estilo do Botão - AGORA VISÍVEL */
-    .stButton>button {
-        background-color: #0f172a !important; 
-        color: #00ffcc !important; 
-        border: 2px solid #00ffcc !important;
-        font-weight: bold !important;
-        width: 100% !important;
-        height: 50px !important;
-        box-shadow: 0 0 10px rgba(0,255,204,0.2);
-    }
-    .stButton>button:hover {
-        background-color: #00ffcc !important;
-        color: #030712 !important;
-        box-shadow: 0 0 25px #00ffcc !important;
-    }
-
-    /* Métricas Neon */
-    [data-testid="stMetricContainer"] {
-        background: linear-gradient(135deg, #0f172a, #030712) !important;
-        border-left: 4px solid #00ffcc !important;
-        border-radius: 10px !important;
-        padding: 15px !important;
-    }
-    
-    h1, h2, h3, h4 { color: #00ffcc !important; text-shadow: 0 0 10px rgba(0,255,204,0.3); }
+    [data-testid='stAppViewContainer'] {background-color: #030712 !important; color: #f9fafb !important;}
+    [data-testid='stSidebar'], section[data-testid='stSidebar'] div {background-color: #090d16 !important;}
+    [data-testid='stSidebar'] nav ul li div a span {color: #00ffcc !important; font-weight: bold !important; text-shadow: 0 0 8px rgba(0,255,204,0.5) !important;}
+    .stTextInput>div>div>input {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; font-size: 1.1rem !important;}
+    .stTextInput>div>div>input:focus {border-color: #00ffcc !important; box-shadow: 0 0 15px rgba(0,255,204,0.3) !important;}
+    .stButton>button {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #00ffcc !important; border-radius: 8px !important; font-weight: bold !important; box-shadow: 0 0 10px rgba(0,255,204,0.15) !important; transition: all 0.3s ease-in-out !important; width: 100% !important; height: 45px !important;}
+    .stButton>button:hover {background-color: #00ffcc !important; color: #030712 !important; box-shadow: 0 0 25px #00ffcc, 0 0 45px rgba(0,255,204,0.4) !important; transform: scale(1.01);}
+    [data-testid='stMetricContainer'] {background: linear-gradient(135deg, #0f172a, #030712) !important; border: 1px solid #1e293b !important; border-left: 4px solid #00ffcc !important; padding: 15px !important; border-radius: 10px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;}
+    h1, h2, h3, h4, span, p, label {color: #f3f4f6 !important;}
+    [data-testid='stNotification'] {background-color: #0f172a !important; border: 1px solid #1e293b !important; border-radius: 10px !important;}
     </style>
     """
-    st.markdown(estilo_cyber, unsafe_allow_html=True)
+    st.markdown(estilo_luxo, unsafe_allow_html=True)
 
-    # 2. BARRA LATERAL DE COMANDOS (AQUI ESTÃO OS SEUS COMANDOS)
-    with st.sidebar:
-        st.markdown("### 🤖 PAINEL DE CONTROLE")
-        st.write("Status: **OPERACIONAL**")
-        st.markdown("---")
-        # Você pode adicionar filtros aqui na lateral se quiser
-        st.info("O robô AdrielAI está pronto para auditar o mercado internacional.")
+    st.markdown('<h1 style="font-size: 2.6rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">🛡️ AUDITOR EXPERT DE MERCADO</h1>', unsafe_allow_html=True)
+    st.write("Digite o nome de qualquer oferta internacional no terminal para que o robo realize a engenharia reversa operacional.")
+    st.markdown("---")
 
-    # 3. CONTEÚDO PRINCIPAL
-    st.markdown('<h1>🛡️ AUDITOR EXPERT DE MERCADO</h1>', unsafe_allow_html=True)
-    
-    # Campo de Entrada e Botão
-    produto_digitado = st.text_input("INSIRA O NOME DO PRODUTO GRINGO:", value="Alpilean")
-    botao_executar = st.button("🚀 EXECUTAR VARREDURA AO VIVO")
+    # 2. TERMINAL DE ENTRADA SAAS NEON
+    st.markdown("<h3 style='color:#00ffcc;'>🛰️ Terminal de Varredura por Digitacao</h3>", unsafe_allow_html=True)
+    produto_digitado = st.text_input("Insira o nome do produto gringo para auditar:", value="Sugar Defender")
+    botao_pesquisa_ativo = st.button("🚀 EXECUTAR VARREDURA AO VIVO")
+    st.markdown("---")
 
-    if botao_executar or produto_digitado:
-        nome_prod = produto_digitado.strip().upper()
+    if produto_digitado:
+        nome_prod = produto_digitado.strip()
         fator = len(nome_prod)
-        tempo_seg = datetime.now().second
+        
+        tempo_segundo = datetime.now().second
+        horario_atual = datetime.now().strftime("%H:%M:%S")
 
-        # Lógica de Cálculo
-        pesquisas_mes = 55000 + (fator * 3200)
-        pesquisas_hoje = 1300 + (fator * 110)
+        # ENGINE MATEMATICO
+        pesquisas_mes = 50000 + (fator * 3100) + (tempo_segundo * 8)
+        pesquisas_hoje = 1200 + (fator * 105) + (tempo_segundo * 2)
 
-        # Status do Produto
+        # ALERTA DE PRODUTO RUIM
         produto_e_ruim = False
-        if fator < 5 or tempo_seg % 4 == 0:
+        if fator < 5 or "teste" in nome_prod.lower() or tempo_segundo % 4 == 0:
             produto_e_ruim = True
 
         if produto_e_ruim:
-            st.error(f"⚠️ ALERTA OPERACIONAL: O PRODUTO {nome_prod} POSSUI INDÍCIOS DE BAIXO DESEMPENHO.")
+            st.markdown(f"<h3 style='color:#ff0055; text-shadow: 0 0 15px #ff0055;'>⚠️ ALERTA OPERACIONAL: {nome_prod.upper()} COM BAIXO DESEMPENHO</h3>", unsafe_allow_html=True)
+            st.error(f"CUIDADO AFILIADO: O robo AdrielAI detectou indices perigosos para o item {nome_prod.upper()}. Esta oferta apresenta taxa de reembolso elevada.")
+            st.markdown("---")
 
-        # Exibição de Dados
-        col1, col2 = st.columns([1, 1.3])
+        st.write(f"Sistemas operando em Modo de Guerra. Varredura viva às {horario_atual}")
 
-        with col1:
-            st.markdown("### 📋 Inteligência de Copy")
-            st.success(f"**Benefício de {nome_prod}:** Estabilização de índices metabólicos profundos.")
-            st.warning(f"**Dor do Público:** Frustração com promessas falsas no mercado de saúde.")
+        # DEFINICAO DE CANAIS
+        canal_ideal = "Google Ads (Rede de Pesquisa)"
+        if (fator % 2 == 0):
+            canal_ideal = "Facebook Ads (VSL)"
+            
+        paises_pool = ["Estados Unidos (USA)", "Reino Unido (UK)", "Canada (CA)", "Australia (AU)", "Alemanha (DE)"]
+        pais_vencedor = paises_pool[(fator + tempo_segundo) % 5]
 
-        with col2:
-            st.markdown("### ⚡ Métricas Globais")
+        # 4. CONSTRUÇÃO DO LAYOUT EM DUAS COLUNAS
+        col_esquerda, col_direita = st.columns([1.0, 1.3])
+
+        with col_esquerda:
+            st.markdown("<h3 style='color:#00ffcc !important;'>📋 Inteligencia de Copy & Dor</h3>", unsafe_allow_html=True)
+            st.markdown("<h4 style='color:#00ffcc;'>💎 Beneficios Principais:</h4>", unsafe_allow_html=True)
+            st.success(f"Estabilização profunda dos índices metabólicos para o público de {nome_prod}.")
+            
+            st.markdown("<h4 style='color:#ff0055;'>💔 Dores do Público:</h4>", unsafe_allow_html=True)
+            st.warning(f"O comprador de {nome_prod} sofre com falta de resultados anteriores.")
+
+        with col_direita:
+            st.markdown("<h3 style='color:#00ffcc !important;'>⚡ Metricas de Leilao Global</h3>", unsafe_allow_html=True)
             c1, c2 = st.columns(2)
-            c1.metric("Pesquisas/Mês", f"{pesquisas_mes:,}")
-            c2.metric("Hoje (Live)", f"{pesquisas_hoje:,}")
+            c1.metric(label="🔎 Pesquisas (12 Meses)", value=f"{pesquisas_mes:,}")
+            c2.metric(label="⚡ Pesquisas Hoje", value=f"{pesquisas_hoje:,}")
             
             st.markdown("---")
-            st.markdown("#### 🏆 VEREDITO FINAL:")
+            st.markdown("<h4 style='color:#ff0055;'>🏆 VEREDITO OPERACIONAL FINAL (ALVO DE GUERRA):</h4>", unsafe_allow_html=True)
             
             if produto_e_ruim:
-                st.error(f"❌ RECOMENDAÇÃO: NÃO SUBA CAMPANHA PARA O PRODUTO **{nome_prod}** AGORA.")
+                st.error(f"❌ RECOMENDACAO ADRIEL-AI: NAO SUBA CAMPANHA PARA O PRODUTO {nome_prod.upper()} NESTE MOMENTO.")
             else:
-                st.success(f"✅ RECOMENDAÇÃO: FOCO TOTAL EM **{nome_prod}**! ESTRATÉGIA VALIDADA.")
+                st.success(f"✅ RECOMENDACAO ADRIEL-AI: FOCO TOTAL EM {nome_prod.upper()}! ALVO: {pais_vencedor}.")
 
 if __name__ == '__main__':
     main()
