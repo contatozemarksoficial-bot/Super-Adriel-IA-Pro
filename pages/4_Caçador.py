@@ -6,9 +6,9 @@ import random
 
 def main():
     # 1. CONFIGURAÇÃO DE ELITE (Sidebar visível e Design Cinema Dark)
-    st.set_page_config(page_title="Caçador Pro - V10 Elite", layout="wide", initial_sidebar_state="expanded")
+    st.set_page_config(page_title="Caçador Pro - Elite", layout="wide", initial_sidebar_state="expanded")
 
-    # Inicia memória do robô
+    # Inicia memória do robô para evitar travamentos
     if "pesquisa_ativa" not in st.session_state: st.session_state.pesquisa_ativa = False
     if "wa_v10" not in st.session_state: st.session_state.wa_v10 = ""
 
@@ -41,7 +41,7 @@ def main():
 
     st.markdown('<h1 style="color: #00ffcc; font-size: 2.2rem; letter-spacing: -1px;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
 
-    # --- PAINEL DE CONTROLE (ORDEM: PESQUISA -> WHATSAPP -> SALVAR) ---
+    # --- PAINEL DE CONTROLE ---
     col_pesq, col_whats, col_save = st.columns([1.2, 0.8, 0.5])
     
     with col_pesq:
@@ -63,39 +63,61 @@ def main():
         with st.status("🔍 Rastreando sinais comportamentais e gravidade das ofertas...", expanded=False):
             time.sleep(1)
 
-        # BANCO DE DADOS ESTRATÉGICO COM VOLUME REALISTA (ESCALA DE MILHARES)
         meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
         
-        # Estrutura: Nome, Estratégia, Dor, País, Status, Gravidade, Comissão, Volume (Lista)
+        # BANCO DE DADOS BLINDADO (8 ITENS POR LINHA)
         produtos = [
-            ("Nagano Tonic", "YouTube Ads + Review", "Metabolismo travado e gordura visceral.", "Austrália", "ESCALA AGRESSIVA", "148.5", "$125",),
-            ("FitSpresso", "Facebook Ads (VSL)", "Bloqueio metabólico matinal persistente.", "Canadá", "ALTA ESCALA", "210.2", "$140",),
-            ("ZenCortex", "Google Ads (Fundo)", "Zumbido auditivo e névoa mental.", "USA", "OCEANO AZUL", "92.4", "$115",),
-            ("Sugar Defender", "Google Ads Review", "Desequilíbrio de glicose e fadiga.", "USA", "TOP VENDAS", "185.0", "$130",),
-            ("DentiCore", "YouTube + Google Search", "Saúde das gengivas e reconstrução oral.", "Reino Unido", "LANÇAMENTO", "78.9", "$110",),
-            ("Puravive", "Google Search (Review)", "Gordura marrom teimosa pós-40.", "USA", "ESTÁVEL", "160.3", "$135",)
+            {
+                "nome": "Nagano Tonic", "est": "YouTube Ads + Review", "dor": "Metabolismo travado e gordura visceral.", 
+                "pais": "Austrália", "status": "ESCALA AGRESSIVA", "grav": "148.5", "com": "$125",
+                "vol": [32, 35, 38, 42, 48, 55, 64, 62, 58, 55, 52, 50]
+            },
+            {
+                "nome": "FitSpresso", "est": "Facebook Ads (VSL)", "dor": "Bloqueio metabólico matinal persistente.", 
+                "pais": "Canadá", "status": "ALTA ESCALA", "grav": "210.2", "com": "$140",
+                "vol": [45, 48, 52, 60, 75, 92, 115, 110, 105, 98, 92, 88]
+            },
+            {
+                "nome": "ZenCortex", "est": "Google Ads (Fundo)", "dor": "Zumbido auditivo e névoa mental.", 
+                "pais": "USA", "status": "OCEANO AZUL", "grav": "92.4", "com": "$115",
+                "vol": [20, 22, 25, 28, 32, 35, 40, 38, 36, 34, 32, 30]
+            },
+            {
+                "nome": "Sugar Defender", "est": "Google Ads Review", "dor": "Desequilíbrio de glicose e fadiga.", 
+                "pais": "USA", "status": "TOP VENDAS", "grav": "185.0", "com": "$130",
+                "vol": [40, 42, 45, 50, 58, 65, 78, 75, 72, 70, 68, 65]
+            },
+            {
+                "nome": "DentiCore", "est": "YouTube + Google Search", "dor": "Saúde das gengivas e reconstrução oral.", 
+                "pais": "Reino Unido", "status": "LANÇAMENTO", "grav": "78.9", "com": "$110",
+                "vol": [15, 18, 22, 28, 35, 42, 50, 48, 45, 42, 40, 38]
+            },
+            {
+                "nome": "Puravive", "est": "Google Search (Review)", "dor": "Gordura marrom teimosa pós-40.", 
+                "pais": "USA", "status": "ESTÁVEL", "grav": "160.3", "com": "$135",
+                "vol": [50, 52, 55, 62, 70, 85, 98, 95, 90, 88, 85, 82]
+            }
         ]
 
-        for nome, est, dor, pais, status, grav, com, vol in produtos:
+        for p in produtos:
             col_info, col_graf = st.columns([1, 1.3])
             
             with col_info:
                 st.markdown(f"""
                 <div class="card-luxury">
-                    <h3>🔥 {nome} <span style="font-size:0.75rem; color:#94a3b8;">({status})</span></h3>
-                    <p><span class="neon-label">🚀 Estratégia:</span> {est}</p>
-                    <p><span class="neon-label">💡 Dor:</span> {dor}</p>
-                    <p><span class="neon-label">🛰️ Veredito:</span> Melhor país para anunciar: <b>{pais}</b></p>
+                    <h3>🔥 {p['nome']} <span style="font-size:0.75rem; color:#94a3b8;">({p['status']})</span></h3>
+                    <p><span class="neon-label">🚀 Estratégia:</span> {p['est']}</p>
+                    <p><span class="neon-label">💡 Dor:</span> {p['dor']}</p>
+                    <p><span class="neon-label">🛰️ Veredito:</span> Melhor país: <b>{p['pais']}</b></p>
                     <hr style="border-color:#1e293b;">
-                    <p><span class="neon-label">📊 Gravidade:</span> {grav} | <span class="neon-label">💰 Comissão:</span> {com}</p>
+                    <p><span class="neon-label">📊 Gravidade:</span> {p['grav']} | <span class="neon-label">💰 Comissão:</span> {p['com']}</p>
                 </div>
                 """, unsafe_allow_html=True)
             
             with col_graf:
-                st.markdown(f"<p style='font-size:0.9rem; font-weight:bold;'>📈 Volume de Buscas Mensais (Escala Real)</p>", unsafe_allow_html=True)
-                df_d = pd.DataFrame({"Mês": meses, "Buscas": vol})
+                st.markdown(f"<p style='font-size:0.9rem; font-weight:bold;'>📈 Volume de Buscas Mensais (Escala Real em Milhares)</p>", unsafe_allow_html=True)
+                df_d = pd.DataFrame({"Mês": meses, "Buscas": [v * 1000 for v in p['vol']]})
                 
-                # GRÁFICO ALTAIR COM FUNDO PRETO FORÇADO E TRANSPARENTE
                 chart = alt.Chart(df_d).mark_bar(color='#00ffcc').encode(
                     x=alt.X('Mês', sort=None, axis=alt.Axis(labelColor='white', titleColor='white')),
                     y=alt.Y('Buscas', axis=alt.Axis(labelColor='white', titleColor='white', title='Volume'))
@@ -105,9 +127,9 @@ def main():
             st.markdown("<br>", unsafe_allow_html=True)
         
         if st.session_state.wa_v10:
-            st.success(f"💎 Varredura enviada com sucesso para: {st.session_state.wa_v10}")
+            st.success(f"💎 Varredura enviada para: {st.session_state.wa_v10}")
     else:
-        st.info("Painel em standby. Clique em 'Iniciar Varredura Real' para rastrear as oportunidades gringas.")
+        st.info("Painel em standby. Clique no botão de varredura para iniciar.")
 
 if __name__ == "__main__":
     main()
