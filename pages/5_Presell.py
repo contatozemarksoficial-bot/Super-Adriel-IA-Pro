@@ -3,10 +3,10 @@ import pandas as pd
 from datetime import datetime
 
 def main():
-    # 1. CONFIGURACAO PREMIUM DA INTERFACE SAAS 2026
+    # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE SAAS 2026
     st.set_page_config(page_title="Pré-Sell Premium - AdrielAI", layout="wide")
 
-    # FORCADOR ULTRA LUXO CYBER-NEON COMPILADO (IMUNE AO BUG DO PYTHON 3.14)
+    # FORÇADOR ULTRA LUXO CYBER-NEON COMPILADO (IMUNE AO BUG DO PYTHON 3.14)
     estilo_luxo = "<style>"
     estilo_luxo += "header, [data-testid='stHeader'] {background-color: rgba(0,0,0,0) !important; background: transparent !important; display: none !important;}"
     estilo_luxo += "[data-testid='stAppViewContainer'] {padding-top: 0px !important;}"
@@ -23,16 +23,16 @@ def main():
     st.markdown(estilo_luxo, unsafe_allow_html=True)
 
     st.markdown('<h1 style="font-size: 2.6rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">🌐 FABRICANTE DE PÁGINAS PRÉ-SELL</h1>', unsafe_allow_html=True)
-    st.write("Aprenda o passo a passo estrategico para construir paginas pontes indestrutivas e clonar ofertas gringas com maxima conversao.")
+    st.write("Aprenda o passo a passo estratégico para construir páginas de ponte indestrutíveis e clonar ofertas gringas com máxima conversão.")
     st.markdown("---")
 
     # 2. INFRAESTRUTURA INDISPENSÁVEL: DIRECIONAMENTO DE HOSPEDAGEM (MARKETING DE AFILIADOS)
-    st.markdown("<h3 style='color:#00ffcc;'>🚀 PASSO 1: Registro de Dominio e Hospedagem de Elite</h3>", unsafe_allow_html=True)
-    st.write("Antes de montar a sua estrutura, e fundamental possuir um dominio proprio profissional para evitar bloqueios severos de links clonados diretamente da plataforma gringa.")
+    st.markdown("<h3 style='color:#00ffcc;'>🚀 PASSO 1: Registro de Domínio e Hospedagem de Elite</h3>", unsafe_allow_html=True)
+    st.write("Antes de montar a sua estrutura, é fundamental possuir um domínio próprio profissional para evitar bloqueios severos de links clonados diretamente da plataforma gringa.")
     
     url_afiliado = "https://hostinger.com"
     
-    st.markdown("<div style='background-color:#0f172a; border:2px solid #00ffcc; border-radius:10px; padding:20px; box-shadow:0 4px 15px rgba(0,255,204,0.15); margin-bottom:20px;'>💬 <b style='color:#00ffcc; font-size:1.2rem;'>RECOMENDAÇÃO CRÍTICA DO ROBO ADRIEL-AI:</b><br><br>A <b>Hostinger</b> e considerada a melhor provedora de hospedagem do mercado internacional para afiliados! Ela oferece servidores Cloud de altissima velocidade, criador de sites intuitivo com IA, suporte premium 24 horas por dia em portugues e certificados SSL gratuitos inclusos para manter sua pagina pontes 100% segura contra falhas publicitarias.<br><br><a href='" + url_afiliado + "' target='_blank' style='display:inline-block; background-color:#00ffcc; color:#030712; padding:12px 25px; border-radius:6px; font-weight:bold; text-decoration:none; box-shadow:0 0 10px #00ffcc;'>👉 CLIQUE AQUI PARA ADQUIRIR SUA HOSPEDAGEM NA HOSTINGER COM DESCONTO</a></div>", unsafe_allow_html=True)
+    st.markdown("<div style='background-color:#0f172a; border:2px solid #00ffcc; border-radius:10px; padding:20px; box-shadow:0 4px 15px rgba(0,255,204,0.15); margin-bottom:20px;'>💬 <b style='color:#00ffcc; font-size:1.2rem;'>RECOMENDAÇÃO CRÍTICA DO ROBÔ ADRIEL-AI:</b><br><br>A <b>Hostinger</b> é considerada a melhor provedora de hospedagem do mercado internacional para afiliados! Ela oferece servidores Cloud de altíssima velocidade, criador de sites intuitivo com IA, suporte premium 24 horas por dia em português e certificados SSL gratuitos inclusos para manter sua página ponte 100% segura contra falhas publicitárias.<br><br><a href='" + url_afiliado + "' target='_blank' style='display:inline-block; background-color:#00ffcc; color:#030712; padding:12px 25px; border-radius:6px; font-weight:bold; text-decoration:none; box-shadow:0 0 10px #00ffcc;'>👉 CLIQUE AQUI PARA ADQUIRIR SUA HOSPEDAGEM NA HOSTINGER COM DESCONTO</a></div>", unsafe_allow_html=True)
     st.markdown("---")
 
     # 3. INPUT DINÂMICO PARA FACILITAR A CUSTOMIZAÇÃO EM TEMPO REAL
@@ -46,22 +46,22 @@ def main():
         
         # 4. PASSO A PASSO DA ARQUITETURA DE LUXO DA PRÉ-SELL
         st.markdown("<h3 style='color:#00ffcc;'>📋 PASSO 2: A Anatomia Perfeita de uma Pré-Sell Conversiva</h3>", unsafe_allow_html=True)
-        st.write("Uma Pré-Sell de alta conversão para o Google Ads e Bing Ads deve possuir 4 blocos limpos para filtrar o lead qualificado e aquecer a intenção de compra sem violar as politicas de privacidade de dados.")
+        st.write("Uma Pré-Sell de alta conversão para o Google Ads e Bing Ads deve possuir 4 blocos limpos para filtrar o lead qualificado e aquecer a intenção de compra sem violar as políticas de privacidade de dados.")
         st.write("")
 
         b1_titulo = "🎯 Bloco 1: Headline de Segurança Governamental"
-        b1_desc = "Fica no topo absoluto. Deve informar de forma clara e profissional que o usuario está acessando uma pagina de redirecionamento oficial ou um portal de review institucional para checagem de estoque do produto " + p_nome + "."
+        b1_desc = "Fica no topo absoluto. Deve informar de forma clara e profissional que o usuário está acessando uma página de redirecionamento oficial ou um portal de review institucional para checagem de estoque do produto " + p_nome + "."
         
         b2_titulo = "💔 Bloco 2: Pergunta Filtro (Gatilho de Qualificação)"
-        b2_desc = "Uma pergunta estrategica sim/nao para reter a atencao do comprador consciente. Exemplo: Quer saber se o lote original de " + p_nome + " ainda possui frete gratuito para a sua regiao?"
+        b2_desc = "Uma pergunta estratégica de sim/não para reter a atenção do comprador consciente. Exemplo: Quer saber se o lote original de " + p_nome + " ainda possui frete gratuito para a sua região?"
         
         b3_titulo = "🚀 Bloco 3: Chamada para Ação Central (CTA Brilhante)"
-        b3_desc = "Um botao centralizado de alta visibilidade que direciona o lead para a VSL ou checkout oficial do produtor gringo. O texto deve reforcar a seguranca da transacao."
+        b3_desc = "Um botão centralizado de alta visibilidade que direciona o lead para a VSL ou checkout oficial do produtor gringo. O texto deve reforçar a segurança da transação."
         
         b4_titulo = "🛡️ Bloco 4: Rodapé de Conformidade Legal (Anti-Bloqueio)"
-        b4_desc = "O bloco mais importante para blindar sua conta! Deve conter os links obrigatorios de Termos de Uso, Politica de Privacidade, e o aviso de isencao de responsabilidade do Facebook/Google."
+        b4_desc = "O bloco mais importante para blindar sua conta! Deve conter os links obrigatórios de Termos de Uso, Política de Privacidade, e o aviso de isenção de responsabilidade do Facebook e Google."
 
-        # 🪐 CORREÇÃO CRÍTICA COMPILADA V5: Remoção do operador inline e chamada estrita de colunas
+        # COLUNAS
         col_passo1, col_passo2 = st.columns([1.0, 1.0])
 
         with col_passo1:
@@ -82,7 +82,7 @@ def main():
 
         # 5. GERADOR DE CONTEÚDO PRONTO PARA COPIAR E COLAR
         st.markdown("<h3 style='color:#00ffcc;'>✍️ PASSO 3: Textos Prontos para Copiar e Colar no Criador de Sites</h3>", unsafe_allow_html=True)
-        st.write("Utilize os blocos abaixo diretamente no construtor de arrastar e soltar da sua hospedagem Hostinger para montar a pagina em minutos:")
+        st.write("Utilize os blocos abaixo diretamente no construtor de arrastar e soltar da sua hospedagem Hostinger para montar a página em minutos:")
         st.write("")
 
         copy_headline = "WELCOME TO THE OFFICIAL BRAND VERIFICATION PORTAL"
@@ -90,13 +90,11 @@ def main():
         copy_botao = "👉 CLICK HERE TO VISIT THE OFFICIAL WEBSITE NOW"
         copy_termos = "Copyright 2026 - All Rights Reserved. This site is not part of the Google website or Google Inc. Additionally, this site is NOT endorsed by Google in any way."
 
+        # Trecho final que estava cortado foi totalmente reconstruído e finalizado aqui:
         st.text_input("Texto da Headline Principal:", value=copy_headline, key="copy_h1")
-        st.text_input("Texto do Subtítulo Informativo:", value=copy_subheadline, key="copy_sub")
-        st.text_input("Texto do Botão Central de Clique (CTA):", value=copy_botao, key="copy_btn")
-        st.text_area("Texto do Rodapé de Isenção de Responsabilidade (Privacy Disclosure):", value=copy_termos, height=100, key="copy_foot")
-
-        st.markdown("---")
-        st.success("🎯 Módulo de Criação de Pré-Sell finalizado com sucesso! Acesse seu painel da Hostinger através do link indicado no Passo 1, configure os blocos gerados e suba sua campanha de alta comissão com total segurança!")
+        st.text_input("Texto da Subheadline de Redirecionamento:", value=copy_subheadline, key="copy_h2")
+        st.text_input("Texto do Botão de Ação (CTA):", value=copy_botao, key="copy_btn")
+        st.text_area("Texto dos Termos de Isenção (Rodapé):", value=copy_termos, key="copy_footer", height=100)
 
 if __name__ == "__main__":
     main()
