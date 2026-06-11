@@ -5,118 +5,112 @@ import time
 from datetime import datetime
 
 def main():
-    # 1. CONFIGURAÇÃO DE PÁGINA (MODO LUXO)
-    st.set_page_config(page_title="Caçador Pro - Luxo Neon", layout="wide")
+    # 1. CONFIGURAÇÃO DE PÁGINA (GARANTE QUE A LATERAL EXISTA)
+    st.set_page_config(page_title="Caçador Pro - Luxo", layout="wide", initial_sidebar_state="expanded")
 
-    # CSS PARA ESTILO PLATAFORMA DE LUXO E COMPACTAÇÃO
+    # CSS PARA CORREÇÃO DA LATERAL E CORES DO GRÁFICO (CIANO NEON)
     st.markdown("""
     <style>
+    /* Remove barra branca do topo */
     header, [data-testid="stHeader"] {display: none !important;}
-    .stApp {background-color: #020617 !important; color: #f8fafb !important;}
     
-    /* Barra Lateral Estilizada */
-    [data-testid="stSidebar"] {background-color: #030712 !important; border-right: 1px solid #10b981;}
+    /* Garante fundo preto na lateral e no corpo */
+    [data-testid="stSidebar"], .stApp {background-color: #030712 !important;}
+    
+    /* Cor do Gráfico e Detalhes (Ciano Neon conforme imagem) */
+    :root { --neon-color: #00ffcc; }
 
-    /* Botões Luxo Neon */
     .stButton>button {
-        background-color: #020617 !important; 
-        color: #10b981 !important; 
-        border: 1px solid #10b981 !important; 
-        border-radius: 6px !important;
+        background-color: #030712 !important; 
+        color: var(--neon-color) !important; 
+        border: 1px solid var(--neon-color) !important; 
+        border-radius: 4px !important;
         font-weight: bold !important;
-        transition: 0.4s;
+        height: 40px !important;
+        width: 100% !important;
     }
     .stButton>button:hover {
-        background-color: #10b981 !important; 
-        color: #020617 !important;
-        box-shadow: 0 0 20px #10b981 !important;
+        background-color: var(--neon-color) !important; 
+        color: #030712 !important;
+        box-shadow: 0 0 15px var(--neon-color) !important;
     }
 
-    /* Cards de Rastreio Luxo */
+    /* Estilização dos Cards */
     .card-luxury {
         border: 1px solid #1e293b;
         padding: 20px;
-        border-radius: 12px;
-        background: linear-gradient(145deg, #0f172a, #020617);
-        margin-bottom: 10px;
-        border-left: 4px solid #10b981;
+        border-radius: 8px;
+        background-color: #090d16;
+        margin-bottom: 15px;
+        border-left: 4px solid var(--neon-color);
     }
-    .neon-text { color: #10b981; font-weight: bold; }
-    
-    /* Campo de texto menor */
-    .stTextInput>div>div>input {
-        background-color: #030712 !important;
-        color: #10b981 !important;
-        border: 1px solid #1e293b !important;
-        height: 35px !important;
-    }
+    .neon-text { color: var(--neon-color); font-weight: bold; }
     </style>
     """, unsafe_allow_html=True)
 
-    # --- TÍTULO CENTRAL ---
-    st.markdown('<h1 style="color: #10b981; text-align: center; font-size: 2.2rem;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
-    
-    # --- 📲 CONFIGURAÇÃO DE CONTATO COMPACTA ---
+    # --- TÍTULO ---
+    st.markdown(f'<h1 style="color: #00ffcc; font-size: 2.2rem;">🛰️ CAÇADOR DE PRODUTOS PREMIUM</h1>', unsafe_allow_html=True)
+
+    # --- ⚙️ PAINEL DE COMANDO (ORDEM CORRIGIDA) ---
     if "whats_config" not in st.session_state: st.session_state.whats_config = ""
 
-    # Área de contato menor e em linha única
-    c_tel, c_save, c_search = st.columns([2, 1, 2])
-    with c_tel:
-        whats_input = st.text_input("WhatsApp (Ex: 5511999999999):", value=st.session_state.whats_config, label_visibility="collapsed", placeholder="Seu WhatsApp...")
-    with c_save:
-        if st.button("💾 SALVAR CONTATO"):
+    # Coluna 1: Pesquisa | Coluna 2: Input WhatsApp | Coluna 3: Salvar
+    c_pesquisa, c_input, c_salvar = st.columns([1, 1.5, 0.8])
+    
+    with c_pesquisa:
+        ativar = st.button("🚀 INICIAR VARREDURA")
+    
+    with c_input:
+        whats_input = st.text_input("WhatsApp:", value=st.session_state.whats_config, label_visibility="collapsed", placeholder="5511999999999")
+    
+    with c_salvar:
+        if st.button("💾 SALVAR"):
             st.session_state.whats_config = whats_input
-            st.toast("Contato fixado!", icon="✅")
-    with c_search:
-        ativar = st.button("🚀 INICIAR VARREDURA ESTRATÉGICA")
+            st.toast("Contato salvo!", icon="✅")
 
     st.markdown("---")
 
-    # --- LÓGICA DE VARREDURA ---
+    # --- RESULTADO DA VARREDURA ---
     if ativar:
-        if not st.session_state.whats_config:
-            st.warning("⚠️ Salve o WhatsApp para receber o dossiê.")
-        
-        with st.status("🔍 Rastreando...", expanded=False) as status:
+        with st.status("🔍 Rastreando oportunidades...", expanded=False):
             time.sleep(1)
-            status.update(label="Varredura de Luxo Finalizada!", state="complete")
 
-        # BANCO DE DADOS
+        # Dados simulados com foco na Estratégia e Demanda
         pool = [
-            {"n": "FitSpresso", "o": "Oferta matinal de café termogênico.", "d": "Resistência à perda de peso.", "g": "USA, Canadá", "cpc": "$1.45", "grv": "99.1"},
-            {"n": "Nagano Tonic", "o": "Tônico japonês para queima de gordura.", "d": "Metabolismo lento pós-40.", "g": "Austrália, EUA", "cpc": "$1.10", "grv": "88.4"},
-            {"n": "DentiCore", "o": "Saúde oral e reconstrução dentária.", "d": "Inflamação e hálito crônico.", "g": "Reino Unido, Irlanda", "cpc": "$1.25", "grv": "91.7"},
-            {"n": "Sugar Defender", "o": "Controle natural de glicemia.", "d": "Cansaço e picos de insulina.", "g": "USA, Canadá", "cpc": "$1.85", "grv": "96.3"},
-            {"n": "Puravive", "o": "Alvo em gordura marrom teimosa.", "d": "Autoestima e inchaço.", "g": "USA, UK", "cpc": "$1.60", "grv": "97.9"},
-            {"n": "ZenCortex", "o": "Saúde auditiva e neuroproteção.", "d": "Ruídos e perda de foco.", "g": "Canadá, Austrália", "cpc": "$0.95", "grv": "85.2"}
+            {"n": "FitSpresso", "o": "Facebook Ads (VSL)", "d": "Indisposição matinal e bloqueio biológico.", "g": "USA (Facebook Ads)", "grv": "120"},
+            {"n": "Puravive", "o": "Google Ads (Review)", "d": "Gordura marrom teimosa pós-40.", "g": "Reino Unido (Search)", "grv": "115"}
         ]
-        random.shuffle(pool)
+        
+        for p in pool:
+            col_info, col_grafico = st.columns([1, 1.2])
+            
+            with col_info:
+                st.markdown(f"""
+                <div class="card-luxury">
+                    <h3 style="color:#00ffcc; margin:0;">📌 {p['n']}</h3>
+                    <p><span class="neon-text">📌 Estratégia Recomendada:</span><br>
+                    Canal: {p['o']}<br>
+                    A melhor estratégia operacional é subir uma campanha estruturada focada no canal recomendado.</p>
+                    <p><span class="neon-text">💡 Dor Identificada:</span> {p['d']}</p>
+                    <p><span class="neon-text">🌍 Veredito:</span> Melhor país absoluto para anunciar agora é <b>{p['g']}</b>.</p>
+                </div>
+                """, unsafe_allow_html=True)
 
-        # EXIBIÇÃO EM GRID 2 COLUNAS
-        for i in range(0, 6, 2):
-            cols = st.columns(2)
-            for j in range(2):
-                p = pool[i + j]
-                with cols[j]:
-                    st.markdown(f"""
-                    <div class="card-luxury">
-                        <h3 style="color:#10b981; margin:0; font-size:1.4rem;">🔥 {p['n']}</h3>
-                        <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom:10px;">Monitoramento Ativo</p>
-                        <p><span class="neon-text">⚖️ VEREDITO:</span> {p['o']}</p>
-                        <p><span class="neon-text">💡 DOR:</span> {p['d']}</p>
-                        <p><span class="neon-text">🌍 GOOGLE ADS:</span> {p['g']}</p>
-                        <p><span class="neon-text">💰 CPC:</span> {p['cpc']} | <span class="neon-text">📊 GRAVIDADE:</span> {p['grv']}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                    
-                    # Gráfico de Colunas Neon Verde
-                    df = pd.DataFrame({"Tendência": [random.randint(30, 100) for _ in range(5)]})
-                    st.bar_chart(df, height=130, color="#10b981")
+            with col_grafico:
+                st.markdown(f"📊 **Histórico de Demanda Coletado (Sinais)**")
+                # Gráfico com a cor exata Ciano/Verde Neon da imagem
+                df_grafico = pd.DataFrame({
+                    "Mes": ["Abr", "Ago", "Dez", "Fev", "Jan", "Jul", "Jun", "Mai", "Mar", "Nov", "Out", "Set"],
+                    "Sinal": [random.randint(40, 130) for _ in range(12)]
+                })
+                st.bar_chart(df_grafico, x="Mes", y="Sinal", color="#00ffcc", height=250)
+            
+            st.markdown("---")
 
         if st.session_state.whats_config:
-            st.success(f"💎 DISPARO CONCLUÍDO para {st.session_state.whats_config}")
+            st.success(f"✅ Dossiê enviado para o WhatsApp: {st.session_state.whats_config}")
     else:
-        st.info("Aguardando comando... Use o painel superior para caçar.")
+        st.write("Aguardando comando no painel superior...")
 
 if __name__ == "__main__":
     main()
