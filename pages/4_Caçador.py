@@ -76,11 +76,11 @@ def main():
     # --- BANCO DE DADOS COMPACTADO (EVITA SYNTAX ERROR NO PYTHON 3.14) ---
     m = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
     p_lista = [
-        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40 anos.", "v": "USA", "s": "JUN/2026", "b": [45, 52, 61, 48, 55, 68, 75, 82, 90, 85, 78, 92]},
-        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal intenso.", "v": "Canadá", "s": "ALTA ESCALA", "b": [30, 42, 58, 65, 72, 85, 95, 88, 82, 75, 68, 60]},
-        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália", "s": "MAIO/2026", "b": [25, 35, 45, 55, 65, 80, 88, 92, 95, 98, 90, 85]},
-        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga crônica.", "v": "USA", "s": "TOP VENDAS", "b": [50, 55, 62, 68, 75, 82, 88, 92, 95, 98, 100, 95]},
-        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde oral e reconstrução dentária.", "v": "Irlanda", "s": "RECENTE", "b": [20, 28, 35, 42, 50, 65, 78, 85, 92, 95, 88, 80]},
+        {"n": "ZenCortex", "e": "Google Ads (Fundo)", "d": "Zumbido e névoa mental pós-40 anos.", "v": "USA", "s": "JUN/2026", "b": [55, 78, 62, 89, 45, 120, 115, 52, 85, 68, 82, 95]},
+        {"n": "FitSpresso", "e": "Facebook Ads (VSL)", "d": "Bloqueio metabólico matinal intenso.", "v": "Canadá", "s": "ALTA ESCALA", "b": [60, 100, 80, 85, 80, 110, 90, 50, 125, 60, 70, 85]},
+        {"n": "Nagano Tonic", "e": "Native Ads", "d": "Gordura visceral e baixa energia.", "v": "Austrália", "s": "MAIO/2026", "b": [45, 65, 90, 55, 110, 85, 75, 120, 60, 95, 80, 105]},
+        {"n": "Sugar Defender", "e": "Google Ads (Review)", "d": "Picos de insulina e fadiga crônica.", "v": "USA", "s": "TOP VENDAS", "b": [70, 95, 60, 88, 125, 55, 80, 110, 92, 65, 78, 90]},
+        {"n": "DentiCore", "e": "YouTube Ads", "d": "Saúde oral e reconstrução dentária.", "v": "Irlanda", "s": "RECENTE", "b": [50, 85, 115, 62, 90, 78, 120, 55, 88, 70, 95, 110]},
         {"n": "Puravive", "e": "Facebook Ads (Direto)", "d": "Resistência insulínica e inchaço corporal.", "v": "Nova Zelândia", "s": "LANÇAMENTO", "b":}
     ]
 
@@ -93,7 +93,7 @@ def main():
             with c_info:
                 st.markdown(f"""<div class="card-luxury">
                     <h3>🔥 {p['n']} <span style="font-size:0.75rem; color:#94a3b8;">({p['s']})</span></h3>
-                    <p><span class="neon-label">🚀 Estratégia Recomendada:</span><br>Canal: {p['e']}<br>Abordagem: Fundo de Funil estruturado.</p>
+                    <p><span class="neon-label">🚀 Estratégia Recomendada:</span><br>Canal: {p['e']}<br>Abordagem: Fundo de Funil estruturado com blindagem de link.</p>
                     <p><span class="neon-label">💡 Dor Identificada:</span> {p['d']}</p>
                     <p><span class="neon-label">🛰️ Veredito:</span> Melhor país absoluto para anunciar agora: <b>{p['v']}</b></p>
                 </div>""", unsafe_allow_html=True)
@@ -105,9 +105,9 @@ def main():
             st.markdown("<br>", unsafe_allow_html=True)
         
         if st.session_state.wa_db_vfinal:
-            st.success(f"💎 Dossiê enviado para o WhatsApp: {st.session_state.wa_db_vfinal}")
+            st.success(f"💎 Dossiê estratégico enviado com sucesso para o WhatsApp: {st.session_state.wa_db_vfinal}")
     else:
-        st.info("Aguardando comando de varredura. Utilize o menu lateral para navegar.")
+        st.info("Aguardando comando de varredura estratégica. O menu lateral está operacional.")
 
 if __name__ == "__main__":
     main()
