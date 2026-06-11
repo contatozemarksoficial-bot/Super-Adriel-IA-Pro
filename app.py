@@ -5,18 +5,17 @@ import time
 import random
 from datetime import datetime, timedelta
 
-# 1. CONFIGURAÇÃO DE ELITE (Design Cinema Dark)
-st.set_page_config(page_title="Adriel-AI Pro | Ativador", layout="wide", initial_sidebar_state="expanded")
+# 1. CONFIGURAÇÃO DE ELITE
+st.set_page_config(page_title="Adriel-AI Pro | Dashboard", layout="wide", initial_sidebar_state="expanded")
 
 if "ativado" not in st.session_state: st.session_state.ativado = False
 
-# 2. CSS DE ALTA COSTURA - BOTÕES NEON E TEMA TRIPLE BLACK
+# 2. CSS MASTER LUXO - TEMA TRIPLE BLACK (Corrigindo o fundo dos botões)
 st.markdown("""
 <style>
     header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
     .stApp { background-color: #010409 !important; }
     
-    /* Logo Magnética */
     .main-logo {
         color: #ffffff; font-size: 3rem; font-weight: 900; letter-spacing: -2px;
         display: flex; align-items: center; gap: 15px;
@@ -35,23 +34,28 @@ st.markdown("""
         border-top: 5px solid #00ffcc; box-shadow: 0 25px 50px rgba(0,0,0,0.7);
     }
 
-    /* ESTILO DOS BOTÕES DE AFILIADO (PRO) */
-    .btn-container { display: flex; gap: 10px; margin-top: 20px; }
+    /* DESIGN DOS BOTÕES (CORRIGIDO) */
+    .btn-container { 
+        display: flex; 
+        gap: 15px; 
+        margin-top: 25px; 
+        background: transparent !important; 
+    }
     
     .btn-pro {
         flex: 1;
         display: inline-block;
-        padding: 14px 20px;
-        background-color: transparent;
+        padding: 16px 20px;
+        background-color: #010409;
         color: #00ffcc !important;
         border: 2px solid #00ffcc;
-        border-radius: 10px;
+        border-radius: 12px;
         text-align: center;
         text-decoration: none !important;
         font-weight: 900;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 1.5px;
         transition: 0.4s all;
     }
     .btn-pro:hover {
@@ -78,7 +82,7 @@ st.markdown("""
 
 # --- CABEÇALHO ---
 st.markdown('<div class="main-logo">🤖 Adriel-AI <span class="badge-pro">PRO</span></div>', unsafe_allow_html=True)
-st.markdown('<p style="color:#94a3b8; margin-top:-10px; margin-left:65px; font-weight:600;">Sincronização de Inteligência e Brand Bidding</p>', unsafe_allow_html=True)
+st.markdown('<p style="color:#94a3b8; margin-top:-10px; margin-left:65px; font-weight:600;">Inteligência de Fundo de Funil e Brand Bidding</p>', unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -90,28 +94,26 @@ with col_btn:
 
 st.markdown('<div style="height:1px; background:linear-gradient(90deg, transparent, #1e293b, transparent); margin:40px 0;"></div>', unsafe_allow_html=True)
 
-# --- RESULTADOS COM BOTÕES ELITE ---
+# --- RESULTADOS ---
 if st.session_state.ativado:
-    with st.status("🔗 Conectando APIs de Afiliação ClickBank e BuyGoods...", expanded=False):
-        time.sleep(1)
-
     hoje = datetime.now()
     meses = [(hoje - timedelta(days=30*i)).strftime('%b') for i in range(12)][::-1]
     
+    # BANCO DE DADOS COM OS LINKS REAIS
     produtos = [
-        {
-            "n": "FitSpresso", 
-            "v24": "9.120", "st": "DOMÍNIO TOTAL", 
-            "plat": "ClickBank", "com": "$145", "peso": 2.5,
-            "mkt_link": "https://clickbank.com",
-            "aff_link": "https://getfitspresso.com"
-        },
         {
             "n": "Nagano Lean Body Tonic", 
             "v24": "5.412", "st": "ESCALA AGRESSIVA", 
             "plat": "BuyGoods", "com": "$127", "peso": 1.7,
             "mkt_link": "https://buygoods.com",
             "aff_link": "https://leanbodytoniconline.com"
+        },
+        {
+            "n": "FitSpresso", 
+            "v24": "9.120", "st": "DOMÍNIO TOTAL", 
+            "plat": "ClickBank", "com": "$145", "peso": 2.5,
+            "mkt_link": "https://clickbank.com",
+            "aff_link": "https://getfitspresso.com"
         }
     ]
 
@@ -120,6 +122,7 @@ if st.session_state.ativado:
         c_txt, c_chart = st.columns([1, 1.3], gap="large")
         
         with c_txt:
+            # AQUI ESTÁ A CORREÇÃO: O comando st.markdown com unsafe_allow_html=True
             st.markdown(f"""
                 <span style="color:#00ffcc; font-size:0.75rem; font-weight:800; letter-spacing:2px;">● {p['st']}</span>
                 <div style="color:white; font-size:2.3rem; font-weight:900; margin:5px 0;">🔥 {p['n']}</div>
@@ -129,15 +132,12 @@ if st.session_state.ativado:
                     <span class="metric-hero">{p['v24']}</span> <span style="color:#00ffcc; font-weight:900;">VIVO</span>
                 </div>
                 
-                <p><span class="neon-text">⚖️ VEREDITO:</span> Oferta validada para <span class="neon-text">Fundo de Funil</span> na rede {p['plat']}.</p>
+                <p><span class="neon-text">⚖️ VEREDITO:</span> O produto <b>{p['n']}</b> é validado para <b>Fundo de Funil</b>.</p>
+                <p style="color:#94a3b8; margin-bottom:15px;">Plataforma: <b style="color:white;">{p['plat']}</b> | Comissão: <b style="color:#00ffcc;">{p['com']}</b></p>
                 
-                <div style="margin-top:20px; padding-top:15px; border-top:1px solid #1e293b;">
-                    <p style="color:#94a3b8; margin-bottom:15px;">Plataforma: <b style="color:white;">{p['plat']}</b> | Comissão: <b style="color:#00ffcc;">{p['com']}</b></p>
-                    
-                    <div class="btn-container">
-                        <a href="{p['mkt_link']}" target="_blank" class="btn-pro">🔌 ABRIR MARKETPLACE</a>
-                        <a href="{p['aff_link']}" target="_blank" class="btn-pro btn-secondary">📄 MATERIAL</a>
-                    </div>
+                <div class="btn-container">
+                    <a href="{p['mkt_link']}" target="_blank" class="btn-pro">🔌 ABRIR MARKETPLACE</a>
+                    <a href="{p['aff_link']}" target="_blank" class="btn-pro btn-secondary">📄 MATERIAL</a>
                 </div>
             """, unsafe_allow_html=True)
         
@@ -156,6 +156,5 @@ if st.session_state.ativado:
             st.altair_chart(chart, use_container_width=True)
         
         st.markdown('</div>', unsafe_allow_html=True)
-
 else:
-    st.info("Dashboard Adriel-AI pronto para ativação.")
+    st.info("Painel Adriel-AI pronto. Clique acima para ativar.")
