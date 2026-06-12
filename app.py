@@ -1,141 +1,134 @@
 import streamlit as st
 import pandas as pd
-import random
+import numpy as np
 import time
+from datetime import datetime
 
-def main():
-    # 1. CONFIGURAÇÃO DE ELITE (Design Cinema Dark)
-    st.set_page_config(page_title="Adriel-AI Pro | Gestão Suprema", layout="wide", initial_sidebar_state="expanded")
+# 1. CONFIGURAÇÃO PREMIUM DA INTERFACE (GRUDADO NO TETO DO MONITOR)
+st.set_page_config(page_title="Adriel-AI Pro", layout="wide", initial_sidebar_state="collapsed")
 
-    # 2. CSS MASTER LUXO - PROTOCOLO TRIPLE BLACK TOTAL
-    st.markdown("""
-    <style>
-        /* RESET TOTAL E FUNDO PRETO ABSOLUTO */
-        header, [data-testid="stHeader"] { visibility: hidden; height: 0px; }
-        .stApp, [data-testid="stSidebar"], [data-testid="stSidebarNav"], [data-testid="stAppViewContainer"] {
-            background-color: #010409 !important;
-        }
+# =============================================================================================================
+# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL (TRAVA O DESIGN DO MONITOR E OCULTA BARRAS NATIVAS)
+# =============================================================================================================
+st.markdown("""
+<style>
+/* 🌌 Fundo Escuro Premium Cyber Onyx Exato do seu Print */
+.stApp { background-color: #060913 !important; color: #f8fafc !important; }
+h1, h2, h3, h4, p, span, div, label { font-family: 'Segoe UI', Roboto, sans-serif !important; }
 
-        /* ESCONDE O MENU PADRÃO E ESTILIZA A LATERAL EM BOTÕES */
-        [data-testid="stSidebarNav"] { display: none; }
-        [data-testid="stSidebar"] { border-right: 1px solid #1e293b !important; }
-        
-        .sidebar-logo { color: #ffffff; font-size: 1.8rem; font-weight: 900; padding: 20px; text-align: left; }
-        .sidebar-label { color: #475569; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; padding: 0 20px; margin-bottom: 15px; }
-        
-        .sidebar-menu { display: flex; flex-direction: column; gap: 8px; padding: 0 15px; }
-        .menu-btn {
-            display: flex; align-items: center; gap: 12px; padding: 12px;
-            background: #0d1117; border: 1px solid #1e293b; border-radius: 8px;
-            color: #ffffff !important; text-decoration: none !important;
-            font-weight: 700; font-size: 0.75rem; text-transform: uppercase; transition: 0.3s;
-        }
-        .menu-btn:hover { border-color: #00ffcc; box-shadow: 0 0 15px rgba(0, 255, 204, 0.2); transform: translateX(5px); }
-        .icon-n { color: #00ffcc; text-shadow: 0 0 8px #00ffcc; font-size: 1.1rem; }
+/* 🚨 DELEÇÃO CIRÚRGICA DA BARRA BRANCA SUPERIOR E MENU LATERAL CINZA NATIVO */
+[data-testid="stHeader"] { display: none !important; height: 0px !important; background: transparent !important; }
+.stHeader { display: none !important; height: 0px !important; }
+.block-container { padding-top: 0.5rem !important; padding-bottom: 2rem !important; padding-left: 2rem !important; padding-right: 2rem !important; max-width: 100% !important; width: 100% !important; }
+[data-testid="stSidebar"], section[data-testid="stSidebar"] { display: none !important; width: 0px !important; }
 
-        /* HEADER E LIVE STATUS */
-        .header-top { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #1e293b; margin-bottom: 25px; }
-        .live-status { color: #00ffcc; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
-        .blink { height: 8px; width: 8px; background-color: #00ffcc; border-radius: 50%; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+/* Indicador de Operadores Ativos (Canto Superior Direito) */
+.operadores-ativos { text-align: right; color: #00ffcc !important; font-weight: 800; font-size: 14px; margin-top: -10px; }
 
-        /* PLATAFORMAS (BADGES CLICÁVEIS) */
-        .plat-bar { display: flex; gap: 10px; margin-bottom: 30px; overflow-x: auto; }
-        .plat-item { flex: 1; background: #0d1117; border: 1px solid #1e293b; padding: 12px; border-radius: 8px; text-align: center; color: #f9fafb; font-size: 0.65rem; font-weight: 800; text-decoration: none !important; transition: 0.3s; min-width: 120px; }
-        .plat-item:hover { border-color: #00ffcc; box-shadow: 0 0 15px rgba(0, 255, 204, 0.2); }
+/* Molduras de Conexões de Plataformas (Fila Superior) */
+.box-plataforma {
+    background-color: #0f1526 !important; border: 1px solid #1e293b !important; border-radius: 8px !important;
+    padding: 10px !important; text-align: center; font-size: 10px !important; font-weight: 900 !important; color: #cbd5e1 !important; letter-spacing: 1px;
+}
 
-        /* MÉTRICAS DE FATURAMENTO */
-        .metric-card {
-            background: #0d1117; border: 1px solid #1e293b; padding: 25px; border-radius: 15px;
-            text-align: center; border-bottom: 4px solid #00ffcc;
-        }
-        .m-label { color: #94a3b8; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
-        .m-value { color: #ffffff; font-size: 1.8rem; font-weight: 900; }
+/* Customização dos Containers de Métricas em Gradiente Escuro do seu Chassi */
+[data-testid="stMetricContainer"] {
+    background: linear-gradient(135deg, #0f172a, #030712) !important; border: 1px solid #1e293b !important;
+    border-bottom: 3px solid #00ffcc !important; padding: 20px !important; border-radius: 12px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;
+}
+div[data-testid="stMetricContainer"]:nth-of-type(4) { border-bottom: 3px solid #ff0055 !important; }
 
-        /* CARDS DE LICENÇA ACESSÍVEIS */
-        .plan-card {
-            background: #0d1117; border: 1px solid #1e293b; padding: 35px; border-radius: 20px;
-            text-align: left; transition: 0.4s; height: 100%; display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .plan-card:hover { border-color: #00ffcc; transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
-        .p-price { color: #ffffff; font-size: 2.5rem; font-weight: 900; margin: 15px 0; }
-        
-        .btn-checkout {
-            display: block; width: 100%; padding: 16px; background: #00ffcc; color: #010409 !important;
-            border-radius: 10px; text-align: center; font-weight: 900; font-size: 0.9rem;
-            text-transform: uppercase; text-decoration: none !important; transition: 0.3s;
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
-        }
-        .btn-checkout:hover { background: #ffffff; box-shadow: 0 0 40px #00ffcc; transform: scale(1.02); }
-    </style>
-    """, unsafe_allow_html=True)
+/* Forçador de cor branca nas métricas para sumir com o apagado */
+[data-testid="stMetricLabel"], [data-testid="stMetricValue"] { color: #ffffff !important; }
+[data-testid="stMetricValue"] { font-size: 1.8rem !important; font-weight: 800 !important; }
 
-    # --- SIDEBAR (CONFORME O PRINT) ---
-    with st.sidebar:
-        st.markdown('<div class="sidebar-logo">🤖 Adriel-AI <span style="color:#00ffcc;">Pro</span></div>', unsafe_allow_html=True)
-        st.markdown('<div class="sidebar-label">MÓDULOS DE COMANDO</div>', unsafe_allow_html=True)
-        st.markdown("""
-        <div class="sidebar-menu">
-            <a href="/" class="menu-btn"><span class="icon-n">🏠</span> DASHBOARD</a>
-            <a href="Radar" class="menu-btn"><span class="icon-n">📡</span> 1. RADAR ELITE</a>
-            <a href="Auditor" class="menu-btn"><span class="icon-n">🕵️</span> 2. AUDITOR IA</a>
-            <a href="RSA" class="menu-btn"><span class="icon-n">✍️</span> 3. GERADOR RSA</a>
-            <a href="Cacador" class="menu-btn"><span class="icon-n">🎯</span> 4. CAÇADOR V10</a>
-            <a href="Presell" class="menu-btn"><span class="icon-n">📄</span> 5. PRE-SELL</a>
-            <a href="Funil" class="menu-btn"><span class="icon-n">📐</span> 6. FUNIL</a>
-            <a href="Assinantes" class="menu-btn" style="border-left: 4px solid #00ffcc; background: #1e293b;"><span class="icon-n">💎</span> ASSINANTES</a>
-        </div>
-        """, unsafe_allow_html=True)
+/* 🧱 CARDS DOS PLANOS E SEÇÕES INTERNAS */
+.card-plano-luxo { background-color: #080f1d !important; border: 1px solid #1e293b !important; border-radius: 14px !important; padding: 25px !important; min-height: 200px; }
+.caixa-holografica-master { background-color: #080f1d !important; border: 2px solid #1e293b !important; border-radius: 12px !important; padding: 24px !important; margin-bottom: 25px !important; width: 100% !important; }
 
-    # --- HEADER E PLATAFORMAS ---
-    st.markdown(f"""
-        <div class="header-top">
-            <div style="font-size:2rem; font-weight:900; color:white;">🛰️ Central de <span style="color:#00ffcc;">Assinantes</span></div>
-            <div class="live-status"><span class="blink"></span> {random.randint(2300, 2600):,} OPERADORES CONECTADOS AGORA</div>
-        </div>
-        <div class="plat-bar">
-            <a href="https://clickbank.com" target="_blank" class="plat-item">● CLICKBANK</a>
-            <a href="https://buygoods.com" target="_blank" class="plat-item">● BUYGOODS</a>
-            <a href="https://digistore24.com" target="_blank" class="plat-item">● DIGISTORE24</a>
-            <a href="https://stripe.com" target="_blank" class="plat-item">● STRIPE DASH</a>
-            <a href="https://hostinger.com" target="_blank" class="plat-item">● HOSTINGER VPS</a>
-        </div>
-    """, unsafe_allow_html=True)
+/* Seletor Executivo de Módulos (Menu de Abas do Tema) */
+.stSelectbox > div { background-color: #0f172a !important; border: 2px solid #00ffcc !important; border-radius: 8px !important; }
+.stSelectbox div[role="button"] { color: #00ffcc !important; font-weight: 800 !important; }
 
-    # --- MÉTRICAS DE FATURAMENTO ---
-    m1, m2, m3, m4 = st.columns(4)
-    with m1: st.markdown('<div class="metric-card"><div class="m-label">FATURAMENTO GERAL</div><div class="m-value">R$ 142.580</div></div>', unsafe_allow_html=True)
-    with m2: st.markdown('<div class="metric-card"><div class="m-label">LICENÇAS ATIVAS</div><div class="m-value">2.105</div></div>', unsafe_allow_html=True)
-    with m3: st.markdown('<div class="metric-card"><div class="m-label">RECORRÊNCIA (MRR)</div><div class="m-value">R$ 104.200</div></div>', unsafe_allow_html=True)
-    with m4: st.markdown('<div class="metric-card" style="border-bottom-color:#ff0055;"><div class="m-label">TAXA DE CHURN</div><div class="m-value">0.8%</div></div>', unsafe_allow_html=True)
+/* 🚨 REPROGRAMAÇÃO DO BOTÃO DE CHECKOUT CIANO DO PRINT EM FORMATO CÁPSULA ARREDONDADA */
+div.stLinkButton > a, .stButton > button {
+    background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%) !important; color: #030712 !important;
+    font-weight: 900 !important; font-size: 13px !important; border-radius: 30px !important;
+    padding: 12px 20px !important; width: 100% !important; border: none !important; cursor: pointer !important;
+    text-transform: uppercase !important; letter-spacing: 0.5px !important; box-shadow: 0 0 15px rgba(0, 255, 204, 0.4) !important;
+    display: block !important; text-align: center !important; text-decoration: none !important;
+}
+div.stLinkButton > a:hover, .stButton > button:hover { box-shadow: 0 0 25px rgba(0, 255, 135, 0.7) !important; transform: scale(1.01) !important; }
+div.stLinkButton > a p, .stButton > button p { color: #030712 !important; font-weight: 900 !important; }
 
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown('<h2 style="color:white; font-size:1.8rem; font-weight:900; letter-spacing:-1px;">💳 ADESÃO ÀS NOVAS LICENÇAS SUPREMAS</h2>', unsafe_allow_html=True)
+/* Caixas de texto e tabelas */
+.stTextInput > div > div > input { background-color: #0f1526 !important; color: #ffffff !important; border: 2px solid #1e293b !important; border-radius: 8px !important; padding: 12px !important; }
+.stCodeBlock, pre { background-color: #0b111e !important; border: 1px solid #1e293b !important; border-radius: 8px !important; }
+.stCodeBlock code, pre code { color: #33ffdd !important; font-size: 13.5px !important; }
+.terminal-hacker { background-color: #040814 !important; border: 2px solid #00ffcc !important; border-radius: 10px !important; padding: 15px !important; font-family: monospace !important; color: #00ffcc !important; box-shadow: 0 0 15px rgba(0,255,204,0.2) !important; }
+</style>
+""", unsafe_allow_html=True)
 
-    # --- CARDS DE VENDAS ---
-    p1, p2, p3 = st.columns(3)
-    
-    licencas = [
-        {"n": "PLANO MENSAL START", "v": "R$ 47", "d": "Liberação do Módulo 1 (Radar) + Tendências. Acesso básico para validação imediata do robô.", "l": "#"},
-        {"n": "PLANO MENSAL PRO", "v": "R$ 97", "d": "Start + Módulo RSA (45 Keywords) + Arquiteto de Funil. Foco em escala semanal acelerada.", "l": "#"},
-        {"n": "PLANO ELITE MASTER", "v": "R$ 197", "d": "ACESSO TOTAL ILIMITADO + Construtor Pre-Sell Hostinger. O poder máximo da Adriel-AI Pro.", "l": "#"}
-    ]
+# Inicialização segura do painel na memória RAM
+if "modulo_ativo" not in st.session_state: st.session_state.modulo_ativo = "Área de Membros (Faturamento)"
 
-    cols = [p1, p2, p3]
-    for i, lic in enumerate(licencas):
-        with cols[i]:
-            st.markdown(f"""
-            <div class="plan-card">
-                <div>
-                    <p style="color:#94a3b8; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:1px;">{lic['n']}</p>
-                    <div class="p-price">{lic['v']}</div>
-                    <p style="color:#94a3b8; font-size:0.85rem; line-height:1.6; margin-bottom:25px;">{lic['d']}</p>
-                </div>
-                <a href="{lic['l']}" target="_blank" class="btn-checkout">💳 PAGAR COM CARTÃO / PIX</a>
-            </div>
-            """, unsafe_allow_html=True)
+# =============================================================================================================
+# 🏢 ESTRUTURA VISUAL CORPORATIVA (IDÊNTICA AO PRINT DO SEU MONITOR)
+# =============================================================================================================
+col_tit, col_ope = st.columns([2.0, 1.0])
+with col_tit:
+    st.markdown('<h2 style="font-size: 2.5rem; font-weight: 900; color: #ffffff; margin:0; font-family: sans-serif;">🤖 Adriel-AI <span style="background:#00E5FF; color:#050814; padding:2px 8px; font-size:12px; border-radius:4px; vertical-align:middle; margin-left:5px;">PRO</span></h2>', unsafe_allow_html=True)
+with col_ope:
+    st.markdown('<p class="operadores-ativos">🟢 1.895 OPERADORES ATIVOS NA ÁREA</p>', unsafe_allow_html=True)
 
-    st.markdown("<br><br><p style='color:#475569; font-size:0.6rem; text-align:center;'>ESTRUTURA BLINDADA - PROTOCOLO ADRIEL-AI PRO V16.8</p>", unsafe_allow_html=True)
+st.write("")
 
-if __name__ == "__main__":
-    main()
+# Fila Superior de Conexões Ativas das Plataformas
+col_p1, col_p2, col_p3, col_p4, col_p5 = st.columns(5)
+col_p1.markdown('<div class="box-plataforma">🟢 • CLICKBANK</div>', unsafe_allow_html=True)
+col_p2.markdown('<div class="box-plataforma">🟢 • BUYGOODS</div>', unsafe_allow_html=True)
+col_p3.markdown('<div class="box-plataforma">🟢 • DIGISTORE24</div>', unsafe_allow_html=True)
+col_p4.markdown('<div class="box-plataforma">🟢 • STRIPE DASH</div>', unsafe_allow_html=True)
+col_p5.markdown('<div class="box-plataforma">🟢 • HOSTINGER VPS</div>', unsafe_allow_html=True)
+
+st.write("")
+
+# Monitoramento de Métricas Reais do Painel Superior
+col_met1, col_met2, col_met3, col_met4 = st.columns(4)
+with col_met1: st.metric(label="FATURAMENTO GERAL", value="R$ 142.580")
+with col_met2: st.metric(label="LICENÇAS ATIVAS", value="2.105")
+with col_met3: st.metric(label="RECORRÊNCIA (MRR)", value="R$ 104.200")
+with col_met4: st.metric(label="TAXA DE CHURN", value="0.8%")
+
+st.write("---")
+
+# Seletor de Módulos integrado ao tema para navegar no teto sem a barra cinza feia da esquerda
+st.session_state.modulo_ativo = st.selectbox(
+    "Navegação Master de Módulos (Selecione a ferramenta de trabalho):",
+    ["Área de Membros (Faturamento)", "Módulo 7: Minerador de Palavras Vivas"]
+)
+
+st.write("")
+url_hostinger = "https://hostinger.com"
+
+# =============================================================================================================
+# ROTEADOR DE TELAS DO TESTE
+# =============================================================================================================
+
+# 💳 TELA 1: EXIBIÇÃO ORIGINAL DO SEU PRINT (OS 3 CARDS DE VALORES FUNCIONAIS)
+if st.session_state.modulo_ativo == "Área de Membros (Faturamento)":
+    st.markdown('<h3 style="font-size: 1.6rem; font-weight: 800; color: #ffffff;">💳 ADESÃO ÀS NOVAS LICENÇAS SUPREMAS</h3>', unsafe_allow_html=True)
+    st.write("")
+    col_v1, col_v2, col_v3 = st.columns(3)
+    with col_v1:
+        st.markdown('<div class="card-plano-luxo"><span style="color:#94a3b8; font-weight:bold; font-size:11px;">PLANO MENSAL START</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#fff !important;">R$ 47</h2><p style="font-size:13px; color:#94a3b8;">Liberação do Módulo 1 (Radar) + Tendências. Acesso básico para validação imediata.</p></div>', unsafe_allow_html=True)
+        st.link_button("💳 PAGAR COM CARTÃO / PIX", url_hostinger, use_container_width=True, key="btn_st_t1")
+    with col_v2:
+        st.markdown('<div class="card-plano-luxo"><span style="color:#94a3b8; font-weight:bold; font-size:11px;">PLANO MENSAL PRO</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#fff !important;">R$ 97</h2><p style="font-size:13px; color:#94a3b8;">Start + Módulo RSA (45 Keywords) + Arquiteto de Funil. Foco em quem já escala.</p></div>', unsafe_allow_html=True)
+        st.link_button("💳 PAGAR COM CARTÃO / PIX ", url_hostinger, use_container_width=True, key="btn_st_t2")
+    with col_v3:
+        st.markdown('<div class="card-plano-luxo"><span style="color:#94a3b8; font-weight:bold; font-size:11px;">PLANO ELITE MASTER</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#fff !important;">R$ 197</h2><p style="font-size:13px; color:#94a3b8;">ACESSO TOTAL ILIMITADO + Construtor Pre-Sell Hostinger. O poder máximo do robô.</p></div>', unsafe_allow_html=True)
+        st.link_button("💳 PAGAR COM CARTÃO / PIX  ", url_hostinger, use_container_width=True, key="btn_st_t3")
+
+# 📡 TELA 2: MINERADOR VIVO DESCARREGANDO UMA POR UMA (O SHOW VISUAL)
+elif st.session_state.modulo_ativo == "Módulo 7: Minerador de Palavras Vivas":
