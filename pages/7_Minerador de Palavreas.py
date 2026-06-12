@@ -8,7 +8,7 @@ from datetime import datetime
 st.set_page_config(page_title="Minerador Vivo - AdrielAI", page_icon="📡", layout="wide")
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL (TRAVA O DESIGN DO MONITOR E CRIA ANIMAÇÃO NAS BORDAS)
+# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL (TRAVA O DESIGN DO MONITOR E OCULTA BARRAS NATIVAS)
 # =============================================================================================================
 st.markdown("""
 <style>
@@ -22,28 +22,32 @@ h1, h2, h3, h4, p, span, div, label { font-family: 'Segoe UI', Roboto, sans-seri
 .block-container { padding-top: 0.5rem !important; padding-bottom: 2rem !important; padding-left: 2rem !important; padding-right: 2rem !important; max-width: 100% !important; width: 100% !important; }
 [data-testid="stSidebar"], section[data-testid="stSidebar"] { display: none !important; width: 0px !important; }
 
-/* 🚨 DESIGN DAS CÁPSULAS HORIZONTAIS DE NAVEGAÇÃO NO TOPO (RETORNO DO SEU MENU PRINCIPAL) */
-.menu-superior-capsula div.stButton > button {
+/* 🚨 ARREMATE DE LUXO: REPROGRAMAÇÃO DOS BOTÕES NATIVOS DE NAVEGAÇÃO DO TOPO (APPLE STYLE) */
+div.stLinkButton > a {
     background-color: #0f172a !important;
     color: #cbd5e1 !important;
     font-weight: 800 !important;
     font-size: 13px !important;
     border: 1px solid #1e293b !important;
     text-align: center !important;
-    padding: 14px 10px !important;
+    padding: 12px 10px !important;
     width: 100% !important;
     border-radius: 30px !important; /* Formato cápsula executivo Apple Control Center */
     cursor: pointer !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
     transition: all 0.25s ease-in-out !important;
+    display: block !important;
+    text-decoration: none !important;
 }
-.menu-superior-capsula div.stButton > button:hover {
+div.stLinkButton > a:hover {
     background-color: #1e293b !important;
     color: #00ffcc !important;
     border-color: #00ffcc !important;
     box-shadow: 0 0 20px rgba(0, 255, 204, 0.5) !important;
 }
+div.stLinkButton > a p { color: #cbd5e1 !important; font-weight: 800 !important; }
+div.stLinkButton > a:hover p { color: #00ffcc !important; }
 
 /* 🚨 BOTÃO DE MINERAÇÃO GRADIENTE NEON ATIVO DO SEU TEMA */
 .btn-minerador div.stButton > button {
@@ -71,20 +75,15 @@ st.write("Módulo avançado de captura síncrona de volumetria e interesse de le
 st.write("---")
 
 # =============================================================================================================
-# 🚀 3. RETORNO DO MENU HORIZONTAL FIXO NO TOPO: NAVEGAÇÃO COMPLETA ENTRE OS SEUS MÓDULOS
+# 🚀 3. MENU SUPERIOR HORIZONTAL RECONSTRUÍDO COM BOTÕES DE LINK SEGUROS (ZERO ERROS DE TELA VERMELHA)
 # =============================================================================================================
-st.markdown('<div class="menu-superior-capsula">', unsafe_allow_html=True)
 col_nav1, col_nav2, col_nav3 = st.columns(3)
 with col_nav1:
-    if st.button("🎛️ Dashboard Geral", key="nav_dash_m7"):
-        st.markdown('<script>window.parent.location.href = "/";</script>', unsafe_allow_html=True)
+    st.link_button("🎛️ Dashboard Geral", "https://streamlit.app", use_container_width=True)
 with col_nav2:
-    if st.button("🔬 2. Auditor de Mercado", key="nav_aud_m7"):
-        st.markdown('<script>window.parent.location.href = "/Auditor";</script>', unsafe_allow_html=True)
+    st.link_button("🔬 2. Auditor de Mercado", "https://streamlit.appAuditor", use_container_width=True)
 with col_nav3:
-    if st.button("🎯 3. Fundo de Funil", key="nav_fun_m7"):
-        st.markdown('<script>window.parent.location.href = "/Fundo_de_Funil";</script>', unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
+    st.link_button("🎯 3. Fundo de Funil", "https://streamlit.appFundo_de_Funil", use_container_width=True)
 
 st.write("---")
 
@@ -110,7 +109,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 if botao_disparar:
     st.write("---")
     
-    # 🚨 BLINDAGEM VISUAL HACKER: Terminais que atualizam dinamicamente simulando a invasão dos servidores
+    # Terminais que atualizam dinamicamente simulando a invasão dos servidores
     log_terminal = st.empty()
     barra_progresso = st.progress(0)
     
@@ -142,7 +141,7 @@ if botao_disparar:
         {"termo": f"best weight loss supplement 2026", "volume": "95.000 buscas/mês", "cpc": "$ 0.85", "int": "🌲 TOPO"}
     ]
     
-    # 🚨 O TRANCO DE PROCESSAMENTO VISUAL VIVO: Loop incremental que faz a lista se mover na tela na hora!
+    # Loop incremental que faz a lista se mover na tela na hora!
     container_tabela = st.empty()
     lista_exibicao = []
     
@@ -151,13 +150,14 @@ if botao_disparar:
         df_atual = pd.DataFrame(lista_exibicao)
         df_atual.columns = ["Palavra-Chave Mais Buscada", "Volume de Buscas (Gringa)", "CPC Estimado (Leilão)", "Nível do Funil"]
         
-        # O usuário vê a tabela crescer, atualizar e mover as linhas para baixo de forma simétrica!
         container_tabela.dataframe(df_atual, use_container_width=True, hide_index=True)
         time.sleep(0.4)
         
     barra_progresso.progress(100)
     log_terminal.markdown(f'<div class="terminal-hacker" style="border-color: #00FF87; color: #00FF87;">✅ [CONCLUÍDO] 45 Palavras-Chave de Fundo, Meio e Topo de Funil descarregadas e prontas para o leilão!</div>', unsafe_allow_html=True)
     
-    # 🚨 TEXTO PESADO, LONGO E CONVINCENTE DE 5 LINHAS EXIGIDO PELO MODO DE GUERRA V45
+    # Justificativa longa e convincente de 5 linhas do Modo de Guerra V45
     st.write("")
     st.markdown(f"""
+    <div style="background-color: rgba(0, 255, 204, 0.03); border: 2px solid #00ffcc; padding: 20px; border-radius: 12px; margin-top: 15px;">
+        <h4 style="color:#00ffcc; font-weight:900; font-size:15px; margin-top:0; margin-bottom:5px;">📊 RELATÓRIO DO MONITORAMENTO DE TRÁFEGO DA GRINGA:</h4>
