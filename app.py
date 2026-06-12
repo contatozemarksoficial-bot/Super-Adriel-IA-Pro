@@ -6,7 +6,7 @@ def main():
     # 1. CONFIGURAÇÃO DE ELITE (Design Cinema Dark)
     st.set_page_config(page_title="Adriel-AI Pro", layout="wide", initial_sidebar_state="expanded")
 
-    # 2. CSS DE BLINDAGEM TOTAL - MATA O BRANCO NA LATERAL E NO CORPO
+    # 2. CSS DE BLINDAGEM TOTAL - PROTOCOLO TRIPLE BLACK
     st.markdown("""
     <style>
         /* REMOVE CABEÇALHO E FORÇA FUNDO PRETO EM TUDO */
@@ -21,7 +21,7 @@ def main():
         /* BORDA DE SEPARAÇÃO DA LATERAL */
         [data-testid="stSidebar"] { border-right: 1px solid #1e293b !important; }
 
-        /* MENU DE BOTÕES DA LATERAL */
+        /* MENU DE BOTÕES DA LATERAL (ADRIEL-AI PRO) */
         .sidebar-menu { display: flex; flex-direction: column; gap: 10px; padding: 15px; }
         .menu-btn {
             display: flex; align-items: center; gap: 12px; padding: 12px;
@@ -37,22 +37,22 @@ def main():
         }
         .icon-n { color: #00ffcc; text-shadow: 0 0 8px #00ffcc; font-size: 1.1rem; }
 
-        /* CARD DE BOAS-VINDAS (CONTEÚDO PRINCIPAL) */
+        /* CARD DE BOAS-VINDAS */
         .welcome-box {
             border: 1px solid #1e293b; padding: 40px; border-radius: 25px;
-            background: linear-gradient(145deg, #0d1117, #010409);
+            background: linear-gradient(145deg, #0d1117 0%, #010409 100%);
             text-align: center; margin-top: 30px; border-top: 5px solid #00ffcc;
             box-shadow: 0 25px 50px rgba(0,0,0,0.7);
         }
     </style>
     """, unsafe_allow_html=True)
 
-    # --- CONSTRUÇÃO DA SIDEBAR (MENU DE BOTÕES) ---
+    # --- CONSTRUÇÃO DA SIDEBAR (IDENTIDADE ADRIEL-AI PRO) ---
     with st.sidebar:
-        st.markdown('<div style="text-align:center; padding:20px 0;"><span style="color:white; font-size:1.6rem; font-weight:900;">🤖 ADRIEL-AI <span style="color:#00ffcc;">PRO</span></span></div>', unsafe_allow_html=True)
-        st.markdown('<p style="color:#475569; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:2px; margin-left:15px;">Navegação Síncrona</p>', unsafe_allow_html=True)
+        st.markdown('<div style="text-align:center; padding:20px 0;"><span style="color:white; font-size:1.6rem; font-weight:900;">🤖 Adriel-AI <span style="color:#00ffcc;">Pro</span></span></div>', unsafe_allow_html=True)
+        st.markdown('<p style="color:#475569; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:2px; margin-left:15px;">Módulos Ativos</p>', unsafe_allow_html=True)
         
-        # Estrutura de links (Confira se os nomes das páginas no seu GitHub são esses)
+        # Estrutura de links síncronos
         st.markdown("""
         <div class="sidebar-menu">
             <a href="/" class="menu-btn"><span class="icon-n">🏠</span> DASHBOARD</a>
@@ -66,22 +66,22 @@ def main():
         </div>
         """, unsafe_allow_html=True)
 
-    # --- CONTEÚDO DA TELA PRINCIPAL ---
+    # --- TELA DE COMANDO CENTRAL ---
     st.markdown("""
         <div class="welcome-box">
-            <h1 style="color:white; font-size:2.5rem; font-weight:900; margin-bottom:10px;">SISTEMA <span style="color:#00ffcc;">ONLINE</span></h1>
-            <p style="color:#94a3b8; font-size:1.1rem;">Comandante José Marques, todos os módulos foram carregados.</p>
+            <h1 style="color:white; font-size:2.5rem; font-weight:900; margin-bottom:10px;">🤖 Adriel-AI <span style="color:#00ffcc;">Pro</span></h1>
+            <p style="color:#94a3b8; font-size:1.1rem;">Bem-vindo ao centro de inteligência preditiva, Comandante José Marques.</p>
             <hr style="border-color:#1e293b; margin:25px 0;">
-            <p style="color:#00ffcc; font-weight:800; letter-spacing:2px;">ESCOLHA UM MÓDULO NA BARRA LATERAL PARA INICIAR A OPERAÇÃO</p>
+            <p style="color:#00ffcc; font-weight:800; letter-spacing:2px;">OPERACIONAL: SELECIONE UM MÓDULO NA SIDEBAR</p>
         </div>
     """, unsafe_allow_html=True)
 
-    # MÉTRICAS DE SEGURANÇA (PARA PROVAR QUE A TELA NÃO ESTÁ VAZIA)
+    # MÉTRICAS LIVE
     st.markdown("<br>", unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
-    c1.metric("STATUS DO SERVIDOR", "100% ATIVO", "Sincronizado")
-    c2.metric("CONEXÕES ATIVAS", f"{random.randint(2100, 2500)}", "Live")
-    c3.metric("PROTEÇÃO DE DADOS", "AES-256", "Blindado")
+    c1.metric("SOFTWARE", "Adriel-AI Pro", "v16.5")
+    c2.metric("CONEXÕES", f"{random.randint(2100, 2500)}", "Live")
+    c3.metric("BANCO DE DADOS", "Sincronizado", "Global")
 
 if __name__ == "__main__":
     main()
