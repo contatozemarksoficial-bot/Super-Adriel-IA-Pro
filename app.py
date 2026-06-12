@@ -79,7 +79,7 @@ div.stLinkButton > a p, .stButton > button p { color: #030712 !important; font-w
 </style>
 """, unsafe_allow_html=True)
 
-# 🚨 FORÇADOR DE MEMÓRIA CRÍTICO (Ao dar Deploy, inicia obrigatoriamente Deslogado para testar)
+# 🚨 FORÇADOR DE MEMÓRIA CRÍTICO (Inicia deslogado para ver a tela do cliente)
 if "cliente_autenticado" not in st.session_state: 
     st.session_state.cliente_autenticado = False
 
@@ -89,7 +89,7 @@ if "modulo_ativo" not in st.session_state:
 url_hostinger = "https://hostinger.com"
 
 # =============================================================================================================
-# 🔒 TELA DE CADASTRO E BLOQUEIO DE CLIENTE (TEMA DE LUXO REMODELADO - ZERO REBORDAS BRANCAS)
+# 🔒 TELA DE CADASTRO E BLOQUEIO DE CLIENTE (VISÃO 100% DO CLIENTE)
 # =============================================================================================================
 if not st.session_state.cliente_autenticado:
     col_t, col_o = st.columns([2.0, 1.0])
@@ -108,10 +108,15 @@ if not st.session_state.cliente_autenticado:
     """, unsafe_allow_html=True)
     
     st.write("")
-    chave_digitada = st.text_input("Digite a sua Chave de Acesso SaaS abaixo:", placeholder="Insira o Token de Ativação (Dica do Teste: ADRIEL-VIP-2026)...", key="input_pass_mestre")
+    chave_digitada = st.text_input("Digite a sua Chave de Acesso SaaS abaixo:", placeholder="Insira o Token de Ativação ou clique abaixo no botão de teste...")
     st.write("")
     
-    if st.button("🔑 EFETUAR LOGIN NO SISTEMA", key="btn_login_mestre"):
+    # 🚨 ATALHO SEU DE COMANDANTE: CLICA E JÁ LOGA AUTOMATICAMENTE SEM DIGITAR NADA
+    if st.button("🔓 CLIQUE AQUI PARA SIMULAR CADASTRO E LIBERAR O TESTE NA HORA"):
+        st.session_state.cliente_autenticado = True
+        st.rerun()
+        
+    if st.button("🔑 EFETUAR LOGIN VIA CHAVE TRADICIONAL", key="btn_login_mestre"):
         if chave_digitada.strip() == "ADRIEL-VIP-2026":
             st.session_state.cliente_autenticado = True
             st.rerun()
@@ -123,25 +128,6 @@ if not st.session_state.cliente_autenticado:
     st.write("")
     
     col_v1, col_v2, col_v3 = st.columns(3)
-    
     with col_v1:
-        st.markdown(f"""
-        <div class="container-card-luxo">
-            <div>
-                <span style="color:#94a3b8; font-weight:bold; font-size:11px; letter-spacing:0.5px; text-transform:uppercase;">PLANO MENSAL START</span>
-                <h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#ffffff !important;">R$ 47</h2>
-                <p style="font-size:13px; color:#94a3b8; line-height:1.5; margin-bottom:20px;">
-                    Liberação do Módulo 1 (Radar) + Tendências. Acesso básico para validação imediata de ofertas na gringa.
-                </p>
-            </div>
-            <a href="{url_hostinger}" target="_blank" class="botao-capsula-neon">💳 ASSINAR PREMIUM</a>
-        </div>
-        """, unsafe_allow_html=True)
-        
+        st.markdown(f"""<div class="container-card-luxo"><div><span style="color:#94a3b8; font-weight:bold; font-size:11px; letter-spacing:0.5px; text-transform:uppercase;">PLANO MENSAL START</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#ffffff !important;">R$ 47</h2><p style="font-size:13px; color:#94a3b8; line-height:1.5; margin-bottom:20px;">Liberação do Módulo 1 (Radar) + Tendências. Acesso básico para validação imediata de ofertas na gringa.</p></div><a href="{url_hostinger}" target="_blank" class="botao-capsula-neon"> Assinar Premium</a></div>""", unsafe_allow_html=True)
     with col_v2:
-        st.markdown(f"""
-        <div class="container-card-luxo">
-            <div>
-                <span style="color:#94a3b8; font-weight:bold; font-size:11px; letter-spacing:0.5px; text-transform:uppercase;">PLANO MENSAL PRO</span>
-                <h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#ffffff !important;">R$ 97</h2>
-                <p style="font-size:13px; color:#94a3b8; line-height:1.5; margin-bottom:20px;">
