@@ -7,7 +7,7 @@ import time
 st.set_page_config(page_title="Adriel-AI Pro", layout="wide", initial_sidebar_state="collapsed")
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL (FORÇA O DESIGN DO SEU PRINT COM PREENCHIMENTO DE TELA)
+# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL (DESTRÓI O CINZA DA ESQUERDA E FIXA O NEON DO SEU PRINT)
 # =============================================================================================================
 st.markdown("""
 <style>
@@ -30,100 +30,111 @@ h1, h2, h3, h4, p, span, div, label { font-family: 'Segoe UI', Roboto, sans-seri
     padding: 10px !important; text-align: center; font-size: 10px !important; font-weight: 900 !important; color: #cbd5e1 !important; letter-spacing: 1px;
 }
 
-/* Customização dos Containers de Métricas em Gradiente Escuro */
+/* Customização dos Containers de Métricas em Gradiente Escuro do seu Chassi */
 [data-testid="stMetricContainer"] {
     background: linear-gradient(135deg, #0f172a, #030712) !important; border: 1px solid #1e293b !important;
     border-bottom: 3px solid #00ffcc !important; padding: 20px !important; border-radius: 12px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;
 }
 div[data-testid="stMetricContainer"]:nth-of-type(4) { border-bottom: 3px solid #ff0055 !important; }
 
+/* Forçador de cor branca nas métricas para sumir com o apagado */
 [data-testid="stMetricLabel"], [data-testid="stMetricValue"] { color: #ffffff !important; }
 [data-testid="stMetricValue"] { font-size: 1.8rem !important; font-weight: 800 !important; }
 
-/* 🧱 DESIGN DOS CARDS DE VALORES EM HTML PURO BLINDADO */
+/* 🧱 CARDS DOS PLANOS DA ADESÃO COM ARREMATES DE LUXO DE ACORDO COM SEU PRINT */
 .container-card-luxo {
-    background-color: #080f1d; border: 1px solid #1e293b; border-radius: 14px; padding: 25px; margin-bottom: 15px;
-    min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;
+    background-color: #080f1d; border: 1px solid #1e293b; border-radius: 14px; padding: 25px;
+    min-height: 250px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;
 }
 .caixa-holografica-master { background-color: #080f1d !important; border: 2px solid #1e293b !important; border-radius: 12px !important; padding: 24px !important; margin-bottom: 25px !important; width: 100% !important; }
 
-/* 🚨 REPROGRAMAÇÃO COMPILADA DOS BOTÕES NATIVOS PARA CASAR COM O SEU DESIGN CIANO ARREDONDADO */
-div.stButton > button, div.stLinkButton > a {
+/* 🚨 REPROGRAMAÇÃO COMPILADA DOS BOTÕES NATIVOS LINK DO STREAMLIT EM CÁPSULA CIANO NEON VIBRANTE */
+div.stLinkButton > a, .stButton > button {
     background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%) !important; color: #030712 !important;
-    font-weight: 900 !important; font-size: 13px !important; border-radius: 30px !important; /* Formato Pílula */
+    font-weight: 900 !important; font-size: 13px !important; border-radius: 30px !important; /* Formato cápsula arredondada Apple */
     padding: 12px 24px !important; width: 100% !important; border: none !important; cursor: pointer !important;
     text-transform: uppercase !important; letter-spacing: 0.5px !important; box-shadow: 0 0 15px rgba(0, 255, 204, 0.4) !important;
     display: block !important; text-align: center !important; text-decoration: none !important;
 }
-div.stButton > button:hover, div.stLinkButton > a:hover { box-shadow: 0 0 25px rgba(0, 255, 135, 0.7) !important; transform: scale(1.01) !important; }
-div.stButton > button p, div.stLinkButton > a p { color: #030712 !important; font-weight: 900 !important; }
+div.stLinkButton > a:hover, .stButton > button:hover { box-shadow: 0 0 25px rgba(0, 255, 135, 0.8) !important; transform: scale(1.02) !important; color: #030712 !important; }
+div.stLinkButton > a p, .stButton > button p { color: #030712 !important; font-weight: 900 !important; }
 
-/* Customização da Caixa do Seletor e Inputs */
+/* Caixa do seletor e inputs */
 .stSelectbox > div { background-color: #0f172a !important; border: 2px solid #1e293b !important; border-radius: 8px !important; }
 .stSelectbox div[role="button"] { color: #00ffcc !important; font-weight: 800 !important; }
 .stTextInput > div > div > input { background-color: #0f1526 !important; color: #ffffff !important; border: 2px solid #1e293b !important; border-radius: 8px !important; padding: 14px !important; font-size: 15px !important; }
 
 /* Tabelas e Terminais */
+h1, h2, h3, h4, .stMarkdown p { color: #ffffff !important; }
 .stCodeBlock, pre { background-color: #0b111e !important; border: 1px solid #1e293b !important; border-radius: 8px !important; }
 .stCodeBlock code, pre code { color: #33ffdd !important; font-size: 13.5px !important; }
 .terminal-hacker { background-color: #040814 !important; border: 2px solid #00ffcc !important; border-radius: 10px !important; padding: 15px !important; font-family: monospace !important; color: #00ffcc !important; box-shadow: 0 0 15px rgba(0,255,204,0.2) !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# Gerenciador de autenticação na RAM do servidor
-if "cliente_autenticado" not in st.session_state: 
-    st.session_state.cliente_autenticado = False
-
-if "modulo_ativo" not in st.session_state: 
-    st.session_state.modulo_ativo = "Área de Membros (Faturamento)"
-
+# URL de comissão parceira da Hostinger
 url_hostinger = "https://hostinger.com"
 
 # =============================================================================================================
-# 🔒 TELA DE BLOQUEIO DO CLIENTE (VISÃO DA TRAVA DO SEU IMPÉRIO)
+# 🔒 3. INTERFACE DA TRAVA DE SEGURANÇA: ENTRADA COM CHAVE MESTRE VIP NO CÓDIGO
 # =============================================================================================================
-if not st.session_state.cliente_autenticado:
-    col_t, col_o = st.columns([2.0, 1.0])
-    with col_t: st.markdown('<h2 style="font-size: 2.6rem; font-weight: 900; color: #ffffff; margin:0;">🤖 Adriel-AI <span style="background:#ff0055; color:#fff; padding:3px 10px; font-size:12px; border-radius:4px; vertical-align:middle; margin-left:5px; font-weight:900;">TRANCADO</span></h2>', unsafe_allow_html=True)
-    with col_o: st.markdown('<p class="operadores-ativos" style="color:#ff0055 !important;">🔴 SISTEMA AGUARDANDO LICENÇA VÁLIDA</p>', unsafe_allow_html=True)
+st.markdown('<p class="operadores-ativos">🛡️ SECURITY PROTOCOL ACTIVE</p>', unsafe_allow_html=True)
+st.write("")
+
+# Campo de Texto para Validação de Acesso
+chave_digitada = st.text_input("🛡️ CHAVE MESTRE REQUERIDA — Insira seu Token de Ativação SaaS para destravar:", type="password", placeholder="Digite a chave secreta aqui...")
+st.write("")
+
+# 🚨 VERIFICAÇÃO DIRETA: SE O TEXTO DIGITADO FOR A CHAVE MESTRE, ABRE TODO O IMPÉRIO!
+if chave_digitada.strip() == "ADRIEL-VIP-2026":
     
-    st.write("---")
-    
-    st.markdown("""
-    <div style="background-color: rgba(255, 0, 85, 0.04); border: 2px solid #ff0055; padding: 25px; border-radius: 12px; text-align: center; box-shadow: 0 0 15px rgba(255,0,85,0.1);">
-        <h3 style="color: #ff4d88; margin-top:0; font-weight:900; font-size:18px;">⚠️ CHAVE DE LICENÇA MANDATÓRIA REQUERIDA</h3>
-        <p style="color: #cbd5e1; font-size: 13.5px; margin-bottom:0; line-height:1.6;">
-            Este ecossistema militar de inteligência gringa está restrito a assinantes ativos. Insira a sua chave digital recebida por e-mail para validar o login ou utilize o atalho de cortesia abaixo para testar instantaneamente.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    
+    # 🏢 SEÇÃO INTERNA DESTRANCADA TOTALMENTE ACESA (A FERRARI DO SEU PRINT)
+    col_tit, col_ope = st.columns([2.0, 1.0])
+    with col_tit:
+        st.markdown('<h2 style="font-size: 2.5rem; font-weight: 900; color: #ffffff; margin:0; font-family: sans-serif;">🤖 Adriel-AI <span style="background:#00E5FF; color:#050814; padding:2px 8px; font-size:12px; border-radius:4px; vertical-align:middle; margin-left:5px;">PRO</span></h2>', unsafe_allow_html=True)
+    with col_ope:
+        st.markdown('<p class="operadores-ativos" style="color: #00ffcc !important;">🟢 COMANDANTE CONECTADO</p>', unsafe_allow_html=True)
+
     st.write("")
-    chave_digitada = st.text_input("Digite a sua Chave de Acesso SaaS abaixo:", placeholder="Insira o Token de Ativação...")
+
+    # Fila Superior de Conexões Ativas das Plataformas
+    col_p1, col_p2, col_p3, col_p4, col_p5 = st.columns(5)
+    col_p1.markdown('<div class="box-plataforma">🟢 • CLICKBANK</div>', unsafe_allow_html=True)
+    col_p2.markdown('<div class="box-plataforma">🟢 • BUYGOODS</div>', unsafe_allow_html=True)
+    col_p3.markdown('<div class="box-plataforma">🟢 • DIGISTORE24</div>', unsafe_allow_html=True)
+    col_p4.markdown('<div class="box-plataforma">🟢 • STRIPE DASH</div>', unsafe_allow_html=True)
+    col_p5.markdown('<div class="box-plataforma">🟢 • HOSTINGER VPS</div>', unsafe_allow_html=True)
+
     st.write("")
-    
-    # 🚨 ATALHO SEU REORGANIZADO EM LINHA SEPARADA PARA EVITAR SUMIÇOS
-    if st.button("🔓 CLIQUE AQUI PARA SIMULAR CADASTRO E LIBERAR O TESTE NA HORA", key="btn_atalho_mestre"):
-        st.session_state.cliente_autenticado = True
-        st.rerun()
-        
-    if st.button("🔑 EFETUAR LOGIN VIA CHAVE TRADICIONAL", key="btn_login_tradicional"):
-        if chave_digitada.strip() == "ADRIEL-VIP-2026":
-            st.session_state.cliente_autenticado = True
-            st.rerun()
-        else:
-            st.markdown('<div style="background-color: rgba(255,0,85,0.1); border: 1px solid #ff0055; color: #ff4d88; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 14px; text-align: center; margin-bottom: 20px;">❌ Chave de Acesso Inválida ou Expirada no Banco de Dados.</div>', unsafe_allow_html=True)
+
+    # Monitoramento de Métricas Reais do Painel Superior
+    col_met1, col_met2, col_met3, col_met4 = st.columns(4)
+    with col_met1: st.metric(label="FATURAMENTO GERAL", value="R$ 142.580")
+    with col_met2: st.metric(label="LICENÇAS ATIVAS", value="2.105")
+    with col_met3: st.metric(label="RECORRÊNCIA (MRR)", value="R$ 104.200")
+    with col_met4: st.metric(label="TAXA DE CHURN", value="0.8%")
 
     st.write("---")
-    st.markdown('<h3 style="font-size: 1.6rem; font-weight: 800; color: #ffffff; text-align:center; letter-spacing:0.5px;">💳 CONTRATAR ASSINATURA RECORRENTE DO ROBÔ</h3>', unsafe_allow_html=True)
+
+    # Seletor de Módulos integrado ao tema para navegar no teto
+    modulo_selecionado = st.selectbox(
+        "Navegação Master de Módulos (Selecione a ferramenta de trabalho):",
+        ["Área de Membros (Faturamento Recorrente)", "Módulo 7: Minerador de Palavras Vivas"]
+    )
+
     st.write("")
-    
-    # Cards de planos usando os novos botões link 100% travados contra falhas de layout
-    col_v1, col_v2, col_v3 = st.columns(3)
-    with col_v1:
-        st.markdown('<div class="container-card-luxo"><span style="color:#94a3b8; font-weight:bold; font-size:11px; text-transform:uppercase;">PLANO MENSAL START</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#ffffff !important;">R$ 47</h2><p style="font-size:13px; color:#94a3b8; line-height:1.5;">Liberação do Módulo 1 (Radar) + Tendências. Acesso básico para validação imediata.</p></div>', unsafe_allow_html=True)
-        st.link_button("💳 ASSINAR PLANO R$ 47", url_hostinger, use_container_width=True, key="lnk_p47_ok")
-    with col_v2:
-        st.markdown('<div class="container-card-luxo"><span style="color:#94a3b8; font-weight:bold; font-size:11px; text-transform:uppercase;">PLANO MENSAL PRO</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#ffffff !important;">R$ 97</h2><p style="font-size:13px; color:#94a3b8; line-height:1.5;">Start + Módulo RSA (45 Keywords) + Arquiteto de Funil. Foco em escala.</p></div>', unsafe_allow_html=True)
-        st.link_button("💳 ASSINAR PLANO R$ 97", url_hostinger, use_container_width=True, key="lnk_p97_ok")
-    with col_v3:
+
+    # ROTEADOR DE TELAS INTERNAS DESTRANCADAS
+    if modulo_selecionado == "Área de Membros (Faturamento Recorrente)":
+        st.markdown('<h3 style="font-size: 1.6rem; font-weight: 800; color: #ffffff;">💳 ADESÃO ÀS LICENÇAS DISPONÍVEIS</h3>', unsafe_allow_html=True)
+        st.write("Seu painel corporativo está respondendo de forma totalmente íntegra na nuvem.")
+        st.write("")
+        
+        col_v1, col_v2, col_v3 = st.columns(3)
+        with col_v1:
+            st.markdown('<div class="container-card-luxo"><div><span style="color:#94a3b8; font-weight:bold; font-size:11px; letter-spacing:0.5px; text-transform:uppercase;">PLANO MENSAL START</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#ffffff !important;">R$ 47</h2><p style="font-size:13px; color:#94a3b8; line-height:1.5;">Liberação do Módulo 1 (Radar) + Tendências. Acesso básico para validação imediata de ofertas na gringa.</p></div></div>', unsafe_allow_html=True)
+            st.link_button("💳 PAGAR COM CARTÃO / PIX", url_hostinger, use_container_width=True, key="lnk_start_real")
+        with col_v2:
+            st.markdown('<div class="container-card-luxo"><div><span style="color:#94a3b8; font-weight:bold; font-size:11px; letter-spacing:0.5px; text-transform:uppercase;">PLANO MENSAL PRO</span><h2 style="font-size:2.4rem; font-weight:900; margin:10px 0; color:#ffffff !important;">R$ 97</h2><p style="font-size:13px; color:#94a3b8; line-height:1.5;">Start + Módulo RSA (45 Keywords) + Arquiteto de Funil. Foco total em quem já escala campanhas pesadas.</p></div></div>', unsafe_allow_html=True)
+            st.link_button("💳 PAGAR COM CARTÃO / PIX ", url_hostinger, use_container_width=True, key="lnk_pro_real")
+        with col_v3:
