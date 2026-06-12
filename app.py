@@ -1,6 +1,5 @@
 import streamlit as st
 import random
-import time
 
 # 1. CONFIGURAÇÃO DE ELITE (Design Cinema Dark)
 st.set_page_config(page_title="Adriel-IA Pro", layout="wide", initial_sidebar_state="expanded")
@@ -17,7 +16,7 @@ st.markdown(f"""
     }}
     [data-testid="stSidebar"] {{ border-right: 1px solid #1e293b !important; }}
     
-    /* BOTÕES DE NAVEGAÇÃO QUE RESPONDEM NA HORA */
+    /* BOTÕES DE NAVEGAÇÃO */
     .stButton>button {{
         background-color: #0d1117 !important; color: #ffffff !important;
         border: 1px solid #1e293b !important; border-radius: 10px !important;
@@ -32,7 +31,7 @@ st.markdown(f"""
     .robot-circle {{
         width: 200px; height: 200px;
         background: radial-gradient(circle, #0d1117 40%, #00ffcc05 100%);
-        border-radius: 50%; border: 3px solid #00ffcc;
+        border: 3px solid #00ffcc; border-radius: 50%;
         box-shadow: 0 0 60px rgba(0, 255, 204, 0.3);
         margin: 40px auto 20px auto; position: relative;
         animation: float 4s infinite ease-in-out;
@@ -63,8 +62,8 @@ with st.sidebar:
     st.markdown('<div style="color:white; font-size:1.6rem; font-weight:900; padding:15px;">🤖 Adriel-IA <span style="color:#00ffcc;">Pro</span></div>', unsafe_allow_html=True)
     st.markdown('<p style="color:#475569; font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:2px; margin-left:15px;">Módulos</p>', unsafe_allow_html=True)
     
-    # Navegação usando st.switch_page (O modo que não abre abas)
-    # IMPORTANTE: Se os nomes dos arquivos no seu Github forem diferentes, ele não responde.
+    # Navegação usando st.switch_page
+    # IMPORTANTE: Se o arquivo no GitHub não tiver o "5_", apague o "5_" aqui embaixo
     if st.button("🏠 DASHBOARD"): st.rerun()
     if st.button("📡 1. RADAR ELITE"): st.switch_page("pages/1_Radar.py")
     if st.button("🕵️ 2. AUDITOR IA"): st.switch_page("pages/2_Auditor.py")
@@ -84,7 +83,7 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# 2. A CARA DO ROBÔ NO CÍRCULO
+# 2. A CARA DO ROBÔ NO CÍRCULO (NOME CORRIGIDO)
 st.markdown("""
     <div style="text-align:center;">
         <div class="robot-circle">
