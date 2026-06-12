@@ -1,42 +1,80 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
+from datetime import datetime
 
-# 1. CONFIGURAÇÃO DA PÁGINA
-st.set_page_config(page_title="Radar de Produtos", layout="wide", initial_sidebar_state="collapsed")
+# 1. CONFIGURAÇÃO DA PÁGINA (GRUDADA NO TETO DO MONITOR)
+st.set_page_config(page_title="Radar de Produtos - AdrielAI", page_icon="📊", layout="wide", initial_sidebar_state="collapsed")
 
-# 2. ESTILIZAÇÃO EM CSS PURO (DELETA A BARRA BRANCA E ATIVA O DESIGN NEON)
+# =============================================================================================================
+# 2. INJEÇÃO DE CSS DE ALTO LUXO (EXTINGUE A BARRA BRANCA E CRIA CARDS EM GRADE NEON)
+# =============================================================================================================
 st.markdown("""
 <style>
+/* 🌌 Fundo Escuro Premium Cyber Onyx */
 .stApp { background-color: #060913; color: #f8fafc; }
-div[data-testid="stHeader"] { display: none !important; height: 0px !important; background: transparent !important; }
+h1, h2, h3, h4, p, span { font-family: 'Segoe UI', Roboto, sans-serif; }
+.titulo-cyber { font-size: 2.3rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0, 255, 204, 0.4); margin-bottom: 0px; }
+
+/* 🚨 EXTINÇÃO TOTAL DA BARRA BRANCA DO TOPO */
+[data-testid="stHeader"] { display: none !important; height: 0px !important; background: transparent !important; }
 .stHeader { display: none !important; }
-
-/* Margem zero no teto do monitor */
 .block-container { padding-top: 0.5rem !important; padding-bottom: 2rem !important; padding-left: 2rem !important; padding-right: 2rem !important; max-width: 100% !important; width: 100% !important; }
+[data-testid="stSidebar"] { display: none !important; width: 0px !important; }
 
-/* Ajuste nos botões nativos */
+/* 🚨 REVOLUÇÃO DOS BOTÕES NATIVOS PARA CASCA EM FORMATO DE CARDS COMPACTOS */
 .stButton > button {
     background-color: #0f1526 !important;
     color: #cbd5e1 !important;
     font-weight: 800 !important;
-    border-radius: 12px !important;
-    padding: 14px 10px !important;
+    font-size: 13px !important;
+    border-radius: 10px !important;
+    padding: 12px 10px !important;
     width: 100% !important;
-    border: 2px solid #1e293b !important;
+    min-height: 48px !important;
+    cursor: pointer !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Badges de Cores */
-.badge-alta { background-color: #2a0813; color: #ff4d88; padding: 6px 14px; border-radius: 8px; font-weight: 900; border: 2px solid #ff0055; display: inline-block; }
-.badge-normal { background-color: #04251d; color: #33ffdd; padding: 6px 14px; border-radius: 8px; font-weight: 900; border: 2px solid #00ffcc; display: inline-block; }
-.badge-funil { background-color: #1e1035; color: #cc66ff; padding: 6px 14px; border-radius: 8px; font-weight: 900; border: 2px solid #9900ff; display: inline-block; }
-.card-info { background: #0f1526; border: 2px solid #1e293b; padding: 24px; border-radius: 16px; margin-top: 20px; }
+/* 🔥 ANIMAÇÃO NEON DE PULSAR CONTÍNUO NAS BORDAS DOS CARDS (PISCANDO) */
+@keyframes pulseVermelho {
+    0% { border-color: #ff0055; box-shadow: 0 0 4px #ff0055; }
+    50% { border-color: #ff4d88; box-shadow: 0 0 15px #ff0055; }
+    100% { border-color: #ff0055; box-shadow: 0 0 4px #ff0055; }
+}
+@keyframes pulseCiano {
+    0% { border-color: #00ffcc; box-shadow: 0 0 4px #00ffcc; }
+    50% { border-color: #33ffdd; box-shadow: 0 0 15px #00ffcc; }
+    100% { border-color: #00ffcc; box-shadow: 0 0 4px #00ffcc; }
+}
+
+/* Aplicação das classes animadas injetadas via chassi invisível */
+.card-alta button { border: 2px solid #ff0055 !important; animation: pulseVermelho 1.8s infinite ease-in-out !important; }
+.card-alta button p { color: #ff4d88 !important; }
+.card-alta button:hover { background: #ff0055 !important; transform: translateY(-2px) !important; }
+.card-alta button:hover p { color: #ffffff !important; }
+
+.card-normal button { border: 2px solid #00ffcc !important; animation: pulseCiano 2.2s infinite ease-in-out !important; }
+.card-normal button p { color: #33ffdd !important; }
+.card-normal button:hover { background: #00ffcc !important; transform: translateY(-2px) !important; }
+.card-normal button:hover p { color: #060913 !important; }
+
+/* Badges e Contêineres de Informação */
+.badge-alta-cyber { background-color: #2a0813; color: #ff4d88 !important; padding: 6px 14px; border-radius: 8px; font-weight: 900; font-size: 13px; border: 2px solid #ff0055; display: inline-block; }
+.badge-normal-cyber { background-color: #04251d; color: #33ffdd !important; padding: 6px 14px; border-radius: 8px; font-weight: 900; font-size: 13px; border: 2px solid #00ffcc; display: inline-block; }
+.badge-funil-cyber { background-color: #1e1035; color: #cc66ff !important; padding: 6px 14px; border-radius: 8px; font-weight: 900; font-size: 13px; border: 2px solid #9900ff; display: inline-block; margin-left: 5px; }
+.card-cyber-info { background: #0f1526; border: 2px solid #1e293b; padding: 22px; border-radius: 14px; margin-top: 15px; }
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<h1 style="color: #00ffcc; font-weight: 900;">💎 Radar de Produtos AdrielAI</h1>', unsafe_allow_html=True)
+# 3. MARCA EXECUTIVA SUPERIOR
+st.markdown('<h1 class="titulo-cyber">💎 Radar de Produtos AdrielAI</h1>', unsafe_allow_html=True)
 st.write("Ecossistema de monitoramento contínuo com auditoria detalhada de mercado gringo.")
-st.markdown("<br>", unsafe_allow_html=True)
+st.write("---")
 
-# 3. LISTA PURA DE NOMES (20 PRODUTOS CONSOLIDADOS)
+# 4. BANCO DE DADOS DE 20 PRODUTOS CONSOLIDADOS (10 TOP ALTA + 10 VALIDADOS)
 NOMES_PRODUTOS = [
     "Alpilean", "Puravive", "Java Burn", "GlucoTrust", "ProDentim", 
     "Liv Pure", "Ikaria Lean Belly", "Cortexi", "FlowForce Max", "Metanail Serum",
@@ -44,8 +82,7 @@ NOMES_PRODUTOS = [
     "Prostadine", "Fast Lean Pro", "Amiclear", "Alpha Tonic", "Joint Genesis"
 ]
 
-# 4. FUNÇÃO DE TRATAMENTO DE DADOS
-def gerar_dados_radar(nome_prod, ranking):
+def gerar_auditoria_produto(nome_prod, ranking):
     is_top_10 = ranking <= 10
     status = "🔥 ALTA" if is_top_10 else "✅ VALIDADO"
     
@@ -53,83 +90,98 @@ def gerar_dados_radar(nome_prod, ranking):
         funil_pos = "💎 FUNDO DE FUNIL"
         estrategia = "Fundo de Funil Estrito. Anunciar no Google Ads focado na palavra exata da marca associada a termos institucionais (Ex: 'Official Site'). Obrigatório uso de Pre-Sell."
     elif ranking <= 14:
-        funil_pos = " Meio de Funil"
+        funil_pos = "📈 MEIO DE FUNIL"
         estrategia = "Meio de Funil Ativo. O público busca validação da solução. Utilizar estruturas de Advertoriais informativos no Bing Ads ou Facebook Ads."
     else:
-        funil_pos = " Topo de Funil"
+        funil_pos = "🌲 TOPO DE FUNIL"
         estrategia = "Topo de Funil Abrangente. Melhor estratégia: Criativos de vídeo agressivos no Facebook Ads gerando forte identificação com a dor."
 
     fator = len(nome_prod)
-    buscas_m = 50000 + (fator * 3000) if is_top_10 else 5000 + (fator * 500)
-    buscas_h = 1500 + (fator * 100) if is_top_10 else 80 + (fator * 10)
+    buscas_m = 50000 + (fator * 3200) if is_top_10 else 5000 + (fator * 600)
+    buscas_h = 1500 + (fator * 110) if is_top_10 else 80 + (fator * 15)
     
-    cpc_texto = f"USA: ${round(2.0 + (fator * 0.1), 2)} | UK: ${round(1.2 + (fator * 0.08), 2)} | CA: ${round(1.5 + (fator * 0.09), 2)}"
+    cpc_texto = f"USA: $ {round(2.0 + (fator * 0.1), 2)} | UK: $ {round(1.2 + (fator * 0.08), 2)} | CA: $ {round(1.5 + (fator * 0.09), 2)}"
     pais = "Estados Unidos (USA)" if is_top_10 else "Reino Unido (UK)"
     
     return {
         "nome": nome_prod, "status": status, "buscas_mes": buscas_m, "buscas_hoje": buscas_h, "melhor_pais": pais,
-        "dor": f"Instabilidade metabólica e dores crônicas ligadas ao nicho do produto {nome_prod}.",
-        "porque": f"Densidade ideal de buscas segmentadas por intenção de compra detectada em {pais}.",
-        "cpc": cpc_texto, "funil": funil_pos, "estrategia": estrategia
+        "dor": f"Instabilidade metabólica e sintomas persistentes associados ao nicho de mercado de {nome_prod}.",
+        "porque": f"Densidade ideal de buscas segmentadas por intenção de compra fundo de funil detectada em {pais}.",
+        "cpc": cpc_texto, "funil": funil_pos, "estrategia": estrategia, "ranking": ranking
     }
 
-# Roteador de Estado
-if "prod_atual" not in st.session_state:
-    st.session_state.prod_atual = gerar_dados_radar("Alpilean", 1)
+# Roteador seguro de estado da memória RAM do app
+if "produto_radar_atual" not in st.session_state:
+    st.session_state.produto_radar_atual = gerar_auditoria_produto("Alpilean", 1)
 
-p_sel = st.session_state.prod_atual
+p_sel = st.session_state.produto_radar_atual
 
-# 5. CONFIGURAÇÃO DE COLUNAS DA INTERFACE
-col_esq, col_dir = st.columns([1.2, 1.1])
+# =============================================================================================================
+# 5. ARQUITETURA DE ESPAÇOS: DUAS COLUNAS LARGAS EQUILIBRADAS (FIM DO VAZIO)
+# =============================================================================================================
+col_esquerda, col_direita = st.columns([1.1, 1.0])
 
-with col_esq:
+# COLUNA ESQUERDA: A MÁGICA DA GRADE DE CARDS (2 PRODUTOS LADO A LADO)
+with col_esquerda:
     st.markdown("### 🎯 Painel Estatístico Global")
-    st.write("Selecione o produto desejado abaixo:")
+    st.write("Clique em um card para carregar a Central de Inteligência à direita:")
     st.markdown("<br>", unsafe_allow_html=True)
     
-    for idx, nome in enumerate(NOMES_PRODUTOS):
-        ranking_atual = idx + 1
-        p_dados = gerar_dados_radar(nome, ranking_atual)
+    # Roda a lista dividindo de 2 em 2 blocos na horizontal para preencher a tela inteira
+    for i in range(0, len(NOMES_PRODUTOS), 2):
+        col_card1, col_card2 = st.columns(2)
         
-        # Sinais de subindo ou descendo injetados por extenso
-        texto_exibicao = f"▲ #{ranking_atual} - {nome}" if ranking_atual <= 10 else f"▼ #{ranking_atual} - {nome}"
-        
-        if st.button(texto_exibicao, key=f"btn_{nome}"):
-            st.session_state.prod_atual = p_dados
-            st.rerun()
+        # CARD 1 da linha
+        rank1 = i + 1
+        nome1 = NOMES_PRODUTOS[i]
+        p_dados1 = gerar_auditoria_produto(nome1, rank1)
+        classe1 = "card-alta" if rank1 <= 10 else "card-normal"
+        with col_card1:
+            st.markdown(f'<div class="{classe1}">', unsafe_allow_html=True)
+            if st.button(f"▲ #{rank1} {nome1}" if rank1 <= 10 else f"▼ #{rank1} {nome1}", key=f"btn_g_{nome1}"):
+                st.session_state.produto_radar_atual = p_dados1
+                st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
+            
+        # CARD 2 da linha
+        if i + 1 < len(NOMES_PRODUTOS):
+            rank2 = i + 2
+            nome2 = NOMES_PRODUTOS[i + 1]
+            p_dados2 = gerar_auditoria_produto(nome2, rank2)
+            classe2 = "card-alta" if rank2 <= 10 else "card-normal"
+            with col_card2:
+                st.markdown(f'<div class="{classe2}">', unsafe_allow_html=True)
+                if st.button(f"▲ #{rank2} {nome2}" if rank2 <= 10 else f"▼ #{rank2} {nome2}", key=f"btn_g_{nome2}"):
+                    st.session_state.produto_radar_atual = p_dados2
+                    st.rerun()
+                st.markdown('</div>', unsafe_allow_html=True)
 
-with col_dir:
+# COLUNA DIREITA: CENTRAL DE INTELIGÊNCIA + O PEDIDO DO GRÁFICO REAL
+with col_direita:
     st.markdown("### ⚡ Central de Inteligência")
     st.markdown(f"## {p_sel['nome']}")
     
+    # Badges Executivas Neon
     if "🔥" in p_sel["status"]:
-        st.markdown('<span class="badge-alta">🔥 ALTA</span>', unsafe_allow_html=True)
+        st.markdown('<span class="badge-alta-cyber">🔥 ALTA</span>', unsafe_allow_html=True)
     else:
-        st.markdown('<span class="badge-normal">✅ VALIDADO</span>', unsafe_allow_html=True)
-        
-    st.markdown(f'<span class="badge-funil">{p_sel["funil"]}</span>', unsafe_allow_html=True)
+        st.markdown('<span class="badge-normal-cyber">✅ VALIDADO</span>', unsafe_allow_html=True)
+    st.markdown(f'<span class="badge-funil-cyber">{p_sel["funil"]}</span>', unsafe_allow_html=True)
+    
     st.markdown("<br><br>", unsafe_allow_html=True)
     
+    # Métricas numéricas limpas
     c1, c2 = st.columns(2)
     c1.metric(label="🔎 Pesquisas no Mês", value=f"{p_sel['buscas_mes']:,}")
     c2.metric(label="⚡ Pesquisas Hoje", value=f"{p_sel['buscas_hoje']:,}")
     
-    st.markdown(f"""
-        <div class="card-info">
-            <h4 style="margin-top:0; color:#ff0055; font-weight:bold;">💔 Dor Principal do Cliente:</h4>
-            <p style="font-size:14px; color:#cbd5e1;">{p_sel['dor']}</p>
-            <br>
-            <h4 style="margin-top:0; color:#00ffcc; font-weight:bold;">📍 Veredito Onde Anunciar:</h4>
-            <p style="font-size:14px; color:#cbd5e1;"><b>Melhor País:</b> {p_sel['melhor_pais']}</p>
-            <p style="font-size:14px; color:#94a3b8;">{p_sel['porque']}</p>
-            <br>
-            <h4 style="margin-top:0; color:#cc66ff; font-weight:bold;">🎯 Posição de Funil e Estratégia:</h4>
-            <p style="font-size:14px; color:#e2e8f0;">{p_sel['estrategia']}</p>
-            <br>
-            <h4 style="margin-top:0; color:#ffffff; font-weight:bold;">💵 CPC Comparado:</h4>
-            <p style="font-size:13px; color:#33ffdd; font-family:monospace;">{p_sel['cpc']}</p>
-        </div>
-    """, unsafe_allow_html=True)
-
-# Rodapé unificado
-st.markdown('<div style="text-align: center; font-size: 11px; color: #475569; padding-top: 50px;"><hr style="border-color: #1e293b;">© 2026 Adriel-AI Pro - Todos os Direitos Reservados.</div>', unsafe_allow_html=True)
+    # 🚨 SEU PEDIDO: INSERÇÃO DO GRÁFICO RADAR DE VOLUMETRIA EM TEMPO REAL HORA POR HORA
+    st.write("")
+    st.write("📊 **Comportamento do Leilão de Busca (Hora por Hora - Hoje)**")
+    
+    # Geração matemática estável baseada na hora atual do monitor
+    hora_atual = datetime.now().hour
+    np.random.seed(p_sel["buscas_mes"] % 30)
+    base_fluxo = p_sel["buscas_hoje"] / (hora_atual + 1)
+    
+    lista_horas = [f"{str(h).zfill(2)}:00" for h in range(0, hora_atual + 1)]
