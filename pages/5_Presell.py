@@ -2,14 +2,12 @@ import streamlit as st
 import pandas as pd
 import requests
 import json
-from datetime import datetime
 
 def buscar_imagem_produto_real(p_nome, api_key):
-    """Busca uma imagem real do produto no Google Images via Serper API"""
     if api_key.strip() != "":
         url_api = "https://serper.dev"
         headers = {'X-API-KEY': api_key.strip(), 'Content-Type': 'application/json'}
-        payload = json.dumps({"q": f"{p_nome} supplement bottle transparent", "gl": "us", "hl": "en"})
+        payload = json.dumps({"q": p_nome + " supplement bottle transparent", "gl": "us", "hl": "en"})
         try:
             resposta = requests.post(url_api, headers=headers, data=payload, timeout=3)
             if resposta.status_code == 200:
@@ -21,10 +19,8 @@ def buscar_imagem_produto_real(p_nome, api_key):
     return "https://unsplash.com"
 
 def main():
-    # 1. CONFIGURACAO PREMIUM DA INTERFACE SAAS 2026
     st.set_page_config(page_title="Pré-Sell Premium - AdrielAI", layout="wide", initial_sidebar_state="expanded")
 
-    # FORCADOR ULTRA LUXO CYBER-NEON COMPILADO
     estilo_luxo = "<style>"
     estilo_luxo += "header, [data-testid='stHeader'] {background-color: rgba(0,0,0,0) !important; background: transparent !important; display: none !important;}"
     estilo_luxo += "[data-testid='stAppViewContainer'] {padding-top: 0px !important;}"
@@ -43,7 +39,6 @@ def main():
     st.write("Gere páginas pontes profissionais e limpas em arquivos HTML prontos para subir no seu domínio.")
     st.markdown("---")
 
-    # CONFIGURAÇÃO DE ENTRADAS DE CONFIGURAÇÃO DO SISTEMA
     col_inputs1, col_inputs2 = st.columns(2)
     with col_inputs1:
         api_key_input = st.text_input("Insira sua API Key da Serper.dev para buscar a foto real:", type="password", value="")
@@ -56,7 +51,6 @@ def main():
     botao_gerar = st.button("⚡ CONSTRUIR E COMPILAR ARQUIVO PRÉ-SELL")
     st.markdown("---")
 
-    # 2. INFRAESTRUTURA INDISPENSÁVEL: DIRECIONAMENTO DE HOSPEDAGEM DE ELITE
     st.markdown("<h3 style='color:#00ffcc;'>🚀 PASSO 1: Registro de Domínio e Hospedagem de Elite</h3>", unsafe_allow_html=True)
     st.write("Antes de montar a sua estrutura, é fundamental possuir um domínio próprio profissional para evitar bloqueios severos de links clonados diretamente da plataforma gringa.")
     
@@ -72,52 +66,28 @@ def main():
         url_imagem_produto = buscar_imagem_produto_real(p_nome, api_key_input)
         
         headline_topo = "OFFICIAL BRAND VERIFICATION PORTAL"
-        subheadline_texto = f"You are being directed to the verified secure manufacturer page for <b>{p_nome}</b> supplement."
+        subheadline_texto = "You are being directed to the verified secure manufacturer page for " + p_nome + " supplement."
         texto_botao = "CONTINUE TO OFFICIAL WEBSITE NOW"
-        texto_rodape = f"Copyright 2026 - {p_nome} Review Portal. All Rights Reserved. This site is not part of the Google website or Google Inc. Additionally, this site is NOT endorsed by Google in any way."
+        texto_rodape = "Copyright 2026 - " + p_nome + " Review Portal. All Rights Reserved. This site is not part of the Google website or Google Inc. Additionally, this site is NOT endorsed by Google in any way."
 
         st.markdown("### 👁️ Pré-visualização da Estrutura Gerada:")
         
-        # Código HTML Puro da Página Ponte (Corrigido para evitar erro de interpolação)
-        codigo_html_puro = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Official Portal - Redirecting</title>
-    <style>
-        body {{ background-color: #f3f4f6; color: #1f2937; font-family: 'Segoe UI', Arial, sans-serif; display: flex; flex-direction: column; min-height: 100vh; margin: 0; align-items: center; justify-content: center; text-align: center; padding: 20px; }}
-        .container {{ background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); max-width: 500px; width: 100%; box-sizing: border-box; }}
-        .badge {{ background-color: #e0f2fe; color: #0369a1; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: bold; letter-spacing: 1px; display: inline-block; margin-bottom: 20px; text-transform: uppercase; }}
-        h1 {{ font-size: 24px; color: #111827; margin: 0 0 15px 0; font-weight: 800; line-height: 1.2; }}
-        p {{ font-size: 15px; color: #4b5563; margin-bottom: 25px; line-height: 1.5; }}
-        .product-img {{ max-width: 160px; height: auto; margin: 15px 0 25px 0; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }}
-        .cta-button {{ display: block; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #ffffff; text-decoration: none; padding: 16px 20px; border-radius: 8px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 12px rgba(34,197,94,0.3); transition: transform 0.2s; }}
-        .cta-button:hover {{ transform: scale(1.02); }}
-        footer {{ margin-top: 40px; font-size: 11px; color: #9ca3af; max-width: 600px; line-height: 1.4; padding: 0 20px; }}
-        footer a {{ color: #6b7280; text-decoration: underline; margin: 0 8px; }}
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="badge">{headline_topo}</div>
-        <h1>Attention Consumer</h1>
-        <p>{subheadline_texto}</p>
-        <img class="product-img" src="{url_imagem_produto}" alt="{p_nome}">
-        <a class="cta-button" href="{link_afiliado}">{texto_botao}</a>
-    </div>
-    <footer>
-        <p>{texto_rodape}</p>
-        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a></p>
-    </footer>
-</body>
-</html>"""
+        codigo_html_puro = "<!DOCTYPE html>\n<html lang='en'>\n<head>\n<meta charset='UTF-8'>\n<meta name='viewport' content='width=device-width, initial-scale=1.0'>\n<title>Official Portal - Redirecting</title>\n<style>\nbody { background-color: #f3f4f6; color: #1f2937; font-family: 'Segoe UI', Arial, sans-serif; display: flex; flex-direction: column; min-height: 100vh; margin: 0; align-items: center; justify-content: center; text-align: center; padding: 20px; }\n.container { background: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); max-width: 500px; width: 100%; box-sizing: border-box; }\n.badge { background-color: #e0f2fe; color: #0369a1; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: bold; letter-spacing: 1px; display: inline-block; margin-bottom: 20px; text-transform: uppercase; }\nh1 { font-size: 24px; color: #111827; margin: 0 0 15px 0; font-weight: 800; line-height: 1.2; }\np { font-size: 15px; color: #4b5563; margin-bottom: 25px; line-height: 1.5; }\n.product-img { max-width: 160px; height: auto; margin: 15px 0 25px 0; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }\n.cta-button { display: block; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #ffffff; text-decoration: none; padding: 16px 20px; border-radius: 8px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 12px rgba(34,197,94,0.3); transition: transform 0.2s; }\n.cta-button:hover { transform: scale(1.02); }\nfooter { margin-top: 40px; font-size: 11px; color: #9ca3af; max-width: 600px; line-height: 1.4; padding: 0 20px; }\nfooter a { color: #6b7280; text-decoration: underline; margin: 0 8px; }\n</style>\n</head>\n<body>\n<div class='container'>\n<div class='badge'>" + headline_topo + "</div>\n<h1>Attention Consumer</h1>\n<p>" + subheadline_texto + "</p>\n<img class='product-img' src='" + url_imagem_produto + "' alt='" + p_nome + "'>\n<a class='cta-button' href='" + link_afiliado + "'>" + texto_botao + "</a>\n</div>\n<footer>\n<p>" + texto_rodape + "</p>\n<p><a href='#'>Privacy Policy</a> | <a href='#'>Terms of Service</a> | <a href='#'>Contact Us</a></p>\n</footer>\n</body>\n</html>"
 
         c_mock1, c_mock2, c_mock3 = st.columns([1, 1.8, 1])
         with c_mock2:
-            st.markdown(f"""
-            <div style="background-color: #ffffff; padding: 30px; border-radius: 12px; text-align: center; color: #111827; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-                <span style="background-color: #e0f2fe; color: #0369a1; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: bold; letter-spacing: 1px;">{headline_topo}</span>
-                <h2 style="color: #111827 !important; font-size: 20px; margin-top:15px; margin-bottom:5px;">Attention Consumer</h2>
-                <p style="color: #4b5563 !important; font-size: 14px;">{subheadline_texto}</p>
-                <img src="{url_imagem_produto}" style="max-width: 130px; margin: 10px 0; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));"><br><br>
+            st.markdown("<div style='background-color: #ffffff; padding: 30px; border-radius: 12px; text-align: center; color: #111827; box-shadow: 0 4px 20px rgba(0,0,0,0.2);'><span style='background-color: #e0f2fe; color: #0369a1; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: bold; letter-spacing: 1px;'>" + headline_topo + "</span><h2 style='color: #111827 !important; font-size: 20px; margin-top:15px; margin-bottom:5px;'>Attention Consumer</h2><p style='color: #4b5563 !important; font-size: 14px;'>" + subheadline_texto + "</p><img src='" + url_imagem_produto + "' style='max-width: 130px; margin: 10px 0; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));'><br><br><a href='" + link_afiliado + "' target='_blank' style='display: block; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #ffffff !important; text-decoration: none; padding: 14px; border-radius: 8px; font-weight: bold; font-size: 15px;'>" + texto_botao + "</a></div>", unsafe_allow_html=True)
+
+        st.markdown("---")
+        st.markdown("### 📥 PASSO 4: Exportar Estrutura Pronta")
+        st.write("Clique no botão abaixo para baixar o arquivo `.html` limpo. Suba este arquivo direto na Hostinger para ativar sua página.")
+        
+        st.download_button(
+            label="💾 COMPILAR E BAIXAR ARQUIVO PRESELL.HTML",
+            data=codigo_html_puro,
+            file_name="presell_" + p_id + ".html",
+            mime="text/html"
+        )
+
+if __name__ == "__main__":
+    main()
