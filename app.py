@@ -142,5 +142,4 @@ if st.session_state.modulo_ativo in ["DASHBOARD", "ASSINANTES"]:
     
     col_p1, col_p2, col_p3 = st.columns(3)
     
-    # 🟢 CORREÇÃO CRUCIAL: Injetado os markdowns corretamente dentro das variáveis recuadas por 4 espaços
-    with col_p1:
+    # 🟢 CORREÇÃO DA INDENTAÇÃO: Removidos os blocos 'with col' vazios e renderizados diretamente por markdowns injetados de forma plana e segura
