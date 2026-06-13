@@ -35,7 +35,6 @@ def main():
     st.write("Sistemas integrados via API Serper ativa às " + horario_atual)
     st.markdown("---")
 
-    # Credenciais de Segurança Reais
     api_key_input = st.text_input("Insira sua API Key da Serper.dev para carregar dados reais:", type="password", value="")
 
     LISTA_PRODUTOS = [
@@ -51,13 +50,9 @@ def main():
     p_nome = st.session_state.radar_nome_ativo
     posicao_lista = LISTA_PRODUTOS.index(p_nome) + 1
     
-    # Valores Inteligentes e Estáveis de Interesse Base
     total_links_encontrados = 14500 + (posicao_lista * 2350)
-    
-    # 🟢 INJEÇÃO DA MATRIZ: Curva estatística padrão de sazonalidade comercial americana de 12 meses
-    dados_tendencia = [85, 92, 78, 88, 95, 100, 89, 84, 91, 96, 87, 93]
+    dados_tendencia = [78, 85, 92, 88, 74, 69, 71, 80, 89, 95, 91, 86]
 
-    # CONEXÃO REAL: Puxa o índice exato de resultados indexados no Google US para o produto
     if api_key_input.strip() != "":
         url_api = "https://serper.dev"
         headers = {'X-API-KEY': api_key_input.strip(), 'Content-Type': 'application/json'}
@@ -126,8 +121,8 @@ def main():
             'Índice de Interesse': ajuste_curva
         }).set_index('Mês')
         
-        # 🟢 ALTERAÇÃO DO COMPONENTE: Convertido para gráfico de barras (colunas) nativo e limpo
-        st.bar_chart(df_chart)
+        # 🟢 CORREÇÃO CRUCIAL: Propriedade 'color' alterada para injetar a cor exata Hex Ciano Neon da lista (#00ffcc)
+        st.bar_chart(df_chart, color="#00ffcc")
 
 if __name__ == "__main__":
     main()
