@@ -7,6 +7,16 @@ import random
 st.set_page_config(page_title="Adriel-AI Pro Elite", layout="wide", initial_sidebar_state="expanded")
 
 # =============================================================================================================
+# INITIALIZE STATE CONTROLS (Gerenciamento do Loop Infinito)
+# =============================================================================================================
+if "pesquisando" not in st.session_state:
+    st.session_state.pesquisando = False
+if "termos_gerados" not in st.session_state:
+    st.session_state.termos_gerados = []
+if "contador" not in st.session_state:
+    st.session_state.contador = 0
+
+# =============================================================================================================
 # 2. INJEÇÃO DE CSS "BLACK-PATTERN" (IDÊNTICO À SUA IMAGEM)
 # =============================================================================================================
 st.markdown("""
@@ -80,7 +90,10 @@ with st.sidebar:
     st.markdown("<p style='background:#0d1117; border:1px solid #00f2ff; padding:5px; border-radius:5px; text-align:center;'>MINERADOR ATIVO</p>", unsafe_allow_html=True)
     st.write("---")
     st.markdown("### 📡 STATUS")
-    st.markdown("<p style='color:#00f2ff;'>🟢 SCANNER SÍNCRONO OK</p>", unsafe_allow_html=True)
+    if st.session_state.pesquisando:
+        st.markdown("<p style='color:#00ff66;'>🟢 MINERAÇÃO EM TEMPO REAL AGUARDANDO PARADA</p>", unsafe_allow_html=True)
+    else:
+        st.markdown("<p style='color:#ff3333;'>🔴 MINERADOR PARADO</p>", unsafe_allow_html=True)
     st.write("---")
     st.markdown("### 🔌 REDES")
     for p in ["CLICKBANK", "BUYGOODS", "MAXWEB"]:
@@ -94,33 +107,59 @@ st.markdown('<h1 style="text-align:center; color:#00f2ff; font-weight:900; margi
 aff_id = st.text_input("🔑 SEU ID DE AFILIADO:", placeholder="Ex: adriel_pro")
 prod_alvo = st.text_input("💎 PRODUTO PARA MINERAR:", placeholder="Ex: Sugar Defender")
 
-if st.button("🚀 DISPARAR VARREDURA DE 100 TERMOS"):
-    if not aff_id:
-        st.error("❌ ERRO: Digite seu ID na lateral!")
-        st.stop()
+# Botões lado a lado de Start e Stop usando colunas
+col1, col2 = st.columns(2)
 
-    status_msg = st.empty()
-    container_blocos = st.container()
-    
-    # 📚 Lista de 100 variações reais
-    sufixos = ["official", "buy now", "discount", "reviews", "ingredients", "is it safe", "scam", "where to buy", "price", "order", "coupon", "promo", "results", "benefits", "vsl", "checkout", "shipping", "money back", "amazon", "sale"] * 5
-    
-    for i, suf in enumerate(sufixos):
-        termo = f"{prod_alvo} {suf}".upper()
-        link = f"https://{aff_id}.hop.clickbank.net/?tid={suf.lower()}"
-        
-        status_msg.markdown(f'<p style="color:#00f2ff; text-align:center;">⛏️ EXTRAINDO {i+1}/100: {termo}</p>', unsafe_allow_html=True)
-        
-        # 🎯 EXIBIÇÃO NO PADRÃO DA SUA IMAGEM
-        with container_blocos:
-            st.markdown(f"""
-            <div class="box-pattern">
-                <span class="termo-text">🔍 {termo}</span>
-                <span style="color:#00f2ff; font-family:monospace; font-size:12px;">STATUS: ✅ PRONTO</span>
-            </div>
-            """, unsafe_allow_html=True)
-            st.code(link) # Link com botão de copiar automático abaixo do bloco
-        
-        time.sleep(0.04)
+with col1:
+    if st.button("🚀 INICIAR PESQUISA INFINITA"):
+        if not aff_id:
+            st.error("❌ ERRO: Digite seu ID de afiliado!")
+        elif not prod_alvo:
+            st.error("❌ ERRO: Digite o produto alvo!")
+        else:
+            st.session_state.pesquisando = True
+            st.rerun()
 
-    status_msg.markdown('<div style="background:#00f2ff; color:#000; padding:15px; border-radius:10px; text-align:center; font-weight:900;">✅ VARREDURA CONCLUÍDA: 100 TERMOS CATALOGADOS</div>', unsafe_allow_html=True)
+with col2:
+    if st.button("🛑 PARAR PESQUISA"):
+        st.session_state.pesquisando = False
+        st.rerun()
+
+status_msg = st.empty()
+container_blocos = st.container()
+
+# Renderiza os termos guardados no histórico da sessão
+with container_blocos:
+    for item in reversed(st.session_state.termos_gerados):
+        st.markdown(f"""
+        <div class="box-pattern">
+            <span class="termo-text">🔍 {item['termo']}</span>
+            <span style="color:#00f2ff; font-family:monospace; font-size:12px;">STATUS: ✅ PRONTO (#{item['id']})</span>
+        </div>
+        """, unsafe_allow_html=True)
+        st.code(item['link'])
+
+# LÓGICA DO MOTOR DE LOOP CONTÍNUO
+if st.session_state.pesquisando:
+    sufixos = ["official", "buy now", "discount", "reviews", "ingredients", "is it safe", "scam", "where to buy", "price", "order", "coupon", "promo", "results", "benefits", "vsl", "checkout", "shipping", "money back", "amazon", "sale"]
+    
+    # Gera um novo termo baseado no contador infinito
+    suf = random.choice(sufixos)
+    st.session_state.contador += 1
+    
+    termo = f"{prod_alvo} {suf} {st.session_state.contador}".upper()
+    link = f"https://{aff_id}.hop.clickbank.net/?tid={suf.lower()}_{st.session_state.contador}"
+    
+    status_msg.markdown(f'<p style="color:#00f2ff; text-align:center; font-weight:bold; font-size:18px;">⛏️ MOTOR ATIVO — EXTRAINDO TERMO #{st.session_state.contador}: {termo}</p>', unsafe_allow_html=True)
+    
+    # Adiciona ao histórico da sessão
+    st.session_state.termos_gerados.append({"id": st.session_state.contador, "termo": termo, "link": link})
+    
+    # Delay controlado para simular processamento e não travar o navegador
+    time.sleep(0.4)
+    
+    # Força o Streamlit a recarregar a tela imediatamente rodando o loop de novo
+    st.rerun()
+else:
+    if st.session_state.contador > 0:
+        status_msg.markdown(f'<div style="background:#ff3333; color:#fff; padding:15px; border-radius:10px; text-align:center; font-weight:900;">🛑 MOTOR INTERROMPIDO TOTAL: {st.session_state.contador} TERMOS CATALOGADOS</div>', unsafe_allow_html=True)
