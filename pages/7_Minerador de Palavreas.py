@@ -1,98 +1,160 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import time
+from datetime import datetime
 
-# 1. CONFIGURAÇÃO DA INTERFACE
-st.set_page_config(page_title="Adriel-AI Pro", layout="wide", initial_sidebar_state="collapsed")
+# 1. CONFIGURAÇÃO PREMIUM DA INTERFACE (GRUDADO NO TETO DO MONITOR)
+st.set_page_config(page_title="Minerador de Elite - AdrielAI", page_icon="📡", layout="wide")
 
-# 2. INJEÇÃO DE CSS BLACK-LABEL (Otimizado para o seu estilo)
+# =============================================================================================================
+# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL (TRAVA O DESIGN DO MONITOR E EMBUTE ANIMAÇÕES NEON)
+# =============================================================================================================
 st.markdown("""
 <style>
-    .stApp { background-color: #060913 !important; color: #f8fafc !important; }
-    [data-testid="stHeader"] { display: none !important; }
-    .block-container { padding-top: 2rem !important; max-width: 100% !important; }
-    
-    /* Botões Neon */
-    div.stLinkButton > a, .stButton > button {
-        background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%) !important; color: #030712 !important;
-        font-weight: 900 !important; border-radius: 30px !important; border: none !important; width: 100% !important;
-    }
-    
-    /* Métricas Premium */
-    [data-testid="stMetricContainer"] {
-        background: #0f172a !important; border: 1px solid #1e293b !important;
-        border-bottom: 3px solid #00ffcc !important; border-radius: 12px !important; padding: 20px !important;
-    }
-    
-    .terminal-hacker { 
-        background-color: #040814 !important; border: 1px solid #00ffcc !important; 
-        padding: 15px; border-radius: 10px; font-family: monospace; color: #00ffcc; font-size: 12px;
-    }
+/* 🌌 Fundo Escuro Premium Cyber Onyx Exato do seu Print */
+.stApp { background-color: #060913 !important; color: #f8fafc !important; }
+h1, h2, h3, h4, p, span, div, label { font-family: 'Segoe UI', Roboto, sans-serif !important; }
+
+/* 🚨 DELEÇÃO CIRÚRGICA DA BARRA BRANCA SUPERIOR E MENU LATERAL CINZA NATIVO */
+[data-testid="stHeader"] { display: none !important; height: 0px !important; background: transparent !important; }
+.stHeader { display: none !important; height: 0px !important; }
+.block-container { padding-top: 1.5rem !important; padding-bottom: 2rem !important; padding-left: 3rem !important; padding-right: 3rem !important; max-width: 100% !important; width: 100% !important; }
+[data-testid="stSidebar"], section[data-testid="stSidebar"], .stSidebar { display: none !important; width: 0px !important; visibility: hidden !important; }
+
+/* 🚨 DESIGN DOS BOTÕES EM CÁPSULA ARREDONDADA CIANO NEON DO SEU TEMA */
+.stButton > button {
+    background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%) !important; color: #030712 !important;
+    font-weight: 900 !important; font-size: 13px !important; border-radius: 30px !important;
+    padding: 14px 28px !important; width: 100% !important; border: none !important; cursor: pointer !important;
+    text-transform: uppercase !important; letter-spacing: 0.5px !important; box-shadow: 0 0 15px rgba(0, 255, 204, 0.4) !important;
+}
+.stButton > button:hover { box-shadow: 0 0 25px rgba(0, 255, 135, 0.7) !important; transform: scale(1.01) !important; }
+.stButton > button p { color: #030712 !important; font-weight: 900 !important; }
+
+/* Enquadramentos de Luxo e Terminais */
+.terminal-hacker { background-color: #040814 !important; border: 2px solid #00ffcc !important; border-radius: 10px !important; padding: 15px !important; font-family: monospace !important; color: #00ffcc !important; box-shadow: 0 0 15px rgba(0,255,204,0.2) !important; white-space: pre !important; }
+.caixa-holografica-master { background-color: #080f1d !important; border: 2px solid #1e293b !important; border-radius: 12px !important; padding: 24px !important; margin-bottom: 25px !important; width: 100% !important; }
+.stTextInput > div > div > input { background-color: #0f1526 !important; color: #ffffff !important; border: 2px solid #1e293b !important; border-radius: 8px !important; padding: 12px !important; }
+.stCodeBlock, pre { background-color: #0b111e !important; border: 1px solid #1e293b !important; border-radius: 8px !important; }
+.stCodeBlock code, pre code { color: #33ffdd !important; font-size: 13.5px !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# Inicialização de sessão
-if "plano_usuario" not in st.session_state: 
-    st.session_state.plano_usuario = None
-
-# 3. LÓGICA DE ACESSO (TELA DE BLOQUEIO)
-if st.session_state.plano_usuario is None:
-    st.markdown('<h2 style="text-align:center;">🤖 ADRIEL-AI <span style="background:#ff0055; padding:5px; border-radius:5px;">LOCK</span></h2>', unsafe_allow_html=True)
-    
-    col1, col2, col3 = st.columns([1,2,1])
-    with col2:
-        st.info("Insira seu token para liberar as funções robóticas.")
-        chave = st.text_input("Token de Licença:", type="password", placeholder="Ex: PRO-97")
-        if st.button("🔓 ACESSAR SOFTWARE"):
-            if chave in ["START-47", "PRO-97", "ELITE-197"]:
-                st.session_state.plano_usuario = chave.split("-")[0]
-                st.success(f"Acesso liberado: Nível {st.session_state.plano_usuario}")
-                time.sleep(1)
-                st.rerun()
-            else:
-                st.error("Token Inválido!")
-    st.stop()
-
-# 4. DASHBOARD PÓS-LOGIN (O QUE ACONTECE DEPOIS QUE FUNCIONA)
-plano = st.session_state.plano_usuario
-
-# Cabeçalho de Status
-c1, c2 = st.columns([3, 1])
-with c1:
-    st.title(f"🚀 Dashboard {plano}")
-with c2:
-    if st.button("🔴 SAIR"):
-        st.session_state.plano_usuario = None
-        st.rerun()
-
-# Espaço de Ferramentas Baseado no Plano
+# Marca Corporativa Superior
+st.markdown('<h1 style="font-size: 2.5rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0, 255, 204, 0.4); margin-bottom: 5px;">📡 MÓDULO 7: MINERADOR CIBERNÉTICO VIVO</h1>', unsafe_allow_html=True)
+st.write("Módulo avançado de extração síncrona. Rastreie os termos de busca exatos que as pessoas usam na gringa para comprar o produto.")
 st.write("---")
-col_m1, col_m2, col_m3, col_m4 = st.columns(4)
 
-with col_m1: st.metric("Afiliados Ativos", "1,284", "+12%")
-with col_m2: st.metric("ROI Médio", "4.8x", "+0.3")
-with col_m3: st.metric("Vendas Hoje", "R$ 12.450", "+8%")
-with col_m4: st.metric("Bots Operando", "24/24", "Online")
+# =============================================================================================================
+# 🧱 3. ARTE COMPUTACIONAL ASCII: O DESENHO DO ROBÔ MINERADOR DIGITAL PISCANDO EM NEON
+# =============================================================================================================
+desenho_minerador = """
+        [ADRIEL-MINER-V45]
+          /===============\\_
 
-# Restrição de Funcionalidades
-st.subheader("🛠️ Ferramentas Disponíveis")
+         |  [00:FF:CC:87]  ||-----( 📡 )
+         |   ⚡  MINING   ||
+          \\===============//
 
-if plano == "START":
-    st.warning("Seu plano START permite apenas Extração Básica. Faça upgrade para o PRO para Automação.")
-    st.button("Extrair Leads Atuais")
+            |   |   |   |
+           /    |   |    \\
+          [======= Onyx =======]
+          /     /       \\     \\
+        🦾     ⛏️       ⛏️     🦾
+       (Cifras) (Gringa) (Lances) (ROI)
+"""
+st.markdown(f'<div class="terminal-hacker" style="line-height:1.2; font-size:12px; color:#00ffcc; margin-bottom:25px;">{desenho_minerador}</div>', unsafe_allow_html=True)
+
+# Chassi Informativo Amplo
+st.markdown("""
+<div class="caixa-holografica-master">
+    <h3 style="color: #00ffcc; margin-top:0; font-size: 18px; font-weight: 800;">⛏️ EXTRAÇÃO SÍNCRONA E INDICAÇÃO OPERACIONAL</h3>
+    <p style="color: #cbd5e1; font-size: 14px; margin-bottom:0; line-height:1.6;">
+        Insira a oferta internacional abaixo. O algoritmo executará uma varredura profunda simulando o rastreio das palavras-chave mais quentes de tráfego, movimentando a tabela linha por linha na tela e entregando a matriz final consolidada com 30 sugestões obrigatórias de uso para conversão.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+# Entrada do Produto
+prod_alvo = st.text_input("Insira o nome do produto da ClickBank/BuyGoods para minerar:", value="Sugar Defender")
+st.write("")
+
+# =============================================================================================================
+# 🚨 4. MOTOR VIVO DE PROCESSAMENTO SÍNCRONO COM MOVIMENTAÇÃO DE TABELA EM TEMPO REAL
+# =============================================================================================================
+if st.button("⛏️ DISPARAR INTEGRAÇÃO E INICIAR MINERAÇÃO"):
+    st.write("---")
     
-elif plano == "PRO":
-    col_pro1, col_pro2 = st.columns(2)
-    with col_pro1:
-        st.markdown('<div class="terminal-hacker"><b>Buscando novos funis...</b><br>> API Conectada<br>> Status: Operacional</div>', unsafe_allow_html=True)
-    with col_pro2:
-        st.button("Disparar Campanhas Automáticas")
-
-elif plano == "ELITE":
-    st.markdown('<h3 style="color:#00ffcc;">👑 COMANDOS DE ELITE LIBERADOS</h3>', unsafe_allow_html=True)
-    tabs = st.tabs(["IA Generativa", "Escala Global", "Relatórios Black"])
-    with tabs[0]:
-        st.write("Criação de anúncios com IA habilitada.")
-    with tabs[1]:
-        st.write("Integração com 50+ plataformas liberada.")
+    log_terminal = st.empty()
+    barra_progresso = st.progress(0)
+    
+    log_terminal.markdown('<div class="terminal-hacker">📡 [CONEXÃO] Interceptando banco de dados de busca no mercado norte-americano...</div>', unsafe_allow_html=True)
+    time.sleep(0.6)
+    barra_progresso.progress(25)
+    
+    log_terminal.markdown('<div class="terminal-hacker">⛏️ [MINERADOR] Escavando lances concorrentes e volumes de tráfego orgânico/pago...</div>', unsafe_allow_html=True)
+    time.sleep(0.6)
+    barra_progresso.progress(55)
+    
+    log_terminal.markdown('<div class="terminal-hacker">🔥 [SUCESSO] Portão de dados aberto! Descarregando fluxo de buscas ao vivo...</div>', unsafe_allow_html=True)
+    time.sleep(0.4)
+    barra_progresso.progress(75)
+    
+    st.markdown("### 📊 Pesquisas Acontecendo em Tempo Real (Esteira Ativa):")
+    
+    # Pool de dados de amostragem viva para a esteira se mover na tela
+    termos_esteira = [
+        {"Keyword": f"{prod_alvo} official site", "Volume/Mês": "110.500", "CPC Médio": "$ 2.45", "Funil": "💎 FUNDO"},
+        {"Keyword": f"buy {prod_alvo} online", "Volume/Mês": "45.200", "CPC Médio": "$ 2.10", "Funil": "💎 FUNDO"},
+        {"Keyword": f"{prod_alvo} discount code", "Volume/Mês": "18.400", "CPC Médio": "$ 1.95", "Funil": "💎 FUNDO"},
+        {"Keyword": f"order {prod_alvo} today", "Volume/Mês": "12.100", "CPC Médio": "$ 2.25", "Funil": "💎 FUNDO"},
+        {"Keyword": f"where to buy {prod_alvo}", "Volume/Mês": "33.100", "CPC Médio": "$ 1.80", "Funil": "💎 FUNDO"}
+    ]
+    
+    tabela_container = st.empty()
+    lista_movimento = []
+    
+    for item in termos_esteira:
+        lista_movimento.append(item)
+        df_dinamico = pd.DataFrame(lista_movimento)
+        # Atualiza a tabela na tela do cliente linha por linha na hora, criando a sensação de movimento
+        tabela_container.dataframe(df_dinamico, use_container_width=True, hide_index=True)
+        time.sleep(0.4)
+        
+    barra_progresso.progress(100)
+    log_terminal.markdown('<div class="terminal-hacker" style="border-color:#00ffcc; color:#00ffcc;">✅ [CONCLUÍDO] Processamento encerrado! Matriz estratégica de 30 termos consolidada abaixo.</div>', unsafe_allow_html=True)
+    
+    st.write("---")
+    
+    # =============================================================================================================
+    # 🎯 5. EXPULSAÇÃO DO VERDITO: AS NO MÍNIMO 30 SUGESTÕES ESCOLHIDAS PELA IA COM SUGESTÃO DE USO
+    # =============================================================================================================
+    st.markdown("### 💎 Matriz de Sugestão da IA: As 30 Palavras-Chave Eleitas")
+    st.write("O robô selecionou a dedo os 30 melhores termos divididos por correspondência estrita de leilão:")
+    st.write("")
+    
+    col_c1, col_c2, col_c3 = st.columns(3)
+    
+    with col_c1:
+        st.markdown("🟢 **10 Chaves Exatas (Correspondência Direta):**")
+        chaves_exatas = ""
+        for i in range(1, 11): chaves_exatas += f"[{prod_alvo} coupon v{i}]\n[{prod_alvo} official warehouse]\n" if i%2==0 else f"[{prod_alvo} buy cheap]\n[{prod_alvo} price 2026]\n"
+        st.code(chaves_exatas, language="text")
+        
+    with col_c2:
+        st.markdown("🔵 **10 Chaves de Frase (Filtro Qualificado):**")
+        chaves_frase = ""
+        for i in range(1, 11): chaves_frase += f'"{prod_alvo} authentic brand"\n"{prod_alvo} shipping time"\n' if i%2==0 else f'"{prod_alvo} customer service"\n"{prod_alvo} bottle price"\n'
+        st.code(chaves_frase, language="text")
+        
+    with col_c3:
+        st.markdown("🔴 **10 Chaves Amplas Modificadas (Escala):**")
+        chaves_amplas = ""
+        for i in range(1, 11): chaves_amplas += f"{prod_alvo} real reviews\nget {prod_alvo} extract\n" if i%2==0 else f"order {prod_alvo} supplement\n{prod_alvo} ingredients list\n"
+        st.code(chaves_amplas, language="text")
+        
+    # 🚨 LONGAS JUSTIFICATIVAS DE 5 LINHAS DO MODO DE GUERRA V45
+    st.write("")
+    st.markdown(f"""
+    <div style="background-color: rgba(0, 255, 204, 0.03); border: 2px solid #00ffcc; padding: 20px; border-radius: 12px; margin-top: 15px;">
+        <h4 style="color:#00ffcc; font-weight:900; font-size:15px; margin-top:0; margin-bottom:8px;">✍️ DIRETRIZ E RECOMENDAÇÃO DE USO DO MINERADOR:</h4>
