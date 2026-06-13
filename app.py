@@ -10,7 +10,7 @@ st.set_page_config(page_title="Adriel-AI Pro - Control Center", page_icon="🤖"
 
 CHAVE_MESTRA = "ONYX_MASTER_2026"
 
-# Inicialização de estados globais de navegação e segurança
+# Inicialização de estados globais de segurança e navegação
 if "modulo_ativo" not in st.session_state:
     st.session_state.modulo_ativo = "DASHBOARD"
 if "status_usuario" not in st.session_state:
@@ -55,22 +55,8 @@ st.markdown("""
 /* 🧠 PAINEL HUD HOLOGRÁFICO: A CARA DO ROBÔ INTELIGENTE */
 .hud-robot {
     background: radial-gradient(circle at 50% 50%, #0d1e3d 0%, #040814 100%) !important;
-    border: 2px dashed #00ffcc !important;
-    border-radius: 20px !important;
-    padding: 30px !important;
-    text-align: center !important;
-    box-shadow: 0 0 35px rgba(0, 255, 204, 0.15) !important;
-    margin-bottom: 25px !important;
-    animation: pulsaRobo 4s ease-in-out infinite;
-}
-@keyframes pulsaRobo {
-    0% { border-color: #00ffcc; box-shadow: 0 0 35px rgba(0, 255, 204, 0.15); }
-    50% { border-color: #00FF87; box-shadow: 0 0 50px rgba(0, 255, 135, 0.3); }
-    100% { border-color: #00ffcc; box-shadow: 0 0 35px rgba(0, 255, 204, 0.15); }
-}
-.hud-robot-title {
-    color: #00ffcc !important; font-size: 22px !important; font-weight: 900 !important;
-    letter-spacing: 4px !important; text-transform: uppercase !important; margin-bottom: 10px !important;
+    border: 2px dashed #00ffcc !important; border-radius: 20px !important; padding: 30px !important; text-align: center !important;
+    box-shadow: 0 0 35px rgba(0, 255, 204, 0.15) !important; margin-bottom: 25px !important;
 }
 
 /* TERMINAL DE MONITORAMENTO CIBERNÉTICO */
@@ -162,8 +148,15 @@ if st.session_state.status_usuario == "ADMIN" or st.session_state.api_key_global
 if st.session_state.modulo_ativo == "DASHBOARD":
     col_tit, col_online = st.columns(2)
     with col_tit: st.markdown('<h1 style="font-size: 2.2rem; font-weight: 900; color: #ffffff;">🤖 ADRIEL-AI PRO HOLOGRAPH</h1>', unsafe_allow_html=True)
-    with col_online: st.markdown('<p style="text-align: right; color: #00ffcc; font-size: 12px; font-weight: bold; margin-top: 15px;">● CORINGA ENGINE ONLINE (130+ CORES)</p>', unsafe_allow_html=True)
+    with col_online: st.markdown('<p style="text-align: right; color: #00ffcc; font-size: 12px; font-weight: bold; margin-top: 15px;">● CORINGA ENGINE ONLINE</p>', unsafe_allow_html=True)
     st.write("---")
 
-    # 🤖 O PAINEL COM A "CARA DO ROBÔ" QUE PULSA NA TELA
     st.markdown("""
+    <div class="hud-robot">
+        <div class="hud-robot-title">🌀 CORE SYSTEM HARDWARE v7.2 - LIGHTSPEED ACTIVE</div>
+        <p style="color: #94a3b8; font-size: 14px; max-width: 650px; margin: 0 auto; line-height:1.6;">
+            Varredura assíncrona ativa cruzando clusters dedicados Tier 1. Robô configurado para extração contínua e mineração de leilões ocultos no Google Ads US de forma imediata.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
