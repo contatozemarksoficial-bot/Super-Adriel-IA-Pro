@@ -4,56 +4,61 @@ import time
 import random
 
 # 1. CONFIGURAÇÃO DE ELITE
-st.set_page_config(page_title="Adriel-AI Elite v7", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="Linkador Pro - Adriel AI", layout="wide", initial_sidebar_state="expanded")
 
 # =============================================================================================================
-# 2. CSS BLACK-LABEL (VERDE NEON MATRIX)
+# 2. INJEÇÃO DE CSS BLACK-LABEL (VERDE NEON & BLINDAGEM CONTRA O BRANCO)
 # =============================================================================================================
 st.markdown("""
 <style>
-.stApp, [data-testid="stSidebar"], [data-testid="stHeader"], .stSidebar { background-color: #02040a !important; }
-section[data-testid="stSidebar"] { border-right: 2px solid #00ff87 !important; }
-section[data-testid="stSidebar"] * { color: #00ff87 !important; }
+/* 🌌 FUNDO PRETO ABSOLUTO */
+.stApp, [data-testid="stSidebar"], [data-testid="stHeader"] { background-color: #02040a !important; }
+section[data-testid="stSidebar"] { border-right: 2px solid #00ff87 !important; background-color: #060913 !important; }
 
-/* ROBÔ VERDE NEON GIGA */
+/* 🤖 ROBÔ VERDE NEON GIGA (MOVIMENTO ZOOM) */
 .robot-neon-verde {
     font-size: 110px; text-align: center;
-    color: #00ff87; filter: drop-shadow(0 0 30px #00ff87);
-    animation: zoom-frente 2.5s infinite ease-in-out;
+    color: #00ff87; filter: drop-shadow(0 0 25px #00ff87);
+    animation: zoom-pulse 2.5s infinite ease-in-out;
 }
-@keyframes zoom-frente { 
-    0%, 100% { transform: scale(0.9); opacity: 0.8; } 
-    50% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 50px #00ff87); } 
+@keyframes zoom-pulse {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.7; }
 }
 
-/* CHASSI DE LUXO */
+/* 💎 CHASSI COM BORDA VERDE NEON */
 .chassi-luxury {
     background: linear-gradient(145deg, #0f172a, #02040a);
     border: 2px solid #00ff87; border-radius: 20px;
     padding: 35px; text-align: center; margin-bottom: 25px;
+    box-shadow: 0 0 30px rgba(0, 255, 135, 0.15);
 }
 
-/* BOTÃO DE LINKAGEM */
+/* ⚡ BOTÃO NEON VERDE */
 .stButton > button {
     background: linear-gradient(135deg, #00ff87 0%, #00ffcc 100%) !important;
     color: #030712 !important; font-weight: 900 !important; border-radius: 50px !important;
     padding: 20px !important; width: 100%; border: none !important;
-    box-shadow: 0 0 30px rgba(0, 255, 135, 0.4) !important;
+    box-shadow: 0 0 25px rgba(0, 255, 135, 0.4) !important;
 }
 
+/* CARDS DE LINK */
+.card-link { background: #0f172a; border-left: 4px solid #00ff87; padding: 15px; border-radius: 8px; margin-bottom: 12px; }
 .terminal-hacker { background: #000; border-left: 5px solid #00ff87; color: #00ff87; padding: 15px; border-radius: 8px; font-family: monospace; }
-.card-sugestao { background: #0f172a; border-left: 4px solid #00ff87; padding: 15px; border-radius: 8px; margin-bottom: 12px; }
+div[data-baseweb="input"] { background-color: #060913 !important; border: 1.5px solid #00ff87 !important; border-radius: 8px; }
+input { background-color: #060913 !important; color: #ffffff !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# 3. SIDEBAR: INPUT DE AFILIADO PARA LINKAGEM
+# 3. SIDEBAR (CONFIGURAÇÃO DAS 4 PLATAFORMAS)
 with st.sidebar:
-    st.markdown("### 🔑 CONFIGURAÇÃO DE LINK")
-    aff_id = st.text_input("Seu ID de Afiliado (Hoplink):", placeholder="ex: adriel123")
-    plataforma_ativa = st.selectbox("Plataforma Alvo:", ["CLICKBANK", "BUYGOODS", "DIGISTORE24", "MAXWEB"])
+    st.markdown("### 🔑 LOGIN DE AFILIADO")
+    aff_id = st.text_input("Seu ID / Nickname:", placeholder="ex: adriel123")
+    plataforma = st.selectbox("Escolha a Plataforma:", ["CLICKBANK", "BUYGOODS", "DIGISTORE24", "MAXWEB"])
     st.write("---")
-    st.markdown("### 🔌 STATUS DE CONEXÃO")
-    st.markdown(f"<div style='color:#00ff87;'>🟢 {plataforma_ativa}: LINKADO</div>", unsafe_allow_html=True)
+    st.markdown(f"### 📡 STATUS: <span style='color:#00ff87;'>CONECTADO</span>", unsafe_allow_html=True)
+    st.info(f"O robô está pronto para gerar links para {plataforma}.")
 
 # 4. ÁREA PRINCIPAL
 st.markdown('<div class="robot-neon-verde">🤖</div>', unsafe_allow_html=True)
@@ -61,50 +66,51 @@ st.markdown('<h1 style="text-align:center; color:#00ff87; font-weight:900; margi
 
 with st.container():
     st.markdown('<div class="chassi-luxury">', unsafe_allow_html=True)
-    prod_alvo = st.text_input("💎 Nome do Produto na Plataforma:", value="Sugar Defender")
-    btn_link = st.button(f"🚀 MINERAR E GERAR LINKS PARA {plataforma_ativa}")
+    prod_alvo = st.text_input("💎 Nome do Produto (ex: Sugar Defender):", value="Sugar Defender")
+    btn_run = st.button(f"🚀 GERAR LINKS SÍNCRONOS PARA {plataforma}")
     st.markdown('</div>', unsafe_allow_html=True)
 
-# 5. MOTOR DE MINERAÇÃO E GERAÇÃO DE LINK
-if btn_link:
+# 5. MOTOR DE GERAÇÃO DE LINKS (4 PLATAFORMAS)
+if btn_run:
     if not aff_id:
-        st.error("⚠️ ERRO: Insira seu ID de Afiliado na lateral para gerar os links!")
+        st.error("❌ ERRO: Insira seu ID de Afiliado na lateral!")
         st.stop()
 
     status = st.empty()
-    esteira = st.empty()
+    lista_links = []
     
-    sufixos = ["official website", "buy now", "discount", "reviews", "ingredients", "price", "order online"]
+    # Sufixos para Tracking (TID)
+    sufixos = ["Official", "Discount", "Order_Now", "Reviews", "Promo_Page"]
     
-    minerados = []
-    for i, suf in enumerate(sufixos):
-        termo = f"{prod_alvo} {suf}".upper()
-        status.markdown(f'<div class="terminal-hacker">⛏️ [LINKANDO {plataforma_ativa}]: {termo}</div>', unsafe_allow_html=True)
+    for suf in sufixos:
+        status.markdown(f'<div class="terminal-hacker">⛏️ [LINKANDO {plataforma}]: Gerando rastro para {suf}...</div>', unsafe_allow_html=True)
         
-        # Lógica de Linkagem Automática (Exemplo ClickBank)
-        link_final = f"https://{aff_id}.hop.clickbank.net/?tid={suf.replace(' ', '_')}"
-        
-        minerados.append({
-            "TERMO": termo,
-            "LINK DE AFILIADO": link_final,
-            "STATUS": "✅ PRONTO"
-        })
-        esteira.dataframe(pd.DataFrame(minerados), use_container_width=True, hide_index=True)
+        # Lógica para as 4 Plataformas
+        if plataforma == "CLICKBANK":
+            link = f"https://{aff_id}.hop.clickbank.net/?tid={suf.lower()}"
+        elif plataforma == "BUYGOODS":
+            link = f"https://buygoods.com{aff_id}&prod={prod_alvo.lower()}&track={suf.lower()}"
+        elif plataforma == "DIGISTORE24":
+            link = f"https://digistore24.com{prod_alvo.lower()}/{aff_id}/{suf.lower()}"
+        elif plataforma == "MAXWEB":
+            link = f"https://maxweb.com{prod_alvo.lower()}/{aff_id}?tid={suf.lower()}"
+            
+        lista_links.append({"Termo": f"{prod_alvo} {suf}", "Link": link})
         time.sleep(0.5)
 
-    # 6. VERDITO E MATRIZ COM BOTÕES DE LINK
-    st.write("---")
-    st.markdown(f"""
-    <div style="background: rgba(0, 255, 135, 0.05); border: 2px solid #00ff87; padding: 25px; border-radius: 15px;">
-        <h3 style="color: #00ff87; margin:0;">🤖 AUDITORIA DE LINKAGEM CONCLUÍDA</h3>
-        <p style="color: white; margin-top:10px;">
-            O Robô vinculou seu ID <b>{aff_id}</b> aos termos minerados. Copie os links abaixo para suas campanhas.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    status.markdown('<div class="terminal-hacker" style="border-color:#00ff87; color:#00ff87;">✅ SUCESSO: Links de Afiliado gerados para as 4 plataformas.</div>', unsafe_allow_html=True)
 
-    st.subheader("📋 Matriz de Links de Elite")
-    for item in minerados:
-        with st.expander(f"🔗 {item['TERMO']}"):
-            st.code(item['LINK DE AFILIADO'])
-            st.markdown(f"[Cliqui aqui para testar o Link]( {item['LINK DE AFILIADO']} )")
+    # 6. ENTREGA FINAL
+    st.write("---")
+    st.subheader(f"📋 Seus Links Gerados ({plataforma})")
+    
+    cols = st.columns(2)
+    for idx, item in enumerate(lista_links):
+        with cols[idx % 2]:
+            st.markdown(f"""
+            <div class="card-link">
+                <b style="color:#00ff87;">🔗 {item['Termo'].upper()}</b><br>
+                <p style="color:#94a3b8; font-size:11px;">Copie o link abaixo para seu anúncio:</p>
+            </div>
+            """, unsafe_allow_html=True)
+            st.code(item['Link'])
