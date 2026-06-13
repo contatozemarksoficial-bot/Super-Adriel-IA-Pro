@@ -21,7 +21,6 @@ def main():
     estilo_luxo += ".stButton>button:hover {background-color: #00ffcc !important; color: #030712 !important; box-shadow: 0 0 25px #00ffcc, 0 0 45px rgba(0,255,204,0.4) !important; transform: scale(1.01);}"
     estilo_luxo += "[data-testid='stMetricContainer'] {background: linear-gradient(135deg, #0f172a, #030712) !important; border: 1px solid #1e293b !important; border-left: 4px solid #00ffcc !important; padding: 15px !important; border-radius: 10px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;}"
     estilo_luxo += "h1, h2, h3, h4, span, p, label {color: #f3f4f6 !important;}"
-    st style="color: #ffffff !important;"
     estilo_luxo += "[data-testid='stNotification'] {background-color: #0f172a !important; border: 1px solid #1e293b !important; border-radius: 10px !important;}"
     estilo_luxo += "</style>"
     st.markdown(estilo_luxo, unsafe_allow_html=True)
@@ -30,7 +29,7 @@ def main():
     st.write("Digite o nome de qualquer oferta internacional no terminal para que o robô realize a engenharia reversa operacional.")
     st.markdown("---")
 
-    # 2. TERMINAL DE ENTRADA SAAS NEON
+    # Terminal de Entrada
     st.markdown("<h3 style='color:#00ffcc;'>🛰️ Terminal de Varredura por Digitação</h3>", unsafe_allow_html=True)
     
     api_key_input = st.text_input("Insira sua API Key da Serper.dev para dados reais:", type="password", value="")
@@ -43,12 +42,10 @@ def main():
         fator = len(nome_prod)
         horario_atual = datetime.now().strftime("%H:%M:%S")
 
-        # Valores base inteligentes padrão (Fallback)
         total_anuncios_reais = 3
         concorrencia_status = "MODERADA"
-        status_cor = "#00ffcc"
 
-        # 🟢 CONEXÃO REAL: Conta a densidade de anúncios de afiliados rodando no Google US agora
+        # Conexão Real Serper API
         if api_key_input.strip() != "":
             url_api = "https://serper.dev"
             headers = {'X-API-KEY': api_key_input.strip(), 'Content-Type': 'application/json'}
@@ -57,12 +54,10 @@ def main():
                 resposta = requests.post(url_api, headers=headers, data=payload, timeout=4)
                 if resposta.status_code == 200:
                     data_json = resposta.json()
-                    # Conta quantos blocos de anúncios patrocinados (ads) estão ativos na primeira página
                     if "ads" in data_json:
                         total_anuncios_reais = len(data_json["ads"])
                         if total_anuncios_reais >= 4:
                             concorrencia_status = "EXTREMAMENTE ALTA (LEILÃO INFLACIONADO)"
-                            status_cor = "#ff0055"
                         else:
                             concorrencia_status = "BAIXA / OPORTUNIDADE EXCELENTE"
             except Exception:
