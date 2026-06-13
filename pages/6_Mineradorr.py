@@ -5,18 +5,32 @@ from bs4 import BeautifulSoup
 import time
 import urllib.parse
 
-# 1. CONFIGURAÇÃO PREMIUM DA INTERFACE (MENU RESTAURADO)
+# 1. CONFIGURAÇÃO PREMIUM DA INTERFACE
 st.set_page_config(page_title="Minerador Real - AdrielAI", page_icon="📡", layout="wide")
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL TEMA DE LUXO (SEM APAGAR O MENU NATIVO)
+# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL TEMA DE LUXO EXATO (ROBÔ HOLOGRÁFICO ATUALIZADO)
 # =============================================================================================================
 st.markdown("""
 <style>
-.stApp { background-color: #060913 !important; color: #f8fafc !important; }
-h1, h2, h3, h4, p, span, div, label { font-family: 'Segoe UI', Roboto, sans-serif !important; }
+/* Força todo o fundo do app e da sidebar para o tom Dark Blue */
+.stApp, [data-testid="stSidebar"], section[data-testid="stSidebar"], .stSidebar { 
+    background-color: #060913 !important; 
+    color: #f8fafc !important; 
+}
 
-/* Mantemos o espaçamento, mas removemos as regras que ocultavam o Header e a Sidebar */
+/* Remove a linha divisória feia e bordas claras da barra lateral */
+[data-testid="stSidebar"] section { background-color: #060913 !important; }
+[data-testid="stSidebar"] * { color: #cbd5e1 !important; font-family: 'Segoe UI', Roboto, sans-serif !important; }
+
+/* Estilização dos links e botões ativos dentro do menu lateral */
+[data-testid="stSidebar"] .st-emotion-cache-17l461b, [data-testid="stSidebar"] li {
+    background-color: #0c1324 !important;
+    border-radius: 8px !important;
+    margin-bottom: 5px !important;
+}
+
+h1, h2, h3, h4, p, span, div, label { font-family: 'Segoe UI', Roboto, sans-serif !important; }
 .block-container { padding-top: 2rem !important; padding-bottom: 2rem !important; padding-left: 3rem !important; padding-right: 3rem !important; max-width: 100% !important; width: 100% !important; }
 
 /* Botão em Cápsula Arredondada Ciano Neon */
@@ -32,35 +46,99 @@ h1, h2, h3, h4, p, span, div, label { font-family: 'Segoe UI', Roboto, sans-seri
 .terminal-hacker { background-color: #040814 !important; border: 2px solid #00ffcc !important; border-radius: 10px !important; padding: 15px !important; font-family: monospace !important; color: #00ffcc !important; box-shadow: 0 0 15px rgba(0,255,204,0.2) !important; white-space: pre !important; }
 .caixa-holografica-master { background-color: #080f1d !important; border: 2px solid #1e293b !important; border-radius: 12px !important; padding: 24px !important; margin-bottom: 25px !important; width: 100% !important; }
 .stTextInput > div > div > input { background-color: #0f1526 !important; color: #ffffff !important; border: 2px solid #1e293b !important; border-radius: 8px !important; padding: 12px !important; }
+
+/* ==========================================
+   🤖 CARD DO NOVO ROBÔ HOLOGRÁFICO ANIMADO
+   ========================================== */
+.container-robo {
+    background: linear-gradient(145deg, #040814, #0b132b) !important;
+    border: 2px solid #00ffcc !important;
+    border-radius: 16px !important;
+    padding: 25px !important;
+    text-align: center !important;
+    box-shadow: 0 0 25px rgba(0, 255, 204, 0.15) !important;
+    margin-bottom: 25px !important;
+    position: relative;
+    overflow: hidden;
+}
+.hud-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 255, 204, 0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #00ffcc;
+    border: 1px solid rgba(0, 255, 204, 0.3);
+}
+.corpo-robo {
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+    color: #00ffcc !important;
+    font-family: 'Courier New', monospace !important;
+    display: inline-block;
+    text-align: left;
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.6);
+    animation: flutuarRobo 3s ease-in-out infinite;
+}
+@keyframes flutuarRobo {
+    0% { transform: translateY(0px); text-shadow: 0 0 8px rgba(0, 255, 204, 0.6); }
+    50% { transform: translateY(-6px); text-shadow: 0 0 15px rgba(0, 255, 204, 0.9); }
+    100% { transform: translateY(0px); text-shadow: 0 0 8px rgba(0, 255, 204, 0.6); }
+}
+.legenda-robo {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #94a3b8;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
 </style>
 """, unsafe_allow_html=True)
+
+# Menu lateral oculto visualmente integrado ao tema escuro
+with st.sidebar:
+    st.markdown("<h4 style='color:#00ffcc;'>Navegação</h4>", unsafe_allow_html=True)
 
 st.markdown('<h1 style="font-size: 2.5rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0, 255, 204, 0.4); margin-bottom: 5px;">📡 MÓDULO 7: MINERADOR CIBERNÉTICO INTERNACIONAL</h1>', unsafe_allow_html=True)
 st.write("Módulo avançado de extração orgânica viva. Conexão direta com os servidores de busca da gringa sem custos de API.")
 st.write("---")
 
-desenho_minerador = """
-        [ADRIEL-MINER-REALTIME]
-          /===============\\_
+# 🟢 NOVO DESIGN: Estrutura simétrica futurista com animação pulsação ativa
+novo_design_robo = """
+          ⚡ [ONYX-AI CORE: v3.9] ⚡
+     .---------------------------------.
 
-         |  [00:FF:CC:87]  ||-----( 📡 CONNECTION: LIVE )
-         |   ⚡ DATA SCRAP  ||
-          \\===============//
+     |    [📡 CORE: ONLINE US/UK]      |
+     '---------------------------------'
+               _____     _____
 
-            |   |   |   |
-           /    |   |    \\
-          [======= Onyx =======]
-          /     /       \\     \\
-        🦾     ⛏️       ⛏️     🦾
+              |  O  |   |  O  |
+              \_____/   \_____/
+           .---------------------.
+
+           |  [=] [=] [=] [=] [=] |
+           '---------------------'
+              ______||______
+             /              \\
+            /  |  MINERANDO  |  \\
+
+           |   |  DATA LIVE  |   |
+           |   '-------------'   |
+           '---------------------'
+
+               |_|_|     |_|_|
+              (_____)   (_____)
 """
-st.markdown(f'<div class="terminal-hacker" style="line-height:1.2; font-size:11px; color:#00ffcc; margin-bottom:25px;">{desenho_minerador}</div>', unsafe_allow_html=True)
 
-st.markdown("""
-<div class="caixa-holografica-master">
-    <h3 style="color: #00ffcc; margin-top:0; font-size: 18px; font-weight: 800;">⛏️ MOTOR DE CAPTURA GEOGRÁFICA EM TEMPO REAL</h3>
-    <p style="color: #cbd5e1; font-size: 14px; margin-bottom:0; line-height:1.6;">
-        Insira o nome do produto gringo abaixo. O sistema disparará requisições HTTP seguras simulando um navegador americano, colhendo de forma legítima e em tempo real as variações exatas mais digitadas pelas pessoas na internet internacional.
-    </p>
+st.markdown(f"""
+<div class="container-robo">
+    <div class="hud-status">● LIVE STREAM</div>
+    <div class="corpo-robo"><pre style="background:transparent !important; border:none !important; color:#00ffcc !important; padding:0 !important; margin:0 !important;">{novo_design_robo}</pre></div>
+    <div class="legenda-robo">Motor de Varredura Geográfica Profunda Ativado</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -74,61 +152,67 @@ if st.button("⛏️ ACIONAR CAPTURA DE DADOS VIVOS DA GRINGA"):
         log_terminal = st.empty()
         barra_progresso = st.progress(0)
         
-        log_terminal.markdown(f'<div class="terminal-hacker">📡 [REDE] Disparando handshake TLS com servidores de busca internacionais (Região: US/UK)...</div>', unsafe_allow_html=True)
-        time.sleep(0.4)
-        barra_progresso.progress(30)
+        log_terminal.markdown(f'<div class="terminal-hacker">📡 [REDE] Inicializando matriz de escaneamento profundo multi-camadas...</div>', unsafe_allow_html=True)
+        time.sleep(0.3)
+        barra_progresso.progress(20)
         
-        log_terminal.markdown(f'<div class="terminal-hacker">⛏️ [SCRAPER] Extraindo matriz oculta de preenchimento automático para "{p_nome}"...</div>', unsafe_allow_html=True)
-        barra_progresso.progress(60)
-        
-        # Cabeçalhos completos de navegador real para evitar bloqueios por robôs
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Referer": "https://google.com"
+            "Accept-Language": "en-US,en;q=0.9"
         }
         
-        alfabeto_sementes = ["", " buy", " official", " reviews", " discount", " price", " ingredients", " complaints", " side effects", " order"]
-        resultados_reais = []
+        sementes_intencoes = ["", " buy", " official", " reviews", " discount", " price", " ingredients", " complaints", " side effects", " order", " website", " scam", " independent review", " coupon"]
+        letras_alfabeto = [f" {chr(i)}" for i in range(97, 123)]
+        todas_as_sementes = sementes_intencoes + letras_alfabeto
         
-        # Coleta os dados usando o endpoint xml do Google que é mais estável para servidores na nuvem
-        for letra in alfabeto_sementes:
-            query_gringa = f"{p_nome}{letra}"
+        resultados_reais = set()
+        contador_visual = st.empty()
+        
+        for idx, semente in enumerate(todas_as_sementes):
+            query_gringa = f"{p_nome}{semente}"
             query_codificada = urllib.parse.quote_plus(query_gringa)
-            
-            # Utilizando endpoint alternativo XML de alta estabilidade
             url_busca = f"https://google.com{query_codificada}"
             
             try:
-                resposta = requests.get(url_busca, headers=headers, timeout=7)
+                resposta = requests.get(url_busca, headers=headers, timeout=4)
                 if resposta.status_code == 200:
                     soup = BeautifulSoup(resposta.content, 'xml')
                     sugestoes = soup.find_all('suggestion')
                     for sug in sugestoes:
                         termo = sug.get('data')
-                        if termo and termo not in resultados_reais and p_nome.lower() in termo.lower():
-                            resultados_reais.append(termo)
-                time.sleep(0.1) # Delay cirúrgico para não ser bloqueado
+                        if termo and p_nome.lower() in termo.lower():
+                            resultados_reais.add(termo.lower().strip())
             except:
                 pass
-        
-        # Fallback de inteligência local caso o IP do seu servidor acabe na lista negra global do Google
-        if len(resultados_reais) < 5:
-            resultados_reais = [
-                f"{p_nome} official site", f"buy {p_nome} online", f"{p_nome} reviews 2026", 
-                f"where to buy {p_nome}", f"{p_nome} supplement", f"{p_nome} discount code", 
-                f"{p_nome} ingredients", f"{p_nome} side effects", f"order {p_nome}", f"does {p_nome} work"
-            ]
+            
+            porcentagem = int((idx / len(todas_as_sementes)) * 60) + 20
+            barra_progresso.progress(porcentagem)
+            contador_visual.markdown(f"⛏️ *Minerando variações... Encontrados {len(resultados_reais)} termos únicos até agora.*")
+            time.sleep(0.04)
             
         barra_progresso.progress(90)
-        log_terminal.markdown(f'<div class="terminal-hacker" style="border-color:#00ffcc; color:#00ffcc;">✅ [SUCESSO] Varredura orgânica concluída! {len(resultados_reais)} Termos reais colhidos de forma legítima!</div>', unsafe_allow_html=True)
+        contador_visual.empty()
         
+        topo_funil = []
+        meio_funil = []
+        fundo_funil = []
+        
+        gatilhos_fundo = ["buy", "official", "order", "price", "discount", "coupon", "website", "sale", "store", "cost", "where to buy"]
+        gatilhos_meio = ["reviews", "ingredients", "side effects", "complaints", "scam", "does it work", "work", "independent", "results", "pros and cons", "customer"]
+        
+        for termo in resultados_reais:
+            if any(palavra in termo for palavra in gatilhos_fundo):
+                fundo_funil.append(termo)
+            elif any(palavra in termo for palavra in gatilhos_meio):
+                meio_funil.append(termo)
+            else:
+                topo_funil.append(termo)
+                
+        log_terminal.markdown(f'<div class="terminal-hacker" style="border-color:#00ffcc; color:#00ffcc;">✅ [SUCESSO] Mineração Concluída! {len(resultados_reais)} Termos Orgânicos Separados por Intenção de Compra!</div>', unsafe_allow_html=True)
         st.write("---")
-        st.markdown("### 📊 Pesquisas Reais Acontecendo Agora:")
         
-        # Exibe em um DataFrame limpo integrado ao visual do app
-        df = pd.DataFrame(resultados_reais, columns=["Termos Encontrados"])
-        st.dataframe(df, use_container_width=True)
+        col1, col2, col3 = st.columns(3)
         
-        barra_progresso.progress(100)
+        with col1:
+            st.markdown("### 🔴 Topo de Funil (Curiosidade)")
+            if topo_funil:
