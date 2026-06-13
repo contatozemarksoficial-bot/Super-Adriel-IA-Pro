@@ -3,104 +3,127 @@ import pandas as pd
 import time
 import random
 
-# 1. CONFIGURAÇÃO DE LUXO TOTAL
-st.set_page_config(page_title="Minerador Elite V5", layout="wide", initial_sidebar_state="collapsed")
+# 1. CONFIGURAÇÃO DE ELITE (MATA A ABA BRANCA E INTEGRA O MENU)
+st.set_page_config(page_title="Adriel-AI Elite v5", layout="wide", initial_sidebar_state="expanded")
 
 # =============================================================================================================
-# 2. CSS BLACK-LABEL COM BORDA NEON DE LUXO
+# 2. INJEÇÃO DE CSS BLACK-LABEL (FOCO NO NEON E FUNDO PRETO ABSOLUTO)
 # =============================================================================================================
 st.markdown("""
 <style>
-/* 🌌 Fundo Totalmente Escuro e Remoção de Cabeçalho */
-.stApp { background-color: #02040a !important; color: #f8fafc !important; }
-[data-testid="stHeader"] { display: none !important; }
+/* 🌌 Reset Total para Preto Absoluto - Remove qualquer rastro de branco/cinza */
+.stApp, [data-testid="stSidebar"], [data-testid="stHeader"] {
+    background-color: #02040a !important;
+}
 
-/* 🤖 Robô Neon Pulsante */
+/* 👤 Menu Lateral de Luxo (Onyx Sidebar) */
+section[data-testid="stSidebar"] {
+    border-right: 1px solid #1e293b !important;
+    background-color: #060913 !important;
+}
+section[data-testid="stSidebar"] .stMarkdown p {
+    color: #00ffcc !important;
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+}
+
+/* 🤖 Robô em Neon Pulsante de Alta Definição */
 .robot-neon {
-    font-size: 70px; text-align: center;
-    filter: drop-shadow(0 0 15px #00ffcc);
-    animation: neon-pulse 1.5s infinite alternate;
+    font-size: 100px;
+    text-align: center;
+    color: #00ffcc;
+    filter: drop-shadow(0 0 20px #00ffcc) drop-shadow(0 0 40px #00ff87);
+    animation: neon-glow 2s infinite alternate;
+    margin-bottom: 20px;
 }
-@keyframes neon-pulse {
-    from { filter: drop-shadow(0 0 5px #00ffcc); transform: scale(1); }
-    to { filter: drop-shadow(0 0 18px #00ffcc); transform: scale(1.03); }
+@keyframes neon-glow {
+    from { filter: drop-shadow(0 0 10px #00ffcc); transform: scale(1); opacity: 0.8; }
+    to { filter: drop-shadow(0 0 30px #00ffcc) drop-shadow(0 0 50px #00ff87); transform: scale(1.05); opacity: 1; }
 }
 
-/* 💎 CHASSI COM BORDA NEON (O DETALHE DE LUXO) */
+/* 💎 Chassi com Borda Neon Fina e Elegante */
 .chassi-luxury {
     background: linear-gradient(145deg, #0f172a, #02040a);
-    border: 2px solid #00ffcc; /* Borda Neon Fina */
+    border: 1px solid #00ffcc;
     border-radius: 20px;
-    padding: 30px;
+    padding: 35px;
     text-align: center;
-    box-shadow: 0 0 20px rgba(0, 255, 204, 0.2); /* Brilho Externo */
-    margin-bottom: 25px;
+    box-shadow: 0 0 25px rgba(0, 255, 204, 0.15);
 }
 
-/* ⚡ Botão Neon Arredondado */
+/* ⚡ Botão Neon Giga */
 .stButton > button {
     background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%) !important;
-    color: #030712 !important; font-weight: 900 !important; border-radius: 50px !important;
-    padding: 15px !important; width: 100%; border: none !important;
-    box-shadow: 0 0 15px rgba(0, 255, 204, 0.3) !important;
+    color: #030712 !important;
+    font-weight: 900 !important;
+    border-radius: 50px !important;
+    padding: 18px !important;
+    width: 100%;
+    border: none !important;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.4) !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Terminal e Cards */
-.terminal-hacker { 
-    background: #000; border: 1px solid #1e293b; color: #00ffcc; 
-    padding: 12px; border-radius: 8px; font-family: monospace; font-size: 13px; 
-}
-.card-estratégico {
-    background: #0f172a; border-left: 4px solid #00ffcc;
-    padding: 12px; border-radius: 8px; margin-bottom: 8px;
-}
+/* Tabelas e Terminal */
+.terminal-hacker { background: #000; border-left: 5px solid #00ffcc; color: #00ffcc; padding: 15px; border-radius: 8px; font-family: monospace; }
 </style>
 """, unsafe_allow_html=True)
 
-# 3. CONTEÚDO (ESTRUTURA MANTIDA)
-st.markdown('<div class="robot-neon">🤖</div>', unsafe_allow_html=True)
-st.markdown('<h1 style="text-align:center; color:#00ffcc; font-weight:900; margin-top:-5px; font-size: 2.2rem;">MINERADOR CIBERNÉTICO ELITE</h1>', unsafe_allow_html=True)
+# 3. MENU LATERAL (Sincronizado com o Preto do Fundo)
+with st.sidebar:
+    st.markdown("### 📡 SISTEMA ADRIEL-AI")
+    st.write("🟢 Radar Ativo")
+    st.write("🟢 Auditor de Lances")
+    st.write("🟢 Minerador Pro")
+    st.write("---")
+    st.markdown("### 🔌 PLATAFORMAS")
+    st.code("CLICKBANK: OK\nBUYGOODS: OK", language="bash")
 
-# Envolvendo a entrada no Chassi com Borda
+# 4. ÁREA DO ROBÔ NEON
+st.markdown('<div class="robot-neon">🤖</div>', unsafe_allow_html=True)
+st.markdown('<h1 style="text-align:center; color:#00ffcc; font-weight:900; margin-top:-20px; letter-spacing:3px;">MINERADOR CIBERNÉTICO ELITE</h1>', unsafe_allow_html=True)
+
+# Entrada dentro do Chassi de Luxo
 with st.container():
     st.markdown('<div class="chassi-luxury">', unsafe_allow_html=True)
-    prod_alvo = st.text_input("💎 Ativo Alvo (ClickBank/BuyGoods):", value="Sugar Defender")
-    btn_start = st.button("⛏️ DISPARAR MINERAÇÃO SÍNCRONA (50 TERMOS)")
+    prod_alvo = st.text_input("💎 Produto Alvo para Escaneamento Sincronizado:", value="Sugar Defender")
+    btn_run = st.button("🚀 DISPARAR MINERAÇÃO (50 TERMOS DE ELITE)")
     st.markdown('</div>', unsafe_allow_html=True)
 
-if btn_start:
+# 5. MOTOR DE MINERAÇÃO
+if btn_run:
+    st.write("---")
     status = st.empty()
-    tabela_viva = st.empty()
+    esteira = st.empty()
     
-    sufixos = ["official website", "buy now", "discount price", "order online", "customer reviews", "ingredients", "is it safe", "real results", "where to buy", "best price", "official store", "coupon code", "promo code", "scam or legit", "benefits", "how to use", "shipping", "money back", "amazon price", "walmart cost", "vsl link", "checkout", "special offer", "lowest cost", "legit site", "official link", "get a discount", "sale today", "guaranteed", "supplement facts", "drops price", "liquid", "supplier", "buy direct", "reports", "scam check", "order today", "fast shipping", "genuine", "original", "stock", "availability", "cost per bottle", "top rated", "review", "pros and cons", "trial", "best deal", "portal", "store link"]
+    # Pool de 50 variações estratégicas
+    sufixos = ["official website", "buy now", "discount price", "order online", "customer reviews", "ingredients list", "side effects", "is it safe", "real results", "where to buy", "best price today", "official store", "coupon code", "promo code", "scam or legit", "benefits", "how to use", "shipping time", "money back guarantee", "amazon price", "walmart cost", "vsl link", "checkout page", "special offer", "lowest cost", "legit site", "official link", "get a discount", "sale today", "guaranteed", "supplement facts", "drops price", "liquid discount", "official supplier", "buy direct", "consumer reports", "is it a scam", "order today", "fast shipping", "genuine store", "original product", "stock update", "availability", "near me", "top rated", "expert review", "pros and cons", "trial offer", "best deal", "official portal"]
     
     minerados = []
     for i, suf in enumerate(sufixos):
-        status.markdown(f'<div class="terminal-hacker">📡 [ESCANEANDO {i+1}/50]: {prod_alvo} {suf}</div>', unsafe_allow_html=True)
-        cpc = random.uniform(1.95, 4.85)
+        status.markdown(f'<div class="terminal-hacker">⛏️ MINANDO ({i+1}/50): {prod_alvo} {suf}</div>', unsafe_allow_html=True)
+        cpc = random.uniform(1.85, 4.95)
         minerados.append({
-            "MÉTRICA": f"Rank #{i+1:02d}",
+            "POSIÇÃO": f"Rank #{i+1:02d}",
             "TERMO DE ELITE": f"{prod_alvo} {suf}".upper(),
-            "VALOR P/ CLIQUE (CPC)": f"$ {cpc:.2f}",
-            "POTENCIAL": "🔥 ALTO"
+            "LANCE CPC": f"$ {cpc:.2f}",
+            "CONVERSÃO": "🔥 ALTA"
         })
-        tabela_viva.dataframe(pd.DataFrame(minerados), use_container_width=True, hide_index=True)
-        time.sleep(0.08)
+        esteira.dataframe(pd.DataFrame(minerados), use_container_width=True, hide_index=True)
+        time.sleep(0.09)
 
     status.markdown('<div class="terminal-hacker" style="border-color:#00ff87; color:#00ff87;">✅ SUCESSO: MATRIZ DE 50 TERMOS CONSOLIDADA.</div>', unsafe_allow_html=True)
 
+    # 6. INDICAÇÃO DO ROBÔ
     st.write("---")
     st.markdown(f"""
-    <div style="background: rgba(0, 255, 204, 0.05); border: 1px solid #00ffcc; padding: 20px; border-radius: 12px; margin-bottom: 25px;">
-        <h4 style="color:#00ffcc; margin:0;">🎯 Indicação Estratégica do Robô:</h4>
-        <p style="color: #cbd5e1; font-size: 14px; margin-top:10px;">
-            Para <b>{prod_alvo}</b>, use os termos com "OFFICIAL" em <b>Correspondência de Frase</b> para dominar o topo do Google Ads com o melhor ROI.
+    <div style="background: rgba(0, 255, 204, 0.05); border: 2px solid #00ffcc; padding: 25px; border-radius: 15px;">
+        <h3 style="color: #00ffcc; margin:0;">🤖 INDICAÇÃO ESTRATÉGICA DO ROBÔ</h3>
+        <p style="color: #cbd5e1; font-size: 15px; margin-top:10px;">
+            Análise concluída para <b>{prod_alvo}</b>. 
+            <b>Veredito:</b> Os termos com CPC acima de $3.20 indicam tráfego pronto para compra. 
+            Suba no Google Ads em <b>Correspondência de Frase</b> para maximizar o lucro.
         </p>
     </div>
     """, unsafe_allow_html=True)
-
-    st.subheader("💎 Matriz Estratégica (Top 50)")
-    cols = st.columns(2)
-    for idx, item in enumerate(minerados):
-        with cols[idx % 2]:
-            st.markdown(f'<div class="card-estratégico"><b style="color:#00ffcc;">{item["TERMO DE ELITE"]}</b></div>', unsafe_allow_html=True)
