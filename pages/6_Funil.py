@@ -1,89 +1,94 @@
 import streamlit as st
 import time
 
-# 1. CONFIGURAÇÃO DE ELITE (ESTRUTURA STEALTH)
-st.set_page_config(page_title="Conexão Particular - Adriel AI", layout="wide", initial_sidebar_state="collapsed")
+# 1. CONFIGURAÇÃO DE ELITE (ESTRUTURA PRIVADA)
+st.set_page_config(page_title="Acesso Restrito - Adriel AI", layout="wide", initial_sidebar_state="collapsed")
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS BLACK-LABEL (MODO CONEXÃO PRIVADA)
+# 2. INJEÇÃO DE CSS BLACK-LABEL (LOGIN DE LUXO)
 # =============================================================================================================
 st.markdown("""
 <style>
 /* 🌌 FUNDO PRETO ABSOLUTO */
 .stApp, [data-testid="stHeader"] { background-color: #02040a !important; }
 
-/* 🤖 ROBÔ MONITORANDO (NEON VERDE PULSANTE) */
-.robot-security {
+/* 🤖 ROBÔ GUARDIÃO (NEON VERDE) */
+.robot-guard {
     font-size: 100px; text-align: center;
     filter: drop-shadow(0 0 20px #00ff87);
-    animation: pulse-secure 2s infinite alternate;
+    animation: pulse-glow 2s infinite alternate;
 }
-@keyframes pulse-secure {
-    from { opacity: 0.6; transform: scale(1); }
+@keyframes pulse-glow {
+    from { opacity: 0.7; transform: scale(1); }
     to { opacity: 1; transform: scale(1.05); }
 }
 
-/* 💎 CHASSI DE CONEXÃO PARTICULAR */
-.chassi-particular {
+/* 💎 CHASSI DE LOGIN PARTICULAR */
+.chassi-login {
     background: linear-gradient(145deg, #0f172a, #02040a);
-    border: 1px solid #00ff87;
+    border: 2px solid #00ff87;
     border-radius: 20px;
     padding: 40px;
-    box-shadow: 0 0 30px rgba(0, 255, 135, 0.1);
-    max-width: 800px;
+    box-shadow: 0 0 40px rgba(0, 255, 135, 0.15);
+    max-width: 500px;
     margin: 0 auto;
+    text-align: center;
 }
 
-/* ⚡ INPUTS CRIPTOGRAFADOS */
-div[data-baseweb="input"] { background-color: #060913 !important; border: 1.5px solid #00ff87 !important; border-radius: 8px; }
-input { background-color: #060913 !important; color: #00ff87 !important; font-family: monospace !important; }
+/* ⚡ INPUTS DE ELITE */
+div[data-baseweb="input"] { 
+    background-color: #060913 !important; 
+    border: 1.5px solid #00ff87 !important; 
+    border-radius: 50px !important; /* Arredondado de luxo */
+    padding: 5px 15px !important;
+}
+input { background-color: #060913 !important; color: #ffffff !important; }
 
-/* BOTÃO DE ATIVAÇÃO */
+/* BOTÃO DE ACESSO */
 .stButton > button {
     background: linear-gradient(135deg, #00ff87 0%, #00ffcc 100%) !important;
     color: #030712 !important; font-weight: 900 !important; border-radius: 50px !important;
     padding: 20px !important; width: 100%; border: none !important;
-    box-shadow: 0 0 25px rgba(0, 255, 135, 0.4) !important;
+    box-shadow: 0 0 30px rgba(0, 255, 135, 0.4) !important;
     letter-spacing: 2px;
+    text-transform: uppercase;
 }
 </style>
 """, unsafe_allow_html=True)
 
-# 3. INTERFACE DE CONEXÃO
-st.markdown('<div class="robot-security">🛡️</div>', unsafe_allow_html=True)
+# 3. INTERFACE DE LOGIN
+st.markdown('<div class="robot-guard">🤖</div>', unsafe_allow_html=True)
 st.markdown('<h1 style="text-align:center; color:#00ff87; font-weight:900; letter-spacing:3px;">CONEXÃO PARTICULAR</h1>', unsafe_allow_html=True)
-st.markdown('<p style="text-align:center; color:#576574; margin-top:-15px;">Configure suas credenciais de elite com criptografia ponta a ponta.</p>', unsafe_allow_html=True)
+st.markdown('<p style="text-align:center; color:#576574; margin-top:-15px;">Autenticação síncrona Adriel-AI Elite v7</p>', unsafe_allow_html=True)
 
-with st.container():
-    st.markdown('<div class="chassi-particular">', unsafe_allow_html=True)
+# Centralização do Chassi
+col_center = st.columns([1, 2, 1])[1]
+
+with col_center:
+    st.markdown('<div class="chassi-login">', unsafe_allow_html=True)
     
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("<p style='color:#00ff87; margin-bottom:5px;'>🔑 TOKEN DE API (ADS):</p>", unsafe_allow_html=True)
-        api_key = st.text_input("api_key", type="password", label_visibility="collapsed")
-    with col2:
-        st.markdown("<p style='color:#00ff87; margin-bottom:5px;'>🆔 NICKNAME AFILIADO:</p>", unsafe_allow_html=True)
-        aff_nick = st.text_input("aff_nick", placeholder="Ex: adriel_pro", label_visibility="collapsed")
-    
-    st.write("")
-    st.markdown("<p style='color:#00ff87; margin-bottom:5px;'>🌐 PLATAFORMA DE TUNELAMENTO:</p>", unsafe_allow_html=True)
-    platform = st.selectbox("platform", ["CLICKBANK", "BUYGOODS", "DIGISTORE24", "MAXWEB"], label_visibility="collapsed")
+    # Campos de Credenciais
+    email = st.text_input("E-mail de Operador:", placeholder="seu@email.com")
+    senha = st.text_input("Senha Criptografada:", type="password", placeholder="••••••••")
     
     st.write("")
-    if st.button("🚀 ESTABELECER CONEXÃO SEGURA"):
-        with st.spinner("Sincronizando com o servidor..."):
-            time.sleep(2)
-            st.markdown(f"""
-            <div style="background:rgba(0,255,135,0.1); border:1px solid #00ff87; padding:15px; border-radius:10px; color:#00ff87; text-align:center; font-family:monospace;">
-                ✅ CONEXÃO ESTABELECIDA!<br>
-                Uplink: {platform}<br>
-                Sinal: 100% Criptografado
-            </div>
-            """, unsafe_allow_html=True)
-            st.balloons()
+    
+    # Botão de Login
+    if st.button("🔓 ACESSAR TERMINAL"):
+        if email == "admin" and senha == "admin": # Defina aqui seu login real
+            with st.spinner("Validando criptografia..."):
+                time.sleep(1.5)
+                st.success("✅ ACESSO LIBERADO!")
+                time.sleep(1)
+                st.session_state['login_concluido'] = True
+                st.rerun()
+        elif email == "" or senha == "":
+            st.warning("⚠️ Insira suas credenciais.")
+        else:
+            st.error("❌ Credenciais Inválidas. Acesso Negado.")
     
     st.markdown('</div>', unsafe_allow_html=True)
 
-# 4. RODAPÉ DE SEGURANÇA
+# 4. RODAPÉ
 st.write("")
-st.markdown('<p style="text-align:center; color:#1e293b; font-size:12px;">🔒 Seus dados não são armazenados em servidores externos. Conexão local ativa.</p>', unsafe_allow_html=True)
+st.markdown('<p style="text-align:center; color:#1e293b; font-size:11px;">🔒 Protocolo de segurança ativa. IP rastreado para fins de auditoria.</p>', unsafe_allow_html=True)
