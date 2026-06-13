@@ -2,113 +2,111 @@ import streamlit as st
 import pandas as pd
 import time
 
-# 1. CONFIGURAÇÃO DE ELITE
-st.set_page_config(page_title="Adriel-AI Pro: Minerador de Luxo", layout="wide")
+# 1. CONFIGURAÇÃO DE LUXO (SEM BORDAS E FUNDO DARK)
+st.set_page_config(page_title="Adriel-AI Elite", layout="wide", initial_sidebar_state="collapsed")
 
-# 2. CSS BLACK-LABEL LUXURY
+# 2. CSS "BLACK LABEL" - REMOVE BORDAS BRANCAS E APLICA ESTILO LUXO
 st.markdown("""
 <style>
-    .stApp { background-color: #030712 !important; color: #f8fafc !important; }
+    /* Fundo Total Escuro sem bordas brancas */
+    .stApp { background-color: #060913 !important; color: #f8fafc !important; }
     [data-testid="stHeader"] { display: none !important; }
-    
-    .terminal-luxo { 
-        background: #000; border: 1px solid #00ffcc; border-radius: 12px; 
-        padding: 20px; font-family: 'Courier New', monospace; color: #00ffcc;
-        box-shadow: 0 0 20px rgba(0, 255, 204, 0.1); margin-bottom: 25px;
+    .block-container { padding-top: 2rem !important; }
+
+    /* Container de Luxo do Minerador */
+    .minerador-chassi {
+        background: linear-gradient(145deg, #0f172a, #030712);
+        border: 1px solid #1e293b;
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(0, 255, 204, 0.1);
+        margin-bottom: 30px;
     }
-    
+
+    /* Ícone de Luxo com Animação Glow */
+    .minerador-icon {
+        font-size: 80px;
+        filter: drop-shadow(0 0 15px #00ffcc);
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.05); opacity: 1; }
+        100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    /* Botão Neon Redondo */
     .stButton > button {
         background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%) !important;
-        color: #030712 !important; font-weight: 900 !important; border-radius: 50px !important;
-        padding: 15px 40px !important; border: none !important; width: 100%;
-        text-transform: uppercase; letter-spacing: 2px;
+        color: #030712 !important;
+        font-weight: 900 !important;
+        border-radius: 50px !important;
+        padding: 18px 45px !important;
+        border: none !important;
+        letter-spacing: 1px;
+        box-shadow: 0 0 20px rgba(0, 255, 204, 0.4) !important;
     }
-    
-    .card-sugestao {
-        background: rgba(15, 23, 42, 0.8); border: 1px solid #1e293b;
-        border-radius: 10px; padding: 15px; margin-bottom: 10px;
+
+    /* Terminal Hacker Limpo */
+    .terminal-luxo {
+        background: #040814;
+        border-left: 4px solid #00ffcc;
+        color: #00ffcc;
+        padding: 15px;
+        font-family: monospace;
+        border-radius: 8px;
+        margin: 15px 0;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# 3. DESENHO DO MINERADOR ASCII
-minerador_art = """
-      ⚡ [ADRIEL MINER LUXURY V4.0] ⚡
-             
-             HHH   HHH
-             HHHH HHHH
-             HHHHHHHHH      ( 💎 )
-             HHHH HHHH     --/
-             HHH   HHH    /
-              \\_______/  /
+# 3. INTERFACE DE LUXO
+st.markdown('<h1 style="text-align:center; color:#00ffcc; font-weight:900;">📡 MINERADOR CIBERNÉTICO ELITE</h1>', unsafe_allow_html=True)
 
-               |     |--
-      _________|_____|_________
+# Chassi do Minerador (Substituindo o ASCII feio por design de Luxo)
+st.markdown(f'''
+<div class="minerador-chassi">
+    <div class="minerador-icon">🤖</div>
+    <h2 style="color: #ffffff; margin-top:10px;">ADRIEL-MINER V5 PRO</h2>
+    <p style="color: #576574;">Sincronizando com redes de tráfego internacional...</p>
+</div>
+''', unsafe_allow_html=True)
 
-     |  [PRODUTO: BUSCANDO...] |
-     |_________________________|
-        /     /       \     \ 
-       🦾    ⛏️       ⛏️    🦾
-"""
+prod_alvo = st.text_input("💎 Produto Alvo (Ex: Sugar Defender):", value="Sugar Defender")
 
-st.markdown(f'<div class="terminal-luxo" style="text-align:center; line-height:1.1;">{minerador_art}</div>', unsafe_allow_html=True)
-st.title("📡 Minerador de Luxo: Extração Síncrona")
-
-# Entrada do Produto
-prod_alvo = st.text_input("Qual produto vamos minerar hoje?", value="Sugar Defender")
-
-if st.button("⛏️ INICIAR MINERAÇÃO DE ALTA PERFORMANCE"):
-    st.write("---")
-    
+if st.button("⛏️ INICIAR MINERAÇÃO SÍNCRONA"):
     status = st.empty()
     esteira = st.empty()
-    progresso = st.progress(0)
     
-    # Pool de 30 variações estratégicas (Sufixos de alta conversão)
-    sufixos_elite = [
-        "official website", "buy now", "discount price", "order online", "customer reviews", 
-        "ingredients list", "side effects", "is it safe", "real results", "where to buy",
-        "best price today", "official store", "coupon code", "promo 2024", "scam or legit",
-        "benefits", "how to use", "shipping time", "money back guarantee", "amazon price",
-        "walmart cost", "vsl link", "checkout page", "special offer", "lowest cost",
-        "legit site", "official link", "get a discount", "sale today", "guaranteed"
+    # 30 Termos Estratégicos
+    termos = [
+        "official website", "discount store", "buy online", "reviews 2024", "ingredients", 
+        "is it safe", "side effects", "order now", "price check", "best offer",
+        "official link", "customer results", "real reviews", "money back", "coupon code",
+        "promo", "scam check", "where to buy", "shipping time", "sale",
+        "lowest cost", "original store", "benefits", "vsl link", "checkout",
+        "how to use", "daily dose", "guarantee", "secure order", "bonus"
     ]
     
-    dados_minerados = []
+    lista_movimento = []
     
-    # 4. PESQUISA EM TEMPO REAL (ESTEIRA VIVA)
-    for i, suf in enumerate(sufixos_elite):
-        status.markdown(f'<div class="terminal-luxo">⛏️ ESCANEANDO: {prod_alvo} {suf}...</div>', unsafe_allow_html=True)
+    for i, suf in enumerate(termos):
+        status.markdown(f'<div class="terminal-luxo">⛏️ EXTRAINDO: {prod_alvo} {suf}</div>', unsafe_allow_html=True)
         
-        nova_linha = {
-            "Termo Encontrado": f"{prod_alvo} {suf}".lower(),
-            "Volume Est.": f"{12000 // (i+1)} searches",
-            "Nível de Intenção": "💎 FUNDO DE FUNIL"
-        }
-        dados_minerados.append(nova_linha)
+        lista_movimento.append({
+            "MÉTRICA": f"Rank #{i+1}",
+            "TERMO DE ELITE": f"{prod_alvo} {suf}".upper(),
+            "INTENÇÃO": "💎 COMPRA IMEDIATA",
+            "POTENCIAL": "🔥 98%"
+        })
         
-        # Atualiza a tabela na tela linha por linha
-        esteira.dataframe(pd.DataFrame(dados_minerados), use_container_width=True, hide_index=True)
-        
-        progresso.progress((i + 1) / len(sufixos_elite))
-        time.sleep(0.2) # Velocidade síncrona
-        
-    status.markdown('<div class="terminal-luxo" style="border-color:#00ff87; color:#00ff87;">✅ SUCESSO: 30 Termos de Luxo Consolidados!</div>', unsafe_allow_html=True)
-    
-    # 5. SUGESTÃO DO ROBÔ (30 ESCOLHIDAS COM SUGESTÃO DE USO)
-    st.write("---")
-    st.header("🎯 Matriz Estratégica: 30 Sugestões do Robô")
-    
-    cols = st.columns(2)
-    for idx, item in enumerate(dados_minerados):
-        with cols[idx % 2]:
-            st.markdown(f"""
-            <div class="card-sugestao">
-                <b style="color:#00ffcc;">#{idx+1} {item['Termo Encontrado'].upper()}</b><br>
-                <small>💡 <b>Sugestão de uso:</b> Usar em <i>Correspondência de Frase</i> no Google Ads para dominar o topo da página.</small>
-            </div>
-            """, unsafe_allow_html=True)
+        # Esteira fluida em tempo real
+        esteira.dataframe(pd.DataFrame(lista_movimento), use_container_width=True, hide_index=True)
+        time.sleep(0.2)
 
-    # Botão de Exportação
-    csv = pd.DataFrame(dados_minerados).to_csv(index=False).encode('utf-8')
-    st.download_button("📥 Baixar Matriz para Google Ads", csv, "mineracao_elite.csv", "text/csv")
+    status.markdown('<div class="terminal-luxo" style="border-left-color:#00ff87; color:#00ff87;">✅ MATRIZ DE 30 TERMOS CONSOLIDADA COM SUCESSO.</div>', unsafe_allow_html=True)
+    
+    # Sugestão de Uso Robótica
+    st.markdown("### 🤖 RECOMENDAÇÃO DO ROBÔ")
+    st.info(f"Para o produto **{prod_alvo}**, utilize esses termos em 'Correspondência de Frase'. Foque nos termos que contêm 'OFFICIAL' para garantir o maior ROI da operação.")
