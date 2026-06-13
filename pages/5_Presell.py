@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import requests
 import json
-import base64
 from datetime import datetime
 
 def buscar_imagem_produto_real(p_nome, api_key):
@@ -50,8 +49,7 @@ def main():
         api_key_input = st.text_input("Insira sua API Key da Serper.dev para buscar a foto real:", type="password", value="")
         produto_nome = st.text_input("Nome exato do produto gringo:", value="Sugar Defender")
     with col_inputs2:
-        # 🟢 INJETADO SEU LINK REAL DE INDICAÇÃO DA HOSTINGER POR PADRÃO
-        link_afiliado_hostinger = st.text_input("Insira seu link de afiliado da HOSTINGER (Indicação):", value="https://www.hostinger.com/br?REFERRALCODE=VBMCONTAT7WC")
+        link_afiliado_hostinger = st.text_input("Insira seu link de afiliado da HOSTINGER (Indicação):", value="https://hostinger.com")
         link_afiliado = st.text_input("Insira seu link de afiliado do PRODUTO (ClickBank/Digistore):", value="https://clickbank.net")
 
     st.write("")
@@ -62,7 +60,7 @@ def main():
     st.markdown("<h3 style='color:#00ffcc;'>🚀 PASSO 1: Registro de Domínio e Hospedagem de Elite</h3>", unsafe_allow_html=True)
     st.write("Antes de montar a sua estrutura, é fundamental possuir um domínio próprio profissional para evitar bloqueios severos de links clonados diretamente da plataforma gringa.")
     
-    url_afiliado_final = link_afiliado_hostinger.strip() if link_afiliado_hostinger.strip() != "" else "https://www.hostinger.com/br?REFERRALCODE=VBMCONTAT7WC"
+    url_afiliado_final = link_afiliado_hostinger.strip() if link_afiliado_hostinger.strip() != "" else "https://hostinger.com"
     
     st.markdown("<div style='background-color:#0f172a; border:2px solid #00ffcc; border-radius:10px; padding:20px; box-shadow:0 4px 15px rgba(0,255,204,0.15); margin-bottom:20px;'>💬 <b style='color:#00ffcc; font-size:1.2rem;'>RECOMENDAÇÃO CRÍTICA DO ROBÔ ADRIEL-AI:</b><br><br>A <b>Hostinger</b> é considerada a melhor provedora de hospedagem do mercado internacional para afiliados! Ela oferece servidores Cloud de altíssima velocidade, criador de sites intuitivo com IA, suporte premium 24 horas por dia em português e certificados SSL gratuitos inclusos para manter suas páginas pontes 100% seguras contra falhas publicitárias.<br><br><a href='" + url_afiliado_final + "' target='_blank' style='display:inline-block; background-color:#00ffcc; color:#030712; padding:12px 25px; border-radius:6px; font-weight:bold; text-decoration:none; box-shadow:0 0 10px #00ffcc;'>👉 CLIQUE AQUI PARA ADQUIRIR SUA HOSPEDAGEM NA HOSTINGER COM DESCONTO</a></div>", unsafe_allow_html=True)
     st.markdown("---")
@@ -71,7 +69,6 @@ def main():
         p_nome = produto_nome.strip().title()
         p_id = p_nome.replace(" ", "_").lower()
         
-        # Dispara o buscador de fotos
         url_imagem_produto = buscar_imagem_produto_real(p_nome, api_key_input)
         
         headline_topo = "OFFICIAL BRAND VERIFICATION PORTAL"
@@ -81,7 +78,7 @@ def main():
 
         st.markdown("### 👁️ Pré-visualização da Estrutura Gerada:")
         
-        # Código HTML Puro da Página Ponte
+        # Código HTML Puro da Página Ponte (Corrigido para evitar erro de interpolação)
         codigo_html_puro = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,14 +100,14 @@ def main():
 </head>
 <body>
     <div class="container">
-        <div class="badge">{{headline_topo}}</div>
+        <div class="badge">{headline_topo}</div>
         <h1>Attention Consumer</h1>
-        <p>{{subheadline_texto}}</p>
-        <img class="product-img" src="{{url_imagem_produto}}" alt="{{p_nome}}">
-        <a class="cta-button" href="{{link_afiliado}}">{{texto_botao}}</a>
+        <p>{subheadline_texto}</p>
+        <img class="product-img" src="{url_imagem_produto}" alt="{p_nome}">
+        <a class="cta-button" href="{link_afiliado}">{texto_botao}</a>
     </div>
     <footer>
-        <p>{{texto_rodape}}</p>
+        <p>{texto_rodape}</p>
         <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a></p>
     </footer>
 </body>
