@@ -59,7 +59,6 @@ def main():
             pool_oportunidades = []
             nomes_filtrados = set()
             
-            # 🟢 AS ISCAS DE ROTAÇÃO: Toda vez que clica, o robô escolhe um termo diferente para varrer mercados novos
             iscas_americanas = [
                 "buy discount code coupon official store shipping reviews",
                 "best new dietary supplement for weight loss energy buy online",
@@ -79,9 +78,8 @@ def main():
                         if "ads" in data_json:
                             for ad in data_json["ads"]:
                                 title = ad.get("title", "")
-                                clean_name = title.split("-")[0].split("|")[0].split("®")[0].split("©")[0].strip()
+                                clean_name = title.split("-").split("|").split("®").split("©").strip()
                                 
-                                # Filtro de Isolamento Inteligente Alargado
                                 if len(clean_name.split()) <= 3 and clean_name.lower() not in ["google", "shop", "discount", "coupon", "official", "buy", "get"] and clean_name not in nomes_filtrados:
                                     nomes_filtrados.add(clean_name)
                                     pool_oportunidades.append({
@@ -92,17 +90,20 @@ def main():
                 except Exception:
                     pass
             
-            # Plano B Inteligente: Também rotaciona os produtos locais para nunca ficar travado no mesmo!
-            if len(pool_oportunidades) == 0:
+            # Plano B: Banco local expandido para sempre rodar com 6 itens e rotacionar todos!
+            if len(pool_oportunidades) < 6:
                 banco_local_luxo = [
                     {"n": "ZenCortex", "e": "Google Ads Search", "d": "Público qualificado buscando tratamento alternativo.", "p": "EUA / UK", "s": "💎 BAIXA CONCORRÊNCIA", "g": random.randint(80, 100), "c": "$118"},
                     {"n": "GlucoTrust", "e": "Bing Ads Search", "d": "Mercado maduro com cliques baratos no Bing.", "p": "Canadá / AU", "s": "📈 ROI ALTO ESTIMADO", "g": random.randint(105, 125), "c": "$125"},
                     {"n": "LeanBliss", "e": "YouTube Review", "d": "Lançamento recente com pouca concorrência de canais.", "p": "Estados Unidos", "s": "🔥 JANELA DE ENTRADA", "g": random.randint(120, 145), "c": "$140"},
                     {"n": "Puravive", "e": "Google Search", "d": "Gordura teimosa e resistente. Alto volume na gringa.", "p": "EUA / CA", "s": "⚡ TRÁFEGO SEGURO", "g": random.randint(110, 135), "c": "$135"},
-                    {"n": "Java Burn", "e": "TikTok Ads", "d": "Foco em mistura com café. Apelo visual forte.", "p": "Estados Unidos", "s": "☕ COMPRA EM MASSA", "g": random.randint(130, 160), "c": "$115"}
+                    {"n": "Java Burn", "e": "TikTok Ads", "d": "Foco em mistura com café. Apelo visual forte.", "p": "Estados Unidos", "s": "☕ COMPRA EM MASSA", "g": random.randint(130, 160), "c": "$115"},
+                    {"n": "Alpilean", "e": "YouTube Ads", "d": "Nicho focado em temperatura corporal interna travada.", "p": "Austrália", "s": "🔥 AGRESSIVO", "g": random.randint(115, 140), "c": "$127"},
+                    {"n": "ProDentim", "e": "Google Review", "d": "Nicho de saúde dental e gengivas. Poucos afiliados.", "p": "Reino Unido", "s": "💎 OCEANO AZUL", "g": random.randint(95, 120), "c": "$130"},
+                    {"n": "Liv Pure", "e": "Google Ads", "d": "Detox hepático e purificação do fígado gordo.", "p": "Canadá", "s": "⚡ ALTA ESCALA", "g": random.randint(125, 150), "c": "$145"}
                 ]
-                # Sorteia 3 produtos diferentes do banco local a cada clique!
-                pool_oportunidades = random.sample(banco_local_luxo, 3)
+                # 🟢 CORREÇÃO: Garante a extração de 6 produtos diferentes a cada varredura
+                pool_oportunidades = random.sample(banco_local_luxo, 6)
             
             st.session_state.cache_breaker = str(int(time.time()))
             st.session_state.lista_oportunidades = pool_oportunidades
@@ -115,7 +116,7 @@ def main():
         curva_sazonalidade = [1.2, 1.0, 1.4, 1.5, 1.3, 1.1, 0.9, 0.8, 1.2, 1.5, 1.7, 1.4]
         cb_id = st.session_state.get("cache_breaker", "0")
         
-        for idx, p in enumerate(st.session_state.lista_oportunidades):
+        for idx, p in enumerate(st.session_state.lista_oportunidades[:6]):
             p_id = f"{p['n'].replace(' ', '_').lower()}_{cb_id}_{idx}"
             col_info, col_graf = st.columns([1, 1.3])
             
