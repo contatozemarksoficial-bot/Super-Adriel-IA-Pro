@@ -1,164 +1,121 @@
 import streamlit as st
-import pandas as pd
-import requests
-import json
-import time
-
-# 1. CONFIGURAÇÃO PREMIUM DESIGN DE CINEMA 2026
-st.set_page_config(page_title="Adriel-AI Pro", page_icon="🤖", layout="wide")
-
-CHAVE_MESTRA = "ONYX_MASTER_2026"
-
-# Inicialização de estados de sessão blindados contra recarregamento
-if "modulo_ativo" not in st.session_state: st.session_state.modulo_ativo = "DASHBOARD"
-if "status_usuario" not in st.session_state: st.session_state.status_usuario = "DESLOGADO"
-if "api_key_global" not in st.session_state: st.session_state.api_key_global = ""
+import os
 
 # =============================================================================================================
-# 2. DESIGN CYBERPUNK LUXO SUPREMO INJETADO (CÓPIA REAL E FIEL DE PROJETO BLACK-LABEL)
+# 1. MOTOR INTELIGENTE DE AUTO-DETECÇÃO DE MÓDULOS (EXPANSÍVEL AUTOMÁTICO)
+# =============================================================================================================
+# O robô varre a sua pasta 'pages/' de forma autônoma. Se você jogar um arquivo novo lá, ele vira botão na hora!
+
+# Declara a página inicial fixa
+lista_paginas = [st.Page("app.py", title="📊 DASHBOARD PRINCIPAL", icon="👑", default=True)]
+
+# Varre a pasta 'pages' em busca de novos módulos criados por você
+pasta_pages = "pages"
+if os.path.exists(pasta_pages):
+    arquivos = sorted(os.listdir(pasta_pages))
+    for arquivo in arquivos:
+        if arquivo.endswith(".py"):
+            caminho_completo = os.path.join(pasta_pages, arquivo)
+            # Limpa o nome do arquivo para exibir um título bonito no menu lateral
+            nome_limpo = arquivo.replace(".py", "").replace("_", " ").replace("-", " ").upper()
+            
+            # Adiciona o novo módulo de forma dinâmica na árvore de navegação
+            lista_paginas.append(st.Page(caminho_completo, title=f"🔹 {nome_limpo}"))
+
+# Ativa o roteamento nativo inteligente de alta velocidade (Fim do menu duplicado e dos deslogues)
+st.navigation(lista_paginas)
+
+# =============================================================================================================
+# 2. INJEÇÃO DE CSS RESTRITO SUPER LUXO DE CINEMA (ALINHADO COM O SEU PRINT)
 # =============================================================================================================
 st.markdown("""
 <style>
-/* Fundo preto espacial de cinema */
+/* Reset de fundo escuro profundo uniforme de plataforma SaaS */
 .stApp, [data-testid="stSidebar"], section[data-testid="stSidebar"], .stSidebar { 
-    background-color: #030712 !important; 
-    color: #f3f4f6 !important; 
+    background-color: #060913 !important; 
+    color: #f8fafc !important; 
 }
-[data-testid="stSidebar"] section { background-color: #090d16 !important; border-right: 1px solid #1e293b !important; }
+[data-testid="stSidebar"] section { background-color: #0c111d !important; }
 
-/* Aniquilação de menus nativos e barras brancas redundantes do Streamlit */
-[data-testid="stSidebarNav"], ul[data-testid="stSidebarNavItems"] { display: none !important; height: 0px !important; }
+/* Customização Premium da Árvore Nativa de Páginas (Deixa os botões idênticos ao seu print) */
+[data-testid="stSidebarNavItems"] li div a {
+    background-color: #111827 !important;
+    color: #ffffff !important;
+    border: 1px solid #1f293b !important;
+    border-radius: 8px !important;
+    padding: 12px 15px !important;
+    margin-bottom: 8px !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease-in-out !important;
+}
+[data-testid="stSidebarNavItems"] li div a:hover {
+    border-color: #00ffcc !important;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.2) !important;
+}
+[data-testid="stSidebarNavItems"] li div a[aria-current="page"] {
+    border-color: #00ffcc !important;
+    background-color: #161f33 !important;
+    color: #00ffcc !important;
+}
+
+/* Ocultação de elementos desnecessários */
 [data-testid="stHeader"] { display: none !important; height: 0px !important; }
 .block-container { padding-top: 1.5rem !important; padding-bottom: 2rem; padding-left: 2.5rem; padding-right: 2.5rem; }
 
-/* 🚨 ENGENHARIA DE BOTÕES DO MENU LATERAL (MOLDADOS COMO BLOCOS ESCUROS SAAS) */
-.stButton > button {
-    background-color: #0f172a !important; 
-    color: #94a3b8 !important;
-    border: 1px solid #1e293b !important; 
-    border-radius: 8px !important;
-    padding: 14px 20px !important; 
-    width: 100% !important; 
-    text-align: left !important;
-    font-weight: 700 !important; 
-    font-size: 13px !important; 
-    text-transform: uppercase !important; 
-    letter-spacing: 0.5px !important;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-/* Efeito de iluminação Neon ao passar o mouse */
-.stButton > button:hover {
-    border-color: #00ffcc !important;
-    color: #00ffcc !important;
-    box-shadow: 0 0 15px rgba(0, 255, 204, 0.2) !important;
-    transform: translateY(-1px);
-}
-.stButton > button p { text-align: left !important; font-weight: 700 !important; }
-
-/* 🧠 HUD CENTRAL DO ROBÔ INTELIGENTE (A CARA DO PROJETO) */
-.hud-robot {
-    background: radial-gradient(circle at 50% 50%, #0d1e3d 0%, #030712 100%) !important;
-    border: 2px dashed #00ffcc !important; border-radius: 20px !important; padding: 30px !important; text-align: center !important;
-    box-shadow: 0 0 35px rgba(0, 255, 204, 0.15) !important; margin-bottom: 25px !important;
-}
-.hud-robot-title { color: #00ffcc !important; font-size: 20px !important; font-weight: 900 !important; letter-spacing: 3px !important; text-transform: uppercase !important; margin-bottom: 5px !important; }
-
-/* CARDS DE MONITORAMENTO DE CONSULTAS DA CONTA */
+/* CARDS DE FATURAMENTO DA BARRA SUPERIOR (CÓPIA REAL DO SEU PRINT) */
 .grid-metricas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
 .card-metric {
-    background-color: #0f172a !important; border: 1px solid #1e293b !important;
+    background-color: #0d121f !important; border: 1px solid #1e293b !important;
     border-bottom: 4px solid #00ffcc !important; border-radius: 12px !important;
-    padding: 22px !important; text-align: center !important; box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+    padding: 20px !important; text-align: center !important; box-shadow: 0 10px 25px rgba(0,0,0,0.4) !important;
 }
-.card-metric-title { font-size: 11px; font-weight: 800; color: #64748b; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
-.card-metric-value { font-size: 28px; font-weight: 900; color: #ffffff; font-family: 'Segoe UI', sans-serif; }
+.card-metric-title { font-size: 11px; font-weight: 800; color: #94a3b8; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.card-metric-value { font-size: 28px; font-weight: 900; color: #ffffff; }
 
-/* CARDS DE PREÇO DO SEU PRINT COM BORDAS ARREDONDADAS */
+/* CARDS DE PREÇO DOS PLANOS MENSAL R$ 47, R$ 97, R$ 197 */
 .card-plano {
-    background-color: #0f172a !important; border: 1px solid #1e293b !important; border-radius: 16px !important;
-    padding: 35px !important; box-shadow: 0 12px 40px rgba(0,0,0,0.6) !important; text-align: left;
+    background-color: #0d121f !important; border: 1px solid #1e293b !important; border-radius: 16px !important;
+    padding: 30px !important; box-shadow: 0 12px 35px rgba(0,0,0,0.5) !important; min-height: 260px;
 }
-.plano-title { font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
-.plano-price { font-size: 40px; font-weight: 900; color: #ffffff; margin: 15px 0; font-family: monospace; }
-.plano-desc { font-size: 13.5px; color: #94a3b8; line-height: 1.6; margin-bottom: 30px; min-height: 60px; }
+.plano-title { font-size: 11px; font-weight: bold; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
+.plano-price { font-size: 36px; font-weight: 900; color: #ffffff; margin: 15px 0; }
+.plano-desc { font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 25px; min-height: 50px; }
 
-/* Botão de Pagamento Verde Fluorescente Arredondado */
 .btn-compra {
     display: block; background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%);
     color: #030712 !important; text-decoration: none !important; text-align: center;
-    font-weight: 900; font-size: 13px; padding: 15px; border-radius: 30px;
-    text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 0 15px rgba(0, 255, 204, 0.4); transition: 0.2s;
+    font-weight: 900; font-size: 13px; padding: 14px; border-radius: 30px;
+    text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
 }
-.btn-compra:hover { box-shadow: 0 0 25px rgba(0, 255, 135, 0.7); transform: translateY(-1px); }
-
 .top-badge-container { display: flex; gap: 15px; margin-bottom: 25px; }
 .top-badge { background-color: #0f172a; border: 1px solid #1e293b; padding: 6px 16px; border-radius: 6px; font-size: 11px; font-family: monospace; font-weight: bold; color: #38bdf8; }
-.terminal-cyber { background-color: #02040a !important; border: 2px solid #1e293b !important; border-left: 4px solid #00ffcc !important; border-radius: 8px !important; padding: 15px !important; font-family: monospace !important; color: #00ffcc !important; font-size: 13px !important; }
 </style>
 """, unsafe_allow_html=True)
 
 # =============================================================================================================
-# 3. INTERFACE LATERAL: LINKS DE COMANDO SUPER LUXO ESTÁVEIS
+# 3. RENDERIZAÇÃO DO CONTEÚDO DO PANEL DA CENTRAL DE ASSINANTES (EXATO DO SEU PRINT)
 # =============================================================================================================
-with st.sidebar:
-    st.markdown('<h2 style="color: #00ffcc; font-weight: 900; font-size: 22px; margin-bottom: 3px;">👑 Adriel-AI Pro</h2>', unsafe_allow_html=True)
-    st.markdown('<p style="font-size: 10px; color: #475569; font-weight: bold; margin-bottom: 25px; letter-spacing:1px;">MÓDULOS DE COMANDO</p>', unsafe_allow_html=True)
-    
-    # Sistema de gatilhos em memória pura: Não usa URL, logo nunca desloga o administrador!
-    if st.session_state.status_usuario in ["ATIVO", "ADMIN"]:
-        if st.button("📊 DASHBOARD", key="menu_dash"): st.session_state.modulo_ativo = "DASHBOARD"
-        if st.button("🔥 1. RADAR ELITE", key="menu_rad"): st.session_state.modulo_ativo = "RADAR"
-        if st.button("🛰️ 2. AUDITOR IA", key="menu_aud"): st.session_state.modulo_ativo = "AUDITOR"
-        if st.button("✍️ 3. GERADOR RSA", key="menu_gen"): st.session_state.modulo_ativo = "GERADOR"
-        if st.button("🎯 4. CAÇADOR V10", key="menu_cac"): st.session_state.modulo_ativo = "CACADOR"
-        if st.button("📄 5. PRE-SELL", key="menu_pre"): st.session_state.modulo_ativo = "PRESELL"
-        st.write("---")
-        if st.button("👥 ASSINANTES", key="menu_ass"): st.session_state.modulo_ativo = "ASSINANTES"
-    else:
-        if st.button("🔒 CENTRAL DE LOGIN", key="menu_lock_login"): st.session_state.modulo_ativo = "DASHBOARD"
-        if st.button("💳 VER PLANOS SUPREMOS", key="menu_lock_plan"): st.session_state.modulo_ativo = "ASSINANTES"
+col_tit, col_online = st.columns(2)
+with col_tit: 
+    st.markdown('<h1 style="font-size: 2.2rem; font-weight: 900; color: #ffffff; margin-top:0px;">💳 Central de Assinantes</h1>', unsafe_allow_html=True)
+with col_online: 
+    st.markdown('<p style="text-align: right; color: #00ffcc; font-size: 12px; font-weight: bold; margin-top: 15px;">● 2,387 OPERADORES CONECTADOS AGORA</p>', unsafe_allow_html=True)
+st.write("---")
 
-    if st.session_state.status_usuario != "DESLOGADO":
-        st.write("---")
-        if st.button("🚪 DESCONECTAR SISTEMA", key="menu_logout"):
-            st.session_state.status_usuario = "DESLOGADO"
-            st.session_state.modulo_ativo = "DASHBOARD"
-            st.rerun()
+st.markdown('<div class="top-badge-container"><div class="top-badge">🔹 CLICKBANK</div><div class="top-badge">🔹 BUYGOODS</div><div class="top-badge">🔹 DIGISTORE24</div><div class="top-badge">🔹 STRIPE DASH</div><div class="top-badge">🔹 HOSTINGER VPS</div></div>', unsafe_allow_html=True)
 
-# =============================================================================================================
-# 4. GESTOR DE TRAVA FINANCEIRA ATIVA
-# =============================================================================================================
-if st.session_state.status_usuario == "BLOQUEADO" and st.session_state.modulo_ativo != "ASSINANTES":
-    st.markdown("<div class='card-saas' style='text-align:center; padding:40px; margin-top:50px; border: 2px solid #ff0055;'>", unsafe_allow_html=True)
-    st.markdown("<h1 style='color:#ff0055;'>🚨 ACESSO SUSPENSO: FATURAMENTO EXPIRADO</h1>", unsafe_allow_html=True)
-    st.write("A sua mensalidade recorrente falhou. Efetue a regularização para destravar as consultas e os robôs.")
-    if st.button("💳 ENTRAR NA CENTRAL DE ASSINANTES"):
-        st.session_state.modulo_ativo = "ASSINANTES"
-        st.rerun()
-    st.markdown("</div>", unsafe_allow_html=True)
-    st.stop()
+# Cards de faturamento idênticos ao print
+st.markdown('<div class="grid-metricas"><div class="card-metric"><div class="card-metric-title">Faturamento Geral</div><div class="card-metric-value">R$ 142.580</div></div><div class="card-metric"><div class="card-metric-title">Licenças Ativas</div><div class="card-metric-value">2.105</div></div><div class="card-metric"><div class="card-metric-title">Recorrência (MRR)</div><div class="card-metric-value">R$ 104.200</div></div><div class="card-metric"><div class="card-metric-title">Taxa de Churn</div><div class="card-metric-value">0.8%</div></div></div>', unsafe_allow_html=True)
 
-# =============================================================================================================
-# 5. ENGENHARIA DE TELAS SUPREMA UNIFICADA
-# =============================================================================================================
+st.markdown('<h2 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-top:10px; margin-bottom:20px;">💳 ADESÃO ÀS NOVAS LICENÇAS SUPREMAS</h2>', unsafe_allow_html=True)
 
-# 🔒 TELA DE ACESSO CRIPTOGRAFADA
-if st.session_state.status_usuario == "DESLOGADO" and st.session_state.modulo_ativo == "DASHBOARD":
-    col1, col2, col3 = st.columns([1, 1.4, 1])
-    with col2:
-        st.markdown("<div class='card-saas' style='margin-top:60px; border: 2px solid #00ffcc; box-shadow: 0 0 25px rgba(0,255,204,0.15);'>", unsafe_allow_html=True)
-        st.markdown("<h2 style='text-align:center; color:#00ffcc;'>🔑 SECURITY AUTH CONTROL</h2>", unsafe_allow_html=True)
-        st.write("Insira sua chave de licença ativa ou use o código master:")
-        
-        chave_digitada = st.text_input("Chave Secreta Operacional:", type="password", value="")
-        st.write("")
-        
-        if st.button("🔓 LIBERAR ACESSO AO CLUSTER NUVEM"):
-            if chave_digitada.strip() == CHAVE_MESTRA:
-                st.session_state.status_usuario = "ADMIN"
-                st.session_state.modulo_ativo = "DASHBOARD"
-                st.success("👑 Chave Mestra Ativada! Modo Gestor Liberado.")
-                time.sleep(0.4)
-                st.rerun()
-            elif chave_digitada.strip() == "cliente":
-                st.session_state.status_usuario = "ATIVO"
+# Grade com os planos comerciais reais do seu print
+col_p1, col_p2, col_p3 = st.columns(3)
+
+col_p1.markdown('<div class="card-plano"><div class="plano-title">Plano Mensal Start</div><div class="plano-price">R$ 47</div><div class="plano-desc">Acesso básico aos módulos iniciais para validação imediata do robô gringo.</div><br><a href="https://hostinger.com" target="_blank" class="btn-compra">= PAGAR COM CARTÃO / PIX</a></div>', unsafe_allow_html=True)
+col_p2.markdown('<div class="card-plano" style="border: 2px solid #00ffcc; box-shadow: 0 0 25px rgba(0,255,204,0.15);"><div class="plano-title" style="color:#00ffcc;">Plano Mensal Pro</div><div class="plano-price" style="color:#00ffcc;">R$ 97</div><div class="plano-desc">Módulo RSA completo + Arquitetura avançada de funil com alta velocidade e escala.</div><br><a href="https://hostinger.com" target="_blank" class="btn-compra">= PAGAR COM CARTÃO / PIX</a></div>', unsafe_allow_html=True)
+col_p3.markdown('<div class="card-plano"><div class="plano-title">Plano Elite Master</div><div class="plano-price">R$ 197</div><div class="plano-desc">ACESSO TOTAL ILIMITADO + Exportador de páginas Pré-Sell com Imagens IA.</div><br><a href="https://hostinger.com" target="_blank" class="btn-compra">= PAGAR COM CARTÃO / PIX</a></div>', unsafe_allow_html=True)
