@@ -58,10 +58,9 @@ def main():
         p_nome = produto_nome.strip().title()
         p_id = p_nome.replace(" ", "_").lower()
         
-        # Dispara o buscador real de fotos
+        # Dispara o buscador de fotos
         url_imagem_produto = buscar_imagem_produto_real(p_nome, api_key_input)
         
-        # Definição das copys profissionais em inglês americano (Google Compliance)
         headline_topo = "OFFICIAL BRAND VERIFICATION PORTAL"
         subheadline_texto = f"You are being directed to the verified secure manufacturer page for <b>{p_nome}</b> supplement."
         texto_botao = "CONTINUE TO OFFICIAL WEBSITE NOW"
@@ -69,7 +68,7 @@ def main():
 
         st.markdown("### 👁️ Pré-visualização da Estrutura Gerada:")
         
-        # Criação do Código HTML Puro da Página Ponte (Fundo limpo e focado na conversão)
+        # Código HTML Puro da Página Ponte
         codigo_html_puro = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,7 +103,6 @@ def main():
 </body>
 </html>"""
 
-        # Desenha o mock da Pré-sell na tela do painel para o aluno ver o design antes de baixar
         c_mock1, c_mock2, c_mock3 = st.columns([1, 1.8, 1])
         with c_mock2:
             st.markdown(f"""
@@ -119,9 +117,8 @@ def main():
 
         st.markdown("---")
         st.markdown("### 📥 PASSO 4: Exportar Estrutura Pronta")
-        st.write("Clique no botão abaixo para baixar o arquivo `.html` limpo. Suba este arquivo direto no gerenciador de arquivos da Hostinger para ativar o seu link propio de afiliado.")
+        st.write("Clique no botão abaixo para baixar o arquivo `.html` limpo. Suba este arquivo direto na Hostinger para ativar sua página.")
         
-        # Função para compilar e baixar o arquivo diretamente pelo Streamlit
         st.download_button(
             label="💾 COMPILAR E BAIXAR ARQUIVO PRESELL.HTML",
             data=codigo_html_puro,
