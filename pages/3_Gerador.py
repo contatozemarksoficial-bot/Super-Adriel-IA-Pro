@@ -87,7 +87,9 @@ def main():
     st.markdown("---")
 
     if botao_gerar and produto_nome:
-        p_nome = produto_nome.strip()
+        # Força letras maiúsculas na primeira letra de cada palavra para o anúncio ficar bonito
+        p_nome = produto_nome.strip().title()
+        p_id = p_nome.replace(" ", "_").lower()
         horario_atual = datetime.now().strftime("%H:%M:%S")
         
         st.write("Sistemas operando em Modo de Guerra. Extração massiva de cópias concluída às " + horario_atual)
@@ -100,16 +102,18 @@ def main():
         with col_esquerda:
             st.markdown(f"<h3 style='color:#00ffcc;'>📌 Títulos Encontrados ({len(headlines)} Headlines)</h3>", unsafe_allow_html=True)
             for idx, h in enumerate(headlines):
-                st.text_input(f"Título {idx+1} ({len(h)}/30):", value=h, key=f"gen_t_{idx}")
+                # 🟢 CORREÇÃO: O segredo está aqui! Adicionei o p_id na 'key' para limpar o cache quando mudar o produto
+                st.text_input(f"Título {idx+1} ({len(h)}/30):", value=h, key=f"t_{p_id}_{idx}")
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown("<h3 style='color:#00ffcc;'>🛣️ Caminhos de Exibição (Display URL)</h3>", unsafe_allow_html=True)
-            st.text_input("Caminho 1 (Máx 15):", value="OfficialSite", key="path_1")
-            st.text_input("Caminho 2 (Máx 15):", value="DiscountNow", key="path_2")
+            st.text_input("Caminho 1 (Máx 15):", value="OfficialSite", key=f"path1_{p_id}")
+            st.text_input("Caminho 2 (Máx 15):", value="DiscountNow", key=f"path2_{p_id}")
 
         with col_direita:
             st.markdown(f"<h3 style='color:#cc66ff;'>📝 Descrições Coletadas ({len(descriptions)} Descriptions)</h3>", unsafe_allow_html=True)
             for idx, d in enumerate(descriptions):
-                st.text_input(f"Descrição {idx+1} ({len(d)}/90):", value=d, key=f"gen_d_{idx}")
+                # 🟢 CORREÇÃO: Chave dinâmica para as descrições também mudarem na hora
+                st.text_input(f"Descrição {idx+1} ({len(d)}/90):", value=d, key=f"d_{p_id}_{idx}")
 
         st.markdown("---")
         st.markdown("<h3 style='color:#00ffcc;'>🔑 Central de Engenharia de Palavras-Chave (Tráfego Blindado)</h3>", unsafe_allow_html=True)
@@ -118,7 +122,6 @@ def main():
 
         c_solta, c_aspas, c_colchete, c_negativa = st.columns(4)
 
-        # 🟢 ATUALIZAÇÃO REAIS DAS MATRIZES DE PALAVRAS-CHAVE EM LOTE MASSIVO
         sufixos_comerciais = ["official website", "buy online", "discount code", "ingredients", "side effects", "order now", "price", "reviews 2026", "scam or legit", "where to buy", "coupon", "supplement facts", "official store", "secure portal", "lowest cost"]
         
         lista_broad = [f"{p_nome} {s}" for s in sufixos_comerciais]
@@ -128,19 +131,19 @@ def main():
 
         with c_solta:
             st.markdown("💬 **Broad Match (Ampla)**")
-            st.text_area("Copiar Lista:", value="\n".join(lista_broad), height=250, key="ta_broad")
+            st.text_area("Copiar Lista:", value="\n".join(lista_broad), height=250, key=f"ta_broad_{p_id}")
 
         with c_aspas:
             st.markdown("💬 **Phrase Match (Frase)**")
-            st.text_area("Copiar Lista:", value="\n".join(lista_phrase), height=250, key="ta_phrase")
+            st.text_area("Copiar Lista:", value="\n".join(lista_phrase), height=250, key=f"ta_phrase_{p_id}")
 
         with c_colchete:
             st.markdown("💬 **Exact Match (Exata)**")
-            st.text_area("Copiar Lista:", value="\n".join(lista_exact), height=250, key="ta_exact")
+            st.text_area("Copiar Lista:", value="\n".join(lista_exact), height=250, key=f"ta_exact_{p_id}")
 
         with c_negativa:
             st.markdown("❌ **Negative Keywords (Negativas)**")
-            st.text_area("Copiar Lista:", value="\n".join(lista_negativas), height=250, key="ta_neg")
+            st.text_area("Copiar Lista:", value="\n".join(lista_negativas), height=150, key=f"ta_neg_{p_id}")
 
 if __name__ == "__main__":
     main()
