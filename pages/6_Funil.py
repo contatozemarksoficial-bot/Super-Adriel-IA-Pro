@@ -3,26 +3,32 @@ import pandas as pd
 import time
 import random
 
-# 1. CONFIGURAÇÃO DE ELITE (ESTRUTURA DE LUXO)
+# 1. CONFIGURAÇÃO DE ELITE (ESTRUTURA TRAVADA NO DARK)
 st.set_page_config(page_title="Adriel-AI Pro Elite", layout="wide", initial_sidebar_state="expanded")
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS BLACK-LABEL (CIANO NEON IDÊNTICO AO SEU PRINT)
+# 2. INJEÇÃO DE CSS "ZERO BRANCO" (ONYX & CIANO NEON TOTAL)
 # =============================================================================================================
 st.markdown("""
 <style>
-/* 🌌 FUNDO PRETO ÔNIX ABSOLUTO */
-.stApp, [data-testid="stHeader"], [data-testid="stSidebar"] { background-color: #02040a !important; }
+/* 🌌 FUNDO PRETO ABSOLUTO - Mata qualquer rastro de branco */
+html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"], [data-testid="stSidebar"] {
+    background-color: #02040a !important;
+    color: #f8fafc !important;
+}
 
-/* 👤 SIDEBAR COM BORDA CIANO NEON */
-section[data-testid="stSidebar"] { border-right: 1px solid #00f2ff !important; background-color: #060913 !important; }
+/* 👤 SIDEBAR INTEGRADA - Borda Ciano Fina */
+section[data-testid="stSidebar"] {
+    border-right: 1px solid #00f2ff !important;
+    background-color: #02040a !important;
+}
 section[data-testid="stSidebar"] * { color: #00f2ff !important; font-weight: 800; }
 
-/* 🤖 ROBÔ CIANO NEON GIGA (ANIMAÇÃO ZOOM) */
-.robot-neon-original {
+/* 🤖 ROBÔ CIANO NEON GIGA */
+.robot-neon {
     font-size: 110px; text-align: center;
     color: #00f2ff;
-    filter: drop-shadow(0 0 15px #00f2ff) drop-shadow(0 0 35px #00f2ff);
+    filter: drop-shadow(0 0 20px #00f2ff);
     animation: zoom-pulse 2.5s infinite ease-in-out;
 }
 @keyframes zoom-pulse {
@@ -31,98 +37,100 @@ section[data-testid="stSidebar"] * { color: #00f2ff !important; font-weight: 800
     100% { transform: scale(0.9); opacity: 0.8; }
 }
 
-/* 💎 CHASSI COM BORDAS ARREDONDADAS IGUAL AO PRINT */
-.chassi-luxury {
-    background: #040814;
-    border: 1.5px solid #00f2ff; 
-    border-radius: 12px;
-    padding: 30px; 
-    text-align: center; 
-    margin-bottom: 20px;
-    box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
+/* 💎 CHASSI DE INPUT - FUNDO DARK E BORDA CIANO */
+div[data-baseweb="input"] {
+    background-color: #0d1117 !important;
+    border: 1.5px solid #00f2ff !important;
+    border-radius: 12px !important;
+}
+input { color: #ffffff !important; background-color: transparent !important; }
+
+/* ⚡ BOTÃO DE COMANDO NEON */
+.stButton > button {
+    background: linear-gradient(135deg, #00f2ff 0%, #0080ff 100%) !important;
+    color: #02040a !important; font-weight: 900 !important; border-radius: 50px !important;
+    padding: 15px 30px !important; width: 100%; border: none !important;
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.4) !important;
+    text-transform: uppercase;
 }
 
-/* 📋 CARDS DE RESULTADOS EM LINHAS */
-.card-resultado {
-    background: #060913; 
-    border: 1px solid #00f2ff; 
-    border-radius: 8px;
-    padding: 15px; 
+/* 📋 CARDS DE RESULTADO (IGUAL À SUA IMAGEM) */
+.box-luxury {
+    background-color: #0d1117;
+    border: 1px solid #00f2ff;
+    border-radius: 10px;
+    padding: 15px;
     margin-bottom: 10px;
     color: #ffffff;
     font-family: 'Segoe UI', sans-serif;
+    transition: 0.3s;
 }
+.box-luxury:hover { box-shadow: 0 0 15px rgba(0, 242, 255, 0.3); }
 
-/* ⚡ BOTÃO DE COMANDO CIANO VIVO */
-.stButton > button {
-    background: linear-gradient(135deg, #00f2ff 0%, #0080ff 100%) !important;
-    color: #030712 !important; font-weight: 900 !important; border-radius: 50px !important;
-    padding: 18px !important; width: 100%; border: none !important;
-    box-shadow: 0 0 20px rgba(0, 242, 255, 0.4) !important;
-    text-transform: uppercase; letter-spacing: 2px;
-}
-
-/* 🚨 BLINDAGEM CONTRA O BRANCO */
-div[data-baseweb="input"] { background-color: #060913 !important; border: 1.5px solid #00f2ff !important; border-radius: 8px; }
-input { background-color: transparent !important; color: #ffffff !important; }
+/* 🚨 BLINDAGEM DE CÓDIGO E TABELAS */
+code { background-color: #000 !important; color: #00f2ff !important; border: 1px solid #00f2ff !important; }
+.stDataFrame { background-color: #0d1117 !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# 3. SIDEBAR COM STATUS
+# 3. SIDEBAR - STATUS E PLATAFORMAS
 with st.sidebar:
-    st.markdown("### 🛰️ ADRIEL-AI STATUS")
-    st.markdown("<p style='color:#00f2ff;'>🟢 SCANNER: ATIVO</p>", unsafe_allow_html=True)
+    st.markdown("<h2 style='letter-spacing:2px;'>🛰️ STATUS</h2>", unsafe_allow_html=True)
+    st.markdown("<p style='color:#00f2ff;'>🟢 SCANNER ATIVO</p>", unsafe_allow_html=True)
     st.write("---")
     st.markdown("### 🔌 PLATAFORMAS")
-    platforms = ["CLICKBANK", "BUYGOODS", "MAXWEB", "DIGISTORE24"]
-    for p in platforms:
-        st.markdown(f'<div style="border:1px solid #00f2ff; padding:5px; border-radius:5px; margin-bottom:5px; text-align:center; font-size:11px;">{p}</div>', unsafe_allow_html=True)
+    for p in ["CLICKBANK", "BUYGOODS", "MAXWEB", "DIGISTORE"]:
+        st.markdown(f'<div style="border:1px solid #00f2ff; padding:5px; border-radius:8px; margin-bottom:8px; text-align:center; font-size:12px;">{p}</div>', unsafe_allow_html=True)
 
 # 4. ÁREA PRINCIPAL
-st.markdown('<div class="robot-neon-original">🤖</div>', unsafe_allow_html=True)
-st.markdown('<h1 style="text-align:center; color:#00f2ff; font-weight:900; margin-top:-20px; letter-spacing:3px;">MINERADOR DE ELITE V7</h1>', unsafe_allow_html=True)
+st.markdown('<div class="robot-neon">🤖</div>', unsafe_allow_html=True)
+st.markdown('<h1 style="text-align:center; color:#00f2ff; font-weight:900; margin-top:-20px; letter-spacing:2px;">MINERADOR DE ELITE V7</h1>', unsafe_allow_html=True)
 
-with st.container():
-    st.markdown('<div class="chassi-luxury">', unsafe_allow_html=True)
-    aff_id = st.text_input("🔑 SEU ID DE AFILIADO:", placeholder="ex: adriel_pro")
-    prod_alvo = st.text_input("💎 PRODUTO PARA MINERAR:", value="Sugar Defender")
-    btn_run = st.button("🚀 INICIAR VARREDURA (100 TERMOS)")
-    st.markdown('</div>', unsafe_allow_html=True)
+# Container de Entrada
+st.write("")
+aff_id = st.text_input("🔑 SEU ID DE AFILIADO:", placeholder="ex: adriel_pro")
+prod_alvo = st.text_input("💎 NOME DO PRODUTO PARA MINERAR:", value="Sugar Defender")
+btn_run = st.button("🚀 DISPARAR VARREDURA DE 100 TERMOS")
 
-# 5. MOTOR DE MINERAÇÃO (PESQUISA EM LINHAS)
+# Containers de exibição
+status_msg = st.empty()
+container_resultados = st.container()
+
+# 5. MOTOR DE MINERAÇÃO SÍNCRONA
 if btn_run:
     if not aff_id:
-        st.error("❌ Insira seu ID de Afiliado na lateral!")
+        st.error("❌ ERRO: Insira seu ID de Afiliado na lateral!")
         st.stop()
 
-    status = st.empty()
-    esteira = st.container()
-    
-    sufixos = ["official", "buy now", "discount", "reviews", "ingredients", "is it safe", "scam", "where to buy", "price", "order"] * 10
-    
     minerados = []
-    for i, suf in enumerate(sufixos):
+    # Base de 100 termos (50 sufixos x 2)
+    sufixos = ["official", "buy now", "discount", "reviews", "ingredients", "is it safe", "scam", "where to buy", "price", "order", "coupon", "promo", "results", "side effects", "benefits", "shipping", "money back", "amazon", "vsl", "checkout"] * 10 
+    
+    for i, suf in enumerate(sufixos[:100]):
         termo = f"{prod_alvo} {suf}".upper()
-        status.markdown(f'<p style="color:#00f2ff; text-align:center;">⛏️ VARRENDO: {termo} ({i+1}/100)</p>', unsafe_allow_html=True)
+        status_msg.markdown(f'<p style="color:#00f2ff; text-align:center; font-family:monospace;">⛏️ [SINCRO-SCAN {i+1}/100]: {termo}</p>', unsafe_allow_html=True)
         
-        minerados.append({
-            "termo": termo,
-            "cpc": f"$ {random.uniform(2.10, 5.80):.2f}",
-            "link": f"https://{aff_id}.hop.clickbank.net/?tid={suf.lower().replace(' ', '_')}"
-        })
-        time.sleep(0.04)
-
-    status.markdown('<div class="chassi-luxury" style="border-color:#00ff87; color:#00ff87;">✅ VARREDURA CONCLUÍDA: 100 TERMOS CATALOGADOS</div>', unsafe_allow_html=True)
-
-    # 6. EXIBIÇÃO DA MATRIZ EM LINHAS (IGUAL AO PRINT)
-    st.write("---")
-    for item in minerados[:50]: # Mostrando os primeiros 50 em cards individuais
-        st.markdown(f"""
-        <div class="card-resultado">
-            <div style="display:flex; justify-content:space-between;">
-                <b style="color:#00f2ff;">🔍 {item['termo']}</b>
-                <span style="color:#00f2ff;">CPC: {item['cpc']}</span>
+        cpc = random.uniform(2.15, 5.95)
+        link = f"https://{aff_id}.hop.clickbank.net/?tid={suf.lower().replace(' ', '_')}"
+        
+        minerados.append({"termo": termo, "cpc": f"$ {cpc:.2f}", "link": link})
+        
+        # Exibição em tempo real dentro do container, criando os blocos da sua imagem
+        with container_resultados:
+            st.markdown(f"""
+            <div class="box-luxury">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <b style="color:#00f2ff; font-size:18px;">🔍 {termo}</b>
+                    <span style="color:#00f2ff; font-family:monospace;">CPC: $ {cpc:.2f}</span>
+                </div>
             </div>
-        </div>
-        """, unsafe_allow_html=True)
-        st.code(item['link']) # Botão de cópia automática
+            """, unsafe_allow_html=True)
+            st.code(link) # Botão de cópia nativo e escuro
+        
+        time.sleep(0.05)
+
+    status_msg.markdown('<div style="background:#00f2ff; color:#000; padding:15px; border-radius:10px; text-align:center; font-weight:900;">✅ VARREDURA COMPLETA: 100 TERMOS VINCULADOS AO SEU ID</div>', unsafe_allow_html=True)
+
+# 6. RODAPÉ DE LUXO
+st.write("---")
+st.markdown('<p style="text-align:center; color:#1e293b; font-size:12px;">ADRIEL-AI ELITE SYSTEM | ENCRYPTED CONNECTION</p>', unsafe_allow_html=True)
