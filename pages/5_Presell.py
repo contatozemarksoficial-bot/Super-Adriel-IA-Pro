@@ -19,7 +19,6 @@ def buscar_imagem_produto_real(p_nome, api_key):
                     return data_json["images"][0].get("imageUrl")
         except Exception:
             pass
-    # Imagem padrão de frasco genérico caso esteja sem chave
     return "https://unsplash.com"
 
 def main():
@@ -45,14 +44,28 @@ def main():
     st.write("Gere páginas pontes profissionais e limpas em arquivos HTML prontos para subir no seu domínio.")
     st.markdown("---")
 
-    # CONFIGURAÇÃO DE ENTRADAS
+    # CONFIGURAÇÃO DE ENTRADAS DE CONFIGURAÇÃO DO SISTEMA
     col_inputs1, col_inputs2 = st.columns(2)
     with col_inputs1:
         api_key_input = st.text_input("Insira sua API Key da Serper.dev para buscar a foto real:", type="password", value="")
         produto_nome = st.text_input("Nome exato do produto gringo:", value="Sugar Defender")
     with col_inputs2:
-        link_afiliado = st.text_input("Insira seu link de afiliado da ClickBank/Digistore:", value="https://clickbank.net")
-        botao_gerar = st.button("⚡ CONSTRUIR E COMPILAR ARQUIVO PRÉ-SELL")
+        # 🟢 INJETADO SEU LINK REAL DE INDICAÇÃO DA HOSTINGER POR PADRÃO
+        link_afiliado_hostinger = st.text_input("Insira seu link de afiliado da HOSTINGER (Indicação):", value="https://www.hostinger.com/br?REFERRALCODE=VBMCONTAT7WC")
+        link_afiliado = st.text_input("Insira seu link de afiliado do PRODUTO (ClickBank/Digistore):", value="https://clickbank.net")
+
+    st.write("")
+    botao_gerar = st.button("⚡ CONSTRUIR E COMPILAR ARQUIVO PRÉ-SELL")
+    st.markdown("---")
+
+    # 2. INFRAESTRUTURA INDISPENSÁVEL: DIRECIONAMENTO DE HOSPEDAGEM DE ELITE
+    st.markdown("<h3 style='color:#00ffcc;'>🚀 PASSO 1: Registro de Domínio e Hospedagem de Elite</h3>", unsafe_allow_html=True)
+    st.write("Antes de montar a sua estrutura, é fundamental possuir um domínio próprio profissional para evitar bloqueios severos de links clonados diretamente da plataforma gringa.")
+    
+    url_afiliado_final = link_afiliado_hostinger.strip() if link_afiliado_hostinger.strip() != "" else "https://www.hostinger.com/br?REFERRALCODE=VBMCONTAT7WC"
+    
+    st.markdown("<div style='background-color:#0f172a; border:2px solid #00ffcc; border-radius:10px; padding:20px; box-shadow:0 4px 15px rgba(0,255,204,0.15); margin-bottom:20px;'>💬 <b style='color:#00ffcc; font-size:1.2rem;'>RECOMENDAÇÃO CRÍTICA DO ROBÔ ADRIEL-AI:</b><br><br>A <b>Hostinger</b> é considerada a melhor provedora de hospedagem do mercado internacional para afiliados! Ela oferece servidores Cloud de altíssima velocidade, criador de sites intuitivo com IA, suporte premium 24 horas por dia em português e certificados SSL gratuitos inclusos para manter suas páginas pontes 100% seguras contra falhas publicitárias.<br><br><a href='" + url_afiliado_final + "' target='_blank' style='display:inline-block; background-color:#00ffcc; color:#030712; padding:12px 25px; border-radius:6px; font-weight:bold; text-decoration:none; box-shadow:0 0 10px #00ffcc;'>👉 CLIQUE AQUI PARA ADQUIRIR SUA HOSPEDAGEM NA HOSTINGER COM DESCONTO</a></div>", unsafe_allow_html=True)
+    st.markdown("---")
 
     if botao_gerar and produto_nome and link_afiliado:
         p_nome = produto_nome.strip().title()
@@ -90,14 +103,14 @@ def main():
 </head>
 <body>
     <div class="container">
-        <div class="badge">{headline_topo}</div>
+        <div class="badge">{{headline_topo}}</div>
         <h1>Attention Consumer</h1>
-        <p>{subheadline_texto}</p>
-        <img class="product-img" src="{url_imagem_produto}" alt="{p_nome}">
-        <a class="cta-button" href="{link_afiliado}">{texto_botao}</a>
+        <p>{{subheadline_texto}}</p>
+        <img class="product-img" src="{{url_imagem_produto}}" alt="{{p_nome}}">
+        <a class="cta-button" href="{{link_afiliado}}">{{texto_botao}}</a>
     </div>
     <footer>
-        <p>{texto_rodape}</p>
+        <p>{{texto_rodape}}</p>
         <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a></p>
     </footer>
 </body>
@@ -111,20 +124,3 @@ def main():
                 <h2 style="color: #111827 !important; font-size: 20px; margin-top:15px; margin-bottom:5px;">Attention Consumer</h2>
                 <p style="color: #4b5563 !important; font-size: 14px;">{subheadline_texto}</p>
                 <img src="{url_imagem_produto}" style="max-width: 130px; margin: 10px 0; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15));"><br><br>
-                <a href="{link_afiliado}" target="_blank" style="display: block; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #ffffff !important; text-decoration: none; padding: 14px; border-radius: 8px; font-weight: bold; font-size: 15px;">{texto_botao}</a>
-            </div>
-            """, unsafe_allow_html=True)
-
-        st.markdown("---")
-        st.markdown("### 📥 PASSO 4: Exportar Estrutura Pronta")
-        st.write("Clique no botão abaixo para baixar o arquivo `.html` limpo. Suba este arquivo direto na Hostinger para ativar sua página.")
-        
-        st.download_button(
-            label="💾 COMPILAR E BAIXAR ARQUIVO PRESELL.HTML",
-            data=codigo_html_puro,
-            file_name=f"presell_{p_id}.html",
-            mime="text/html"
-        )
-
-if __name__ == "__main__":
-    main()
