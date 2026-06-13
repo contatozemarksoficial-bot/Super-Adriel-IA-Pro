@@ -61,10 +61,9 @@ st.markdown("""
 .card-metric-value { font-size: 28px; font-weight: 900; color: #ffffff; }
 
 /* CARDS DE PREÇO DOS PLANOS */
-.grid-planos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 15px; }
 .card-plano {
     background-color: #0d121f !important; border: 1px solid #1e293b !important; border-radius: 16px !important;
-    padding: 30px !important; box-shadow: 0 12px 35px rgba(0,0,0,0.5) !important;
+    padding: 30px !important; box-shadow: 0 12px 35px rgba(0,0,0,0.5) !important; min-height: 280px;
 }
 .plano-title { font-size: 11px; font-weight: bold; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
 .plano-price { font-size: 36px; font-weight: 900; color: #ffffff; margin: 15px 0; }
@@ -78,7 +77,6 @@ st.markdown("""
     text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
 }
 .stTextInput>div>div>input, .stTextArea>div>div>textarea { background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; }
-.terminal-hacker { background-color: #040814 !important; border: 2px solid #00ffcc !important; border-radius: 10px !important; padding: 15px !important; font-family: monospace !important; color: #00ffcc !important; white-space: pre-wrap !important; }
 .top-badge-container { display: flex; gap: 15px; margin-bottom: 25px; }
 .top-badge { background-color: #0f172a; border: 1px solid #1e293b; padding: 6px 16px; border-radius: 6px; font-size: 11px; font-family: monospace; font-weight: bold; color: #38bdf8; }
 </style>
@@ -91,7 +89,6 @@ with st.sidebar:
     st.markdown('<h2 style="color: #00ffcc; font-weight: 900; font-size: 22px; margin-bottom: 5px;">⚙️ Adriel-AI Pro</h2>', unsafe_allow_html=True)
     st.markdown('<p style="font-size: 10px; color: #64748b; font-weight: bold; margin-bottom: 20px;">MÓDULOS DE COMANDO</p>', unsafe_allow_html=True)
     
-    # Botões do Menu Lateral
     if st.button("📊 DASHBOARD", use_container_width=True): st.session_state.modulo_ativo = "DASHBOARD"
     if st.button("🔥 1. RADAR ELITE", use_container_width=True): st.session_state.modulo_ativo = "RADAR"
     if st.button("🛰️ 2. AUDITOR IA", use_container_width=True): st.session_state.modulo_ativo = "AUDITOR"
@@ -118,7 +115,6 @@ if st.session_state.status_usuario == "BLOQUEADO" and st.session_state.modulo_at
 # 5. EXECUÇÃO PARALELA DAS TELAS (NÚCLEO DO ECOSSISTEMA DO ROBÔ)
 # =============================================================================================================
 
-# 👑 PAINEL SECRETO ADMINISTRADOR (Exibido para você gerenciar o status da ferramenta)
 if st.session_state.status_usuario == "ADMIN" or st.session_state.api_key_global == CHAVE_MESTRA:
     st.markdown("<div style='background:rgba(255,255,255,0.02); border:2px dashed #cc66ff; border-radius:12px; padding:15px; margin-bottom:20px;'>", unsafe_allow_html=True)
     st.markdown("<h6 style='color:#cc66ff; margin:0;'>⚙️ INTERRUPTOR DE SEGURANÇA (MODO GESTOR MASTER)</h6>", unsafe_allow_html=True)
@@ -135,14 +131,16 @@ if st.session_state.status_usuario == "ADMIN" or st.session_state.api_key_global
 # 📊 MONITOR 1: DASHBOARD / ASSINANTES (EXATO DO SEU PRINT)
 if st.session_state.modulo_ativo in ["DASHBOARD", "ASSINANTES"]:
     col_tit, col_online = st.columns(2)
-    with col_tit: st.markdown('<h1 style="font-size: 2.2rem; font-weight: 900;">💳 Central de Assinantes</h1>', unsafe_allow_html=True)
+    with col_tit: st.markdown('<h1 style="font-size: 2.2rem; font-weight: 900; color: #ffffff;">💳 Central de Assinantes</h1>', unsafe_allow_html=True)
     with col_online: st.markdown('<p style="text-align: right; color: #00ffcc; font-size: 12px; font-weight: bold; margin-top: 15px;">● 2,387 OPERADORES CONECTADOS AGORA</p>', unsafe_allow_html=True)
     
     st.markdown('<div class="top-badge-container"><div class="top-badge">🔹 CLICKBANK</div><div class="top-badge">🔹 BUYGOODS</div><div class="top-badge">🔹 DIGISTORE24</div><div class="top-badge">🔹 STRIPE DASH</div><div class="top-badge">🔹 HOSTINGER VPS</div></div>', unsafe_allow_html=True)
     
     st.markdown('<div class="grid-metricas"><div class="card-metric"><div class="card-metric-title">Faturamento Geral</div><div class="card-metric-value">R$ 142.580</div></div><div class="card-metric"><div class="card-metric-title">Licenças Ativas</div><div class="card-metric-value">2.105</div></div><div class="card-metric"><div class="card-metric-title">Recorrência (MRR)</div><div class="card-metric-value">R$ 104.200</div></div><div class="card-metric"><div class="card-metric-title">Taxa de Churn</div><div class="card-metric-value">0.8%</div></div></div>', unsafe_allow_html=True)
     
-    st.markdown('<h2 style="font-size: 1.5rem; font-weight: 800;">💳 ADESÃO ÀS NOVAS LICENÇAS SUPREMAS</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 style="font-size: 1.5rem; font-weight: 800; color: #ffffff;">💳 ADESÃO ÀS NOVAS LICENÇAS SUPREMAS</h2>', unsafe_allow_html=True)
     
     col_p1, col_p2, col_p3 = st.columns(3)
+    
+    # 🟢 CORREÇÃO CRUCIAL: Injetado os markdowns corretamente dentro das variáveis recuadas por 4 espaços
     with col_p1:
