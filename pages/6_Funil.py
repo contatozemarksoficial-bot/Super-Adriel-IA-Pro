@@ -3,112 +3,113 @@ import pandas as pd
 import time
 import random
 
-# 1. CONFIGURAÇÃO DE ELITE (SIDEBAR FIXA E LAYOUT LARGO)
-st.set_page_config(page_title="Adriel-AI Elite v7", layout="wide", initial_sidebar_state="expanded")
+# 1. CONFIGURAÇÃO DE ELITE
+st.set_page_config(page_title="Adriel-AI Elite v7", layout="wide", initial_sidebar_state="collapsed")
+
+# 2. CONTROLE DE FLUXO (ESTADO DA SESSÃO)
+if 'estagio' not in st.session_state:
+    st.session_state.estagio = 'login' 
+if 'plataforma_escolhida' not in st.session_state:
+    st.session_state.plataforma_escolhida = None
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS BLACK-LABEL (MATA O BRANCO E PROTEGE A SIDEBAR)
+# 3. DESIGN BLACK-LABEL (NEON & BOTÕES VIVOS)
 # =============================================================================================================
 st.markdown("""
 <style>
-/* 🌌 FUNDO PRETO ABSOLUTO */
-.stApp, [data-testid="stHeader"], [data-testid="stSidebar"], .stSidebar { background-color: #02040a !important; }
+    /* 🌌 Fundo Onyx Absoluto */
+    .stApp { background-color: #02040a !important; color: #f8fafc !important; }
+    [data-testid="stHeader"] { display: none !important; }
+    
+    /* 💎 Chassi de Luxo */
+    .chassi-elite {
+        background: linear-gradient(145deg, #0f172a, #02040a);
+        border: 2px solid #00ff87; border-radius: 20px;
+        padding: 40px; text-align: center; max-width: 500px; margin: 0 auto;
+        box-shadow: 0 0 30px rgba(0, 255, 135, 0.2);
+    }
 
-/* 👤 SIDEBAR BLINDADA: MÓDULOS E PLATAFORMAS */
-section[data-testid="stSidebar"] { border-right: 1px solid #1e293b !important; min-width: 250px !important; }
-section[data-testid="stSidebar"] * { color: #00ffcc !important; }
+    /* 🤖 Robô Neon Verde Giga */
+    .robot-neon {
+        font-size: 100px; text-align: center; filter: drop-shadow(0 0 25px #00ff87);
+        animation: pulse 2.5s infinite alternate;
+    }
+    @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.08); } }
 
-/* 🚨 BLINDAGEM DO INPUT */
-div[data-baseweb="input"] { background-color: #060913 !important; border: 1px solid #00ffcc !important; border-radius: 8px; }
-input { background-color: #060913 !important; color: #ffffff !important; }
+    /* ⚡ BOTÃO VIVO (GLOW NEON) - REMOVE O BRANCO */
+    div.stButton > button {
+        background: linear-gradient(135deg, #00ff87 0%, #00ffcc 100%) !important;
+        color: #030712 !important; 
+        font-weight: 900 !important; 
+        font-size: 16px !important;
+        border-radius: 50px !important;
+        padding: 18px 30px !important; 
+        width: 100% !important; 
+        border: none !important; 
+        box-shadow: 0 0 15px rgba(0, 255, 135, 0.4) !important;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: 0.4s all ease-in-out !important;
+    }
 
-/* 🤖 ROBÔ VAI E VEM */
-.robot-scanner { font-size: 80px; text-align: center; filter: drop-shadow(0 0 15px #00ffcc); animation: zoom 2s infinite alternate; }
-@keyframes zoom { from { transform: scale(0.9); } to { transform: scale(1.05); } }
+    /* Efeito ao passar o mouse (Hover) */
+    div.stButton > button:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 0 35px rgba(0, 255, 135, 0.8) !important;
+        background: linear-gradient(135deg, #00ffcc 0%, #00ff87 100%) !important;
+    }
 
-/* 📊 TABELAS DE LUXO (SEM FUNDO BRANCO) */
-[data-testid="stDataFrame"] { background-color: #060913 !important; border: 1px solid #1e293b !important; border-radius: 10px; }
-thead tr th { background-color: #0f172a !important; color: #00ffcc !important; }
-
-/* 💎 MOLDURAS NEON (CHASSIS) */
-.moldura-neon { border: 2px solid #00ffcc; border-radius: 15px; padding: 20px; background: #040814; margin-bottom: 20px; text-align: center; }
-
-/* 📋 CARDS DA MATRIZ (LISTAGEM) */
-.card-sugestao { background: #0f172a; border-left: 4px solid #00ffcc; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-top: 1px solid #1e293b; text-align: left; }
+    /* Inputs Estilizados */
+    div[data-baseweb="input"] { background-color: #060913 !important; border: 1.5px solid #00ff87 !important; border-radius: 50px !important; }
+    input { color: #ffffff !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# 3. SIDEBAR FIXA (MÓDULOS QUE NÃO PODEM SUMIR)
-with st.sidebar:
-    st.markdown("### 📡 MÓDULOS")
-    st.write("🟢 Radar de Lances")
-    st.write("🟢 Auditor de Funil")
-    st.write("🟢 Minerador Pro")
-    st.write("---")
-    st.markdown("### 🔌 PLATAFORMAS")
-    st.markdown("<p style='color:#00ff87; font-family:monospace;'>CLICKBANK: OK<br>BUYGOODS: OK</p>", unsafe_allow_html=True)
-
-# 4. ÁREA PRINCIPAL
-st.markdown('<div class="robot-scanner">🤖</div>', unsafe_allow_html=True)
-st.markdown('<h1 style="text-align:center; color:#00ffcc; font-weight:900; font-size:24px; margin-top:-15px;">MINERADOR CIBERNÉTICO ELITE</h1>', unsafe_allow_html=True)
-
-prod_alvo = st.text_input("💎 Digite o Produto:", value="Sugar Defender")
-btn_run = st.button("🚀 DISPARAR MINERAÇÃO (50 TERMOS)")
-
-# Containers Fixos
-espaco_pesquisa = st.empty()
-espaco_vazio = st.container()
-
-if btn_run:
-    # 50 Sufixos estratégicos
-    sufixos = ["official website", "buy now", "discount price", "order online", "customer reviews", "ingredients list", "side effects", "is it safe", "real results", "where to buy", "best price today", "official store", "coupon code", "promo code", "scam or legit", "benefits", "how to use", "shipping", "money back", "amazon price", "walmart cost", "vsl link", "checkout", "special offer", "lowest cost", "legit site", "official link", "get a discount", "sale today", "guaranteed", "supplement facts", "drops price", "liquid", "supplier", "buy direct", "reports", "scam check", "order today", "fast shipping", "genuine", "original", "stock", "availability", "cost per bottle", "top rated", "review", "pros and cons", "trial", "best deal", "portal", "store link"]
+# =============================================================================================================
+# 4. FLUXO DE TELAS (LOGIN -> PLATAFORMA -> MINERADOR)
+# =============================================================================================================
+if st.session_state.estagio == 'login':
+    st.markdown('<div class="robot-neon">🤖</div>', unsafe_allow_html=True)
+    st.markdown('<h1 style="text-align:center; color:#00ff87; font-weight:900;">CONEXÃO PARTICULAR</h1>', unsafe_allow_html=True)
     
-    minerados = []
+    with st.container():
+        st.markdown('<div class="chassi-elite">', unsafe_allow_html=True)
+        email = st.text_input("E-mail de Operador:", value="admin@elite.com")
+        senha = st.text_input("Senha Criptografada:", type="password", value="123456")
+        
+        if st.button("🔓 VALIDAR ACESSO"):
+            if email == "admin@elite.com" and senha == "123456":
+                st.session_state.estagio = 'plataforma'
+                st.rerun()
+            else:
+                st.error("❌ Credenciais Inválidas.")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+elif st.session_state.estagio == 'plataforma':
+    st.markdown('<div class="robot-neon">🤖</div>', unsafe_allow_html=True)
+    st.markdown('<h1 style="text-align:center; color:#00ff87;">ESCOLHA A PLATAFORMA</h1>', unsafe_allow_html=True)
+
+    with st.container():
+        st.markdown('<div class="chassi-elite">', unsafe_allow_html=True)
+        escolha = st.selectbox("Rede de Mineração:", ["CLICKBANK", "BUYGOODS", "DIGISTORE24", "MAXWEB"])
+        
+        if st.button("🚀 ESTABELECER CONEXÃO"):
+            st.session_state.plataforma_escolhida = escolha
+            st.session_state.estagio = 'minerador'
+            st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
+
+else:
+    st.markdown('<div class="robot-neon">🤖</div>', unsafe_allow_html=True)
+    st.markdown(f'<h1 style="text-align:center; color:#00ff87;">TERMINAL: {st.session_state.plataforma_escolhida}</h1>', unsafe_allow_html=True)
     
-    # ⛏️ VARREDURA ATIVA (Chassi de cima)
-    for i, suf in enumerate(sufixos):
-        termo = f"{prod_alvo} {suf}".upper()
-        espaco_pesquisa.markdown(f"""
-        <div class="moldura-neon">
-            <h2 style="color:#00ff87; margin:0;">⛏️ [VARRENDO]: {termo}</h2>
-            <p style="color:#ffffff; margin:0;">Sincronizando servidores internacionais... ({i+1}/50)</p>
-        </div>
-        """, unsafe_allow_html=True)
-        minerados.append({
-            "Nº": f"#{i+1:02d}",
-            "TERMO DE ELITE": termo,
-            "LANCE CPC": f"$ {random.uniform(2.15, 5.30):.2f}",
-            "ROI": "🔥 ALTO"
-        })
-        time.sleep(0.06)
-
-    # ✅ VARREDURA CONCLUÍDA
-    espaco_pesquisa.markdown(f'<div class="moldura-neon"><h2 style="color:#00ff87; margin:0;">✅ VARREDURA CONCLUÍDA</h2><p style="color:#fff; margin:0;">50 Termos Extraídos com Sucesso</p></div>', unsafe_allow_html=True)
-
-    # 🤖 PREENCHENDO O ESPAÇO VAZIO (LISTAGEM + MATRIZ)
-    with espaco_vazio:
-        # Tabela com CPC
-        st.markdown("### 📊 Listagem Operacional (CPC)")
-        st.dataframe(pd.DataFrame(minerados), use_container_width=True, hide_index=True)
-        
-        # Auditoria do Robô
-        st.markdown(f"""
-        <div style="background: rgba(0, 255, 204, 0.05); border: 2px solid #00ffcc; padding: 25px; border-radius: 15px; margin: 20px 0;">
-            <h3 style="color:#00ffcc; margin:0;">🤖 VERDITO DO ROBÔ ADRIEL-AI</h3>
-            <p style="color:#ffffff; font-size:15px; margin-top:10px;">
-                Análise concluída para <b>{prod_alvo}</b>. Use os termos 'Official' em correspondência exata para dominar o Google Ads.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Matriz Estratégica (Cards)
-        st.markdown("### 📋 Matriz Estratégica: 50 Sugestões")
-        cols = st.columns(2)
-        for idx, item in enumerate(minerados):
-            with cols[idx % 2]:
-                st.markdown(f"""
-                <div class="card-sugestao">
-                    <b style="color:#00ffcc;">{item['TERMO DE ELITE']}</b><br>
-                    <span style="color:#ffffff; font-size:12px;">Google Ads: Recomendado para Título 1</span>
-                </div>
-                """, unsafe_allow_html=True)
+    with st.container():
+        st.markdown('<div class="chassi-elite" style="max-width: 800px;">', unsafe_allow_html=True)
+        prod = st.text_input("💎 Nome do Produto:", value="Sugar Defender")
+        if st.button("⛏️ INICIAR MINERAÇÃO"):
+            st.success(f"Protocolo síncrono ativado para {prod}!")
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    if st.button("🔴 SAIR"):
+        st.session_state.estagio = 'login'
+        st.rerun()
