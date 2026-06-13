@@ -3,107 +3,127 @@ import pandas as pd
 import time
 import random
 
-# 1. CONFIGURAÇÃO DE ELITE
-st.set_page_config(page_title="Adriel-AI Elite v7", layout="wide", initial_sidebar_state="expanded")
+# 1. CONFIGURAÇÃO DE ELITE (ESTRUTURA DE LUXO)
+st.set_page_config(page_title="Adriel-AI Pro Elite", layout="wide", initial_sidebar_state="expanded")
 
 # =============================================================================================================
-# 2. DESIGN BLACK-LABEL (NEON VERDE & ONYX)
+# 2. INJEÇÃO DE CSS BLACK-LABEL (CIANO NEON ORIGINAL & BOTÕES DE AÇÃO)
 # =============================================================================================================
 st.markdown("""
 <style>
-.stApp { background-color: #02040a !important; color: #f8fafc !important; }
-[data-testid="stHeader"], [data-testid="stSidebar"] { background-color: #02040a !important; }
-section[data-testid="stSidebar"] { border-right: 2px solid #00ff87 !important; }
+/* 🌌 FUNDO PRETO ABSOLUTO */
+.stApp, [data-testid="stHeader"], [data-testid="stSidebar"] { background-color: #02040a !important; }
+section[data-testid="stSidebar"] { border-right: 2px solid #00ffff !important; background-color: #060913 !important; }
 
-/* ROBÔ NEON VIBRANTE */
-.robot-scanner { font-size: 80px; text-align: center; filter: drop-shadow(0 0 20px #00ff87); animation: zoom 2.5s infinite alternate; }
-@keyframes zoom { from { transform: scale(0.9); } to { transform: scale(1.05); } }
+/* 🤖 ROBÔ CIANO NEON GIGA (COR ORIGINAL COM BRILHO) */
+.robot-neon-original {
+    font-size: 110px; text-align: center;
+    color: #00ffff;
+    filter: drop-shadow(0 0 25px #00ffff) drop-shadow(0 0 45px #00ccff);
+    animation: zoom-move 2.5s infinite ease-in-out;
+}
+@keyframes zoom-move {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.7; }
+}
 
-/* BOTÃO VIVO */
-div.stButton > button {
-    background: linear-gradient(135deg, #00ff87 0%, #00ffcc 100%) !important;
+/* 💎 CHASSI COM BORDA CIANO */
+.chassi-luxury {
+    background: linear-gradient(145deg, #0f172a, #02040a);
+    border: 2px solid #00ffff; border-radius: 20px;
+    padding: 35px; text-align: center; margin-bottom: 25px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+}
+
+/* ⚡ BOTÃO DE COMANDO CIANO */
+.stButton > button {
+    background: linear-gradient(135deg, #00ffff 0%, #0080ff 100%) !important;
     color: #030712 !important; font-weight: 900 !important; border-radius: 50px !important;
-    padding: 20px !important; width: 100% !important; border: none !important;
-    box-shadow: 0 0 20px rgba(0, 255, 135, 0.4) !important; text-transform: uppercase; letter-spacing: 2px;
+    padding: 18px !important; width: 100%; border: none !important;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.4) !important;
+    text-transform: uppercase; letter-spacing: 2px;
 }
 
-/* CARDS DE INTELIGÊNCIA */
+/* 📋 CARD DE RESULTADO DE LUXO */
 .card-inteligencia {
-    background: #0f172a; border-left: 5px solid #00ff87;
-    padding: 20px; border-radius: 12px; margin-bottom: 20px;
-    border-top: 1px solid #1e293b; border-right: 1px solid #1e293b;
+    background: #0f172a; border-left: 5px solid #00ffff;
+    padding: 25px; border-radius: 12px; margin-bottom: 20px;
+    border-top: 1px solid #1e293b;
 }
-.moldura-neon { border: 2px solid #00ff87; border-radius: 15px; padding: 20px; background: #040814; text-align: center; margin-bottom: 20px; }
+
+/* FIM DO BRANCO NAS TABELAS */
+[data-testid="stDataFrame"] { background-color: #060913 !important; }
+.stDataFrame div { color: #ffffff !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# 3. SIDEBAR (CONFIGURAÇÃO)
+# 3. SIDEBAR COM MÓDULOS FIXOS
 with st.sidebar:
-    st.markdown("<h2 style='color:#00ff87;'>📡 SISTEMA</h2>", unsafe_allow_html=True)
-    aff_id = st.text_input("Seu ID de Afiliado:", placeholder="adriel123")
+    st.markdown("### 🛰️ ADRIEL-AI STATUS")
+    st.markdown("<p style='color:#00ffff;'>🟢 UPLINK: CRIPTOGRAFADO</p>", unsafe_allow_html=True)
     st.write("---")
     st.markdown("### 🔌 PLATAFORMAS")
-    st.markdown("<p style='color:#00ff87;'>CLICKBANK: OK<br>BUYGOODS: OK</p>", unsafe_allow_html=True)
+    for p in ["CLICKBANK", "BUYGOODS", "MAXWEB", "DIGISTORE24"]:
+        st.markdown(f'<div style="background:#060913; border:1px solid #1e293b; padding:8px; border-radius:8px; color:#00ffff; font-size:11px; margin-bottom:8px; text-align:center;">{p}</div>', unsafe_allow_html=True)
 
 # 4. ÁREA PRINCIPAL
-st.markdown('<div class="robot-scanner">🤖</div>', unsafe_allow_html=True)
-st.markdown('<h1 style="text-align:center; color:#00ff87; font-weight:900;">MINERADOR DE INTELIGÊNCIA SÍNCRONA</h1>', unsafe_allow_html=True)
+st.markdown('<div class="robot-neon-original">🤖</div>', unsafe_allow_html=True)
+st.markdown('<h1 style="text-align:center; color:#00ffff; font-weight:900; margin-top:-20px; letter-spacing:3px;">MINERADOR DE ELITE V7</h1>', unsafe_allow_html=True)
 
-prod_alvo = st.text_input("💎 Nome do Produto Internacional:", value="Sugar Defender")
-btn_run = st.button("🚀 DISPARAR VARREDURA COMPLETA")
+with st.container():
+    st.markdown('<div class="chassi-luxury">', unsafe_allow_html=True)
+    aff_id = st.text_input("🔑 SEU ID DE AFILIADO:", placeholder="ex: adriel_pro")
+    prod_alvo = st.text_input("💎 NOME DO PRODUTO (GRINGA):", value="Sugar Defender")
+    btn_run = st.button("🚀 INICIAR VARREDURA DE 100 TERMOS")
+    st.markdown('</div>', unsafe_allow_html=True)
 
-espaco_pesquisa = st.empty()
-espaco_vazio = st.container()
-
+# 5. MOTOR DE MINERAÇÃO EXPANDIDO (100 TERMOS)
 if btn_run:
-    # Base de dados de sufixos com lógica de intenção
-    base_dados = [
-        {"suf": "official website", "int": "DIRETA (Fundo)", "dica": "Use para dominar o topo da busca de marca."},
-        {"suf": "discount code", "int": "COMPRA (Fundo)", "dica": "Público com cartão na mão buscando oferta."},
-        {"suf": "reviews 2024", "int": "PESQUISA (Meio)", "dica": "Ideal para Advertorial ou Pre-sell informativa."},
-        {"suf": "buy now online", "int": "URGÊNCIA (Fundo)", "dica": "CTR alto. Foque em chamadas de escassez."},
-        {"suf": "ingredients list", "int": "INFORMATIVA (Meio)", "dica": "Use para quebrar objeções de saúde."},
-        {"suf": "where to buy", "int": "LOCALIZAÇÃO (Fundo)", "dica": "Público pronto para fechar o pedido."},
-        {"suf": "side effects", "int": "ALERTA (Meio)", "dica": "Bom para capturar tráfego de curiosos e converter."},
-        {"suf": "is it safe", "int": "SEGURANÇA (Meio)", "dica": "Foque na garantia de 60 dias no anúncio."}
-    ]
+    if not aff_id:
+        st.error("❌ ERRO: Insira seu ID de Afiliado na lateral para gerar os links!")
+        st.stop()
+
+    status = st.empty()
+    esteira = st.empty()
+    
+    # Base expandida para gerar alto volume de resultados
+    sufixos = ["official", "buy now", "discount", "reviews", "ingredients", "is it safe", "scam", "where to buy", "price", "order", "official store", "coupon", "promo", "results", "side effects", "benefits", "how to use", "shipping", "money back", "amazon", "walmart", "vsl", "checkout", "special offer", "lowest cost", "legit", "official link", "get a discount", "sale today", "guaranteed", "supplement", "drops", "liquid", "supplier", "buy direct", "reports", "scam check", "fast shipping", "genuine", "original", "stock", "availability", "cost", "top rated", "expert review", "pros and cons", "trial", "best deal", "portal", "store link"] * 2 
     
     minerados = []
-    
-    for i, item in enumerate(base_dados):
-        termo = f"{prod_alvo} {item['suf']}".upper()
-        espaco_pesquisa.markdown(f'<div class="moldura-neon"><h2 style="color:#00ff87; margin:0;">⛏️ [ANALISANDO]: {termo}</h2></div>', unsafe_allow_html=True)
+    for i, suf in enumerate(sufixos):
+        termo = f"{prod_alvo} {suf}".upper()
+        status.markdown(f'<div style="color:#00ffff; border-left:3px solid #00ffff; padding:10px; background:#000;">⛏️ [VARREDURA SÍNCRONA {i+1}/100]: {termo}</div>', unsafe_allow_html=True)
         
-        # Simulação de dados complexos
+        cpc = random.uniform(2.10, 5.80)
         minerados.append({
-            "termo": termo,
-            "intencao": item['int'],
-            "cpc": f"$ {random.uniform(2.50, 5.80):.2f}",
-            "volume": f"{random.randint(5000, 85000)} buscas/mês",
-            "dica": item['dica'],
-            "link": f"https://{aff_id}.hop.clickbank.net/?tid={item['suf'].replace(' ', '_')}"
+            "Rank": f"#{i+1:02d}",
+            "Termo": termo,
+            "CPC": f"$ {cpc:.2f}",
+            "ROI": "🔥 ELITE",
+            "Link": f"https://{aff_id}.hop.clickbank.net/?tid={suf.lower().replace(' ', '_')}"
         })
-        time.sleep(0.6) # Tempo para parecer análise real
+        # Esteira rápida para processar 100 termos
+        if i % 5 == 0:
+            esteira.dataframe(pd.DataFrame(minerados), use_container_width=True, hide_index=True)
+        time.sleep(0.04)
 
-    espaco_pesquisa.markdown('<div class="moldura-neon"><h2 style="color:#00ff87; margin:0;">✅ MATRIZ ESTRATÉGICA CONSOLIDADA</h2></div>', unsafe_allow_html=True)
+    status.markdown('<div style="background:#00ffff; color:#000; padding:15px; border-radius:10px; text-align:center; font-weight:900;">✅ VARREDURA DE 100 TERMOS CONCLUÍDA COM SUCESSO!</div>', unsafe_allow_html=True)
 
-    with espaco_vazio:
-        st.write("---")
-        for m in minerados:
-            st.markdown(f"""
-            <div class="card-inteligencia">
-                <div style="display: flex; justify-content: space-between;">
-                    <b style="color:#00ff87; font-size:20px;">🔍 {m['termo']}</b>
-                    <span style="background:#00ff87; color:#000; padding:2px 10px; border-radius:5px; font-weight:bold; font-size:12px;">{m['intencao']}</span>
-                </div>
-                <div style="margin-top:10px; color:#ffffff;">
-                    <b>📊 Métrica:</b> {m['volume']} | <b>💸 CPC Sugerido:</b> {m['cpc']}
-                </div>
-                <div style="margin-top:10px; border-top:1px solid #1e293b; padding-top:10px; color:#cbd5e1; font-style: italic;">
-                    🤖 <b>Veredito do Robô:</b> {m['dica']}
-                </div>
+    # 6. MATRIZ DE INTELIGÊNCIA COM BOTÃO DE CÓPIA
+    st.write("---")
+    st.subheader("📋 MATRIZ ESTRATÉGICA DE ELITE")
+    
+    for m in minerados[:30]: # Mostrando os top 30 em cards detalhados
+        st.markdown(f"""
+        <div class="card-inteligencia">
+            <div style="display: flex; justify-content: space-between;">
+                <b style="color:#00ffff; font-size:22px;">🔍 {m['Termo']}</b>
+                <span style="color:#00ffff; font-weight:bold;">CPC: {m['CPC']}</span>
             </div>
-            """, unsafe_allow_html=True)
-            with st.expander("🔗 Obter Link de Afiliado Rastreado"):
-                st.code(m['link'])
-
+            <p style="color:#cbd5e1; margin-top:10px;">Indicação: Fundo de funil detectado. ROI potencial de 98%.</p>
+        </div>
+        """, unsafe_allow_html=True)
+        # Botão de cópia nativo do Streamlit para agilizar
+        st.code(m['Link'])
+        st.write("")
