@@ -17,7 +17,7 @@ if "contador_infinito" not in st.session_state:
     st.session_state.contador_infinito = 0
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS PERSONALIZADO (ALINHAMENTO E CORES DA SUA SEGUNDA IMAGEM)
+# 2. INJEÇÃO DE CSS PERSONALIZADO (IDÊNTICO À COR VERDE-ÁGUA DA SUA IMAGEM)
 # =============================================================================================================
 st.markdown("""
 <style>
@@ -26,14 +26,22 @@ st.markdown("""
     background-color: #02040a !important;
 }
 
-/* 👤 SIDEBAR NEON VERDE */
-section[data-testid="stSidebar"] { border-right: 1px solid #10b981 !important; }
-section[data-testid="stSidebar"] * { color: #10b981 !important; }
+/* 👤 SIDEBAR NEON COM O TOM DE VERDE-ÁGUA */
+section[data-testid="stSidebar"] { border-right: 1px solid #00c4b4 !important; }
+section[data-testid="stSidebar"] * { color: #00c4b4 !important; }
 
-/* 🤖 ROBÔ VAI E VEM (ZOOM NEON VERDE) */
+/* 🚨 INPUTS COMBINANDO COM A PALETA */
+div[data-baseweb="input"] {
+    background-color: #0d1117 !important;
+    border: 1px solid #00c4b4 !important;
+    border-radius: 10px !important;
+}
+input { color: #ffffff !important; background-color: transparent !important; -webkit-text-fill-color: #ffffff !important; }
+
+/* 🤖 ROBÔ VAI E VEM (ZOOM NEON VERDE-ÁGUA) */
 .robot-scanner {
     font-size: 100px; text-align: center;
-    filter: drop-shadow(0 0 20px #10b981);
+    filter: drop-shadow(0 0 20px #00c4b4);
     animation: vai-e-vem-zoom 2.5s infinite ease-in-out;
 }
 @keyframes vai-e-vem-zoom {
@@ -42,32 +50,33 @@ section[data-testid="stSidebar"] * { color: #10b981 !important; }
     100% { transform: scale(0.9); opacity: 0.7; }
 }
 
-/* 💎 CHASSI CENTRALIZADO COM BORDA VERDE */
+/* 💎 CHASSI CENTRALIZADO COESO */
 .chassi-luxury {
     background-color: #02040a;
-    border: 1px solid #10b981; 
+    border: 1px solid #00c4b4; 
     border-radius: 8px;
     padding: 25px; 
     margin-bottom: 20px;
 }
 
-/* ⚡ CONFIGURAÇÃO DO BOTÃO REON VERDE */
+/* ⚡ CONFIGURAÇÃO DO BOTÃO EM VERDE-ÁGUA NEON */
 .stButton > button {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    background: linear-gradient(135deg, #00c4b4 0%, #008080 100%) !important;
     color: #02040a !important; 
     font-weight: 800 !important; 
     border-radius: 25px !important;
     padding: 10px 20px !important; 
     border: none !important;
-    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4) !important;
+    box-shadow: 0 0 15px rgba(0, 196, 180, 0.4) !important;
     text-transform: uppercase;
     font-size: 14px !important;
+    width: 100%;
 }
 
-/* 📋 BLOCOS DE LISTAGEM EXATAMENTE IGUAIS AO PRINT VERDE */
-.box-pattern-green {
+/* 📋 BLOCOS DE LISTAGEM EXATAMENTE IGUAIS AO PRINT ENVIADO */
+.box-pattern-aqua {
     background-color: #02040a;
-    border: 1px solid #10b981;
+    border: 1px solid #00c4b4;
     border-radius: 6px;
     padding: 10px 15px;
     margin-bottom: 6px;
@@ -75,36 +84,42 @@ section[data-testid="stSidebar"] * { color: #10b981 !important; }
     justify-content: space-between;
     align-items: center;
 }
-.termo-text-green { color: #ffffff !important; font-weight: 700; font-size: 14px; font-family: monospace; }
-.status-tag-green { color: #10b981 !important; font-size: 11px; font-weight: bold; letter-spacing: 1px; }
+.termo-text-aqua { color: #ffffff !important; font-weight: 700; font-size: 14px; font-family: monospace; }
+.status-tag-aqua { color: #00c4b4 !important; font-size: 11px; font-weight: bold; letter-spacing: 1px; }
 
-.terminal-hacker { background: #000; border-left: 5px solid #10b981; color: #10b981; padding: 15px; border-radius: 8px; font-family: monospace; margin-bottom: 15px; }
+.terminal-hacker { background: #000; border-left: 5px solid #00c4b4; color: #00c4b4; padding: 15px; border-radius: 8px; font-family: monospace; margin-bottom: 15px; }
 </style>
 """, unsafe_allow_html=True)
 
 # 3. SIDEBAR COM PLATAFORMAS (TOTALMENTE DARK)
 with st.sidebar:
-    st.markdown("### 📡 STATUS DO SISTEMA")
-    if st.session_state.minerando:
-        st.markdown("<p style='color:#10b981;'>🟢 Scanner: LOOP INFINITO ATIVO</p>", unsafe_allow_html=True)
-    else:
-        st.markdown("<p style='color:#ff3333;'>🔴 Scanner: AGUARDANDO COMANDO</p>", unsafe_allow_html=True)
+    st.markdown("### 🛰️ MENU ELITE")
+    st.write("app | Radar | Auditor")
+    st.write("Gerador | Caçador")
+    st.markdown("<p style='background:#0d1117; border:1px solid #00c4b4; padding:5px; border-radius:5px; text-align:center;'>MINERADOR ATIVO</p>", unsafe_allow_html=True)
     st.write("---")
-    st.markdown("### 🔌 PLATAFORMAS CONECTADAS")
-    for p in ["CLICKBANK", "BUYGOODS", "DIGISTORE24", "MAXWEB", "HOTMART INT"]:
-        st.markdown(f'<div style="border:1px solid #10b981; padding:5px; border-radius:5px; margin-bottom:5px; text-align:center; font-size:11px; color:#10b981;">{p}<br>🟢 ONLINE</div>', unsafe_allow_html=True)
+    st.markdown("### 📡 STATUS")
+    if st.session_state.minerando:
+        st.markdown("<p style='color:#00c4b4;'>🟢 SCANNER: LOOP INFINITO ATIVO</p>", unsafe_allow_html=True)
+    else:
+        st.markdown("<p style='color:#ff3333;'>🔴 MINERADOR PARADO</p>", unsafe_allow_html=True)
+    st.write("---")
+    st.markdown("### 🔌 REDES")
+    for p in ["CLICKBANK", "BUYGOODS", "MAXWEB"]:
+        st.markdown(f'<div style="border:1px solid #00c4b4; padding:4px; border-radius:5px; margin-bottom:5px; text-align:center; font-size:10px;">{p}</div>', unsafe_allow_html=True)
 
 # 4. ÁREA PRINCIPAL
 st.markdown('<div class="robot-scanner">🤖</div>', unsafe_allow_html=True)
-st.markdown('<h1 style="text-align:center; color:#10b981; font-weight:900; margin-top:-10px; letter-spacing:2px;">MINERADOR DE ELITE V7</h1>', unsafe_allow_html=True)
+st.markdown('<h1 style="text-align:center; color:#00c4b4; font-weight:900; margin-top:-10px; letter-spacing:2px;">MINERADOR DE ELITE V7</h1>', unsafe_allow_html=True)
 
-# Chassi organizador dos Inputs e Botões
-st.markdown('<div class="chassi-luxury">', unsafe_allow_html=True)
+# Inputs organizados
 aff_id = st.text_input("🔑 SEU ID DE AFILIADO:", placeholder="Ex: adriel_pro")
 prod_alvo = st.text_input("💎 PRODUTO PARA MINERAR:", placeholder="Ex: Sugar Defender")
 
-# CORREÇÃO DO ERRO DO ESPAÇO: Colunas com proporção inteligente para juntar os botões
-col_space1, col_btn1, col_btn2, col_space2 = st.columns([2, 2, 2, 2])
+st.write("") 
+
+# Distribuição por colunas para juntar os botões centralizados
+col_esq, col_btn1, col_btn2, col_dir = st.columns()
 
 with col_btn1:
     if st.button("🚀 INICIAR PESQUISA INFINITA"):
@@ -118,19 +133,18 @@ with col_btn2:
     if st.button("🛑 PARAR PESQUISA"):
         st.session_state.minerando = False
         st.rerun()
-st.markdown('</div>', unsafe_allow_html=True)
 
 status = st.empty()
 container_blocos = st.container()
 
-# Renderização estável dos blocos
+# Renderização estável dos blocos com o tom correto da imagem
 if st.session_state.dados_minerados:
     with container_blocos:
         for item in reversed(st.session_state.dados_minerados):
             st.markdown(f"""
-            <div class="box-pattern-green">
-                <span class="termo-text-green">🔍 {item['TERMO DE ELITE']}</span>
-                <span class="status-tag-green">[ALTA] - {item['LANCE CPC']} — SUCE-X</span>
+            <div class="box-pattern-aqua">
+                <span class="termo-text-aqua">🔍 {item['TERMO DE ELITE']}</span>
+                <span class="status-tag-aqua">[ALTA] - {item['LANCE CPC']} — SUCE-X</span>
             </div>
             """, unsafe_allow_html=True)
 
@@ -158,4 +172,4 @@ if st.session_state.minerando:
     st.rerun()
 else:
     if st.session_state.contador_infinito > 0:
-        status.markdown(f'<div class="terminal-hacker" style="border-color:#ff3333; color:#ff3333; text-align:center; font-weight:900;">🛑 MOTOR INTERROMPIDO TOTAL: {st.session_state.contador_infinito} TERMOS CATALOGADOS</div>', unsafe_allow_html=True)
+        status.markdown(f'<div class="terminal-hacker" style="border-color:#ff3333; color:#ffffff; background-color:#ff3333; text-align:center; font-weight:900;">🛑 MOTOR INTERROMPIDO TOTAL: {st.session_state.contador_infinito} TERMOS CATALOGADOS</div>', unsafe_allow_html=True)
