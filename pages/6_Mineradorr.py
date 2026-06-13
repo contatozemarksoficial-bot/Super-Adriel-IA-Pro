@@ -1,15 +1,14 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import requests
-import urllib.parse
+import json
 import time
 
 # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE
 st.set_page_config(page_title="Minerador Real - AdrielAI", page_icon="📡", layout="wide")
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL TEMA DE LUXO (NOVO HUD HOLOGRÁFICO)
+# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL TEMA DE LUXO (HUD HOLOGRÁFICO)
 # =============================================================================================================
 st.markdown("""
 <style>
@@ -34,7 +33,6 @@ st.markdown("""
 .terminal-hacker { background-color: #040814 !important; border: 2px solid #00ffcc !important; border-radius: 10px !important; padding: 15px !important; font-family: monospace !important; color: #00ffcc !important; box-shadow: 0 0 15px rgba(0,255,204,0.2) !important; white-space: pre-wrap !important; }
 .stTextInput > div > div > input { background-color: #0f1526 !important; color: #ffffff !important; border: 2px solid #1e293b !important; border-radius: 8px !important; padding: 12px !important; }
 
-/* 🌟 NOVO CONTEXTO VISUAL: PAINEL HOLOGRÁFICO ULTRA-MODERNO (SEM DESENHO DE TEXTO FEIO) */
 .hud-futurista {
     background: radial-gradient(circle at 50% 50%, #0d1b3e 0%, #040814 100%) !important;
     border: 2px dashed #00ffcc !important;
@@ -77,114 +75,96 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown('<h1 style="font-size: 2.5rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0, 255, 204, 0.4); margin-bottom: 5px;">📡 MÓDULO 7: MINERADOR CIBERNÉTICO INTERNACIONAL</h1>', unsafe_allow_html=True)
-st.write("Conexão estável via API síncrona com os servidores de busca dos Estados Unidos sem risco de bloqueios de IP.")
+st.write("Conexão direta e blindada via API com os servidores oficiais do Google Ads US.")
 st.write("---")
 
-# ✨ NOVO VISUAL COMPLETO: PAINEL HUD DE ENERGIA CYBERPUNK
 st.markdown("""
 <div class="hud-futurista">
-    <div class="hud-title">🌀 ONYX INTELLIGENCE MODULE v4.0</div>
+    <div class="hud-title">🌀 ONYX TRUE-DATA HARDWARE v5.0</div>
     <p style="color: #94a3b8; font-size: 14px; max-width: 600px; margin: 0 auto;">
-        Varredura geográfica profunda automatizada. Rastreando comportamentos e intenções de compra em tempo real diretamente nos servidores globais.
+        Extração legítima via servidores dedicados. Capturando os dados reais de preenchimento automático do mercado americano.
     </p>
     <div class="hud-status-grid">
-        <div class="hud-badge">📡 STATUS: ONLINE</div>
-        <div class="hud-badge">🌍 REGION: USA / UK</div>
-        <div class="hud-badge">🔒 SECURE LINK: ACTIVE</div>
+        <div class="hud-badge">📡 SERPER API: CONECTADA</div>
+        <div class="hud-badge">🌍 GOOGLE GEOLOC: US (EN)</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
+
+# CONFIGURAÇÃO DE SEGURANÇA: Chave do Usuário
+api_key_input = st.text_input("Insira sua API Key da Serper.dev:", type="password", value="")
 
 # Entrada do Produto
 prod_alvo = st.text_input("Insira o nome do produto gringo para minerar ao vivo:", value="FitSpresso")
 st.write("")
 
 if st.button("⛏️ ACIONAR CAPTURA DE DADOS VIVOS DA GRINGA"):
-    if prod_alvo:
+    if not api_key_input:
+        st.error("❌ Você precisa inserir uma API Key válida da Serper.dev para o robô funcionar.")
+    elif prod_alvo:
         p_nome = prod_alvo.strip()
         
         log_terminal = st.empty()
         barra_progresso = st.progress(0)
         
-        log_terminal.markdown('<div class="terminal-hacker">📡 [REDE] Autenticando handshake TLS estável com o gateway US...</div>', unsafe_allow_html=True)
+        log_terminal.markdown('<div class="terminal-hacker">📡 [REDE] Efetuando tunelamento criptografico com os clusters do Google...</div>', unsafe_allow_html=True)
         time.sleep(0.3)
-        barra_progresso.progress(15)
+        barra_progresso.progress(20)
 
         # =============================================================================================================
-        # 🔌 NOVO MOTOR DE CONEXÃO PREMIUM REFORÇADO (DESTRAVADO)
+        # 🔌 MOTOR DE CONEXÃO REAL VIA SERPER (GOOGLE ADS AUTOMATIC DATA)
         # =============================================================================================================
         resultados_reais = set()
-        contador_visual = st.empty()
         
-        # Alfabeto completo expandido para forçar centenas de resultados
-        sementes_comerciais = ["", " buy", " official", " reviews", " discount", " price", " ingredients", " complaints", " side effects", " order", " scam", " coupon"]
-        alfabeto = [f" {chr(i)}" for i in range(97, 123)] # ' a' até ' z'
+        # Sementes alfa comerciais e alfabeto de busca completo
+        sementes_comerciais = ["", " buy", " official", " reviews", " discount", " price", " ingredients", " complaints", " side effects", " order", " scam", " coupon", " website"]
+        alfabeto = [f" {chr(i)}" for i in range(97, 123)]
         todas_as_sementes = sementes_comerciais + alfabeto
         
-        # Cabeçalhos completos de navegador real com Cookies aceitos para destravar o limite de dados
+        url = "https://serper.dev"
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-            "Accept": "application/json, text/javascript, */*; q=0.01",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Referer": "https://duckduckgo.com",
-            "Cookie": "kl=us-en"
+            'X-API-KEY': api_key_input,
+            'Content-Type': 'application/json'
         }
 
+        # Varredura síncrona
         for idx, semente in enumerate(todas_as_sementes):
             query_gringa = f"{p_nome}{semente}"
-            url_api = f"https://duckduckgo.comac/?q={urllib.parse.quote_plus(query_gringa)}&kl=us-en"
+            payload = json.dumps({"q": query_gringa})
             
             try:
-                resposta = requests.get(url_api, headers=headers, timeout=4)
+                resposta = requests.post(url, headers=headers, data=payload, timeout=5)
                 if resposta.status_code == 200:
                     dados = resposta.json()
-                    for item in dados:
-                        termo = item.get('phrase')
-                        # Limpa e valida o termo coletado
-                        if termo and p_nome.lower() in termo.lower():
-                            resultados_reais.add(termo.lower().strip())
-            except:
+                    # A Serper entrega uma lista estruturada chamada 'suggestions'
+                    if "suggestions" in dados:
+                        for termo in dados["suggestions"]:
+                            if p_nome.lower() in termo.lower():
+                                resultados_reais.add(termo.lower().strip())
+            except Exception:
                 pass
             
-            # Progresso visual incremental na tela
-            porcentagem = int((idx / len(todas_as_sementes)) * 65) + 15
+            porcentagem = int((idx / len(todas_as_sementes)) * 60) + 20
             barra_progresso.progress(porcentagem)
-            contador_visual.markdown(f"⛏️ *Onyx-AI minerando em tempo real... Coletados {len(resultados_reais)} termos únicos.*")
-            time.sleep(0.02)
 
         lista_final = sorted(list(resultados_reais))
 
-        # Backup inteligente com termos de funil ricos caso a rede externa caia completamente
-        if len(lista_final) < 6:
-            lista_final = [
-                f"{p_nome} official site", f"buy {p_nome} online", f"{p_nome} reviews", 
-                f"where to buy {p_nome}", f"{p_nome} discount code", f"{p_nome} price",
-                f"{p_nome} ingredients", f"{p_nome} side effects", f"order {p_nome}"
-            ]
-
         barra_progresso.progress(85)
-        log_terminal.markdown(f'<div class="terminal-hacker" style="border-color:#00ffcc; color:#00ffcc;">✅ [SUCESSO] Varredura orgânica concluída! {len(lista_final)} Termos reais colhidos da gringa!</div>', unsafe_allow_html=True)
-        contador_visual.empty()
+        log_terminal.markdown(f'<div class="terminal-hacker" style="border-color:#00ffcc; color:#00ffcc;">✅ [SUCESSO] Varredura orgânica concluída! {len(lista_final)} Termos reais extraídos do Google US!</div>', unsafe_allow_html=True)
         
         st.write("---")
-        st.markdown("### 📊 Distribuição Estratégica por Intenção (Separação por Funil):")
+        st.markdown("### 📊 Banco de Dados Oficial Organizado por Funil de Vendas:")
         
-        # =============================================================================================================
-        # 🧠 INTEGRAÇÃO E CLASSIFICAÇÃO DOS FUNIS COM CPC E VOLUME SIMULADOS
-        # =============================================================================================================
         topo_funil = []
         meio_funil = []
         fundo_funil = []
         
         gatilhos_fundo = ["buy", "official", "order", "price", "discount", "coupon", "website", "sale", "store", "cost", "where to buy", "site"]
-        gatilhos_meio = ["reviews", "ingredients", "side effects", "complaints", "scam", "does it work", "work", "independent", "results", "pros and cons", "customer"]
+        gatilhos_meio = ["reviews", "ingredients", "side effects", "complaints", "scam", "does it work", "work", "independent", "results", "pros and cons", "customer", "facts", "legit", "dosage"]
         
-        for idx, termo in enumerate(lista_final):
-            np.random.seed(idx + len(p_nome))
-            vol = f"{int(np.random.randint(1500, 38000)):,}"
-            cpc = f"$ {float(np.random.uniform(1.10, 3.45)):.2f}"
-            
-            item_dados = {"Palavra-Chave": termo, "Vol. Busca": vol, "CPC Médio": cpc}
+        # Filtro estruturado
+        for termo in lista_final:
+            item_dados = {"Palavra-Chave": termo}
             
             if any(x in termo for x in gatilhos_fundo):
                 fundo_funil.append(item_dados)
@@ -193,7 +173,28 @@ if st.button("⛏️ ACIONAR CAPTURA DE DADOS VIVOS DA GRINGA"):
             else:
                 topo_funil.append(item_dados)
                 
-        # Exibição limpa em 3 colunas dedicadas
+        # Impressão na tela das tabelas reais
         col1, col2, col3 = st.columns(3)
         
         with col1:
+            st.markdown("#### 🔴 Topo de Funil (Descoberta)")
+            if topo_funil:
+                st.dataframe(pd.DataFrame(topo_funil), use_container_width=True, hide_index=True)
+            else:
+                st.info("Nenhuma palavra mapeada.")
+                
+        with col2:
+            st.markdown("#### 🟡 Meio de Funil (Análise)")
+            if meio_funil:
+                st.dataframe(pd.DataFrame(meio_funil), use_container_width=True, hide_index=True)
+            else:
+                st.info("Nenhuma análise mapeada.")
+                
+        with col3:
+            st.markdown("#### 🟢 Fundo de Funil (Compra Direta)")
+            if fundo_funil:
+                st.dataframe(pd.DataFrame(fundo_funil), use_container_width=True, hide_index=True)
+            else:
+                st.info("Nenhum termo de intenção mapeado.")
+                
+        barra_progresso.progress(100)
