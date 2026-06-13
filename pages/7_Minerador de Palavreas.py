@@ -17,28 +17,28 @@ if "contador_infinito" not in st.session_state:
     st.session_state.contador_infinito = 0
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS BLACK-LABEL (EXTERMINA O BRANCO E FIXA O NEON)
+# 2. INJEÇÃO DE CSS PERSONALIZADO (IDÊNTICO À PALETA DE VERDE DA SUA NOVA IMAGEM)
 # =============================================================================================================
 st.markdown("""
 <style>
-/* 🌌 FUNDO PRETO ABSOLUTO: Bloqueia qualquer vazamento de cor clara */
+/* 🌌 FUNDO PRETO ABSOLUTO */
 .stApp, [data-testid="stSidebar"], [data-testid="stHeader"], .stSidebar {
     background-color: #02040a !important;
 }
 
-/* 👤 SIDEBAR NEON: Cores e Bordas */
-section[data-testid="stSidebar"] { border-right: 1px solid #1e293b !important; }
-section[data-testid="stSidebar"] * { color: #00ffcc !important; }
+/* 👤 SIDEBAR NEON COM TOQUE VERDE DA SUA IMAGEM */
+section[data-testid="stSidebar"] { border-right: 1px solid #10b981 !important; }
+section[data-testid="stSidebar"] * { color: #10b981 !important; }
 
-/* 📊 TABELAS DE LUXO: Remove o fundo branco nativo do Streamlit */
-[data-testid="stDataFrame"] { background-color: #060913 !important; border: 1px solid #1e293b !important; border-radius: 10px; }
+/* 📊 TABELAS DE LUXO ADAPTADAS */
+[data-testid="stDataFrame"] { background-color: #060913 !important; border: 1px solid #10b981 !important; border-radius: 10px; }
 .stDataFrame div { color: #ffffff !important; }
-thead tr th { background-color: #0f172a !important; color: #00ffcc !important; }
+thead tr th { background-color: #0f172a !important; color: #10b981 !important; }
 
-/* 🤖 ROBÔ VAI E VEM (ZOOM NEON) */
+/* 🤖 ROBÔ VAI E VEM (ZOOM NEON VERDE) */
 .robot-scanner {
     font-size: 100px; text-align: center;
-    filter: drop-shadow(0 0 20px #00ffcc);
+    filter: drop-shadow(0 0 20px #10b981);
     animation: vai-e-vem-zoom 2.5s infinite ease-in-out;
 }
 @keyframes vai-e-vem-zoom {
@@ -47,26 +47,40 @@ thead tr th { background-color: #0f172a !important; color: #00ffcc !important; }
     100% { transform: scale(0.9); opacity: 0.7; }
 }
 
-/* 💎 CHASSI COM BORDA NEON */
+/* 💎 CHASSI COM BORDA VERDE DA NOVA IMAGEM */
 .chassi-luxury {
-    background: linear-gradient(145deg, #0f172a, #02040a);
-    border: 2px solid #00ffcc; border-radius: 20px;
-    padding: 35px; text-align: center; margin-bottom: 25px;
-    box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+    background: linear-gradient(145deg, #060913, #02040a);
+    border: 1.5px solid #10b981; border-radius: 12px;
+    padding: 30px; text-align: center; margin-bottom: 25px;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
 }
 
-/* ⚡ BOTÃO NEON GIGA */
+/* ⚡ BOTÃO NEON SINTONIZADO NO VERDE DA IMAGEM */
 .stButton > button {
-    background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%) !important;
-    color: #030712 !important; font-weight: 900 !important; border-radius: 50px !important;
-    padding: 20px !important; width: 100%; border: none !important;
-    box-shadow: 0 0 20px rgba(0, 255, 204, 0.4) !important;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: #02040a !important; font-weight: 900 !important; border-radius: 50px !important;
+    padding: 18px !important; width: 100%; border: none !important;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3) !important;
 }
 
-/* CARDS DE PLATAFORMAS E MATRIZ */
-.card-plataforma { background: #060913; border: 1px solid #1e293b; padding: 10px; border-radius: 8px; text-align: center; color: #00ffcc; font-size: 11px; margin-bottom: 8px; }
-.card-sugestao { background: #0f172a; border-left: 4px solid #00ffcc; padding: 15px; border-radius: 8px; margin-bottom: 12px; border-top: 1px solid #1e293b; }
-.terminal-hacker { background: #000; border-left: 5px solid #00ffcc; color: #00ffcc; padding: 15px; border-radius: 8px; font-family: monospace; margin-bottom: 15px; }
+/* 📋 BLOCOS DE LISTAGEM EXATAMENTE IGUAIS AO PRINT DA SUA ESQUERDA */
+.box-pattern-green {
+    background-color: #02040a;
+    border: 1px solid #10b981;
+    border-radius: 6px;
+    padding: 10px 15px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.termo-text-green { color: #ffffff !important; font-weight: 700; font-size: 14px; font-family: monospace; }
+.status-tag-green { color: #10b981 !important; font-size: 11px; font-weight: bold; letter-spacing: 1px; }
+
+/* CARDS DA MATRIZ E TERMINAL */
+.card-plataforma { background: #060913; border: 1px solid #10b981; padding: 10px; border-radius: 8px; text-align: center; color: #10b981; font-size: 11px; margin-bottom: 8px; }
+.card-sugestao { background: #060913; border-left: 4px solid #10b981; padding: 15px; border-radius: 8px; margin-bottom: 12px; border-top: 1px solid #1e293b; }
+.terminal-hacker { background: #000; border-left: 5px solid #10b981; color: #10b981; padding: 15px; border-radius: 8px; font-family: monospace; margin-bottom: 15px; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -74,7 +88,7 @@ thead tr th { background-color: #0f172a !important; color: #00ffcc !important; }
 with st.sidebar:
     st.markdown("### 📡 STATUS DO SISTEMA")
     if st.session_state.minerando:
-        st.markdown("<p style='color:#00ff87;'>🟢 Scanner: LOOP INFINITO ATIVO</p>", unsafe_allow_html=True)
+        st.markdown("<p style='color:#10b981;'>🟢 Scanner: LOOP INFINITO ATIVO</p>", unsafe_allow_html=True)
     else:
         st.markdown("<p style='color:#ff3333;'>🔴 Scanner: AGUARDANDO COMANDO</p>", unsafe_allow_html=True)
     st.write("---")
@@ -85,7 +99,7 @@ with st.sidebar:
 
 # 4. ÁREA PRINCIPAL
 st.markdown('<div class="robot-scanner">🤖</div>', unsafe_allow_html=True)
-st.markdown('<h1 style="text-align:center; color:#00ffcc; font-weight:900; margin-top:-10px; letter-spacing:2px;">MINERADOR CIBERNÉTICO ELITE</h1>', unsafe_allow_html=True)
+st.markdown('<h1 style="text-align:center; color:#10b981; font-weight:900; margin-top:-10px; letter-spacing:2px;">MINERADOR CIBERNÉTICO ELITE</h1>', unsafe_allow_html=True)
 
 with st.container():
     st.markdown('<div class="chassi-luxury">', unsafe_allow_html=True)
@@ -105,11 +119,19 @@ with st.container():
     st.markdown('</div>', unsafe_allow_html=True)
 
 status = st.empty()
-esteira = st.empty()
+container_blocos = st.container()
 
+# Renderiza os blocos estilizados iguaizinhos à lista da esquerda da sua imagem
 if st.session_state.dados_minerados:
-    df_visualizacao = pd.DataFrame(st.session_state.dados_minerados)[::-1]
-    esteira.dataframe(df_visualizacao, use_container_width=True, hide_index=True)
+    with container_blocos:
+        # Mostra o mais novo no topo
+        for item in reversed(st.session_state.dados_minerados):
+            st.markdown(f"""
+            <div class="box-pattern-green">
+                <span class="termo-text-green">🔍 {item['TERMO DE ELITE']}</span>
+                <span class="status-tag-green">[ALTA] - {item['LANCE CPC']} — SUCE-X</span>
+            </div>
+            """, unsafe_allow_html=True)
 
 # =============================================================================================================
 # 5. MOTOR DE LOOP CONTÍNUO (MOTO-PESQUISA)
@@ -139,12 +161,12 @@ else:
     if st.session_state.contador_infinito > 0:
         status.markdown(f'<div class="terminal-hacker" style="border-color:#ff3333; color:#ff3333;">🛑 MOTOR SECCIONADO: Mineração parada com {st.session_state.contador_infinito} termos consolidados.</div>', unsafe_allow_html=True)
 
-# 6. AUDITORIA E MATRIZ ESTRATÉGICA (Onde os links ocultos foram removidos)
+# 6. AUDITORIA E MATRIZ ESTRATÉGICA (Ajustada com a nova identidade visual verde)
 if st.session_state.dados_minerados:
     st.write("---")
     st.markdown(f"""
-    <div style="background: rgba(0, 255, 204, 0.05); border: 2px solid #00ffcc; padding: 25px; border-radius: 15px;">
-        <h3 style="color: #00ffcc; margin:0;">🤖 AUDITORIA E INDICAÇÃO DO ROBÔ</h3>
+    <div style="background: rgba(16, 185, 129, 0.05); border: 2px solid #10b981; padding: 25px; border-radius: 15px;">
+        <h3 style="color: #10b981; margin:0;">🤖 AUDITORIA E INDICAÇÃO DO ROBÔ</h3>
         <p style="color: #cbd5e1; font-size: 16px; margin-top:10px;">
             <b>VERDITO:</b> O motor coletou <b>{st.session_state.contador_infinito}</b> termos estruturados para o produto <b>{prod_alvo}</b>. 
             <b>Indicação:</b> Foque na filtragem dos termos com maior constância e otimize seus lances diretamente nos blocos gerados abaixo.
@@ -154,13 +176,11 @@ if st.session_state.dados_minerados:
 
     st.subheader("📋 Matriz Estratégica: Sugestões Ativas do Robô")
     cols = st.columns(2)
-    
-    # Exibe os cards limpos (sem o st.code de links abaixo)
     for idx, item in enumerate(st.session_state.dados_minerados[::-1][:50]):
         with cols[idx % 2]:
             st.markdown(f"""
             <div class="card-sugestao">
-                <b style="color:#00ffcc;">{item['TERMO DE ELITE']}</b><br>
+                <b style="color:#10b981;">{item['TERMO DE ELITE']}</b><br>
                 <span style="color:#cbd5e1; font-size:12px;">Lance Base Estimado: {item['LANCE CPC']} — Google Ads</span>
             </div>
             """, unsafe_allow_html=True)
