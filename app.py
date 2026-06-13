@@ -5,33 +5,35 @@ import json
 import time
 from datetime import datetime
 
-# 1. CONFIGURAÇÃO PREMIUM DA INTERFACE DE ELITE 2026
-st.set_page_config(page_title="Adriel-AI Pro - Control Center", page_icon="👑", layout="wide")
+# 1. CONFIGURAÇÃO PREMIUM DA INTERFACE DE ELITE
+st.set_page_config(page_title="Adriel-AI Pro - Control Center", page_icon="🤖", layout="wide")
 
-# CHAVE MESTRA DO ADMINISTRADOR
 CHAVE_MESTRA = "ONYX_MASTER_2026"
 
 # Inicialização de estados globais de navegação e segurança
 if "modulo_ativo" not in st.session_state:
     st.session_state.modulo_ativo = "DASHBOARD"
 if "status_usuario" not in st.session_state:
-    st.session_state.status_usuario = "ADMIN"  # Opções: ADMIN, ATIVO, BLOQUEADO
+    st.session_state.status_usuario = "ADMIN"  
 if "api_key_global" not in st.session_state:
     st.session_state.api_key_global = ""
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL LUXO SUPREMO (COPIA FIEL DO PRINT DE TELA)
+# 2. INJEÇÃO DE CSS BLACK-LABEL LUXO SUPREMO CYBER-PULSE
 # =============================================================================================================
 st.markdown("""
 <style>
-/* Reset de fundo escuro profundo */
+/* Reset de fundo escuro profundo de cinema */
 .stApp, [data-testid="stSidebar"], section[data-testid="stSidebar"], .stSidebar { 
     background-color: #060913 !important; 
     color: #f8fafc !important; 
 }
 [data-testid="stSidebar"] section { background-color: #0c111d !important; }
 
-/* Ocultação total da barra nativa superior branca */
+/* Ocultação total e absoluta da navegação nativa redundante do Streamlit */
+[data-testid="stSidebarNav"], ul[data-testid="stSidebarNavItems"], .stSidebarNavItems { 
+    display: none !important; visibility: hidden !important; height: 0px !important; opacity: 0 !important;
+}
 [data-testid="stHeader"] { display: none !important; height: 0px !important; background: transparent !important; }
 .block-container { padding-top: 1.5rem !important; padding-bottom: 2rem; padding-left: 2rem; padding-right: 2rem; }
 
@@ -50,7 +52,37 @@ st.markdown("""
 }
 .stButton > button p { text-align: left !important; font-weight: 700 !important; }
 
-/* CARDS DE FATURAMENTO DA BARRA SUPERIOR */
+/* 🧠 PAINEL HUD HOLOGRÁFICO: A CARA DO ROBÔ INTELIGENTE */
+.hud-robot {
+    background: radial-gradient(circle at 50% 50%, #0d1e3d 0%, #040814 100%) !important;
+    border: 2px dashed #00ffcc !important;
+    border-radius: 20px !important;
+    padding: 30px !important;
+    text-align: center !important;
+    box-shadow: 0 0 35px rgba(0, 255, 204, 0.15) !important;
+    margin-bottom: 25px !important;
+    animation: pulsaRobo 4s ease-in-out infinite;
+}
+@keyframes pulsaRobo {
+    0% { border-color: #00ffcc; box-shadow: 0 0 35px rgba(0, 255, 204, 0.15); }
+    50% { border-color: #00FF87; box-shadow: 0 0 50px rgba(0, 255, 135, 0.3); }
+    100% { border-color: #00ffcc; box-shadow: 0 0 35px rgba(0, 255, 204, 0.15); }
+}
+.hud-robot-title {
+    color: #00ffcc !important; font-size: 22px !important; font-weight: 900 !important;
+    letter-spacing: 4px !important; text-transform: uppercase !important; margin-bottom: 10px !important;
+}
+
+/* TERMINAL DE MONITORAMENTO CIBERNÉTICO */
+.terminal-cyber {
+    background-color: #040814 !important; border: 2px solid #00ffcc !important;
+    border-radius: 10px !important; padding: 15px !important;
+    font-family: 'Courier New', monospace !important; color: #00ffcc !important;
+    box-shadow: 0 0 15px rgba(0,255,204,0.2) !important; white-space: pre-wrap !important;
+    text-align: left !important; font-size: 13px !important;
+}
+
+/* CARDS DE FATURAMENTO E PLANOS */
 .grid-metricas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
 .card-metric {
     background-color: #0d121f !important; border: 1px solid #1e293b !important;
@@ -59,8 +91,6 @@ st.markdown("""
 }
 .card-metric-title { font-size: 11px; font-weight: 800; color: #94a3b8; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
 .card-metric-value { font-size: 28px; font-weight: 900; color: #ffffff; }
-
-/* CARDS DE PREÇO DOS PLANOS */
 .card-plano {
     background-color: #0d121f !important; border: 1px solid #1e293b !important; border-radius: 16px !important;
     padding: 30px !important; box-shadow: 0 12px 35px rgba(0,0,0,0.5) !important; min-height: 280px;
@@ -69,7 +99,6 @@ st.markdown("""
 .plano-price { font-size: 36px; font-weight: 900; color: #ffffff; margin: 15px 0; }
 .plano-desc { font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 25px; min-height: 50px; }
 
-/* Botão de Compra e Ação Verde Água Neon */
 .btn-compra {
     display: block; background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%);
     color: #030712 !important; text-decoration: none !important; text-align: center;
@@ -83,7 +112,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # =============================================================================================================
-# 3. CONSTRUÇÃO DO MENU LATERAL FLUIDO DE ELITE (EXATO DO PRINT)
+# 3. BARRA LATERAL DE BOTÕES LIMPO (EXATO DO PRINT)
 # =============================================================================================================
 with st.sidebar:
     st.markdown('<h2 style="color: #00ffcc; font-weight: 900; font-size: 22px; margin-bottom: 5px;">⚙️ Adriel-AI Pro</h2>', unsafe_allow_html=True)
@@ -111,10 +140,7 @@ if st.session_state.status_usuario == "BLOQUEADO" and st.session_state.modulo_at
     st.markdown("</div>", unsafe_allow_html=True)
     st.stop()
 
-# =============================================================================================================
-# 5. EXECUÇÃO PARALELA DAS TELAS (NÚCLEO DO ECOSSISTEMA DO ROBÔ)
-# =============================================================================================================
-
+# INTERRUPTOR DE SEGURANÇA (MODO GESTOR MASTER DO ADRIEL)
 if st.session_state.status_usuario == "ADMIN" or st.session_state.api_key_global == CHAVE_MESTRA:
     st.markdown("<div style='background:rgba(255,255,255,0.02); border:2px dashed #cc66ff; border-radius:12px; padding:15px; margin-bottom:20px;'>", unsafe_allow_html=True)
     st.markdown("<h6 style='color:#cc66ff; margin:0;'>⚙️ INTERRUPTOR DE SEGURANÇA (MODO GESTOR MASTER)</h6>", unsafe_allow_html=True)
@@ -128,18 +154,16 @@ if st.session_state.status_usuario == "ADMIN" or st.session_state.api_key_global
         st.rerun()
     st.markdown("</div>", unsafe_allow_html=True)
 
-# 📊 MONITOR 1: DASHBOARD / ASSINANTES (EXATO DO SEU PRINT)
-if st.session_state.modulo_ativo in ["DASHBOARD", "ASSINANTES"]:
+# =============================================================================================================
+# 5. EXECUÇÃO PARALELA DAS TELAS (CENTRAL E MÓDULOS DE RASPAGEM REAL)
+# =============================================================================================================
+
+# 📊 DASHBOARD PRINCIPAL (TELA DO ROBO + METRICAS DO SEU PRINT)
+if st.session_state.modulo_ativo == "DASHBOARD":
     col_tit, col_online = st.columns(2)
-    with col_tit: st.markdown('<h1 style="font-size: 2.2rem; font-weight: 900; color: #ffffff;">💳 Central de Assinantes</h1>', unsafe_allow_html=True)
-    with col_online: st.markdown('<p style="text-align: right; color: #00ffcc; font-size: 12px; font-weight: bold; margin-top: 15px;">● 2,387 OPERADORES CONECTADOS AGORA</p>', unsafe_allow_html=True)
-    
-    st.markdown('<div class="top-badge-container"><div class="top-badge">🔹 CLICKBANK</div><div class="top-badge">🔹 BUYGOODS</div><div class="top-badge">🔹 DIGISTORE24</div><div class="top-badge">🔹 STRIPE DASH</div><div class="top-badge">🔹 HOSTINGER VPS</div></div>', unsafe_allow_html=True)
-    
-    st.markdown('<div class="grid-metricas"><div class="card-metric"><div class="card-metric-title">Faturamento Geral</div><div class="card-metric-value">R$ 142.580</div></div><div class="card-metric"><div class="card-metric-title">Licenças Ativas</div><div class="card-metric-value">2.105</div></div><div class="card-metric"><div class="card-metric-title">Recorrência (MRR)</div><div class="card-metric-value">R$ 104.200</div></div><div class="card-metric"><div class="card-metric-title">Taxa de Churn</div><div class="card-metric-value">0.8%</div></div></div>', unsafe_allow_html=True)
-    
-    st.markdown('<h2 style="font-size: 1.5rem; font-weight: 800; color: #ffffff;">💳 ADESÃO ÀS NOVAS LICENÇAS SUPREMAS</h2>', unsafe_allow_html=True)
-    
-    col_p1, col_p2, col_p3 = st.columns(3)
-    
-    # 🟢 CORREÇÃO DA INDENTAÇÃO: Removidos os blocos 'with col' vazios e renderizados diretamente por markdowns injetados de forma plana e segura
+    with col_tit: st.markdown('<h1 style="font-size: 2.2rem; font-weight: 900; color: #ffffff;">🤖 ADRIEL-AI PRO HOLOGRAPH</h1>', unsafe_allow_html=True)
+    with col_online: st.markdown('<p style="text-align: right; color: #00ffcc; font-size: 12px; font-weight: bold; margin-top: 15px;">● CORINGA ENGINE ONLINE (130+ CORES)</p>', unsafe_allow_html=True)
+    st.write("---")
+
+    # 🤖 O PAINEL COM A "CARA DO ROBÔ" QUE PULSA NA TELA
+    st.markdown("""
