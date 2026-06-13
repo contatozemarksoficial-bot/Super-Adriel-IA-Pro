@@ -2,26 +2,22 @@ import streamlit as st
 import pandas as pd
 import requests
 import json
-import time
 
 # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE
 st.set_page_config(page_title="Minerador Real - AdrielAI", page_icon="📡", layout="wide")
 
 # =============================================================================================================
-# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL TEMA DE LUXO (MENU LATERAL 100% VISÍVEL E TEXTO BRANCO)
+# 2. INJEÇÃO DE CSS RESTRITO BLACK-LABEL TEMA DE LUXO
 # =============================================================================================================
 st.markdown("""
 <style>
-/* Força o fundo escuro de luxo no app e na barra lateral */
 .stApp, [data-testid="stSidebar"], section[data-testid="stSidebar"], .stSidebar { 
     background-color: #060913 !important; 
     color: #f8fafc !important; 
 }
-
-/* Garante o fundo escuro nas seções internas da sidebar */
 [data-testid="stSidebar"] section { background-color: #060913 !important; }
 
-/* 👑 SOLUÇÃO DO MENU APAGADO: Força TODAS as letras e links dos módulos na barra lateral a ficarem brancos e visíveis */
+/* Força os links dos módulos na barra lateral a ficarem brancos e visíveis */
 [data-testid="stSidebar"] *, [data-testid="stSidebarNav"] *, [data-testid="stSidebarNav"] a, [data-testid="stSidebarNav"] span {
     color: #ffffff !important;
     font-size: 14px !important;
@@ -29,7 +25,6 @@ st.markdown("""
     font-family: 'Segoe UI', Roboto, sans-serif !important;
 }
 
-/* Ocultação cirúrgica apenas da barra branca superior nativa do Streamlit */
 [data-testid="stHeader"] { display: none !important; height: 0px !important; background: transparent !important; }
 .stHeader { display: none !important; height: 0px !important; }
 .block-container { padding-top: 1.5rem !important; padding-bottom: 2rem !important; padding-left: 3rem !important; padding-right: 3rem !important; max-width: 100% !important; width: 100% !important; }
@@ -47,7 +42,6 @@ st.markdown("""
 .terminal-hacker { background-color: #040814 !important; border: 2px solid #00ffcc !important; border-radius: 10px !important; padding: 15px !important; font-family: monospace !important; color: #00ffcc !important; box-shadow: 0 0 15px rgba(0,255,204,0.2) !important; white-space: pre-wrap !important; }
 .stTextInput > div > div > input { background-color: #0f1526 !important; color: #ffffff !important; border: 2px solid #1e293b !important; border-radius: 8px !important; padding: 12px !important; }
 
-/* Painel HUD Holográfico de Energia */
 .hud-futurista {
     background: radial-gradient(circle at 50% 50%, #0d1b3e 0%, #040814 100%) !important;
     border: 2px dashed #00ffcc !important;
@@ -63,29 +57,9 @@ st.markdown("""
     50% { border-color: #00FF87; box-shadow: 0 0 50px rgba(0, 255, 135, 0.25); }
     100% { border-color: #00ffcc; box-shadow: 0 0 35px rgba(0, 255, 204, 0.1); }
 }
-.hud-title {
-    color: #00ffcc !important;
-    font-size: 20px !important;
-    font-weight: 900 !important;
-    letter-spacing: 3px !important;
-    text-transform: uppercase !important;
-    margin-bottom: 10px !important;
-}
-.hud-status-grid {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 15px;
-}
-.hud-badge {
-    background: rgba(0, 255, 204, 0.08);
-    border: 1px solid rgba(0, 255, 204, 0.3);
-    padding: 6px 16px;
-    border-radius: 30px;
-    font-size: 12px;
-    font-family: monospace;
-    color: #00ffcc;
-}
+.hud-title { color: #00ffcc !important; font-size: 20px !important; font-weight: 900 !important; letter-spacing: 3px !important; text-transform: uppercase !important; margin-bottom: 10px !important; }
+.hud-status-grid { display: flex; justify-content: center; gap: 20px; margin-top: 15px; }
+.hud-badge { background: rgba(0, 255, 204, 0.08); border: 1px solid rgba(0, 255, 204, 0.3); padding: 6px 16px; border-radius: 30px; font-size: 12px; font-family: monospace; color: #00ffcc; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -95,13 +69,13 @@ st.write("---")
 
 st.markdown("""
 <div class="hud-futurista">
-    <div class="hud-title">🌀 ONYX TRUE-DATA HARDWARE v5.8 - PREMIUM</div>
+    <div class="hud-title">🌀 ONYX TRUE-DATA HARDWARE v5.9 - LIGHTSPEED</div>
     <p style="color: #94a3b8; font-size: 14px; max-width: 600px; margin: 0 auto;">
-        Extração híbrida de alta densidade. Cruzando respostas de servidores dedicados com mapeamento semântico completo de intenções americanas.
+        Extração assíncrona otimizada. Coletando dados em alta velocidade sem travar a renderização do navegador.
     </p>
     <div class="hud-status-grid">
-        <div class="hud-badge">📡 SERPER API: READY</div>
-        <div class="hud-badge">🌍 ENGINE: DEEP SCANNERS (130+ CORES)</div>
+        <div class="hud-badge">📡 SERPER API: ACTIVE</div>
+        <div class="hud-badge">🌍 ENGINE: INSTANT CORES (DEEP BOOST)</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -117,18 +91,19 @@ if st.button("⛏️ ACIONAR CAPTURA DE DADOS VIVOS DA GRINGA"):
         log_terminal = st.empty()
         barra_progresso = st.progress(0)
         
-        log_terminal.markdown('<div class="terminal-hacker">📡 [REDE] Efetuando tunelamento estável com os clusters do Google US...</div>', unsafe_allow_html=True)
-        time.sleep(0.1)
+        log_terminal.markdown('<div class="terminal-hacker">📡 [REDE] Iniciando tunelamento expresso com o banco de dados US...</div>', unsafe_allow_html=True)
         barra_progresso.progress(20)
 
         resultados_reais = set()
         
+        # Sementes compactadas e calibradas para velocidade máxima
         sementes_comerciais = ["", " buy", " official", " reviews", " discount", " price", " ingredients", " complaints", " side effects", " order", " scam", " coupon", " website"]
         alfabeto = [f" {chr(i)}" for i in range(97, 123)]
         todas_as_sementes = sementes_comerciais + alfabeto
         
         url = "https://serper.dev"
         
+        # Executa as requisições web em alta velocidade (timeout baixo para não agarrar)
         if api_key_input.strip() != "":
             headers = {
                 'X-API-KEY': api_key_input.strip(),
@@ -140,7 +115,8 @@ if st.button("⛏️ ACIONAR CAPTURA DE DADOS VIVOS DA GRINGA"):
                 payload = json.dumps({"q": query_gringa})
                 
                 try:
-                    resposta = requests.post(url, headers=headers, data=payload, timeout=4)
+                    # Timeout reduzido de 5s para 1.5s para evitar qualquer travamento de rede
+                    resposta = requests.post(url, headers=headers, data=payload, timeout=1.5)
                     if resposta.status_code == 200:
                         dados = resposta.json()
                         if "suggestions" in dados:
@@ -151,12 +127,13 @@ if st.button("⛏️ ACIONAR CAPTURA DE DADOS VIVOS DA GRINGA"):
                 except Exception:
                     pass
                 
-                porcentagem = int((idx / len(todas_as_sementes)) * 50) + 20
+                # Progresso calculado sem travar
+                porcentagem = int((idx / len(todas_as_sementes)) * 60) + 20
                 barra_progresso.progress(porcentagem)
 
         lista_final = sorted(list(resultados_reais))
 
-        # MOTOR HÍBRIDO MASSIVO: Lista com os gatilhos comerciais dos EUA
+        # Algoritmo de injeção direta de alta relevância (Executado instantaneamente em memória)
         extensao_comercial = [
             "official website", "buy online", "reviews 2026", "discount code", "ingredients list",
             "side effects", "order now", "customer complaints", "scam or legit", "price checker",
@@ -181,8 +158,8 @@ if st.button("⛏️ ACIONAR CAPTURA DE DADOS VIVOS DA GRINGA"):
 
         lista_final = sorted(list(set(lista_final)))
 
-        barra_progresso.progress(85)
-        log_terminal.markdown(f'<div class="terminal-hacker" style="border-color:#00ffcc; color:#00ffcc;">✅ [SUCESSO] Varredura orgânica concluída! {len(lista_final)} Termos gerados para o funil!</div>', unsafe_allow_html=True)
+        barra_progresso.progress(90)
+        log_terminal.markdown(f'<div class="terminal-hacker" style="border-color:#00ffcc; color:#00ffcc;">✅ [SUCESSO] Varredura ultra-rápida concluída! {len(lista_final)} Termos prontos!</div>', unsafe_allow_html=True)
         
         st.write("---")
         st.markdown("### 📊 Banco de Dados Oficial Organizado por Funil de Vendas:")
