@@ -11,180 +11,97 @@ def extrair_nome_produto_do_link(url):
                 return match.group(1).strip().title()
         elif ".clickbank.net" in url_lower:
             partes = url_lower.split('.')
-            if len(partes) >= 3:
-                return partes[1].strip().title()
-        match_slug = re.search(r'/([^/?#]+)(?:/|$)')
-        if match_slug:
-            nome_slug = match_slug.group(1).replace("-", " ").replace("_", " ")
-            if len(nome_slug) > 3 and not "hop" in nome_slug:
-                return nome_slug.strip().title()
+            if len(partes) >= 3 and partes[0] != "hop":
+                return partes[0].strip().title()
     except Exception:
         pass
-    return "Prostavive"
+    return "ProDentim"
 
 def main():
-    st.markdown('<h1 style="font-size: 2.4rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">🌐 FABRICANTE DE PRÉ-SELL HIGH-LUXO</h1>', unsafe_allow_html=True)
-    st.write("Gere páginas pontes com design cyberpunk de cinema estruturado para conversão internacional.")
+    st.markdown('<h1 style="font-size: 2.4rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">🌐 FABRICANTE DE PRÉ-SELL GREEN CONVERSION</h1>', unsafe_allow_html=True)
+    st.write("Gere páginas pontes no modelo verde clássico oficial com alta conversão em dólar.")
     st.markdown("---")
 
     link_afiliado = st.text_input("👉 Cole o seu Link de Afiliado aqui:", value="https://clickbank.net")
-    
     nome_extraido = extrair_nome_produto_do_link(link_afiliado)
     
-    col1, col2 = st.columns(2)
-    with col1:
-        produto_nome = st.text_input("✏️ Nome do Produto Identificado:", value=nome_extraido)
-    with col2:
-        texto_botao = st.text_input("Texto de Chamada do Botão (CTA):", value="CONTINUE TO OFFICIAL WEBSITE NOW")
-
+    produto_nome = st.text_input("✏️ Nome do Produto:", value=nome_extraido)
     st.write("")
-    botao_gerar = st.button("⚡ ESCANEAR DADOS E COMPILAR DESIGN PREMIUM")
+    botao_gerar = st.button("⚡ ESCANEAR DADOS E COMPILAR TEMA VERDE DE LUXO")
     st.markdown("---")
 
     if botao_gerar and link_afiliado and produto_nome:
         p_nome = produto_nome.strip()
         p_id = p_nome.replace(" ", "_").lower()
         
-        headline_topo = "OFFICIAL BRAND VERIFICATION PORTAL"
-        subheadline_texto = "You are being directed to the verified secure manufacturer page for original <b>{}</b> supplement.".format(p_nome)
-        texto_rodape = "Copyright 2026 - {} Review Portal. All Rights Reserved. This site is not part of the Google website or Google Inc.".format(p_nome)
-
-        # CÓDIGO HTML COM DESIGN CIBERNÉTICO ULTRA LUXO
-        codigo_html_vendas = """<!DOCTYPE html>
+        # HTML EXATO DO SEU PRINT VERDE PROFISSIONAL
+        codigo_html_verde = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Official Portal - Verification Secure</title>
+    <title>{p_nome} - New Oral Probiotics</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            background-color: #060913; 
-            color: #f8fafc; 
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 20px;
-        }
-        .container { 
-            background: linear-gradient(145deg, #0f172a, #070a13); 
-            border: 1px solid #1e293b;
-            padding: 45px; 
-            border-radius: 24px; 
-            box-shadow: 0 25px 60px rgba(0,0,0,0.7); 
-            max-width: 520px; 
-            width: 100%; 
-            text-align: center;
-        }
-        .badge { 
-            background-color: rgba(0, 255, 204, 0.08); 
-            color: #00ffcc; 
-            padding: 8px 18px; 
-            border-radius: 30px; 
-            font-size: 11px; 
-            font-weight: 800; 
-            letter-spacing: 1.5px; 
-            display: inline-block; 
-            margin-bottom: 25px; 
-            text-transform: uppercase;
-            border: 1px solid rgba(0, 255, 204, 0.15);
-        }
-        h1 { 
-            font-size: 28px; 
-            color: #ffffff; 
-            margin-bottom: 15px; 
-            font-weight: 900; 
-            line-height: 1.2; 
-        }
-        p { 
-            font-size: 15px; 
-            color: #94a3b8; 
-            margin-bottom: 35px; 
-            line-height: 1.6; 
-        }
-        .product-wrapper {
-            background-color: rgba(255,255,255,0.02);
-            border: 1px dashed #1e293b;
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .product-img { 
-            max-width: 140px; 
-            height: auto; 
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6)); 
-        }
-        .cta-button { 
-            display: block; 
-            background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%); 
-            color: #030712; 
-            text-decoration: none; 
-            padding: 18px 25px; 
-            border-radius: 30px; 
-            font-weight: 900; 
-            font-size: 14px; 
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.35); 
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
-        }
-        .cta-button:hover { 
-            box-shadow: 0 0 30px rgba(0, 255, 135, 0.7);
-            transform: translateY(-2px); 
-        }
-        footer { 
-            margin-top: 40px; 
-            font-size: 11px; 
-            color: #475569; 
-            max-width: 550px; 
-            line-height: 1.5; 
-        }
-        footer a { color: #64748b; text-decoration: underline; margin: 0 8px; }
+        * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+        body {{ background-color: #f4f7f6; color: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; display: flex; flex-direction: column; min-height: 100vh; align-items: center; justify-content: flex-start; }}
+        .top-banner {{ background-color: #f6d14b; color: #000000; width: 100%; text-align: center; padding: 10px; font-weight: 800; font-size: 14px; border-bottom: 1px solid #dcb52a; }}
+        .header-brand {{ background-color: #1a7a4a; width: 100%; text-align: center; padding: 30px 10px; border-bottom: 5px solid #145e39; font-size: 45px; font-weight: 900; letter-spacing: 2px; }}
+        .content-container {{ background-color: #1a7a4a; max-width: 600px; width: 100%; margin: 30px auto; padding: 30px 20px; border-radius: 8px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }}
+        .headline-sub {{ font-size: 18px; font-weight: 700; color: #f6d14b; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px; }}
+        .headline-main {{ font-size: 15px; font-weight: bold; color: #ffffff; margin-bottom: 25px; line-height: 1.4; max-width: 400px; margin-left: auto; margin-right: auto; }}
+        .img-box {{ background: transparent; padding: 10px; margin-bottom: 25px; }}
+        .product-img {{ max-width: 260px; height: auto; }}
+        .desc-text {{ font-size: 14px; color: #e2f0e8; line-height: 1.5; margin-bottom: 30px; max-width: 450px; margin-left: auto; margin-right: auto; }}
+        .btn-buy {{ display: inline-block; background-color: #f6d14b; color: #000000; text-decoration: none; padding: 16px 60px; border-radius: 30px; font-weight: 900; font-size: 22px; text-transform: lowercase; box-shadow: 0 4px 15px rgba(246,209,75,0.4); transition: transform 0.2s; }}
+        .btn-buy:hover {{ transform: scale(1.03); }}
+        footer {{ margin-top: auto; width: 100%; text-align: center; padding: 20px; font-size: 11px; color: #718096; background-color: #ffffff; border-top: 1px solid #e2e8f0; line-height: 1.4; }}
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="badge">""" + headline_topo + """</div>
-        <h1>Attention Consumer</h1>
-        <p>""" + subheadline_texto + """</p>
-        <div class="product-wrapper">
-            <img class="product-img" src="https://unsplash.com" alt="Secure Verification">
+    <div class="top-banner">⚠️ Limited Time Offer: Claim Up To 80% OFF + Free Shipping Today!</div>
+    <div class="header-brand">• {p_nome} •</div>
+    
+    <div class="content-container">
+        <div class="headline-sub">NEW ORAL PROBIOTICS</div>
+        <div class="headline-main">Specially Designed For The Health Of Your Teeth And Gums</div>
+        
+        <div class="img-box">
+            <img class="product-img" src="https://ibb.co" alt="{p_nome}">
         </div>
-        <a class="cta-button" href=" """ + link_afiliado + """ ">""" + texto_botao + """</a>
+        
+        <div class="desc-text">Try {p_nome}: a unique blend of 3.5 billion probiotic strains and nutrients supported by clinical research.</div>
+        
+        <a class="btn-buy" href="{link_afiliado}">🛒 buy now</a>
     </div>
+
     <footer>
-        <p>""" + texto_rodape + """</p>
-        <p style="margin-top: 12px;"><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a></p>
+        <p>Privacy Policy | Terms of Service | Disclaimer. The content of this site is for informational purposes only and is not intended to replace professional medical advice, diagnosis, or treatment. {p_nome} is a registered trademark of its respective owners.</p>
     </footer>
 </body>
 </html>"""
 
-        st.markdown("### 👁️ Visualização da Pré-Sell Super Luxo:")
+        st.markdown("### 👁️ Pré-visualização do Modelo Verde:")
         
-        # Mock fiel em Modo Escuro do design que vai para o ar
-        st.markdown("""
-        <div style="background: linear-gradient(145deg, #0f172a, #070a13); border: 1px solid #1e293b; padding: 35px; border-radius: 20px; max-width: 450px; margin: 0 auto; text-align: center; color: #f8fafc; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
-            <div style="background-color: rgba(0, 255, 204, 0.08); color: #00ffcc; padding: 6px 14px; font-size: 10px; font-weight: 800; border-radius: 30px; display: inline-block; margin-bottom: 20px; border: 1px solid rgba(0, 255, 204, 0.15);">{}</div>
-            <h3 style="font-size: 22px; color: #ffffff !important; font-weight: 900; margin-bottom: 10px; line-height:1.2;">Attention Consumer</h3>
-            <p style="font-size: 13.5px; color: #94a3b8 !important; margin-bottom: 20px;">{}</p>
-            <div style="background-color: rgba(255,255,255,0.01); border: 1px dashed #1e293b; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
-                <img src="https://unsplash.com" style="max-width: 110px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));">
+        # Renderiza o visual verde idêntico dentro do Streamlit
+        st.markdown(f"""
+        <div style="background-color: #1a7a4a; padding: 25px; border-radius: 8px; max-width: 450px; margin: 0 auto; text-align: center; color: white;">
+            <div style="background-color: #f6d14b; color: black; font-weight: bold; padding: 5px; font-size: 11px; border-radius: 4px; margin-bottom: 15px;">⚠️ Limited Time Offer: Claim Up To 80% OFF!</div>
+            <h2 style="color: white !important; font-size: 32px; font-weight: 900; margin-bottom: 10px;">• {p_nome} •</h2>
+            <p style="color: #f6d14b !important; font-weight: bold; font-size: 12px; margin:0;">NEW ORAL PROBIOTICS</p>
+            <p style="color: white !important; font-size: 13px; font-weight: bold; margin-bottom: 15px;">Specially Designed For The Health Of Your Teeth And Gums</p>
+            <div style="margin-bottom: 15px;">
+                <img src="https://ibb.co" style="max-width: 140px;">
             </div>
-            <a href="{}" target="_blank" style="display: block; background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%); color: #030712 !important; text-decoration: none; padding: 15px; border-radius: 30px; font-weight: 900; font-size: 13px; text-transform: uppercase; letter-spacing:0.5px; box-shadow: 0 0 15px rgba(0,255,204,0.3);">{}</a>
+            <p style="font-size: 12px; color: #e2f0e8 !important; margin-bottom: 15px;">Try {p_nome}: a unique blend of 3.5 billion probiotic strains.</p>
+            <a href="{link_afiliado}" target="_blank" style="display: inline-block; background-color: #f6d14b; color: black !important; font-weight: 900; padding: 12px 40px; border-radius: 30px; text-decoration: none; font-size: 18px;">🛒 buy now</a>
         </div>
-        """.format(headline_topo, subheadline_texto, link_afiliado, texto_botao), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
         st.markdown("---")
-        st.markdown("### 📥 Compilação Final")
+        st.markdown("### 📥 Baixar Página Verde Pronta")
         st.download_button(
-            label="💾 CLIQUE PARA COMPILAR E BAIXAR INDEX.HTML DE LUXO",
-            data=codigo_html_vendas,
+            label="💾 BAIXAR COMPILAÇÃO DO MODELO VERDE",
+            data=codigo_html_verde,
             file_name="index.html",
             mime="text/html"
         )
