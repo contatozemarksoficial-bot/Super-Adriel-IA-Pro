@@ -1,133 +1,161 @@
 import streamlit as st
 import pandas as pd
+import requests
+import json
 import time
-import random
 
-# 1. CONFIGURAÇÃO DE ELITE
-st.set_page_config(page_title="Adriel-AI Elite v7", layout="wide", initial_sidebar_state="expanded")
+# 1. CONFIGURAÇÃO OFICIAL DE ALTO LUXO DE CINEMA
+st.set_page_config(page_title="Adriel-AI Pro", page_icon="🤖", layout="wide")
 
-# 2. CONTROLE DE SESSÃO (Login + Pesquisa)
-if 'autenticado' not in st.session_state:
-    st.session_state.autenticado = False
-if 'executando' not in st.session_state:
-    st.session_state.executando = False
-if 'resultados' not in st.session_state:
-    st.session_state.resultados = []
+# Inicialização de estados de sessão de segurança e navegação
+if "modulo_ativo" not in st.session_state: st.session_state.modulo_ativo = "DASHBOARD"
+if "status_usuario" not in st.session_state: st.session_state.status_usuario = "DESLOGADO"
+if "api_key_global" not in st.session_state: st.session_state.api_key_global = ""
 
 # =============================================================================================================
-# 3. DESIGN BLACK-LABEL (CORES ORIGINAIS CIANO #00f2ff)
+# 2. INJEÇÃO DE CSS BLACK-LABEL DESIGN DE SUCESSO (CÓPIA CIRÚRGICA DO SEU PRINT)
 # =============================================================================================================
 st.markdown("""
 <style>
-/* 🌌 FUNDO PRETO ÔNIX */
-html, body, .stApp, [data-testid="stHeader"], [data-testid="stSidebar"] {
-    background-color: #02040a !important; color: #00f2ff !important;
+/* Fundo preto azulado profundo uniforme */
+.stApp, [data-testid="stSidebar"], section[data-testid="stSidebar"], .stSidebar { 
+    background-color: #060913 !important; 
+    color: #f8fafc !important; 
 }
+[data-testid="stSidebar"] section { background-color: #0c111d !important; }
 
-/* 👤 SIDEBAR BLINDADA */
-section[data-testid="stSidebar"] { border-right: 1px solid #00f2ff !important; background-color: #02040a !important; }
-section[data-testid="stSidebar"] * { color: #00f2ff !important; font-weight: 800; }
+/* Oculta completamente os links nativos e feios do Streamlit */
+[data-testid="stSidebarNav"], ul[data-testid="stSidebarNavItems"] { display: none !important; height: 0px !important; }
+[data-testid="stHeader"] { display: none !important; height: 0px !important; }
+.block-container { padding-top: 1.5rem !important; padding-bottom: 2rem; padding-left: 2.5rem; padding-right: 2.5rem; }
 
-/* 🚨 INPUTS SEM BRANCO */
-div[data-baseweb="input"] { background-color: #0d1117 !important; border: 1px solid #00f2ff !important; border-radius: 8px; }
-input { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
-
-/* 📋 BLOCOS DE RESULTADO */
-.box-elite {
-    background-color: #0d1117; border: 1.5px solid #00f2ff; border-radius: 12px;
-    padding: 15px 25px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
-}
-
-/* ⚡ BOTÕES ORIGINAIS */
+/* BOTÕES ESCUROS QUADRADOS DO MENU LATERAL (IDENTICOS AO SEU PRINT) */
 .stButton > button {
-    background: linear-gradient(135deg, #00f2ff 0%, #0080ff 100%) !important;
-    color: #02040a !important; font-weight: 900 !important; border-radius: 50px !important; width: 100%;
+    background-color: #111827 !important; color: #ffffff !important;
+    border: 1px solid #1f293b !important; border-radius: 8px !important;
+    padding: 14px 20px !important; width: 100% !important; text-align: left !important;
+    font-weight: 700 !important; font-size: 13px !important; letter-spacing: 0.5px !important;
+    text-transform: uppercase !important; transition: all 0.2s ease-in-out !important;
 }
+.stButton > button:hover {
+    border-color: #00ffcc !important;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.2) !important;
+}
+.stButton > button p { text-align: left !important; font-weight: 700 !important; }
+
+/* CARDS DE FATURAMENTO PRETOS COM BORDA CIANO */
+.grid-metricas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
+.card-metric {
+    background-color: #0d121f !important; border: 1px solid #1e293b !important;
+    border-bottom: 4px solid #00ffcc !important; border-radius: 12px !important;
+    padding: 20px !important; text-align: center !important; box-shadow: 0 10px 25px rgba(0,0,0,0.4) !important;
+}
+.card-metric-title { font-size: 11px; font-weight: 800; color: #94a3b8; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.card-metric-value { font-size: 28px; font-weight: 900; color: #ffffff; }
+
+/* CARDS DE PREÇO DOS PLANOS MENSAL R$ 47, R$ 97, R$ 197 */
+.grid-planos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 15px; }
+.card-plano {
+    background-color: #0d121f !important; border: 1px solid #1e293b !important; border-radius: 16px !important;
+    padding: 30px !important; box-shadow: 0 12px 35px rgba(0,0,0,0.5) !important;
+}
+.plano-title { font-size: 11px; font-weight: bold; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
+.plano-price { font-size: 36px; font-weight: 900; color: #ffffff; margin: 15px 0; }
+.plano-desc { font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 25px; min-height: 50px; }
+
+.btn-compra {
+    display: block; background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%);
+    color: #030712 !important; text-decoration: none !important; text-align: center;
+    font-weight: 900; font-size: 13px; padding: 14px; border-radius: 30px;
+    text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+}
+.stTextInput>div>div>input { background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; }
+.top-badge-container { display: flex; gap: 15px; margin-bottom: 25px; }
+.top-badge { background-color: #0f172a; border: 1px solid #1e293b; padding: 6px 16px; border-radius: 6px; font-size: 11px; font-family: monospace; font-weight: bold; color: #38bdf8; }
 </style>
 """, unsafe_allow_html=True)
 
 # =============================================================================================================
-# 4. TELA DE LOGIN (PAINEL DE ASSINANTE)
+# 3. BARRA LATERAL FIXA DE COMANDO (MENU PROFISSIONAL DO SEU ROBÔ)
 # =============================================================================================================
-if not st.session_state.autenticado:
-    st.markdown("<h1 style='text-align:center;'>🔐 CONEXÃO PARTICULAR</h1>", unsafe_allow_html=True)
-    with st.container():
-        st.markdown("<div style='max-width:400px; margin:0 auto;'>", unsafe_allow_html=True)
-        email = st.text_input("E-mail do Assinante:")
-        senha = st.text_input("Senha de Acesso:", type="password")
-        if st.button("🔓 ENTRAR NO SISTEMA"):
-            # DEFINA SEU LOGIN AQUI
-            if email == "admin@elite.com" and senha == "123456":
-                st.session_state.autenticado = True
-                st.rerun()
-            else:
-                st.error("❌ Acesso Negado.")
-        st.markdown("</div>", unsafe_allow_html=True)
+with st.sidebar:
+    st.markdown('<h2 style="color: #00ffcc; font-weight: 900; font-size: 22px; margin-bottom: 5px;">👑 Adriel-AI Pro</h2>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size: 10px; color: #64748b; font-weight: bold; margin-bottom: 20px;">MÓDULOS DE COMANDO</p>', unsafe_allow_html=True)
+    
+    # Renderização Condicional dos Botões do Menu Lateral
+    if st.session_state.status_usuario in ["ATIVO", "ADMIN"]:
+        if st.button("📊 DASHBOARD", use_container_width=True): st.session_state.modulo_ativo = "DASHBOARD"
+        if st.button("🔥 1. RADAR ELITE", use_container_width=True): st.session_state.modulo_ativo = "RADAR"
+        if st.button("🛰️ 2. AUDITOR IA", use_container_width=True): st.session_state.modulo_ativo = "AUDITOR"
+        if st.button("✍️ 3. GERADOR RSA", use_container_width=True): st.session_state.modulo_ativo = "GERADOR"
+        if st.button("🎯 4. CAÇADOR V10", use_container_width=True): st.session_state.modulo_ativo = "CACADOR"
+        if st.button("📄 5. PRE-SELL", use_container_width=True): st.session_state.modulo_ativo = "PRESELL"
+        st.write("---")
+        if st.button("👥 ASSINANTES", use_container_width=True): st.session_state.modulo_ativo = "ASSINANTES"
+    else:
+        if st.button("🔒 CENTRAL DE LOGIN", use_container_width=True): st.session_state.modulo_ativo = "DASHBOARD"
+        if st.button("💳 VER PLANOS DISPONÍVEIS", use_container_width=True): st.session_state.modulo_ativo = "ASSINANTES"
+
+    if st.session_state.status_usuario != "DESLOGADO":
+        st.write("---")
+        if st.button("🚪 DESCONECTAR SISTEMA", use_container_width=True):
+            st.session_state.status_usuario = "DESLOGADO"
+            st.session_state.modulo_ativo = "DASHBOARD"
+            st.rerun()
+
+# =============================================================================================================
+# 4. TRAVA DE SEGURANÇA CONTRA INADIMPLÊNCIA MENSAL
+# =============================================================================================================
+if st.session_state.status_usuario == "BLOQUEADO" and st.session_state.modulo_ativo != "ASSINANTES":
+    st.markdown("<div class='card-saas' style='text-align:center; padding:40px; margin-top:50px; border: 2px solid #ff0055;'>", unsafe_allow_html=True)
+    st.markdown("<h1 style='color:#ff0055;'>🚨 ACESSO CONGELADO: MENSALIDADE EM ATRASO</h1>", unsafe_allow_html=True)
+    st.write("A sua assinatura Pro expirou na integradora de pagamentos do cartão.")
+    if st.button("💳 ACESSAR PLANOS PARA REGULARIZAR"):
+        st.session_state.modulo_ativo = "ASSINANTES"
+        st.rerun()
+    st.markdown("</div>", unsafe_allow_html=True)
     st.stop()
 
 # =============================================================================================================
-# 5. ÁREA LOGADA (MINERADOR ELITE)
+# 6. RENDERIZAÇÃO DAS TELAS E INTEGRAÇÃO DA CHAVE MESTRA
 # =============================================================================================================
 
-# Menu Lateral (Só aparece logado)
-with st.sidebar:
-    st.markdown("### 🛰️ MENU ELITE")
-    st.write("app | Radar | Gerador | Funil")
-    st.markdown("<p style='background:#0d1117; border:1px solid #00f2ff; padding:5px; border-radius:5px; text-align:center;'>MINERADOR ATIVO</p>", unsafe_allow_html=True)
-    st.write("---")
-    if st.button("🛑 ENCERRAR SESSÃO"):
-        st.session_state.autenticado = False
-        st.session_state.executando = False
+# 🔑 TELA DE LOGIN / CENTRAL DE ACESSO
+if st.session_state.status_usuario == "DESLOGADO" and st.session_state.modulo_ativo == "DASHBOARD":
+    col1, col2, col3 = st.columns([1, 1.5, 1])
+    with col2:
+        st.markdown("<div class='card-saas' style='margin-top:50px; border-color:#00ffcc;'>", unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align:center; color:#00ffcc;'>🔑 INTEL ENTRADA SAAS</h2>", unsafe_allow_html=True)
+        st.write("Digite sua chave de licença ou utilize a Chave Mestra:")
+        
+        chave_input = st.text_input("Chave de Licença ou Código Secreto:", value="")
+        st.write("")
+        
+        if st.button("🔓 VERIFICAR CREDENCIAIS NO SERVIDOR"):
+            # CHAVE MESTRA QUE DESTRAVA TUDO E ATIVA O MENU DO DONO
+            if chave_input.strip() == "ONYX_MASTER_2026":
+                st.session_state.status_usuario = "ADMIN"
+                st.session_state.modulo_ativo = "DASHBOARD"
+                st.success("👑 Chave Mestra Válida! Modo Administrador Liberado.")
+                time.sleep(0.5)
+                st.rerun()
+            elif chave_input.strip() == "cliente":
+                st.session_state.status_usuario = "ATIVO"
+                st.session_state.modulo_ativo = "DASHBOARD"
+                st.rerun()
+            elif chave_input.strip() == "bloqueado":
+                st.session_state.status_usuario = "BLOQUEADO"
+                st.session_state.modulo_ativo = "ASSINANTES"
+                st.rerun()
+            else:
+                st.error("❌ Token inválido ou assinatura cancelada no gateway.")
+        st.markdown("</div>", unsafe_allow_html=True)
+
+# 👑 PAINEL EXCLUSIVO DO DONO DO ROBÔ (Para você simular e ver como fica a tela do cliente)
+if st.session_state.status_usuario == "ADMIN":
+    st.markdown("<div style='background:rgba(255,255,255,0.02); border:2px dashed #cc66ff; border-radius:12px; padding:15px; margin-bottom:20px;'>", unsafe_allow_html=True)
+    st.markdown("<h6 style='color:#cc66ff; margin:0;'>⚙️ INTERRUPTOR DA CHAVE MESTRA CONTROLE DE CLIENTES</h6>", unsafe_allow_html=True)
+    c_adm1, c_adm2 = st.columns(2)
+    if c_adm1.button("🟢 Ver como Cliente Ativo Pro"):
+        st.session_state.status_usuario = "ATIVO"
         st.rerun()
-
-st.markdown('<h1 style="text-align:center; color:#00f2ff; font-weight:900;">MINERADOR CIBERNÉTICO ELITE</h1>', unsafe_allow_html=True)
-
-# Interface de Comando
-aff_id = st.text_input("🔑 SEU ID DE AFILIADO:", value="adriel_pro")
-prod_alvo = st.text_input("💎 PRODUTO ALVO:", value="Sugar Defender")
-
-c1, c2 = st.columns(2)
-with c1:
-    if st.button("🚀 INICIAR PESQUISA"):
-        st.session_state.executando = True
-with c2:
-    if st.button("🛑 PARAR PESQUISA"):
-        st.session_state.executando = False
-
-# Containers de Exibição
-status_info = st.empty()
-area_elite = st.container()
-area_outros = st.container()
-
-# 6. MOTOR DE PESQUISA (Obedecendo o Login)
-sufixos_elite = ["official", "buy now", "discount", "order", "coupon", "price"]
-sufixos_outros = ["reviews", "ingredients", "is it safe", "scam", "side effects", "results"]
-
-if st.session_state.executando:
-    while st.session_state.executando:
-        cat = random.choice(["elite", "outros"])
-        suf = random.choice(sufixos_elite if cat == "elite" else sufixos_outros)
-        termo = f"{prod_alvo} {suf}".upper()
-        cpc = random.uniform(2.80, 8.50)
-        
-        # Salva resultado
-        st.session_state.resultados.insert(0, {"termo": termo, "cpc": f"$ {cpc:.2f}", "cat": cat})
-        status_info.markdown(f"<p style='text-align:center;'>⛏️ ANALISANDO: {termo}</p>", unsafe_allow_html=True)
-        
-        # Mostra resultados
-        with area_elite:
-            st.markdown("### 💎 PALAVRAS DE ELITE (FUNDO DE FUNIL)")
-            for r in [x for x in st.session_state.resultados if x['cat'] == "elite"][:8]:
-                st.markdown(f'<div class="box-elite"><b>🔍 {r["termo"]}</b><b>{r["cpc"]}</b></div>', unsafe_allow_html=True)
-        
-        with area_outros:
-            st.markdown("### 📊 RESTANTE DA MINERAÇÃO")
-            for r in [x for x in st.session_state.resultados if x['cat'] == "outros"][:4]:
-                st.markdown(f'<div class="box-elite" style="opacity:0.6;"><span>{r["termo"]}</span><span>{r["cpc"]}</span></div>', unsafe_allow_html=True)
-        
-        time.sleep(1)
-        st.rerun()
-
-# Se não estiver executando mas houver resultados, mostra eles estáticos
-elif len(st.session_state.resultados) > 0:
-    st.info("Sessão Ativa - Pesquisa em Pausa")
