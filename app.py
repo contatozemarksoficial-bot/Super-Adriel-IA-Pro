@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime
 
 # 1. CONFIGURAÇÃO PREMIUM DA INTERFACE DE CONTROLE (COLADO NO TETO)
 st.set_page_config(
@@ -79,7 +78,7 @@ st.markdown("""
 <div class="caixa-holografica-admin">
     <h3 style="color: #00ffcc; margin-top:0; font-size: 18px; font-weight: 800;">👤 CONTROLE COMERCIAL DE ASSINANTES ADRIEL-AI PRO</h3>
     <p style="color: #cbd5e1; font-size: 13.5px; margin-bottom:0; line-height:1.6;">
-        Bem-vindo à central master de licenciamento, Comandante José Marques! Este módulo consolida os indicadores financeiros aggregados da plataforma, monitora os tokens de segurança de acesso à API e lista a base de dados de usuários cadastrados nos planos Mensal, Semestral e Black-Label.
+        Bem-vindo à central master de licenciamento, Comandante José Marques! Este módulo consolida os indicadores financeiros agregados da plataforma, monitora os tokens de segurança de acesso à API e lista a base de dados de usuários cadastrados nos planos Mensal, Semestral e Black-Label.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -126,7 +125,7 @@ with col_config:
         
     if st.button("🛡️ Forçar Auditoria Geral de Segurança"):
         st.warning("Ação Executada: Varredura Concluída!")
-        st.write("✍️ **Justificativa Sênior de Engenharia:** Varredura de segurança iniciada nos servidores de dados centrais. O algoritmo executou o pente fino em todos os tokens OAuth 2.0 ativos conectados à Google Ads API, validando o tráfego dos usuários e limpando requirições duplicadas para garantir estabilidade máxima de carregamento hora por hora.")
+        st.write("✍️ **Justificativa Sênior de Engenharia:** Varredura de segurança iniciada nos servidores de dados centrais. O algoritmo executou o pente fino em todos os tokens OAuth 2.0 ativos conectados à Google Ads API, validando o tráfego dos usuários e limpando requisições duplicadas para garantir estabilidade máxima de carregamento hora por hora.")
         
     if st.button("❌ Bloquear Licenças Inadimplentes"):
         st.info("Ação Executada: Limpeza Feita!")
