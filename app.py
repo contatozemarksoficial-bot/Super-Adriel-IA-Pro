@@ -67,33 +67,29 @@ div[data-testid="stMetricContainer"]:nth-of-type(4) {
     border: 1px solid #1e293b !important;
     border-radius: 14px !important;
     padding: 25px !important;
-    min-height: 280px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
-/* 🚨 BOTÕES EM CÁPSULA CIANO DE ALTA VISIBILIDADE DE COMPRA */
-.btn-pagamento-neon {
+/* 🚨 DESIGN EXCLUSIVO DO BOTÃO PREMIUM EM CÁPSULA CIANO (DESTRANCADOR DE PROCESSO) */
+.stButton > button {
     background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%) !important;
     color: #030712 !important;
     font-weight: 900 !important;
     font-size: 13px !important;
     border-radius: 30px !important;
-    padding: 14px 20px !important;
-    text-align: center;
+    padding: 12px 20px !important;
+    width: 100% !important;
+    border: none !important;
+    cursor: pointer !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
-    cursor: pointer !important;
     box-shadow: 0 0 15px rgba(0, 255, 204, 0.3) !important;
     transition: all 0.25s ease-in-out !important;
-    display: block;
-    text-decoration: none !important;
-    margin-top: 15px;
 }
-.btn-pagamento-neon:hover {
+.stButton > button:hover {
     box-shadow: 0 0 25px rgba(0, 255, 135, 0.7) !important;
-    transform: scale(1.02) !important;
+    transform: scale(1.01) !important;
+    color: #030712 !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -128,58 +124,58 @@ st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown('<h3 style="font-size: 1.6rem; font-weight: 800; color: #ffffff; letter-spacing:0.5px;">💳 ADESÃO ÀS NOVAS LICENÇAS SUPREMAS</h3>', unsafe_allow_html=True)
 st.write("")
 
+# Link de redirecionamento mestre da sua comissão Hostinger
+url_checkout_comissao = "https://hostinger.com"
+
 # =============================================================================================================
-# 5. MATRIZ DOS 3 CARD DE VALORES ABAIXO DE 297 REAIS POR EXTENSO
+# 5. MATRIZ DOS 3 CARDS DE PLANOS COMPATÍVEIS COM DESTRANCAMENTO DE CLIQUES NATIVOS
 # =============================================================================================================
 col_card1, col_card2, col_card3 = st.columns(3)
 
 with col_card1:
     st.markdown("""
     <div class="card-plano-luxo">
-        <div>
-            <span style="color:#94a3b8; font-size:11px; font-weight:900; letter-spacing:0.5px; text-transform:uppercase;">PLANO MENSAL START</span>
-            <h2 style="color:#ffffff; font-size:2.4rem; font-weight:900; margin:10px 0;">R$ 47</h2>
-            <p style="color:#94a3b8; font-size:13px; line-height:1.5; margin:0;">
-                Liberação do Módulo 1 (Radar) + Tendências. Acesso básico para validação imediata de leilões internacionais.
-            </p>
-        </div>
-        <a href="https://hostinger.com" target="_blank" class="btn-pagamento-neon">
-            💳 PAGAR COM CARTÃO / PIX
-        </a>
+        <span style="color:#94a3b8; font-size:11px; font-weight:900; letter-spacing:0.5px; text-transform:uppercase;">PLANO MENSAL START</span>
+        <h2 style="color:#ffffff; font-size:2.4rem; font-weight:900; margin:10px 0;">R$ 47</h2>
+        <p style="color:#94a3b8; font-size:13px; line-height:1.5; margin:0;">
+            Liberação do Módulo 1 (Radar) + Tendências. Acesso básico para validação imediata de leilões internacionais.
+        </p>
     </div>
     """, unsafe_allow_html=True)
+    # Botão nativo destrancado sem tags HTML conflituosas
+    if st.button("💳 PAGAR COM CARTÃO / PIX", key="btn_p1_start"):
+        st.markdown(f'<meta http-transform="refresh" content="0; url={url_checkout_comissao}">', unsafe_allow_html=True)
+        st.link_button("🚀 IR PARA CHECKOUT SEGURO", url_checkout_comissao, use_container_width=True)
 
 with col_card2:
     st.markdown("""
     <div class="card-plano-luxo">
-        <div>
-            <span style="color:#94a3b8; font-size:11px; font-weight:900; letter-spacing:0.5px; text-transform:uppercase;">PLANO MENSAL PRO</span>
-            <h2 style="color:#ffffff; font-size:2.4rem; font-weight:900; margin:10px 0;">R$ 97</h2>
-            <p style="color:#94a3b8; font-size:13px; line-height:1.5; margin:0;">
-                Start + Módulo RSA (45 Keywords) + Arquiteto de Funil. Foco total em quem já está escalando campanhas na gringa.
-            </p>
-        </div>
-        <a href="https://hostinger.com" target="_blank" class="btn-pagamento-neon">
-            💳 PAGAR COM CARTÃO / PIX
-        </a>
+        <span style="color:#94a3b8; font-size:11px; font-weight:900; letter-spacing:0.5px; text-transform:uppercase;">PLANO MENSAL PRO</span>
+        <h2 style="color:#ffffff; font-size:2.4rem; font-weight:900; margin:10px 0;">R$ 97</h2>
+        <p style="color:#94a3b8; font-size:13px; line-height:1.5; margin:0;">
+            Start + Módulo RSA (45 Keywords) + Arquiteto de Funil. Foco total em quem já está escalando campanhas na gringa.
+        </p>
     </div>
     """, unsafe_allow_html=True)
+    # Botão nativo destrancado sem tags HTML conflituosas
+    if st.button("💳 PAGAR COM CARTÃO / PIX ", key="btn_p2_pro"):
+        st.markdown(f'<meta http-transform="refresh" content="0; url={url_checkout_comissao}">', unsafe_allow_html=True)
+        st.link_button("🚀 IR PARA CHECKOUT SEGURO ", url_checkout_comissao, use_container_width=True)
 
 with col_card3:
     st.markdown("""
     <div class="card-plano-luxo">
-        <div>
-            <span style="color:#94a3b8; font-size:11px; font-weight:900; letter-spacing:0.5px; text-transform:uppercase;">PLANO ELITE MASTER</span>
-            <h2 style="color:#ffffff; font-size:2.4rem; font-weight:900; margin:10px 0;">R$ 197</h2>
-            <p style="color:#94a3b8; font-size:13px; line-height:1.5; margin:0;">
-                ACESSO TOTAL ILIMITADO + Construtor Pre-Sell Hostinger. O poder máximo do robô minerador de lances gringos.
-            </p>
-        </div>
-        <a href="https://hostinger.com" target="_blank" class="btn-pagamento-neon">
-            💳 PAGAR COM CARTÃO / PIX
-        </a>
+        <span style="color:#94a3b8; font-size:11px; font-weight:900; letter-spacing:0.5px; text-transform:uppercase;">PLANO ELITE MASTER</span>
+        <h2 style="color:#ffffff; font-size:2.4rem; font-weight:900; margin:10px 0;">R$ 197</h2>
+        <p style="color:#94a3b8; font-size:13px; line-height:1.5; margin:0;">
+            ACESSO TOTAL ILIMITADO + Construtor Pre-Sell Hostinger. O poder máximo do robô minerador de lances gringos.
+        </p>
     </div>
     """, unsafe_allow_html=True)
+    # Botão nativo destrancado sem tags HTML conflituosas
+    if st.button("💳 PAGAR COM CARTÃO / PIX  ", key="btn_p3_elite"):
+        st.markdown(f'<meta http-transform="refresh" content="0; url={url_checkout_comissao}">', unsafe_allow_html=True)
+        st.link_button("🚀 IR PARA CHECKOUT SEGURO  ", url_checkout_comissao, use_container_width=True)
 
 # Rodapé unificado Black-Label
-st.markdown('<div style="clear: both; text-align: center; font-size: 11px; color: #475569; padding-top: 60px;"><hr style="border-color: #1e293b;">© 2026 Adriel-AI Pro - Todos os Direitos Reservados • Chassi Homologado e Trancado.</div>', unsafe_allow_html=True)
+st.markdown('<div style="clear: both; text-align: center; font-size: 11px; color: #475569; padding-top: 50px;"><hr style="border-color: #1e293b;">© 2026 Adriel-AI Pro - Todos os Direitos Reservados • Chassi Homologado e Destravado.</div>', unsafe_allow_html=True)
