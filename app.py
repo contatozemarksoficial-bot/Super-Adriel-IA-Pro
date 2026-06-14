@@ -1,170 +1,102 @@
 import streamlit as st
+import pandas as pd
+from datetime import datetime
 
-# 1. CONFIGURAÇÃO PREMIUM DA PÁGINA (COLADO NO TETO DO MONITOR)
-st.set_page_config(
-    page_title="Pre-Sell - AdrielAI", 
-    page_icon="🌐", 
-    layout="wide", 
-    initial_sidebar_state="collapsed"
-)
+def main():
+    # 1. CONFIGURACAO PREMIUM DA INTERFACE SAAS 2026
+    st.set_page_config(page_title="Pré-Sell Premium - AdrielAI", layout="wide", initial_sidebar_state="collapsed")
 
-# =============================================================================================================
-# 2. INJEÇÃO DE CSS DE ALTO LUXO BLACK-LABEL (PADRÃO IDÊNTICO AO SEU PRINT)
-# =============================================================================================================
-st.markdown("""
-<style>
-/* 🌌 Fundo Escuro Premium Cyber Onyx Original do seu Print */
-.stApp { background-color: #060913 !important; color: #f8fafc !important; }
-h1, h2, h3, h4, p, span, div { font-family: 'Segoe UI', Roboto, sans-serif !important; }
+    # FORCADOR ULTRA LUXO CYBER-NEON COMPILADO (IMUNE AO BUG DO PYTHON 3.14)
+    estilo_luxo = "<style>"
+    estilo_luxo += "header, [data-testid='stHeader'] {background-color: rgba(0,0,0,0) !important; background: transparent !important; display: none !important;}"
+    estilo_luxo += "[data-testid='stAppViewContainer'] {padding-top: 0px !important;}"
+    estilo_luxo += "html, body, [data-testid='stAppViewContainer'], .stApp {background-color: #060913 !important; color: #f8fafc !important;}"
+    estilo_luxo += "[data-testid='stSidebar'], section[data-testid='stSidebar'] div {background-color: #090d16 !important;}"
+    estilo_luxo += "[data-testid='stSidebar'] nav ul li div a span {color: #00ffcc !important; font-weight: bold !important; text-shadow: 0 0 8px rgba(0,255,204,0.5) !important;}"
+    estilo_luxo += ".stTextInput>div>div>input, .stTextArea>div>div>textarea {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; font-size: 1.1rem !important;}"
+    estilo_luxo += ".stTextInput>div>div>input:focus, .stTextArea>div>div>textarea:focus {border-color: #00ffcc !important; box-shadow: 0 0 15px rgba(0, 255, 204, 0.3) !important;}"
+    estilo_luxo += ".stButton>button {background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #00ffcc !important; border-radius: 8px !important; font-weight: bold !important; box-shadow: 0 0 10px rgba(0, 255, 204, 0.15) !important; transition: all 0.3s ease-in-out !important; width: 100% !important; height: 45px !important;}"
+    estilo_luxo += ".stButton>button:hover {background-color: #00ffcc !important; color: #030712 !important; box-shadow: 0 0 25px #00ffcc, 0 0 45px rgba(0,255,204,0.4) !important; transform: scale(1.01);}"
+    estilo_luxo += "[data-testid='stMetricContainer'] {background: linear-gradient(135deg, #0f172a, #030712) !important; border: 1px solid #1e293b !important; border-left: 4px solid #00ffcc !important; padding: 15px !important; border-radius: 10px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;}"
+    estilo_luxo += "h1, h2, h3, h4, span, p, label {color: #f3f4f6 !important;}"
+    estilo_luxo += "</style>"
+    st.markdown(estilo_luxo, unsafe_allow_html=True)
 
-/* 🚨 DELEÇÃO CIRÚRGICA DA BARRA BRANCA SUPERIOR DO STREAMLIT */
-[data-testid="stHeader"] { display: none !important; height: 0px !important; background: transparent !important; }
-.stHeader { display: none !important; }
-.block-container { padding-top: 0.5rem !important; padding-bottom: 2rem !important; padding-left: 2rem !important; padding-right: 2rem !important; max-width: 100% !important; width: 100% !important; }
-[data-testid="stSidebar"] { display: none !important; width: 0px !important; }
+    st.markdown('<h1 style="font-size: 2.6rem; font-weight: 900; color: #00ffcc; text-shadow: 0 0 15px rgba(0,255,204,0.4); margin-bottom: 5px;">🌐 FABRICANTE DE PÁGINAS PRÉ-SELL</h1>', unsafe_allow_html=True)
+    st.write("Aprenda o passo a passo estratégico para construir páginas pontes indestrutivas e clonar ofertas gringas com máxima conversão.")
+    st.markdown("---")
 
-/* Moldura Hologrâmica Verde-Neon do seu Print */
-.caixa-holografica-presell {
-    background-color: #080f1d !important;
-    border: 2px solid #00ffcc !important;
-    border-radius: 12px !important;
-    padding: 24px !important;
-    margin-bottom: 25px !important;
-    width: 100% !important;
-}
-
-/* 🚨 REPROGRAMAÇÃO DO BOTÃO EM PÍLULA CIANO QUE PISCA DO SEU PRINT */
-.btn-hostinger-neon {
-    background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%) !important;
-    color: #060913 !important;
-    font-weight: 900 !important;
-    font-size: 13px !important;
-    border-radius: 30px !important;
-    padding: 14px 28px !important;
-    text-align: center;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    cursor: pointer !important;
-    box-shadow: 0 0 15px rgba(0, 255, 204, 0.3) !important;
-    transition: all 0.25s ease-in-out !important;
-    display: block;
-    text-decoration: none !important;
-}
-.btn-hostinger-neon:hover {
-    box-shadow: 0 0 25px rgba(0, 255, 135, 0.7) !important;
-    transform: scale(1.01) !important;
-}
-
-/* Botão nativo de gerar conteúdo estilizado em pílula escuro com hover verde */
-.stButton > button {
-    background: #0f172a !important;
-    color: #00ffcc !important;
-    font-weight: 900 !important;
-    font-size: 12px !important;
-    border: 2px solid #00ffcc !important;
-    border-radius: 30px !important;
-    padding: 10px 20px !important;
-    cursor: pointer !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-}
-.stButton > button:hover {
-    background: #00ffcc !important;
-    color: #060913 !important;
-    box-shadow: 0 0 15px rgba(0, 255, 204, 0.4) !important;
-}
-
-/* Customização da caixa do código HTML gerado */
-.stCodeBlock, div[data-testid="stMarkdownContainer"] pre {
-    background-color: #0b111e !important;
-    border: 1px solid #1e293b !important;
-    border-radius: 8px !important;
-}
-.stCodeBlock code, pre code {
-    color: #33ffdd !important;
-    font-size: 13.5px !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
-# 3. CONTEÚDO E RECHEIO DA PÁGINA CONFORME O SEU PRINT
-st.markdown("<p style='color: #475569; font-size: 11px; margin: 0; letter-spacing:1px; text-transform: uppercase;'>FABRICANTE DE ESTRUTURAS • ADRIEL-AI PLATFORM</p>", unsafe_allow_html=True)
-st.write("Aprenda o passo a passo estratégico para construir páginas de ponte indestrutíveis e clonar ofertas gringas com máxima conversão.")
-st.write("---")
-
-st.markdown("### 🚀 PASSO 1: Registro de Domínio e Hospedagem de Elite")
-st.write("Antes de montar a sua estrutura, é fundamental possuir um domínio próprio profissional para evitar bloqueios severos de links clonados diretamente da plataforma gringa.")
-
-# 🟢 CAIXA MOLDURA NEON DO SEU PRINT IDENTICA
-st.markdown("""
-<div class="caixa-holografica-presell">
-    <h4 style="color: #00ffcc; font-weight: 900; font-size: 15px; margin-top:0; margin-bottom:10px;">
-        👁️ RECOMENDAÇÃO CRÍTICA DO ROBÔ ADRIEL-AI:
-    </h4>
-    <p style="color: #cbd5e1; font-size: 13.5px; line-height: 1.6; margin-bottom: 20px;">
-        A Hostinger é considerada a melhor provedora de hospedagem do mercado internacional para afiliados! Ela oferece servidores Cloud de altíssima velocidade, criador de sites intuitivo com IA, suporte premium 24 horas por dia em português e certificados SSL gratuitos inclusos para manter sua página ponte 100% segura contra falhas publicitárias.
-    </p>
-    <a href="https://hostinger.com" target="_blank" class="btn-hostinger-neon">
-        👉 CLIQUE AQUI PARA ADQUIRIR SUA HOSPEDAGEM NA HOSTINGER COM DESCONTO
-    </a>
-</div>
-""", unsafe_allow_html=True)
-
-st.write("---")
-
-# ✍️ SEÇÃO DE CUSTOMIZAÇÃO DE TEXTOS DA PRE-SELL
-st.markdown("### ⚙️ Customizar Textos da sua Pré-Sell")
-st.write("Insira o nome do produto gringo para moldar a estrutura:")
-
-# Campo de entrada
-prod_presell = st.text_input("", value="Sugar Defender", label_visibility="collapsed")
-st.markdown("<br>", unsafe_allow_html=True)
-
-# =============================================================================================================
-# 🚨 MOTOR COM VIDA DE VERDADE: SE ELE CLICAR NO BOTÃO, O ROBÔ COSPE O CÓDIGO HTML PRONTO NA HORA!
-# =============================================================================================================
-if st.button("⚡ GERAR CONTEÚDO DA PÁGINA PONTE", key="btn_gerar_presell_viva"):
-    st.success("🎉 Estrutura de Código HTML5/CSS3 Gerada com Sucesso para " + str(prod_presell) + "!")
+    # 2. INFRAESTRUTURA INDISPENSÁVEL: DIRECIONAMENTO DE HOSPEDAGEM (MARKETING DE AFILIADOS)
+    st.markdown("<h3 style='color:#00ffcc;'>🚀 PASSO 1: Registro de Domínio e Hospedagem de Elite</h3>", unsafe_allow_html=True)
+    st.write("Antes de montar a sua estrutura, é fundamental possuir um domínio próprio profissional para evitar bloqueios severos de links clonados diretamente da plataforma gringa.")
     
-    # Justificativa pesada de 4 a 5 linhas exigida pelo Protocolo Mestre
-    st.markdown("""
-    <div style="background-color: rgba(0, 255, 204, 0.03); border: 1px solid #1e293b; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-        <p style="color: #94a3b8; font-size: 13px; line-height: 1.5; margin: 0;">
-            <b>✍️ Relatório de Implantação de Código:</b> O esqueleto de código gerado abaixo foi estruturado em linguagem limpa W3C nativa, contendo folhas de estilo inline de carregamento ultra veloz inferior a 0.8 segundos. Toda a estrutura de tags de cabeçalho foi otimizada para pontuação máxima de qualidade no índice de leilão do Google Ads, carregando o seu link de indicação de afiliado Hostinger embutido de forma transparente no botão principal de redirecionamento, blindando o rastreamento concorrente.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    # INJEÇÃO DO SEU LINK DE AFILIADO REAL DA HOSTINGER
+    url_afiliado = "https://hostinger.com"
     
-    # O código fonte real que o usuário vai copiar e colar no gerenciador da Hostinger
-    codigo_html_clonavel = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{prod_presell} - Official Discount</title>
-    <style>
-        body {{ background-color: #060913; color: #ffffff; font-family: Arial, sans-serif; text-align: center; padding: 60px 20px; }}
-        .container {{ max-width: 600px; margin: auto; border: 2px solid #00ffcc; padding: 40px; border-radius: 12px; background: #0f1526; }}
-        h1 {{ font-size: 24px; color: #00ffcc; }}
-        p {{ color: #cbd5e1; font-size: 15px; line-height: 1.6; }}
-        .btn {{ display: inline-block; background: linear-gradient(135deg, #00ffcc 0%, #00FF87 100%); color: #060913; padding: 15px 35px; text-decoration: none; font-weight: bold; border-radius: 30px; margin-top: 25px; text-transform: uppercase; letter-spacing: 0.5px; }}
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>⚠️ Looking For The Authentic {prod_presell}?</h1>
-        <p>Attention: Before making your purchase, ensure you are ordering from the official manufacturer store to validate your 60-day money-back guarantee and claim your free shipping bonus.</p>
-        <a href="https://hostinger.com" class="btn" target="_blank">Proceed To Official Site</a>
-    </div>
-</body>
-</html>"""
+    st.markdown("<div style='background-color:#0f172a; border:2px solid #00ffcc; border-radius:10px; padding:20px; box-shadow:0 4px 15px rgba(0,255,204,0.15); margin-bottom:20px;'>💬 <b style='color:#00ffcc; font-size:1.2rem;'>RECOMENDAÇÃO CRÍTICA DO ROBÔ ADRIEL-AI:</b><br><br>A <b>Hostinger</b> é considerada a melhor provedora de hospedagem do mercado internacional para afiliados! Ela oferece servidores Cloud de altíssima velocidade, criador de sites intuitivo com IA, suporte premium 24 horas por dia em português e certificados SSL gratuitos inclusos para manter suas páginas pontes 100% seguras contra falhas publicitárias.<br><br><a href='" + url_afiliado + "' target='_blank' style='display:inline-block; background-color:#00ffcc; color:#030712; padding:12px 25px; border-radius:6px; font-weight:bold; text-decoration:none; box-shadow:0 0 10px #00ffcc;'>👉 CLIQUE AQUI PARA ADQUIRIR SUA HOSPEDAGEM NA HOSTINGER COM DESCONTO</a></div>", unsafe_allow_html=True)
+    st.markdown("---")
 
-    st.write("📋 **Copie o código completo abaixo e cole no arquivo `index.html` dentro do Gerenciador da Hostinger:**")
-    st.code(codigo_html_clonavel, language="html")
+    # 3. INPUT DINÂMICO PARA FACILITAR A CUSTOMIZAÇÃO EM TEMPO REAL
+    st.markdown("<h3 style='color:#00ffcc;'>⚙️ Customizar Textos da sua Pré-Sell</h3>", unsafe_allow_html=True)
+    produto_nome = st.text_input("Insira o nome do produto gringo para moldar a estrutura:", value="Sugar Defender")
+    botao_processar = st.button("⚡ GERAR CONTEÚDO DA PÁGINA PONTE")
+    st.markdown("---")
 
-st.markdown("<br><br>", unsafe_allow_html=True)
-st.markdown("### 📜 PASSO 2: A Anatomia Perfeita de uma Pré-Sell Conversiva")
-st.write("Uma página de alta conversão exige gatilhos de urgência e clareza total de elementos visuais.")
+    if produto_nome:
+        p_nome = produto_nome.strip()
+        
+        # 4. PASSO A PASSO DA ARQUITETURA DE LUXO DA PRÉ-SELL
+        st.markdown("<h3 style='color:#00ffcc;'>📋 PASSO 2: A Anatomia Perfeita de uma Pré-Sell Conversiva</h3>", unsafe_allow_html=True)
+        st.write("Uma Pré-Sell de alta conversão para o Google Ads e Bing Ads deve possuir 4 blocos limpos para filtrar o lead qualificado e aquecer a intenção de compra sem violar as políticas de privacidade de dados.")
+        st.write("")
 
-# Rodapé unificado Black-Label
-st.markdown('<div style="clear: both; text-align: center; font-size: 11px; color: #475569; padding-top: 50px;"><hr style="border-color: #1e293b;">© 2026 Adriel-AI Pro - Todos os Direitos Reservados • Protocolo Mestre V4 Modo de Guerra.</div>', unsafe_allow_html=True)
+        b1_titulo = "🎯 Bloco 1: Headline de Segurança Governamental"
+        b1_desc = "Fica no topo absoluto. Deve informar de forma clara e profissional que o usuário está acessando uma página de redirecionamento oficial ou um portal de review institucional para checagem de estoque do produto " + p_nome + "."
+        
+        b2_titulo = "💔 Bloco 2: Pergunta Filtro (Gatilho de Qualificação)"
+        b2_desc = "Uma pergunta estratégica sim/não para reter a atenção do comprador consciente. Exemplo: Quer saber se o lote original de " + p_nome + " ainda possui frete gratuito para a sua região?"
+        
+        b3_titulo = "🚀 Bloco 3: Chamada para Ação Central (CTA Brilhante)"
+        b3_desc = "Um botão Scan centralizado de alta visibilidade que direciona o lead para a VSL ou checkout oficial do produtor gringo. O texto deve reforçar a segurança da transação."
+        
+        b4_titulo = "🛡️ Bloco 4: Rodapé de Conformidade Legal (Anti-Bloqueio)"
+        b4_desc = "O bloco mais importante para blindar sua conta! Deve conter os links obrigatórios de Termos de Uso, Política de Privacidade, e o aviso de isenção de responsabilidade do Facebook/Google."
+
+        col_passo1, col_passo2 = st.columns([1.0, 1.0])
+
+        with col_passo1:
+            st.markdown("<h4 style='color:#00ffcc;'>" + b1_titulo + "</h4>", unsafe_allow_html=True)
+            st.write(b1_desc)
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown("<h4 style='color:#ff0055;'>" + b2_titulo + "</h4>", unsafe_allow_html=True)
+            st.write(b2_desc)
+            
+        with col_passo2:
+            st.markdown("<h4 style='color:#cc66ff;'>" + b3_titulo + "</h4>", unsafe_allow_html=True)
+            st.write(b3_desc)
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown("<h4 style='color:#00ffcc;'>" + b4_titulo + "</h4>", unsafe_allow_html=True)
+            st.write(b4_desc)
+
+        st.markdown("---")
+
+        # 5. GERADOR DE CONTEÚDO PRONTO COM FECHAMENTO SEGURO
+        st.markdown("<h3 style='color:#00ffcc;'>✍️ PASSO 3: Textos Prontos para Copiar e Colar no Criador de Sites</h3>", unsafe_allow_html=True)
+        st.write("Utilize os blocos abaixo diretamente no construtor de arrastar e soltar da sua hospedagem Hostinger para montar a página em minutos:")
+        st.write("")
+
+        copy_headline = "WELCOME TO THE OFFICIAL BRAND VERIFICATION PORTAL"
+        copy_subheadline = "You are being directed to the official manufacturer supply page for " + p_nome + "."
+        copy_botao = "👉 CLICK HERE TO VISIT THE OFFICIAL WEBSITE NOW"
+        copy_termos = "Copyright 2026 - All Rights Reserved. This site is not part of the Google website or Google Inc. Additionally, this site is NOT endorsed by Google in any way."
+
+        st.text_input("Texto da Headline Principal:", value=copy_headline, key="copy_h1")
+        st.text_input("Texto do Subtítulo de Redirecionamento:", value=copy_subheadline, key="copy_h2")
+        st.text_input("Texto do Botão Central de Clique (CTA):", value=copy_botao, key="copy_btn")
+        st.text_area("Texto de Conformidade do Rodapé (Compliance):", value=copy_termos, key="copy_foot", height=100)
+
+    # Rodapé unificado Black-Label
+    st.markdown('<div style="clear: both; text-align: center; font-size: 11px; color: #475569; padding-top: 50px;"><hr style="border-color: #1e293b;">© 2026 Adriel-AI Pro - Todos os Direitos Reservados • Blindagem Estrutural V45 Ativa.</div>', unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()
