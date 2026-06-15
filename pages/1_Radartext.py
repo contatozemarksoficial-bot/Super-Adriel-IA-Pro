@@ -117,6 +117,7 @@ with col_painel2:
 
 st.write("")
 st.markdown("#### 📊 Histórico de Tráfego e Densidade Comparativa")
+# CORREÇÃO DA VARIÁVEL: Mudado de p_sel para p_selecionado
 df_barras = pd.DataFrame({"Volume Registrado": [volume_mes_real, 15000]}, index=[p_selecionado, "Média Geral Gringa"])
 st.bar_chart(df_barras)
 
@@ -146,6 +147,3 @@ with col_est:
                 if st.button(f"{v['sym']} {k} ({v['p']})", key=f"r_{k}"):
                     st.session_state.radar_sel = k
                     st.rerun()
-    st.markdown('</div>', unsafe_allow_html=True)
-
-with col_ger:
