@@ -4,7 +4,7 @@ import json
 import pandas as pd
 import datetime
 
-# 1. CONFIGURAÇÃO PREMIUM DA TELA (IMUNE A CRASHES)
+# 1. CONFIGURAÇÃO PREMIUM DA TELA (IMUNE A CRASHES NO PYTHON 3.14)
 st.set_page_config(page_title="Adriel-AI Pro - Radar", page_icon="📊", layout="wide")
 
 # Chave API Real fixa nos bastidores da inteligência
@@ -17,7 +17,7 @@ if "executou_scan" not in st.session_state:
     st.session_state.executou_scan = False
 
 # =============================================================================================================
-# 2. DESIGN BLACK-LABEL: ESTILIZAÇÃO MESTRE CYBER-PULSE
+# 2. DESIGN BLACK-LABEL STÁVEL: ESTILIZAÇÃO MESTRE SEM CARACTERES DE CONFLITO
 # =============================================================================================================
 st.markdown("""
 <style>
@@ -82,12 +82,7 @@ p_selecionado = st.session_state.radar_sel
 # PAINEL DE CONTROLE DO TOPO
 c_topo1, c_topo2 = st.columns([1.2, 1.8])
 with c_topo1:
-    st.markdown(f"""
-    <div style="background-color: #0c111d; border: 1px solid #1f293b; border-radius: 10px; padding: 12px; text-align: center;">
-        <span style="font-size: 11px; color: #64748b; text-transform: uppercase;">Alvo Selecionado</span><br>
-        <b style="color: #00ffcc; font-size: 20px;">{p_selecionado}</b>
-    </div>
-    """, unsafe_allow_html=True)
+    st.info(f"🎯 **Alvo Selecionado:** {p_selecionado}")
 
 with c_topo2:
     if st.button("⛏️ EXECUTAR VARREDURA DA INTELIGÊNCIA CENTRAL", use_container_width=True):
@@ -127,13 +122,13 @@ if st.session_state.executou_scan:
     
     col_p1, col_p2 = st.columns(2)
     with col_p1:
+        # CORREÇÃO DEFINITIVA DO TEXTO DO PAÍS (SEM CONTRABARRAS QUE CAUSAM SYNTAXERROR)
         st.markdown(f"""
-        <div style="background: linear-gradient(135deg, #0f172a 0%, #050811 100%); border: 1px solid #1f293b; border-left: 4px solid {info['cor']}; border-radius:12px; padding:20px; min-height: 180px;">
-            <b style="color: {info['cor']}; font-size: 12px; text-transform: uppercase;">[ {info['status']} ]</b><br><br>
-            <b>Plataforma Oficial:</b> {info["p"]}<br>
-            <b>Melhores Países para Anunciar:</b> {info["pais"]}<br><br>
+        <div style="background: linear-gradient(135deg, #0f172a 0%, #050811 100%); border: 1px solid #1f293b; border-radius:12px; padding:22px; min-height: 180px;">
+            <b>Plataforma Oficial:</b> {info['p']}<br>
+            <b>Melhores Países para Anunciar:</b> {info['pais']}<br><br>
             <b>🔍 Porquê Estratégico (Afirmação Clara):</b><br>
-            <i style="color: #94a3b8; font-size: 13px;">{info["motivo"]}</i>
+            <i style="color: #94a3b8;">{info['motivo']}</i>
         </div>
         """, unsafe_allow_html=True)
         
@@ -141,3 +136,6 @@ if st.session_state.executou_scan:
         st.markdown(f"""
         <div style="background-color: #0a0f1d; border: 1px solid #1e293b; border-bottom: 4px solid #00ffcc; border-radius: 12px; padding: 18px; text-align: center;">
             <span style="font-size: 11px; color: #64748b; text-transform: uppercase;">Quantas pesquisas deste produto teve no MÊS</span><br>
+            <b style="font-size: 28px; color: #ffffff; font-family: monospace;">{volume_mes_real:,}</b>
+        </div>
+        <div style="background-color: #0a0f1d; border: 1px solid #1e293b; border-bottom: 4px solid #00ffcc; border-radius: 12px; padding: 18px; text-align: center; margin-top: 10px;">
