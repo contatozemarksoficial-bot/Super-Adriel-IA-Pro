@@ -51,7 +51,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# TEXTOS COM ORTOGRAFIA 100% CORRIGIDA EM PORTUGUÊS PADRÃO DE AGÊNCIA
+# TEXTOS 100% REVISADOS E CORRIGIDOS SEM ERROS DE PORTUGUÊS
 st.markdown('<h1 style="color: #00ffcc; font-weight: 900; font-size: 2.2rem; margin-bottom: 0;">📊 MÓDULO 01: RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
 st.markdown('<p style="color: #94a3b8; font-size: 14.5px; margin-top: 5px; margin-bottom: 25px;">No momento da pesquisa, o sistema exibirá um radar na tela com um robô realizando uma varredura completa de produtos nas principais plataformas da gringa em tempo real. Se o usuário decidir fazer uma pesquisa por fora do nosso sistema, ele encontrará exatamente os mesmos dados e resultados que o nosso robô disponibilizou nas principais varreduras que realizamos em toda a internet e nas plataformas: ClickBank, Digistore24, BuyGoods e MaxWeb, mostrando exatamente onde o nosso robô está pesquisando.</p>', unsafe_allow_html=True)
 st.markdown("---")
