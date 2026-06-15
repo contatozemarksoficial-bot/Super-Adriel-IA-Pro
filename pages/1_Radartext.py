@@ -38,16 +38,6 @@ st.markdown("""
     box-shadow: 0 0 25px rgba(0, 255, 204, 0.4) !important; transition: all 0.25s ease !important;
 }
 .stButton > button:hover { transform: translateY(-2px) !important; box-shadow: 0 0 35px rgba(0, 255, 135, 0.7) !important; }
-
-/* BOTÕES DAS LISTAS DE PRODUTOS */
-.div-lista-btn > div > div > button {
-    background-color: #111827 !important; color: #f8fafc !important;
-    border: 1px solid #1f293b !important; border-radius: 8px !important;
-    padding: 12px 15px !important; font-weight: 700 !important; font-size: 12.5px !important;
-    width: 100% !important; text-align: left !important; margin-bottom: 8px !important;
-}
-.div-lista-btn > div > div > button:hover { border-color: #00ffcc !important; color: #00ffcc !important; }
-.div-lista-btn > div > div > button p { text-align: left !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -74,8 +64,8 @@ produtos_gringos = {
 
 p_selecionado = st.session_state.radar_sel
 
-# PAINEL SUPERIOR COM O BOTÃO MESTRE (TAG CORRIGIDA PARA EVITAR SYNTAX ERROR)
-c_topo1, c_topo2 = st.columns([1.2, 1.8])
+# PAINEL SUPERIOR COM O BOTÃO MESTRE (CORRIGIDO SEM CONFLITOS DE COLUNAS HTML)
+c_topo1, c_topo2 = st.columns(2)
 with c_topo1:
     st.markdown(f"""
     <div style='background: linear-gradient(135deg, #0f172a 0%, #070a13 100%); border: 1px solid #1f293b; padding: 15px; border-radius: 12px; text-align: center;'>
@@ -137,3 +127,13 @@ if st.session_state.executou_scan:
         st.markdown(f"""
         <div class="card-metric-premium">
             <div class="metric-premium-title">Quantas pesquisas deste produto teve no MÊS (Google US)</div>
+            <div class="metric-premium-value">{volume_mes_real:,}</div>
+        </div>
+        <div class="card-metric-premium" style="margin-top:15px;">
+            <div class="metric-premium-title">Quantas pesquisas teve no DIA até o momento atual</div>
+            <div class="metric-premium-value" style="color:#00ffcc;">{volume_dia_real:,}</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    st.write("")
+    st.markdown("#### 📊 Gráfico de Movimentação em Tempo Real no Instante do Clique")
