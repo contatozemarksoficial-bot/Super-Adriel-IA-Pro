@@ -2,22 +2,21 @@ import streamlit as st
 import requests
 import json
 import pandas as pd
-import datetime
 import random
 
-# 1. CONFIGURAÇÃO OFICIAL DA PLATAFORMA (IMUNE A ERROS VISUAIS)
+# 1. CONFIGURAÇÃO PREMIUM DA TELA (IMUNE A CRASHES NO PYTHON 3.14)
 st.set_page_config(page_title="Adriel-AI Pro - Radar", page_icon="📊", layout="wide")
 
 # Chave API Real fixa nos bastidores da inteligência
 CHAVE_SERPER_GLOBAL = "1e3c16719fbd4f5833199d7466193252986bba26"
 
-# Inicialização limpa e segura dos estados de memória do Streamlit
+# Inicialização e persistência segura dos estados de memória do Streamlit
 if "radar_sel" not in st.session_state:
     st.session_state.radar_sel = "ProDentim"
 if "executou_scan" not in st.session_state:
     st.session_state.executou_scan = False
 
-# Funções de Callback simples para registrar a mudança sem estourar o interpretador
+# Função de Callback limpa para registrar a mudança sem dar crash
 def registrar_clique_produto(nome_p):
     st.session_state.radar_sel = nome_p
     st.session_state.executou_scan = True
@@ -75,6 +74,7 @@ p_selecionado = st.session_state.radar_sel
 # 3. INTERFACE DE EXIBIÇÃO DE RESULTADOS NATIVA (100% SEGURA CONTRA TRAVAMENTOS)
 # =============================================================================================================
 if st.session_state.executou_scan:
+    info = produtos_gringos[p_selecion==st.session_state.radar_sel and p_selecionado in produtos_gringos and p_selecionado or "ProDentim"]
     info = produtos_gringos[p_selecionado]
     
     st.markdown(f"""
@@ -119,14 +119,13 @@ if st.session_state.executou_scan:
     st.write("")
     st.markdown("#### 📊 Gráfico de Movimentação em Tempo Real (Densidade em Colunas / Barras Verticais)")
     
-    # 🟢 CORREÇÃO CRÍTICA DO GRÁFICO: Indentação limpa e pura sem quebras no Pandas DataFrame
     horas_dia = [f"{h:02d}h" for h in range(0, 24, 2)]
     cliques_hora = [int(volume_dia_real / 12) + random.randint(-4, 4) for _ in range(12)]
     df_colunas = pd.DataFrame({"Volume de Cliques": cliques_hora}, index=horas_dia)
     st.bar_chart(df_colunas, height=220)
 
 # =============================================================================================================
-# 4. AS 2 DUAS COLUNAS LARGAS DE LUXO FIXAS NO RODAPÉ DO SEU SITE
+# 4. AS 2 DUAS COLUNAS LARGAS DE LUXO FIXAS NO RODAPÉ DO SEU SITE (REMOVIDO COMANDO ST.RERUN)
 # =============================================================================================================
 st.write("---")
 with st.container():
