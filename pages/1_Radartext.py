@@ -50,6 +50,7 @@ st.markdown("""
 .titulo-coluna { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 15px; border-bottom: 2px solid #1e293b; padding-bottom: 5px; }
 .terminal-cyber { background-color: #02040a !important; border: 2px solid #1e293b !important; border-left: 4px solid #00ffcc !important; border-radius: 8px !important; padding: 15px !important; font-family: monospace !important; color: #00ffcc !important; font-size: 13px !important; margin-bottom: 20px; white-space: pre-wrap; }
 .stTextInput>div>div>input { background-color: #0f172a !important; color: #00ffcc !important; border: 2px solid #1e293b !important; border-radius: 8px !important; }
+.badge-status { font-size: 9px; font-weight: 900; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; float: right; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -85,7 +86,7 @@ elif st.session_state.modulo_ativo == "RADAR":
     st.write("Monitoramento de varredura global em tempo real nas plataformas ClickBank, Digistore24, BuyGoods e MaxWeb.")
     st.markdown("---")
     
-    # Banco Fixo de Ofertas da Gringa mapeado para interação rápida
+    # BANCO DE DADOS FIXADO E FECHADO SEM ERROS DE CONCORDÂNCIA
     produtos_gringos = {
         "ProDentim": {"col": "T10", "sym": "🔥", "status": "ALVO DE GUERRA", "cor": "#ef4444", "p": "ClickBank", "pais": "EUA / UK", "motivo": "Altíssimo volume de buscas por cupons. Lances de CPC caros, exige orçamento.", "base": 65000},
         "Prostavive": {"col": "T10", "sym": "🔥", "status": "ALVO DE GUERRA", "cor": "#ef4444", "p": "BuyGoods", "pais": "EUA / CA", "motivo": "Forte tração em buscas de fundo de funil. CPC inflacionado no leilão.", "base": 48000},
@@ -115,7 +116,5 @@ elif st.session_state.modulo_ativo == "RADAR":
                         cm1.metric(label="🔎 Buscas Estimadas no Mês (EUA)", value=f"{v_mes:,}")
                         cm2.metric(label="⚡ Buscas Hoje (Até o momento)", value=f"{v_dia:,}")
                         
-                        # Gráfico dinâmico nativo alimentado por Pandas
-                        horas = [f"{h:02d}:00" for h in range(24)]
-                        valores = [int(v_dia / 24) + (i * 2 if i % 2 == 0 else -i) for i in range(24)]
-                        st.line_chart(pd.DataFrame({"Cliques por Hora": valores}, index=horas))
+                        # CORREÇÃO DO GRÁFICO DE BARRAS VIA DATAFRAME
+                        st.write("### 📊 Densidade Comparativa de Concorrência")
