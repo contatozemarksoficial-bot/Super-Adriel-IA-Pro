@@ -63,7 +63,7 @@ st.markdown('<h1 style="color: #00ffcc; font-weight: 900; font-size: 2.2rem; mar
 st.markdown('<p style="color: #94a3b8; font-size: 14.5px; margin-top: 5px; margin-bottom: 25px;">No momento da pesquisa, o sistema exibirá um radar na tela com um robô realizando uma varredura completa de produtos nas principais plataformas da gringa em tempo real. Se o usuário decidir fazer uma pesquisa por fora do nosso sistema, ele encontrará exatamente os mesmos dados e resultados que o nosso robô disponibilizou nas principais varreduras que realizamos em toda a internet e nas plataformas: ClickBank, Digistore24, BuyGoods e MaxWeb, mostrando exatamente onde o nosso robô está pesquisando.</p>', unsafe_allow_html=True)
 st.write("---")
 
-# BANCO DE DADOS INTEGRADO DA GRINGA REAL EM 2 GRUPOS DE MOVIMENTAÇÃO
+# BANCO DE DADOS INTEGRADO DA GRINGA REAL EM 2 COLUNAS LARGAS
 produtos_gringos = {
     "ProDentim": {"col": "ALTA", "sym": "🔥", "status": "ALVO DE GUERRA", "p": "ClickBank", "pais": "EUA / UK", "motivo": "Altíssimo volume de buscas por cupons e reviews de afiliados. Lances de CPC caros, exige orçamento forte.", "base": 65000},
     "Prostavive": {"col": "ALTA", "sym": "🔥", "status": "ALVO DE GUERRA", "p": "BuyGoods", "pais": "EUA / CA", "motivo": "Forte tração em buscas de fundo de funil. CPC inflacionado no leilão.", "base": 48000},
@@ -92,6 +92,8 @@ with c_topo1:
 with c_topo2:
     if st.button("⛏️ EXECUTAR VARREDURA DA INTELIGÊNCIA CENTRAL", use_container_width=True):
         st.session_state.executou_scan = True
+
+st.write("---")
 
 # EXECUÇÃO OPERACIONAL DA API
 if st.session_state.executou_scan:
@@ -138,7 +140,7 @@ if st.session_state.executou_scan:
     st.write("")
     st.markdown("#### 📊 Gráfico de Movimentação em Tempo Real (Densidade em Colunas)")
     
-    # 🟢 NOVO GRÁFICO EM COLUNAS ROBUSTO CONFORME SOLICITADO
+    # 🟢 ALINHAMENTO FIXO SEM ERROS DE INDENTAÇÃO
     horas_dia = [f"{h:02d}h" for h in range(0, 24, 2)]
     cliques_hora = [int(volume_dia_real / 12) + (i * 3 if i % 2 == 0 else -i) for i in range(12)]
     df_colunas = pd.DataFrame({"Volume de Cliques": cliques_hora}, index=horas_dia)
@@ -154,6 +156,5 @@ with st.container():
     col_esquerda, col_direita = st.columns(2)
     
     with col_esquerda:
-        st.markdown('<div class="box-luxo-interna"><h4 style="color:#ef4444; margin-top:0; margin-bottom:15px;">🔥 COLUNA 1: TOP 10 EM ALTA DO MERCADO</h4></div>', unsafe_allow_html=True)
+        st.markdown('<div class="box-luxo-interna"><h4 style="color:#ef4444; margin-top:0; margin-bottom:15px;">🔥 COLUNA 1: OS TOP 10 EM ALTA DO MERCADO</h4></div>', unsafe_allow_html=True)
         for k, v in produtos_gringos.items():
-            if v["col"] == "ALTA":
