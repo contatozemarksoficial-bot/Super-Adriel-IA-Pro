@@ -74,7 +74,7 @@ produtos_gringos = {
 
 p_selecionado = st.session_state.radar_sel
 
-# PAINEL SUPERIOR COM O BOTÃO MESTRE
+# PAINEL SUPERIOR COM O BOTÃO MESTRE (TAG CORRIGIDA PARA EVITAR SYNTAX ERROR)
 c_topo1, c_topo2 = st.columns([1.2, 1.8])
 with c_topo1:
     st.markdown(f"""
@@ -128,7 +128,7 @@ if st.session_state.executou_scan:
             <span class="badge-status-premium" style="background-color:{info["cor"]}; color:#030712;">{info["status"]}</span><br>
             <b>Plataforma Oficial:</b> <span style="color:#00ffcc;">{info["p"]}</span><br>
             <b style="color:#f6d14b;">🇺🇸 MELHOR PAÍS PARA ANUNCIAR (FUNDO DE FUNIL):</b> <span style="color:#ffffff;">{info["pais"]}</span><br><br>
-            <b>🔍 Porquê Estratégico (Afirmação Clara):</b><br>
+            <b>🔍 Porquê Estratégico (Reflexo Real):</b><br>
             <i style="color:#94a3b8; font-size:13px;">{info["motivo"]}</i>
         </div>
         """, unsafe_allow_html=True)
