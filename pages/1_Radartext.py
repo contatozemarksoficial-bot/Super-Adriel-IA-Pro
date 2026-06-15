@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import json
 import pandas as pd
+import datetime
 import random
 
 # 1. CONFIGURAÇÃO PREMIUM DA TELA (IMUNE A CRASHES NO PYTHON 3.14)
@@ -74,7 +75,6 @@ p_selecionado = st.session_state.radar_sel
 # 3. INTERFACE DE EXIBIÇÃO DE RESULTADOS NATIVA (100% SEGURA CONTRA TRAVAMENTOS)
 # =============================================================================================================
 if st.session_state.executou_scan:
-    info = produtos_gringos[p_selecion==st.session_state.radar_sel and p_selecionado in produtos_gringos and p_selecionado or "ProDentim"]
     info = produtos_gringos[p_selecionado]
     
     st.markdown(f"""
@@ -125,7 +125,7 @@ if st.session_state.executou_scan:
     st.bar_chart(df_colunas, height=220)
 
 # =============================================================================================================
-# 4. AS 2 DUAS COLUNAS LARGAS DE LUXO FIXAS NO RODAPÉ DO SEU SITE (REMOVIDO COMANDO ST.RERUN)
+# 4. AS 2 DUAS COLUNAS LARGAS DE LUXO FIXAS NO RODAPÉ DO SEU SITE
 # =============================================================================================================
 st.write("---")
 with st.container():
@@ -134,3 +134,6 @@ with st.container():
     col_esquerda, col_direita = st.columns(2)
     
     with col_esquerda:
+        st.markdown('<h4 style="color:#ef4444; margin-top:0; margin-bottom:15px; font-weight:800;">🔥 COLUNA 1: OS TOP 10 EM ALTA</h4>', unsafe_allow_html=True)
+        for k, v in produtos_gringos.items():
+            if v["col"] == "ALTA":
