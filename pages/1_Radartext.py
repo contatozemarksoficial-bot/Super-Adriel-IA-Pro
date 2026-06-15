@@ -4,20 +4,28 @@ import json
 import pandas as pd
 import datetime
 
-# 1. CONFIGURAÇÃO PREMIUM DA TELA (IMUNE A CRASHES NO PYTHON 3.14)
+# 1. CONFIGURAÇÃO PREMIUM DA TELA (IMUNE A CRASHES OPERACIONAIS)
 st.set_page_config(page_title="Adriel-AI Pro - Radar", page_icon="📊", layout="wide")
 
-# Chave API Real fixa nos bastidores da inteligência
+# Chave API Real fixa e isolada nos bastidores
 CHAVE_SERPER_GLOBAL = "1e3c16719fbd4f5833199d7466193252986bba26"
 
-# Estado de memória persistente para travar os cliques e não apagar a tela
+# Funções de Callback para travar a memória de forma limpa sem estourar o st.rerun()
+def mudar_produto_alvo(nome_do_produto):
+    st.session_state.radar_sel = nome_do_produto
+    st.session_state.executou_scan = False
+
+def disparar_motores_scan():
+    st.session_state.executou_scan = True
+
+# Inicialização segura dos estados de memória do Streamlit
 if "radar_sel" not in st.session_state:
     st.session_state.radar_sel = "ProDentim"
 if "executou_scan" not in st.session_state:
     st.session_state.executou_scan = False
 
 # =============================================================================================================
-# 2. DESIGN NEON BLACK-LABEL TRAVADO: ESTILIZAÇÃO COMPLETA DAS DUAS COLUNAS
+# 2. DESIGN NEON BLACK-LABEL TRAVADO: REMOÇÃO DE BORDAS BRANCAS E FONDOS FANTASMAS
 # =============================================================================================================
 st.markdown("""
 <style>
@@ -32,7 +40,7 @@ div[data-testid="stVerticalBlock"], div[role="presentation"], .stButton, div[dat
     box-shadow: none !important;
 }
 
-/* Visual Premium das Caixas Escuras das 2 Colunas */
+/* Blocos Escuros Premium das Duas Novas Colunas */
 .box-luxo-interna {
     background-color: #0c111d !important;
     border: 1px solid #1f293b !important;
@@ -63,7 +71,7 @@ st.markdown('<h1 style="color: #00ffcc; font-weight: 900; font-size: 2.2rem; mar
 st.markdown('<p style="color: #94a3b8; font-size: 14.5px; margin-top: 5px; margin-bottom: 25px;">No momento da pesquisa, o sistema exibirá um radar na tela com um robô realizando uma varredura completa de produtos nas principais plataformas da gringa em tempo real. Se o usuário decidir fazer uma pesquisa por fora do nosso sistema, ele encontrará exatamente os mesmos dados e resultados que o nosso robô disponibilizou nas principais varreduras que realizamos em toda a internet e nas plataformas: ClickBank, Digistore24, BuyGoods e MaxWeb, mostrando exatamente onde o nosso robô está pesquisando.</p>', unsafe_allow_html=True)
 st.write("---")
 
-# BANCO DE DADOS INTEGRADO DA GRINGA REAL EM 2 COLUNAS LARGAS
+# BANCO DE DADOS INTEGRADO DA GRINGA REAL EM 2 GRUPOS DE MOVIMENTAÇÃO
 produtos_gringos = {
     "ProDentim": {"col": "ALTA", "sym": "🔥", "status": "ALVO DE GUERRA", "p": "ClickBank", "pais": "EUA / UK", "motivo": "Altíssimo volume de buscas por cupons e reviews de afiliados. Lances de CPC caros, exige orçamento forte.", "base": 65000},
     "Prostavive": {"col": "ALTA", "sym": "🔥", "status": "ALVO DE GUERRA", "p": "BuyGoods", "pais": "EUA / CA", "motivo": "Forte tração em buscas de fundo de funil. CPC inflacionado no leilão.", "base": 48000},
@@ -90,12 +98,11 @@ with c_topo1:
     st.info(f"🎯 **Alvo Selecionado:** {p_selecionado}")
 
 with c_topo2:
-    if st.button("⛏️ EXECUTAR VARREDURA DA INTELIGÊNCIA CENTRAL", use_container_width=True):
-        st.session_state.executou_scan = True
+    st.button("⛏️ EXECUTAR VARREDURA DA INTELIGÊNCIA CENTRAL", use_container_width=True, on_click=disparar_motores_scan)
 
 st.write("---")
 
-# EXECUÇÃO OPERACIONAL DA API
+# EXECUÇÃO OPERACIONAL DA API REIVINDICADA NO CLIQUE DO BOTÃO DO TOPO
 if st.session_state.executou_scan:
     info = produtos_gringos[p_selecionado]
     
@@ -140,21 +147,16 @@ if st.session_state.executou_scan:
     st.write("")
     st.markdown("#### 📊 Gráfico de Movimentação em Tempo Real (Densidade em Colunas)")
     
-    # 🟢 ALINHAMENTO FIXO SEM ERROS DE INDENTAÇÃO
+    # 🟢 GRÁFICO EM COLUNAS ROBUSTO ALINHADO SEM RECUOS ERRADOS
     horas_dia = [f"{h:02d}h" for h in range(0, 24, 2)]
     cliques_hora = [int(volume_dia_real / 12) + (i * 3 if i % 2 == 0 else -i) for i in range(12)]
     df_colunas = pd.DataFrame({"Volume de Cliques": cliques_hora}, index=horas_dia)
     st.bar_chart(df_colunas)
 
 # =============================================================================================================
-# 🚨 ESTRUTURA RECONFIGURADA PARA APENAS 2 GRANDES COLUNAS FIXAS NO RODAPÉ
+# 🚨 ESTRUTURA RECONFIGURADA PARA APENAS 2 COLUNAS LARGAS DE LUXO FIXADAS NO RODAPÉ VIA CALLBACKS
 # =============================================================================================================
 st.write("---")
 with st.container():
     st.markdown("### 📋 MAPA DO MERCADO INTERNACIONAL (PRODUTOS VALIDADOS)")
     
-    col_esquerda, col_direita = st.columns(2)
-    
-    with col_esquerda:
-        st.markdown('<div class="box-luxo-interna"><h4 style="color:#ef4444; margin-top:0; margin-bottom:15px;">🔥 COLUNA 1: OS TOP 10 EM ALTA DO MERCADO</h4></div>', unsafe_allow_html=True)
-        for k, v in produtos_gringos.items():
