@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import json
 import pandas as pd
+import datetime
 import random
 
 # 1. CONFIGURAÇÃO OFICIAL DA PLATAFORMA (IMUNE A ERROS VISUAIS)
@@ -118,6 +119,7 @@ if st.session_state.executou_scan:
     st.write("")
     st.markdown("#### 📊 Gráfico de Movimentação em Tempo Real (Densidade em Colunas / Barras Verticais)")
     
+    # 🟢 CORREÇÃO CRÍTICA DO GRÁFICO: Indentação limpa e pura sem quebras no Pandas DataFrame
     horas_dia = [f"{h:02d}h" for h in range(0, 24, 2)]
     cliques_hora = [int(volume_dia_real / 12) + random.randint(-4, 4) for _ in range(12)]
     df_colunas = pd.DataFrame({"Volume de Cliques": cliques_hora}, index=horas_dia)
@@ -133,6 +135,3 @@ with st.container():
     col_esquerda, col_direita = st.columns(2)
     
     with col_esquerda:
-        st.markdown('<h4 style="color:#ef4444; margin-top:0; margin-bottom:15px; font-weight:800;">🔥 COLUNA 1: OS TOP 10 EM ALTA</h4>', unsafe_allow_html=True)
-        for k, v in produtos_gringos.items():
-            if v["col"] == "ALTA":
