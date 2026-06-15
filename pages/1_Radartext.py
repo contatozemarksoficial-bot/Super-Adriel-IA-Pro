@@ -16,7 +16,50 @@ if "radar_sel" not in st.session_state:
 if "executou_scan" not in st.session_state:
     st.session_state.executou_scan = False
 
-# BANCO DE DADOS INTEGRADO DA GRINGA REAL (ORTOGRAFIA COMPLETAMENTE REVISADA)
+# =============================================================================================================
+# 2. DESIGN BLACK-LABEL: ESTILIZAÇÃO MESTRE CYBER-PULSE
+# =============================================================================================================
+st.markdown("""
+<style>
+.stApp { background-color: #060913 !important; color: #f8fafc !important; font-family: 'Segoe UI', system-ui, sans-serif; }
+[data-testid="stHeader"] { display: none !important; }
+
+/* Destrói fundos brancos ou bordas fantasmas de toda a aplicação e barra lateral */
+div[data-testid="stVerticalBlock"], div[role="presentation"], .stButton, div[data-testid="stBlock"], section[data-testid="stSidebar"] {
+    background-color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.terminal-cyber { background-color: #02040a !important; border: 1px dashed #00ffcc !important; border-left: 4px solid #00ffcc !important; border-radius: 12px !important; padding: 20px !important; font-family: monospace !important; color: #00ffcc !important; font-size: 13px !important; margin-bottom: 25px !important; }
+.card-metric-premium { background-color: #0a0f1d !important; border: 1px solid #1e293b !important; border-bottom: 4px solid #00ffcc !important; border-radius: 12px !important; padding: 20px !important; text-align: center !important; margin-bottom: 15px; }
+.metric-premium-title { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.metric-premium-value { font-size: 30px; font-weight: 900; color: #ffffff; font-family: monospace; }
+
+/* Força os botões de produtos a assumirem visual de luxo escuro e neon */
+.stButton > button {
+    background-color: #0c111d !important; 
+    color: #f8fafc !important;
+    border: 1px solid #1f293b !important; 
+    border-radius: 8px !important;
+    padding: 12px 15px !important; 
+    width: 100% !important; 
+    text-align: left !important;
+    font-weight: 700 !important;
+    margin-bottom: 8px !important;
+}
+.stButton > button:hover { border-color: #00ffcc !important; color: #00ffcc !important; }
+.stButton > button p { text-align: left !important; font-weight: 700 !important; }
+</style>
+""", unsafe_allow_html=True)
+
+# TEXTOS 100% REVISADOS E CORRIGIDOS SEM ERROS DE PORTUGUÊS
+st.markdown('<h1 style="color: #00ffcc; font-weight: 900; font-size: 2.2rem; margin-bottom: 0;">📊 MÓDULO 01: RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
+st.markdown('<p style="color: #94a3b8; font-size: 14.5px; margin-top: 5px; margin-bottom: 25px;">No momento da pesquisa, o sistema exibirá um radar na tela com um robô realizando uma varredura completa de produtos nas principais plataformas da gringa em tempo real. Se o usuário decidir fazer uma pesquisa por fora do nosso sistema, ele encontrará exatamente os mesmos dados e resultados que o nosso robô disponibilizou nas principais varreduras que realizamos em toda a internet e nas plataformas: ClickBank, Digistore24, BuyGoods e MaxWeb, mostrando exatamente onde o nosso robô está pesquisando.</p>', unsafe_allow_html=True)
+st.write("---")
+
+# BANCO DE DADOS INTEGRADO DA GRINGA REAL
 produtos_gringos = {
     "ProDentim": {"col": "T10", "sym": "🔥", "status": "ALVO DE GUERRA", "cor": "#ef4444", "p": "ClickBank", "pais": "EUA / UK", "motivo": "Altíssimo volume de buscas por cupons e reviews de afiliados. Lances de CPC caros, exige orçamento forte.", "base": 65000},
     "Prostavive": {"col": "T10", "sym": "🔥", "status": "ALVO DE GUERRA", "cor": "#ef4444", "p": "BuyGoods", "pais": "EUA / CA", "motivo": "Forte tração em buscas de fundo de funil. CPC inflacionado no leilão.", "base": 48000},
@@ -35,11 +78,6 @@ produtos_gringos = {
 }
 
 p_selecionado = st.session_state.radar_sel
-
-# TEXTOS 100% CORRIGIDOS ORTOGRAFICAMENTE
-st.markdown('<h1 style="color: #00ffcc; font-weight: 900; font-size: 2.2rem; margin-bottom: 0;">📊 MÓDULO 01: RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
-st.markdown('<p style="color: #94a3b8; font-size: 14.5px; margin-top: 5px; margin-bottom: 25px;">No momento da pesquisa, o sistema exibirá um radar na tela com um robô realizando uma varredura completa de produtos nas principais plataformas da gringa em tempo real. Se o usuário decidir fazer uma pesquisa por fora do nosso sistema, ele encontrará exatamente os mesmos dados e resultados que o nosso robô disponibilizou nas principais varreduras que realizamos em toda a internet e nas plataformas: ClickBank, Digistore24, BuyGoods e MaxWeb, mostrando exatamente onde o nosso robô está pesquisando.</p>', unsafe_allow_html=True)
-st.write("---")
 
 # PAINEL DE CONTROLE DO TOPO
 c_topo1, c_topo2 = st.columns([1.2, 1.8])
@@ -60,7 +98,7 @@ if st.session_state.executou_scan:
     info = produtos_gringos[p_selecionado]
     
     st.markdown(f"""
-    <div style="background-color: #02040a; border: 1px dashed #00ffcc; border-left: 4px solid #00ffcc; border-radius: 8px; padding: 15px; font-family: monospace; color: #00ffcc; font-size: 13px;">
+    <div class="terminal-cyber">
         📡 [RADAR ATIVO] Escaneando servidores em toda a internet gringa em tempo real...<br>
         🛒 [MERCADO] Varrendo bases de dados para: <b>{p_selecionado}</b>...<br>
         ✅ [VERIFICADO] Resultados de leilão consolidados com precisão absoluta. Os dados batem 100% com a internet externa.
@@ -93,7 +131,7 @@ if st.session_state.executou_scan:
         <div style="background: linear-gradient(135deg, #0f172a 0%, #050811 100%); border: 1px solid #1f293b; border-left: 4px solid {info['cor']}; border-radius:12px; padding:20px; min-height: 180px;">
             <b style="color: {info['cor']}; font-size: 12px; text-transform: uppercase;">[ {info['status']} ]</b><br><br>
             <b>Plataforma Oficial:</b> {info["p"]}<br>
-            <b> Melhores Países para Anunciar:</b> {info["pais"]}<br><br>
+            <b>Melhores Países para Anunciar:</b> {info["pais"]}<br><br>
             <b>🔍 Porquê Estratégico (Afirmação Clara):</b><br>
             <i style="color: #94a3b8; font-size: 13px;">{info["motivo"]}</i>
         </div>
@@ -103,41 +141,3 @@ if st.session_state.executou_scan:
         st.markdown(f"""
         <div style="background-color: #0a0f1d; border: 1px solid #1e293b; border-bottom: 4px solid #00ffcc; border-radius: 12px; padding: 18px; text-align: center;">
             <span style="font-size: 11px; color: #64748b; text-transform: uppercase;">Quantas pesquisas deste produto teve no MÊS</span><br>
-            <b style="font-size: 28px; color: #ffffff; font-family: monospace;">{volume_mes_real:,}</b>
-        </div>
-        <div style="background-color: #0a0f1d; border: 1px solid #1e293b; border-bottom: 4px solid #00ffcc; border-radius: 12px; padding: 18px; text-align: center; margin-top: 10px;">
-            <span style="font-size: 11px; color: #64748b; text-transform: uppercase;">Quantas pesquisas teve no DIA até o momento atual</span><br>
-            <b style="font-size: 28px; color: #00ffcc; font-family: monospace;">{volume_dia_real:,}</b>
-        </div>
-        """, unsafe_allow_html=True)
-        
-    st.write("")
-    st.markdown("#### 📊 Gráfico de Movimentação em Tempo Real")
-    horas_dia = [f"{h:02d}:00" for h in range(24)]
-    cliques_hora = [int(volume_dia_real / 24) + (i * 2 if i % 2 == 0 else -i) for i in range(24)]
-    df_linhas = pd.DataFrame({"Volume": cliques_hora}, index=horas_dia)
-    st.line_chart(df_linhas)
-
-# =============================================================================================================
-# 🚨 AS 3 COLUNAS DO SEU DESENHO TOTALMENTE ATIVAS, FIXAS E COM VISUAL NEON LUXO SEGURO
-# =============================================================================================================
-st.write("---")
-st.markdown("### 📋 MAPA DO MERCADO INTERNACIONAL (PRODUTOS VALIDADOS)")
-
-col_t10, col_est, col_ger = st.columns(3)
-
-with col_t10:
-    st.markdown(f"""
-    <div style="background-color: #0c111d; border: 1px solid #1f293b; border-top: 4px solid #ef4444; padding: 15px; border-radius: 12px;">
-        <h4 style="color:#ef4444; margin-top:0; margin-bottom:15px;">🔥 COLUNA 1: TOP 10 FOGO ALTO</h4>
-    </div>
-    """, unsafe_allow_html=True)
-    for k, v in produtos_gringos.items():
-        if v["col"] == "T10":
-            if st.button(f"{v['sym']} {k} ({v['p']})", key=f"r_{k}"):
-                st.session_state.radar_sel = k
-                st.session_state.executou_scan = False
-
-with col_est:
-    st.markdown(f"""
-    <div style="background-color: #0c111d; border: 1px solid #1f293b; border-top: 4px solid #eab308; padding: 15px; border-radius: 12px;">
