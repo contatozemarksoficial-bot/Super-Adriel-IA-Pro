@@ -17,12 +17,12 @@ if "executou_scan" not in st.session_state:
     st.session_state.executou_scan = False
 
 # =============================================================================================================
-# 2. DESIGN BLACK-LABEL: ESTILIZAÇÃO MESTRE CYBER-PULSE (TEXTO DO SEU MODELO CORRIGIDO)
+# 2. DESIGN BLACK-LABEL: ESTILIZAÇÃO MESTRE CYBER-PULSE
 # =============================================================================================================
 st.markdown("""
 <style>
 .stApp { background-color: #060913 !important; color: #f8fafc !important; font-family: 'Segoe UI', system-ui, sans-serif; }
-.terminal-cyber { background-color: #02040a !important; border: 1px dashed #00ffcc !important; border-left: 4px solid #00ffcc !important; border-radius: 12px !important; padding: 20px !important; font-family: monospace !important; color: #00ffcc !important; font-size: 13.5px !important; margin-bottom: 25px !important; }
+.terminal-cyber { background-color: #02040a !important; border: 1px dashed #00ffcc !important; border-left: 4px solid #00ffcc !important; border-radius: 8px !important; padding: 20px !important; font-family: monospace !important; color: #00ffcc !important; font-size: 13px !important; margin-bottom: 25px !important; }
 .box-luxo-coluna { background-color: #0c111d !important; border: 1px solid #1f293b !important; border-radius: 16px !important; padding: 22px 18px !important; margin-bottom: 20px !important; }
 .card-metric-premium { background-color: #0a0f1d !important; border: 1px solid #1e293b !important; border-bottom: 4px solid #00ffcc !important; border-radius: 12px !important; padding: 20px !important; text-align: center !important; margin-bottom: 15px; }
 .metric-premium-title { font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
@@ -39,7 +39,7 @@ st.markdown("""
 }
 .stButton > button:hover { transform: translateY(-2px) !important; box-shadow: 0 0 35px rgba(0, 255, 135, 0.7) !important; }
 
-/* BOTÕES DAS LISTAS DE PRODUTOS (MANTÉM O DESIGN ESCURO DO SEU PRINT) */
+/* BOTÕES DAS LISTAS DE PRODUTOS */
 .div-lista-btn > div > div > button {
     background-color: #111827 !important; color: #f8fafc !important;
     border: 1px solid #1f293b !important; border-radius: 8px !important;
@@ -51,12 +51,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# TEXTOS DO SEU PROJETO 100% CORRIGIDOS E REVISADOS SEM ERROS DE PORTUGUÊS
+# TEXTOS REVISADOS EM PORTUGUÊS IMPECÁVEL
 st.markdown('<h1 style="color: #00ffcc; font-weight: 900; font-size: 2.2rem; margin-bottom: 0;">📊 MÓDULO 01: RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
 st.markdown('<p style="color: #94a3b8; font-size: 14.5px; margin-top: 5px; margin-bottom: 25px;">No momento da pesquisa, o sistema exibirá um radar na tela com um robô realizando uma varredura completa de produtos nas principais plataformas da gringa em tempo real. Se o usuário decidir fazer uma pesquisa por fora do nosso sistema, ele encontrará exatamente os mesmos dados e resultados que o nosso robô disponibilizou.</p>', unsafe_allow_html=True)
 st.markdown("---")
 
-# BANCO DE DADOS DA GRINGA REAL (CLASSIFICAÇÃO DO SEU TEXTO REVISADO)
+# BANCO DE DADOS INTEGRADO DA GRINGA REAL
 produtos_gringos = {
     "ProDentim": {"col": "T10", "sym": "🔥", "status": "ALVO DE GUERRA", "cor": "#ef4444", "p": "ClickBank", "pais": "EUA / UK", "motivo": "Altíssimo volume de buscas por cupons e reviews de afiliados. Lances de CPC caros, exige orçamento forte.", "base": 65000},
     "Prostavive": {"col": "T10", "sym": "🔥", "status": "ALVO DE GUERRA", "cor": "#ef4444", "p": "BuyGoods", "pais": "EUA / CA", "motivo": "Forte tração em buscas de fundo de funil. CPC inflacionado no leilão.", "base": 48000},
@@ -74,9 +74,7 @@ produtos_gringos = {
 
 p_selecionado = st.session_state.radar_sel
 
-# =============================================================================================================
-# 🚨 PAINEL SUPERIOR: ÁREA DO PRODUTO EM FOCO + BOTÃO MANDATÓRIO DE VARREDURA
-# =============================================================================================================
+# PAINEL SUPERIOR COM O BOTÃO MESTRE
 c_topo1, c_topo2 = st.columns([1.2, 1.8])
 with c_topo1:
     st.markdown(f"""
@@ -87,15 +85,12 @@ with c_topo1:
     """, unsafe_allow_html=True)
 
 with c_topo2:
-    # O GATILHO QUE COMPILA OS DADOS REAIS REIVINDICADOS POR VOCÊ
     if st.button("⛏️ EXECUTAR VARREDURA DA INTELIGÊNCIA CENTRAL", use_container_width=True):
         st.session_state.executou_scan = True
 
 st.write("---")
 
-# =============================================================================================================
-# EXECUTOR DA VARREDURA CONECTADO À API APENAS QUANDO O BOTÃO É CLICADO
-# =============================================================================================================
+# EXECUTOR ATIVADO PELO BOTÃO MESTRE
 if st.session_state.executou_scan:
     info = produtos_gringos[p_selecionado]
     
@@ -107,7 +102,6 @@ if st.session_state.executou_scan:
     </div>
     """, unsafe_allow_html=True)
     
-    # Execução real do POST na API Serper
     url_api = "https://serper.dev"
     headers = {'X-API-KEY': CHAVE_SERPER_GLOBAL, 'Content-Type': 'application/json'}
     payload = json.dumps({"q": p_selecionado, "gl": "us", "hl": "en"})
@@ -131,3 +125,15 @@ if st.session_state.executou_scan:
     with col_p1:
         st.markdown(f"""
         <div style="background: linear-gradient(135deg, #0f172a 0%, #050811 100%); border: 1px solid #1f293b; border-radius:12px; padding:22px; min-height:190px;">
+            <span class="badge-status-premium" style="background-color:{info["cor"]}; color:#030712;">{info["status"]}</span><br>
+            <b>Plataforma Oficial:</b> <span style="color:#00ffcc;">{info["p"]}</span><br>
+            <b style="color:#f6d14b;">🇺🇸 MELHOR PAÍS PARA ANUNCIAR (FUNDO DE FUNIL):</b> <span style="color:#ffffff;">{info["pais"]}</span><br><br>
+            <b>🔍 Porquê Estratégico (Afirmação Clara):</b><br>
+            <i style="color:#94a3b8; font-size:13px;">{info["motivo"]}</i>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    with col_p2:
+        st.markdown(f"""
+        <div class="card-metric-premium">
+            <div class="metric-premium-title">Quantas pesquisas deste produto teve no MÊS (Google US)</div>
