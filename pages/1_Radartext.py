@@ -3,6 +3,7 @@ import requests
 import json
 import pandas as pd
 import datetime
+import time
 
 # 1. CONFIGURAÇÃO DA PÁGINA DO RADAR
 st.set_page_config(page_title="Robô Radar - Adriel-AI Pro", page_icon="🔥", layout="wide")
@@ -53,14 +54,14 @@ produtos_gringos = {
     "Puravive": {"id": "puravive", "coluna": "TOP10", "simbolo": "🔥", "status": "ALVO DE GUERRA", "cor": "#ef4444", "plataforma": "ClickBank", "pais": "EUA", "motivo": "Conversão em massa no tráfego frio americano. Leilão disputado centavo por centavo no topo da página 1.", "base_mes": 41000},
     
     # OUTROS 10 - ESTÁVEIS (EXCELENTES OPORTUNIDADES, MENOS DISPUTADOS)
-    "ZeniCortex": {"id": "zenicortex", "coluna": "ESTAVEIS", "simbolo": "🟢", "status": "EXCELENTE", "cor": "#22c55e", "plataforma": "ClickBank", "pais": "UK / CA", "motivo": "Suporte auditivo. Concorrência moderada de afiliados, permitindo cliques qualificados com menor investimento.", "base_mes": 18000},
+    "ZeniCortex": {"id": "zenicortex", "coluna": "ESTAVEIS", "simbolo": "🟢", "status": "EXCELENTE", "cor": "#22c55e", "plataforma": "ClickBank", "pais": "UK / CA", "motivo": "Suporte auditivo. Concorrência moderada de afiliados, permitindo cliques qualificados com menor investment.", "base_mes": 18000},
     "Cortexi": {"id": "cortexi", "coluna": "ESTAVEIS", "simbolo": "🟢", "status": "EXCELENTE", "cor": "#22c55e", "plataforma": "BuyGoods", "pais": "CA / AU", "motivo": "Produto consolidado no mercado gringo. Conversão regular com leilão estável e sem picos abruptos de CPC.", "base_mes": 14000},
     "LeanBliss": {"id": "leanbliss", "coluna": "ESTAVEIS", "simbolo": "🛡️", "status": "MODERADA", "cor": "#eab308", "plataforma": "Digistore24", "pais": "EUA / UK", "motivo": "Nicho de peso mastigável. Concorrência de nível médio. Ótima brecha para testar com anúncios de avaliação.", "base_mes": 22000},
     "Liv Pure": {"id": "liv_pure", "coluna": "ESTAVEIS", "simbolo": "🛡️", "status": "MODERADA", "cor": "#eab308", "plataforma": "ClickBank", "pais": "EUA", "motivo": "Foco em saúde do fígado. Mantém volume sólido de buscas diárias com variação previsível nos lances.", "base_mes": 29000},
     
     # OUTROS - EM MOVIMENTAÇÃO (PRODUTOS NOVOS OU COM BRECHAS ATIVAS)
     "Java Burn": {"id": "java_burn", "coluna": "GERAL", "simbolo": "⚡", "status": "EXCELENTE", "cor": "#22c55e", "plataforma": "ClickBank", "pais": "EUA / DE", "motivo": "Aditivo de café para queima de gordura. Reaquecendo nas últimas horas devido a novos criativos internacionais.", "base_mes": 31000},
-    "Alpilean": {"id": "alpilean", "coluna": "GERAL", "simbolo": "⚡", "status": "MODERADA", "cor": "#eab308", "plataforma": "ClickBank", "pais": "EUA / CA", "motivo": "Fórmula de temperatura corporal interna. Movimentação ativa de novos afiliados testando criativos no Google.", "base_mes": 25000},
+    "Alpilean": {"id": "alpilean", "coluna": "GERAL", "simbolo": "⚡", "status": "MODERADA", "cor": "#eab308", "plataforma": "ClickBank", "pais": "EUA / CA", "motivo": "Fórmula de temperatura corporal interna. Movimentação activa de novos afiliados testando criativos no Google.", "base_mes": 25000},
     "Prodentim Max": {"id": "prodentim_max", "coluna": "GERAL", "simbolo": "⚡", "status": "EXCELENTE", "cor": "#22c55e", "plataforma": "MaxWeb", "pais": "UK / NZ", "motivo": "Variação exclusiva na MaxWeb. Baixíssima concorrência no Google Ads e ótimos payouts por conversão.", "base_mes": 9500}
 }
 
@@ -113,7 +114,7 @@ if st.button("⛏️ EXECUTAR VARREDURA DA INTELIGÊNCIA CENTRAL"):
                 else:
                     st.error("Instabilidade temporária na API de busca real.")
             except Exception as e:
-                st.error(f"Erro ao conectar com o cluster de busca: {e}")
+                st.error(f"Erro ao conectar com a cluster de busca: {e}")
 
 st.write("")
 st.markdown("### 📋 MAPEAMENTO ATUAL DO MERCADO INTERNACIONAL (20 A 30 PRODUTOS VALIDADOS)")
