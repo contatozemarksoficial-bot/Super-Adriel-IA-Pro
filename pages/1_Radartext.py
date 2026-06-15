@@ -24,11 +24,12 @@ st.markdown("""
 .stApp { background-color: #060913 !important; color: #f8fafc !important; font-family: 'Segoe UI', system-ui, sans-serif; }
 [data-testid="stHeader"] { display: none !important; }
 
-/* Limpeza de fundos brancos fantasmas do Streamlit Cloud */
+/* Destrói completamente fundos brancos ou bordas fantasmas em qualquer bloco da aplicação */
 div[data-testid="stVerticalBlock"], div[role="presentation"], .stButton, div[data-testid="stBlock"] {
     background-color: transparent !important;
     background: transparent !important;
     border: none !important;
+    box-shadow: none !important;
 }
 
 .terminal-cyber { background-color: #02040a !important; border: 1px dashed #00ffcc !important; border-left: 4px solid #00ffcc !important; border-radius: 12px !important; padding: 20px !important; font-family: monospace !important; color: #00ffcc !important; font-size: 13px !important; margin-bottom: 25px !important; }
@@ -45,9 +46,8 @@ div.stButton > button[key="btn_varredura_mestre"] {
     box-shadow: 0 0 25px rgba(0, 255, 204, 0.4) !important; transition: all 0.25s ease !important;
     width: 100% !important; text-align: center !important;
 }
-div.stButton > button[key="btn_varredura_mestre"]:hover { transform: translateY(-2px) !important; box-shadow: 0 0 35px rgba(0, 255, 135, 0.7) !important; }
 
-/* 🔴 ESTILIZAÇÃO NEON DOS BOTÕES DA COLUNA 1 (TOP 10 FOGO ALTO) */
+/* 🔴 NEON DOS BOTÕES DA COLUNA 1 (TOP 10 FOGO ALTO) */
 div[data-testid="stHorizontalBlock"] > div:nth-child(1) button {
     background-color: #0c111d !important; color: #ffffff !important;
     border: 1px solid #ef4444 !important; border-radius: 8px !important;
@@ -57,7 +57,7 @@ div[data-testid="stHorizontalBlock"] > div:nth-child(1) button {
 }
 div[data-testid="stHorizontalBlock"] > div:nth-child(1) button:hover { border-color: #ef4444 !important; box-shadow: 0 0 15px rgba(239, 68, 68, 0.5) !important; color: #ef4444 !important; }
 
-/* 🟡 ESTILIZAÇÃO NEON DOS BOTÕES DA COLUNA 2 (OUTROS 10 ESTÁVEIS) */
+/* 🟡 NEON DOS BOTÕES DA COLUNA 2 (OUTROS 10 ESTÁVEIS) */
 div[data-testid="stHorizontalBlock"] > div:nth-child(2) button {
     background-color: #0c111d !important; color: #ffffff !important;
     border: 1px solid #eab308 !important; border-radius: 8px !important;
@@ -67,7 +67,7 @@ div[data-testid="stHorizontalBlock"] > div:nth-child(2) button {
 }
 div[data-testid="stHorizontalBlock"] > div:nth-child(2) button:hover { border-color: #eab308 !important; box-shadow: 0 0 15px rgba(234, 179, 8, 0.5) !important; color: #eab308 !important; }
 
-/* 🟢 ESTILIZAÇÃO NEON DOS BOTÕES DA COLUNA 3 (MOVIMENTAÇÃO GERAL) */
+/* 🟢 NEON DOS BOTÕES DA COLUNA 3 (MOVIMENTAÇÃO GERAL) */
 div[data-testid="stHorizontalBlock"] > div:nth-child(3) button {
     background-color: #0c111d !important; color: #ffffff !important;
     border: 1px solid #00ffcc !important; border-radius: 8px !important;
@@ -81,7 +81,7 @@ div.stButton > button p { text-align: left !important; font-weight: 700 !importa
 </style>
 """, unsafe_allow_html=True)
 
-# TEXTOS 100% REVISADOS E CORRIGIDOS SEM ERROS DE PORTUGUÊS
+# TEXTOS TOTALMENTE REVISADOS E CORRIGIDOS SEM ERROS DE PORTUGUÊS
 st.markdown('<h1 style="color: #00ffcc; font-weight: 900; font-size: 2.2rem; margin-bottom: 0;">📊 MÓDULO 01: RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
 st.markdown('<p style="color: #94a3b8; font-size: 14.5px; margin-top: 5px; margin-bottom: 25px;">No momento da pesquisa, o sistema exibirá um radar na tela com um robô realizando uma varredura completa de produtos nas principais plataformas da gringa em tempo real. Se o usuário decidir fazer uma pesquisa por fora do nosso sistema, ele encontrará exatamente os mesmos dados e resultados que o nosso robô disponibilizou nas principais varreduras que realizamos em toda a internet e nas plataformas: ClickBank, Digistore24, BuyGoods e MaxWeb, mostrando exatamente onde o nosso robô está pesquisando.</p>', unsafe_allow_html=True)
 st.markdown("---")
@@ -99,7 +99,7 @@ produtos_gringos = {
     "Java Burn": {"col": "EST", "sym": "🟢", "status": "EXCELENTE", "p": "ClickBank", "pais": "EUA / DE", "motivo": "Aditivo de café para queima de gordura. Reaquecendo nas últimas horas devido a novos criativos internacionais.", "base": 19000},
     "Tea Burn": {"col": "EST", "sym": "🟢", "status": "EXCELENTE", "p": "BuyGoods", "pais": "EUA", "motivo": "Queima de gordura via chás. Produto estável com baixa volatilidade de lances no Google Ads.", "base": 15000},
     
-    "GlucoTrust": {"col": "GER", "sym": "⚡", "status": "EXCELENTE", "p": "ClickBank", "pais": "EUA / UK", "motivo": "Controle de glicose. Movimentação activa de campanhas de cupons hoje.", "base": 31000},
+    "GlucoTrust": {"col": "GER", "sym": "⚡", "status": "EXCELENTE", "p": "ClickBank", "pais": "EUA / UK", "motivo": "Controle de glicose. Movimentação ativa de campanhas de cupons hoje.", "base": 31000},
     "Alpha Tonic": {"col": "GER", "sym": "⚡", "status": "EXCELENTE", "p": "ClickBank", "pais": "EUA / CA", "motivo": "Fórmula masculina em pó. Picos cíclicos de tráfego de pesquisa em estados americanos.", "base": 24000},
     "Progenic": {"col": "GER", "sym": "⚡", "status": "MODERADA", "p": "MaxWeb", "pais": "UK / IE", "motivo": "Nicho de articulações. Produto de baixa escala, ótimo para lucros rápidos no Bing ou Google.", "base": 12000}
 }
@@ -117,7 +117,7 @@ with c_topo2:
 
 st.write("---")
 
-# EXECUTOR ATIVADO PELO BOTÃO MESTRE
+# EXECUTOR ACTIVADO PELO BOTÃO MESTRE
 if st.session_state.executou_scan:
     info = produtos_gringos[p_selecionado]
     
@@ -136,3 +136,6 @@ if st.session_state.executou_scan:
     volume_mes_real = info["base"]
     volume_dia_real = int(info["base"] / 30)
     
+    try:
+        res = requests.post(url_api, headers=headers, data=payload, timeout=6)
+        if res.status_code == 200:
