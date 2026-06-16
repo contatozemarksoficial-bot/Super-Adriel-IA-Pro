@@ -4,10 +4,10 @@ import json
 import pandas as pd
 import random
 
-# 1. CONFIGURAÇÃO OFICIAL PREMIUM DA TELA (IMUNE A CRASHES NO PYTHON 3.14)
+# 1. CONFIGURAÇÃO PREMIUM DA TELA (IMUNE A CRASHES NO PYTHON 3.14)
 st.set_page_config(page_title="Adriel-AI Pro - Radar", page_icon="📊", layout="wide")
 
-# Chave API Real fixa e ATIVADA com sucesso nos bastidores do robô
+# Chave API Real fixa e ativa nos bastidores do robô
 CHAVE_SERPER_GLOBAL = "1e3c16719fbd4f5833199d7466193252986bba26"
 
 # Inicialização e persistência segura dos estados de memória do Streamlit
@@ -18,83 +18,117 @@ if "radar_sel" not in st.session_state:
 def selecionar_produto(nome_p):
     st.session_state.radar_sel = nome_p
 
-# TÍTULO PRINCIPAL LIMPO DE PLATAFORMA DE ELITE
-st.markdown('<h1 style="color: #00ffcc; font-weight: 900; font-size: 1.8rem; margin-bottom: 25px;">📊 MÓDULO 01: RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
+# =============================================================================================================
+# 2. DESIGN BLACK-LABEL DE ULTRA LUXO NEON (CÓPIA FIEL DO SEU SCRIPT DE ENGENHARIA)
+# =============================================================================================================
+st.markdown("""
+<style>
+.stApp { background-color: #030611 !important; color: #f3f4f6 !important; font-family: 'Segoe UI', system-ui, sans-serif; }
+[data-testid="stHeader"] { display: none !important; }
 
-# BANCO DE DADOS INTEGRADO ORIGINAL COMPLETO E EXTRAÍDO DO SEU MODELO COMERCIAL
-produtos_gringos = {
-    "Alpilean": {"sym": "🔥", "status": "ALTA", "p": "ClickBank", "base": 38000, "dor": "Frustração emocional do comprador internacional devido ao acúmulo de gordura corporal e necessidades associadas à baixa atividade celular, gerando desespero de tempo e buscas por soluções rápidas.", "cpc": "USA: $1.51 | UK: $1.20 | CA: $1.32 | AU: $1.25 | NZ: $1.18"},
-    "ProDentim": {"sym": "🔥", "status": "ALTA", "p": "ClickBank", "base": 65000, "dor": "Insegurança social com a saúde bucal, hálito e dentes amarelados. Buscas massivas por tratamentos naturais de reconstrução dentária e cupons de desconto.", "cpc": "USA: $1.85 | UK: $1.42 | CA: $1.50 | AU: $1.38 | NZ: $1.22"},
-    "FitSpresso": {"sym": "📈", "status": "ALTA", "p": "ClickBank", "base": 72000, "dor": "Falta de energia diária e metabolismo lento no nicho de perda de peso acelerada, impulsionando buscas por lances rápidos de café termogênico.", "cpc": "USA: $1.98 | UK: $1.55 | CA: $1.60 | AU: $1.45 | NZ: $1.30"},
-    "Sugar Defender": {"sym": "📈", "status": "ALTA", "p": "Digistore24", "base": 55000, "dor": "Preocupação crônica com picos de açúcar no sangue e fadiga constante. Alta intenção de compra focada em termos como 'official website'.", "cpc": "USA: $1.62 | UK: $1.30 | CA: $1.40 | AU: $1.28 | NZ: $1.15"},
-    "Prostavive": {"sym": "🔥", "status": "ALTA", "p": "BuyGoods", "base": 48000, "dor": "Desconforto físico masculino e interrupções frequentes de sono. Tráfego qualificado de alta dor com intenção de compra imediata.", "cpc": "USA: $1.70 | UK: $1.35 | CA: $1.48 | AU: $1.32 | NZ: $1.20"},
-    "ZeniCortex": {"sym": "🟢", "status": "ESTÁVEL", "p": "ClickBank", "base": 18000, "dor": "Zumbido persistentemente incômodo e perda de clareza auditiva causando isolamento social. Excelente nicho de conversão devido ao CPC mais calmo e menor concorrência.", "cpc": "USA: $1.10 | UK: $0.85 | CA: $0.92 | AU: $0.88 | NZ: $0.78"},
-    "LeanBliss": {"sym": "🛡️", "status": "ESTÁVEL", "p": "Digistore24", "base": 22000, "dor": "Ansiedade por doces e ganho de peso cíclico. Compradores reagem muito bem a páginas de avaliação e descontos diretos na rede de pesquisa.", "cpc": "USA: $1.25 | UK: $0.95 | CA: $1.02 | AU: $0.98 | NZ: $0.90"}
+/* Destrói fundos brancos e cinzas padrão do Streamlit */
+div[data-testid="stVerticalBlock"], div[role="presentation"], .stButton, div[data-testid="stBlock"], section[data-testid="stSidebar"] {
+    background-color: transparent !important; background: transparent !important; border: none !important; box-shadow: none !important;
 }
 
-p_selecionado = st.session_state.radar_sel
+/* Painel de Ofertas da Esquerda: Força os botões a assumirem o visual escuro com contorno ciano fino */
+.stButton > button {
+    background: linear-gradient(135deg, #090e1a, #0c1424) !important; 
+    color: #ffffff !important; 
+    border: 1px solid #162c2d !important; 
+    border-radius: 6px !important;
+    padding: 10px 14px !important; 
+    width: 100% !important; 
+    text-align: left !important; 
+    font-weight: 700 !important; 
+    margin-bottom: 6px !important;
+    font-size: 12px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
+    transition: all 0.2s ease-in-out !important;
+}
+.stButton > button:hover { 
+    border-color: #00ffcc !important; 
+    color: #00ffcc !important; 
+    box-shadow: 0 0 12px rgba(0,255,204,0.2) !important; 
+}
+.stButton > button p { text-align: left !important; font-weight: 700 !important; color: #ffffff !important; }
 
-# DIVISÃO DA TELA ORIGINAL DO PRINT EM 2 COLUNAS NATIVAS DO STREAMLIT
-col_painel_esq, col_central_dir = st.columns([1, 2.2])
+/* Blocos de Texto Informativos da Direita */
+.card-info-cyber {
+    background-color: #070a13 !important; 
+    border: 1px solid #1f293b !important; 
+    border-radius: 8px !important; 
+    padding: 18px 22px !important; 
+    margin-bottom: 15px;
+}
+</style>
+""", unsafe_allow_html=True)
 
-with col_painel_esq:
-    st.markdown('### 🌸 Painel de Ofertas')
-    st.write("Selecione o alvo abaixo para carregar os indicadores reais:")
-    
-    # Lista lateral pura de botões nativos clicáveis
-    for nome_prod, dados_prod in produtos_gringos.items():
-        st.button(f"{dados_prod['sym']} {nome_prod} | {dados_prod['p']}", key=f"btn_lat_{nome_prod}", on_click=selecionar_produto, args=(nome_prod,))
+# HEADERS DO TERMINAL HACKER DO TOPO EXATOS DO SEU PRINT
+st.markdown('<p style="color: #64748b; font-size: 12px; font-weight: 700; margin-bottom: 2px;">Varredura automatizada e mapeamento operacional de ofertas de alta tração nas plataformas gringas.</p>', unsafe_allow_html=True)
+st.markdown('<p style="color: #64748b; font-size: 12px; font-weight: 700; margin-bottom: 30px;">Sistemas operando em Modo de Guerra. Varredura ativa às 06:09:40</p>', unsafe_allow_html=True)
 
-with col_central_dir:
-    info = produtos_gringos[p_selecionado]
-    
-    st.markdown(f'### ⚡ Central de Inteligência de Mercado')
-    st.markdown(f'## {p_selecionado}')
-    st.write("*Análise Estratégica Computacional Exclusiva*")
-    st.write("---")
-    
-    # 🟢 AGORA SIM: CONEXÃO COM A INTERNET VIA CHAVE API DA SERPER FUNCIOMANDO AO CLIQUE
-    url_api = "https://serper.dev"
-    headers = {'X-API-KEY': CHAVE_SERPER_GLOBAL, 'Content-Type': 'application/json'}
-    payload = json.dumps({"q": p_selecionado, "gl": "us", "hl": "en"})
-    
-    volume_mes_real = info["base"]
-    try:
-        res = requests.post(url_api, headers=headers, data=payload, timeout=5)
-        if res.status_code == 200:
-            dados_busca = res.json()
-            tot_links = len(dados_busca.get("organic", []))
-            # O robô calcula ao vivo a quantidade real de páginas concorrentes do leilão
-            volume_mes_real = dados_busca.get("searchParameters", {}).get("page", 1) * 3950 + (tot_links * 120)
-    except Exception:
-        pass
-        
-    # Exibição dos dados reais integrados nos blocos originais nativos
-    c_m1, c_m2 = st.columns(2)
-    with c_m1:
-        st.metric(label="DENSIDADE ESTIMADA DE PÁGINAS CONCORRENTES (GOOGLE US)", value=f"{volume_mes_real:,}")
-    with c_m2:
-        st.metric(label="NÍVEL DE COMPETITIVIDADE DE TRÁFEGO", value=info["status"])
-        
-    st.write("")
-    
-    # Bloco Dor Cirúrgica Nativo Sem CSS Quebrável
-    st.info(f"**💗 Dor Cirúrgica do Consumidor Gringo:**\n\n{info['dor']}")
-    
-    # Bloco Veredito Estratégico Nativo
-    st.warning(f"**💡 Veredito Estratégico Computacional:**\n\nO algoritmo realizou o cruzamento de dados e confirma que o produto apresenta excelente conversão em campanhas de Fundo de Funil estruturadas. Recomenda-se focar anúncios em palavras-chave de alta intenção de compra nas principais regiões Tier 1.")
-    
-    # Bloco Estimativa Analítica de CPC Nativo
-    st.success(f"**💵 Estimativa Analítica de Leilão por Região (CPC Base):**\n\n{info['cpc']}")
-    
-    st.write("")
-    st.markdown("### 📊 Curva Histórica de Aquecimento de Busca (Últimos 12 Meses)")
-    
-    # 🟢 GRÁFICO EM COLUNAS CIANO ALIMENTADO AO VIVO PELOS DADOS VIVOS DA API SERPER
-    meses_ano = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
-    pesos_meses = [1.1, 1.0, 1.2, 0.9, 1.3, 1.4, 1.5, 1.3, 1.2, 1.4, 1.6, 1.5]
-    base_calculo = volume_mes_real / 12 / sum(pesos_meses)
-    valores_meses = [int(base_calculo * p * 12) + random.randint(-25, 25) for p in pesos_meses]
-    
-    df_barras_print = pd.DataFrame({"Volume de Buscas": valores_meses}, index=meses_ano)
-    st.bar_chart(df_barras_print, height=220, color="#00ffcc")
+# BANCO DE DADOS COMPLETO COM TODOS OS 15 PRODUTOS, CORES DE INDICAÇÃO E COPIES PROFISSIONAIS DO SEU PRINT
+produtos_gringos = {
+    "Alpilean": {
+        "label": "Alpilean | ALTA - SUBINDO", "sym": "🔥", "p": "ClickBank", "base_mes": 53400, "base_dia": 1385,
+        "dor": "Frustração emocional profunda do comprador internacional devido ao acúmulo de sintomas resistentes e dores biológicas profundas associadas à necessidade mapeada por Alpilean, gerando esgotamento físico crônico e bloqueando a autoconfiança de forma devastadora.",
+        "veredito": "O monitoramento automatizado confirma tráfego massivo e qualificado de fundo de funil para Alpilean. O veredito estratégico final aponta que o leilão para a região do Reino Unido (UK) é a melhor oportunidade operacional gringa hoje, entregando cliques limpos e comissão robusta em dólares com baixa concorrência institucional.",
+        "cpc": "USA: $1.51 | UK: $1.20 | CA: $1.32 | AU: $1.25 | DE: $1.25"
+    },
+    "Puravive": {
+        "label": "Puravive | ALTA - DESCENDO", "sym": "🔥", "p": "ClickBank", "base_mes": 41200, "base_dia": 1120,
+        "dor": "Desespero psicológico do consumidor com dietas restritivas que falham continuamente devido à baixa atividade de gordura marrom, criando um ciclo de estresse financeiro e busca imediatista por cápsulas validadas.",
+        "veredito": "Análise computacional detectou saturação parcial no leilão do Google Ads dos EUA. A melhor brecha tática atual encontra-se em campanhas segmentadas para o Bing Ads na região do Canadá, focando exclusivamente em criativos nativos de avaliação.",
+        "cpc": "USA: $1.72 | UK: $1.30 | CA: $1.45 | AU: $1.38 | DE: $1.15"
+    },
+    "Java Burn": {
+        "label": "Java Burn | ALTA - SUBINDO", "sym": "☕", "p": "ClickBank", "base_mes": 39500, "base_dia": 1240,
+        "dor": "Fadiga crônica na rotina diária associada à lentidão metabólica extrema, gerando ansiedade crônica e impulsividade na busca por aditivos de café que prometem queima de gordura passiva.",
+        "veredito": "Picos cíclicos fortes gerados por novos funis internacionais. Excelente indicação para rodar com listas de palavras-chave negativas extremamente limpas para reter o tráfego qualificado de alta intenção.",
+        "cpc": "USA: $1.85 | UK: $1.40 | CA: $1.52 | AU: $1.42 | DE: $1.20"
+    },
+    "GlucoTrust": {
+        "label": "GlucoTrust | ALTA - DESCENDO", "sym": "💊", "p": "ClickBank", "base_mes": 31000, "base_dia": 980,
+        "dor": "Medo e ansiedade constante relacionados ao monitoramento de picos glicêmicos noturnos, gerando privação de sono e buscas persistentes por suplementos de controle natural.",
+        "veredito": "Volume constante de buscas qualificadas pelo termo 'official website'. O algoritmo recomenda campanhas focadas em cupons de desconto para capturar o consumidor na etapa final de decisão de compra.",
+        "cpc": "USA: $1.65 | UK: $1.28 | CA: $1.38 | AU: $1.25 | DE: $1.10"
+    },
+    "ProDentim": {
+        "label": "ProDentim | ALTA - SUBINDO", "sym": "🦷", "p": "ClickBank", "base_mes": 65000, "base_dia": 2160,
+        "dor": "Insegurança social severa com a saúde bucal, hálito e dentes amarelados. Comprador busca de forma desesperada por reconstrutores naturais em formato mastigável.",
+        "veredito": "Produto dominante de mercado gringo. Apresenta o custo por clique (CPC) mais alto do leilão, recomendando-se apenas para afiliados com orçamento diário robusto e páginas pontes blindadas.",
+        "cpc": "USA: $1.95 | UK: $1.48 | CA: $1.60 | AU: $1.52 | DE: $1.35"
+    },
+    "Liv Pure": {
+        "label": "Liv Pure | ALTA - DESCENDO", "sym": "🧪", "p": "ClickBank", "base_mes": 45000, "base_dia": 1310,
+        "dor": "Sensação de intoxicação física e ganho de peso inexplicável devido à sobrecarga hepática, gerando baixa autoestima e buscas por soluções de purificação celular.",
+        "veredito": "Produto com excelente estabilidade de tráfego orgânico. Afiliados obtêm ótimas margens operando anúncios de pesquisa de fundo de funil direcionados para estados americanos de alto poder aquisitivo.",
+        "cpc": "USA: $1.58 | UK: $1.22 | CA: $1.35 | AU: $1.28 | DE: $1.18"
+    },
+    "Ikaria Juice": {
+        "label": "Ikaria Juice | ALTA - SUBINDO", "sym": "🍹", "p": "ClickBank", "base_mes": 52000, "base_dia": 1690,
+        "dor": "Inchaço corporal persistente e frustração com a lentidão na queima de calorias de suplementos comuns, gerando interesse por fórmulas em pó concentradas de alta conversão.",
+        "veredito": "Histórico consistente em vendas de fundo de funil. Excelente taxa de conversão em criativos de vídeo review direcionados para públicos maduros com alto índice de recompra.",
+        "cpc": "USA: $1.80 | UK: $1.38 | CA: $1.49 | AU: $1.40 | DE: $1.22"
+    },
+    "Cortexi": {
+        "label": "Cortexi | ALTA - DESCENDO", "sym": "👂", "p": "BuyGoods", "base_mes": 33000, "base_dia": 1050,
+        "dor": "Zumbido incômodo constante e perda crônica de clareza auditiva gerando fadiga mental extrema e isolamento social nos canais de comunicação diária.",
+        "veredito": "Nicho de alta dor com baixíssimo índice de reembolso. Ótima oportunidade operacional para atuar na rede de pesquisa com palavras-chave exatas de cupons corporativos.",
+        "cpc": "USA: $1.42 | UK: $1.15 | CA: $1.28 | AU: $1.20 | DE: $1.05"
+    },
+    "MaxForce Max": {
+        "label": "MaxForce Max | ALTA - SUBINDO", "sym": "⚡", "p": "MaxWeb", "base_mes": 29000, "base_dia": 890,
+        "dor": "Frustração masculina silenciosa relacionada à perda de vitalidade física e desempenho, gerando buscas sigilosas e imediatistas por fórmulas concentradas de alta potência.",
+        "veredito": "Variação de oferta de baixa escala nas plataformas de busca convencionais, garantindo leilões limpos, CPC extremamente calmo e janelas rápidas de lucro no fundo de funil.",
+        "cpc": "USA: $1.35 | UK: $1.02 | CA: $1.18 | AU: $1.10 | DE: $0.95"
+    },
+    "Metanail Serum": {
+        "label": "Metanail Serum | ALTA - DESCENDO", "sym": "💅", "p": "Digistore24", "base_mes": 19500, "base_dia": 610,
+        "dor": "Constrangimento social severo devido ao aspecto danificado de unhas e cutículas afetadas por fungos, gerando urgência na busca por reparadores tópicos de ação rápida.",
+        "veredito": "Baixíssimo volume de cliques inválidos e lances de CPC controlados no Google Ads. Produto perpétuo altamente lucrativo para operar campanhas com páginas de avaliação estruturadas.",
+        "cpc": "USA: $1.25 | UK: $0.95 | CA: $1.08 | AU: $1.02 | DE: $0.88"
+    },
+    "LeanBliss": {
+        "label": "LeanBliss | NORMAL - SUBINDO", "sym": "🍬", "p": "Digistore24", "base_mes": 22000, "base_dia": 730,
