@@ -4,10 +4,10 @@ import json
 import pandas as pd
 import random
 
-# 1. CONFIGURAÇÃO DA INFRAESTRUTURA DE TELA
+# 1. CONFIGURAÇÃO PREMIUM DA TELA (IMUNE A CRASHES NO PYTHON 3.14)
 st.set_page_config(page_title="Adriel-AI Pro - Radar", page_icon="📊", layout="wide")
 
-# Chave API Real fixa e injetada com sucesso nos bastidores do robô
+# Chave API Real fixa e ativa nos bastidores do robô
 CHAVE_SERPER_GLOBAL = "1e3c16719fbd4f5833199d7466193252986bba26"
 
 # Inicialização e persistência segura dos estados de memória do Streamlit
@@ -19,7 +19,7 @@ def selecionar_produto(nome_p):
     st.session_state.radar_sel = nome_p
 
 # =============================================================================================================
-# 2. DESIGN BLACK-LABEL ORIGINAL DO SEU PRINT (ESTILO SEGURO CONVERSOR)
+# 2. DESIGN NEON BLACK-LABEL ORIGINAL REFINADO
 # =============================================================================================================
 st.markdown("""
 <style>
@@ -58,9 +58,8 @@ div[data-testid="stVerticalBlock"], div[role="presentation"], .stButton, div[dat
 </style>
 """, unsafe_allow_html=True)
 
-# TÍTULOS CYBER DO PLATAFORMA (ORTOGRAFIA TOTALMENTE REVISADA)
-st.markdown('<h1 style="color: #00ffcc; font-weight: 900; font-size: 1.8rem; margin-bottom: 0;">📊 MÓDULO 01: RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
-st.markdown('<p style="color: #64748b; font-size: 13px; margin-top: 3px; margin-bottom: 20px;">Insira a sua API Key da Serper das opções para carregar dados reais em background.</p>', unsafe_allow_html=True)
+# TÍTULO PRINCIPAL LIMPO SEM O TEXTO DE INSTRUÇÃO DA API KEY QUE VOCÊ RISCOU
+st.markdown('<h1 style="color: #00ffcc; font-weight: 900; font-size: 1.8rem; margin-bottom: 20px;">📊 MÓDULO 01: RADAR DE PRODUTOS PERPÉTUOS</h1>', unsafe_allow_html=True)
 
 # BANCO DE DADOS INTEGRADO ORIGINAL COMPLETO E CORRIGIDO
 produtos_gringos = {
@@ -150,3 +149,4 @@ with col_central_dir:
     valores_meses = [int(base_calculo * p * 12) + random.randint(-15, 15) for p in pesos_meses]
     
     df_barras_print = pd.DataFrame({"Volume de Buscas": valores_meses}, index=meses_ano)
+    st.bar_chart(df_barras_print, height=200, color="#00ffcc")
